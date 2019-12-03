@@ -1,3 +1,6 @@
 ## OKM/frontend-components
+Created for OKM-projects such and Oiva and Kuja
 
-### Requires the following:
+Created with:
+- **create-react-app** for creating the base and configurations,
+- **TailwindCSS**, **PostCSS** for styling purposes,
