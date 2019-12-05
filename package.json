@@ -1,6 +1,6 @@
 {
   "name": "okm-frontend-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {},
   "scripts": {
     "start": "npm-run-all --parallel watch:css watch:component-css storybook",
