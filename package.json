@@ -45,11 +45,7 @@
     "lodash": "^4.x",
     "date-fns": "^2.x",
     "@date-io/date-fns": "^1.x",
-    "ramda": "^0.26.x",
-    "moment": "^2.x",
-    "react-icons": "^3.x",
-    "chroma-js": "^2.x",
-    "react-select": "^3.0.8"
+    "ramda": "^0.26.x"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
@@ -71,11 +67,9 @@
     "babel-loader": "^8.0.6",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-app": "^9.0.2",
-    "chroma-js": "^2.0.6",
     "customize-cra": "^0.9.1",
     "date-fns": "^2.0.0-beta.5",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^6.1.3",
     "postcss-import": "^12.0.1",
@@ -85,9 +79,7 @@
     "react": "^16.12.0",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.12.0",
-    "react-icons": "^3.8.0",
     "react-scripts": "3.2.0",
-    "react-select": "^3.0.8",
     "styled-components": "^4.4.0",
     "tailwindcss": "^1.1.2"
   }
