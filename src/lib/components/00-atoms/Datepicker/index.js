@@ -4,9 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import {
   DatePicker
 } from "@material-ui/pickers";
-import MuiPickersUtilsProvider from "@material-ui/pickers/MuiPickersUtilsProvider";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { createStyles } from "@material-ui/styles";
-import green from "@material-ui/core/colors/green";
+import { green } from "@material-ui/core/colors";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
