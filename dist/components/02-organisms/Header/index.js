@@ -2,12 +2,12 @@ import React from "react";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import css from "./header.module.css";
-import TemplateA from "../../03-templates/TemplateA";
 import { NavLink } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { AppBar, Toolbar, useMediaQuery, Typography, IconButton, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import TemplateC from "../../03-templates/TemplateC";
+import HorizontalLayout from "./HorizontalLayout";
+import VerticalLayout from "./VerticalLayout";
 var MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
   TABLET: "only screen and (min-width: 768px) and (max-width: 1023px)",
@@ -74,7 +74,7 @@ var Header = React.memo(function (_ref) {
     className: "text-gray-600"
   }, organisation.text))];
   var breakpointTabletMin = useMediaQuery(MEDIA_QUERIES.TABLET_MIN);
-  return React.createElement(React.Fragment, null, !breakpointTabletMin && React.createElement(React.Fragment, null, template === "C" && React.createElement(TemplateC, {
+  return React.createElement(React.Fragment, null, !breakpointTabletMin && React.createElement(React.Fragment, null, template === "C" && React.createElement(VerticalLayout, {
     items: items
   }, React.createElement(ToggleButtonGroup, {
     size: "small",
@@ -127,7 +127,7 @@ var Header = React.memo(function (_ref) {
     position: "static"
   }, React.createElement(Toolbar, {
     className: "bg-white px-4 border border-gray-300"
-  }, (template === "A" || !template) && React.createElement(TemplateA, {
+  }, (template === "A" || !template) && React.createElement(HorizontalLayout, {
     items: items
   }, React.createElement(ToggleButtonGroup, {
     size: "small",

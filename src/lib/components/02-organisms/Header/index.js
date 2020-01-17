@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import css from "./header.module.css";
-import TemplateA from "../../03-templates/TemplateA";
 import { NavLink } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import {
@@ -15,7 +14,8 @@ import {
   Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import TemplateC from "../../03-templates/TemplateC";
+import HorizontalLayout from "./HorizontalLayout";
+import VerticalLayout from "./VerticalLayout";
 
 const MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
@@ -95,7 +95,7 @@ const Header = React.memo(
         {!breakpointTabletMin && (
           <React.Fragment>
             {template === "C" && (
-              <TemplateC items={items}>
+              <VerticalLayout items={items}>
                 <ToggleButtonGroup
                   size="small"
                   onChange={onLocaleChange}
@@ -124,7 +124,7 @@ const Header = React.memo(
                     {inSwedish}
                   </ToggleButton>
                 </ToggleButtonGroup>
-              </TemplateC>
+              </VerticalLayout>
             )}
             {template !== "C" && (
               <div className={`fixed w-full z-50 ${classes.root} `}>
@@ -162,7 +162,7 @@ const Header = React.memo(
           <AppBar elevation={0} position="static">
             <Toolbar className="bg-white px-4 border border-gray-300">
               {(template === "A" || !template) && (
-                <TemplateA items={items}>
+                <HorizontalLayout items={items}>
                   <ToggleButtonGroup
                     size="small"
                     onChange={onLocaleChange}
@@ -191,7 +191,7 @@ const Header = React.memo(
                       {inSwedish}
                     </ToggleButton>
                   </ToggleButtonGroup>
-                </TemplateA>
+                </HorizontalLayout>
               )}
             </Toolbar>
           </AppBar>
