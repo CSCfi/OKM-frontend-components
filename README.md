@@ -27,10 +27,6 @@ Commit your changes in src/ directory.
 
 Build by running ```npm run build```. Run ```npm install```, commit package.json, package-lock.json and dist/ directory. Increment library version. Try to adhere to semantic versioning. After the work makes it to master, make release as "v0.3.7" or whatever matches your version in github project.
 
-```
-npm run build
-```
-
 ## How to import component from oiva:
 
 * cp -av the desired component and all its missing dependencies to the matching location in this project
