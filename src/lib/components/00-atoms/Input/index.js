@@ -3,6 +3,11 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { withStyles } from "@material-ui/core";
+import Tooltip from "../../02-organisms/Tooltip";
+import { isEmpty } from "ramda";
+import HelpIcon from "@material-ui/icons/Help";
+
+import styles from "./input.module.css";
 
 const CssTextField = withStyles({
   root: {
@@ -34,49 +39,71 @@ const Input = props => {
   const changesOutDelayed = _.debounce(props.onChanges, props.delay);
 
   return (
-    <CssTextField
-      aria-label={props.ariaLabel}
-      defaultValue={props.value}
-      label={props.label}
-      disabled={props.isDisabled || props.isReadOnly}
-      inputprops={{
-        readOnly: props.isReadOnly
-      }}
-      placeholder={
-        props.isDisabled || props.isReadOnly ? "" : props.placeholder
-      }
-      rows={props.rows}
-      margin="dense"
-      rowsMax={props.rowsMax}
-      className={`
+    <div className="flex items-center">
+      {props.isRequired && (
+        <span
+          className={`text-${
+            props.isValid ? "green" : "red"
+          }-500 text-2xl pr-4`}>
+          *
+        </span>
+      )}
+      <CssTextField
+        id={props.id}
+        aria-label={props.ariaLabel}
+        defaultValue={props.value}
+        label={props.label}
+        disabled={props.isDisabled || props.isReadOnly}
+        inputprops={{
+          readOnly: props.isReadOnly
+        }}
+        placeholder={
+          props.isDisabled || props.isReadOnly ? "" : props.placeholder
+        }
+        rows={props.rows}
+        margin="dense"
+        rowsMax={props.rowsMax}
+        className={`
         ${props.isHidden ? "hidden" : ""}
-        ${props.isReadOnly ? "color: text-black border-collapse" : ""} p-2`}
-      onChange={e =>
-        changesOutDelayed(props.payload, { value: e.target.value })
-      }
-      error={props.error}
-      InputLabelProps={
-        props.isReadOnly ? { shrink: true, color: "text-black" } : {}
-      }
-      variant="outlined"
-      style={
-        props.fullWidth
-          ? { border: "none" }
-          : { width: props.width, border: "none" }
-      }
-      fullWidth={props.fullWidth}
-      type={props.type}
-    />
+        ${props.isReadOnly ? "text-black border-collapse" : ""} p-2`}
+        onChange={e =>
+          changesOutDelayed(props.payload, { value: e.target.value })
+        }
+        error={props.error}
+        InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
+        variant="outlined"
+        style={
+          props.fullWidth
+            ? { border: "none" }
+            : { width: props.width, border: "none" }
+        }
+        fullWidth={props.fullWidth}
+        type={props.type}
+      />
+      {!isEmpty(props.tooltip) && (
+        <div className="ml-8">
+          <Tooltip tooltip={props.tooltip.text} trigger="click">
+            <HelpIcon
+              classes={{
+                colorPrimary: styles.tooltipBg
+              }}
+              color="primary"
+            />
+          </Tooltip>
+        </div>
+      )}
+    </div>
   );
 };
 
 Input.defaultProps = {
   ariaLabel: "Text area",
   delay: 300,
-  id: `input-${Math.random()}`,
   isDisabled: false,
   isHidden: false,
   isReadOnly: false,
+  isRequired: false,
+  isValid: true,
   payload: {},
   placeholder: "",
   rows: 1,
@@ -84,6 +111,7 @@ Input.defaultProps = {
   error: false,
   width: "20em",
   fullWidth: false,
+  tooltip: {},
   type: "text"
 };
 
@@ -94,6 +122,8 @@ Input.propTypes = {
   isDisabled: PropTypes.bool,
   isHidden: PropTypes.bool,
   isReadOnly: PropTypes.bool,
+  isRequired: PropTypes.bool,
+  isValid: PropTypes.bool,
   label: PropTypes.string,
   /** Is called with the payload and the value. */
   onChanges: PropTypes.func.isRequired,
@@ -103,6 +133,7 @@ Input.propTypes = {
   rows: PropTypes.number,
   rowsMax: PropTypes.number,
   error: PropTypes.bool,
+  tooltip: PropTypes.object,
   width: PropTypes.string,
   fullWidth: PropTypes.bool,
   type: PropTypes.string
