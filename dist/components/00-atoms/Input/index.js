@@ -2,6 +2,10 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import _ from "lodash";
 import { withStyles } from "@material-ui/core";
+import Tooltip from "../../02-organisms/Tooltip";
+import { isEmpty } from "ramda";
+import HelpIcon from "@material-ui/icons/Help";
+import styles from "./input.module.css";
 var CssTextField = withStyles({
   root: {
     "& MuiInputBase-input": {
@@ -31,7 +35,12 @@ var CssTextField = withStyles({
 var Input = function Input(props) {
   var changesOutDelayed = _.debounce(props.onChanges, props.delay);
 
-  return React.createElement(CssTextField, {
+  return React.createElement("div", {
+    className: "flex items-center"
+  }, props.isRequired && React.createElement("span", {
+    className: "text-".concat(props.isValid ? "green" : "red", "-500 text-2xl pr-4")
+  }, "*"), React.createElement(CssTextField, {
+    id: props.id,
     "aria-label": props.ariaLabel,
     defaultValue: props.value,
     label: props.label,
@@ -43,7 +52,7 @@ var Input = function Input(props) {
     rows: props.rows,
     margin: "dense",
     rowsMax: props.rowsMax,
-    className: "\n        ".concat(props.isHidden ? "hidden" : "", "\n        ").concat(props.isReadOnly ? "color: text-black border-collapse" : "", " p-2"),
+    className: "\n        ".concat(props.isHidden ? "hidden" : "", "\n        ").concat(props.isReadOnly ? "text-black border-collapse" : "", " p-2"),
     onChange: function onChange(e) {
       return changesOutDelayed(props.payload, {
         value: e.target.value
@@ -51,8 +60,7 @@ var Input = function Input(props) {
     },
     error: props.error,
     InputLabelProps: props.isReadOnly ? {
-      shrink: true,
-      color: "text-black"
+      shrink: true
     } : {},
     variant: "outlined",
     style: props.fullWidth ? {
@@ -63,16 +71,27 @@ var Input = function Input(props) {
     },
     fullWidth: props.fullWidth,
     type: props.type
-  });
+  }), !isEmpty(props.tooltip) && React.createElement("div", {
+    className: "ml-8"
+  }, React.createElement(Tooltip, {
+    tooltip: props.tooltip.text,
+    trigger: "click"
+  }, React.createElement(HelpIcon, {
+    classes: {
+      colorPrimary: styles.tooltipBg
+    },
+    color: "primary"
+  }))));
 };
 
 Input.defaultProps = {
   ariaLabel: "Text area",
   delay: 300,
-  id: "input-".concat(Math.random()),
   isDisabled: false,
   isHidden: false,
   isReadOnly: false,
+  isRequired: false,
+  isValid: true,
   payload: {},
   placeholder: "",
   rows: 1,
@@ -80,6 +99,7 @@ Input.defaultProps = {
   error: false,
   width: "20em",
   fullWidth: false,
+  tooltip: {},
   type: "text"
 };
 export default Input;

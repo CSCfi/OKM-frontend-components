@@ -1,5 +1,5 @@
 import React from "react";
-
+import { COLORS } from "../../../modules/styles";
 /**
  * Components
  * @namespace components
@@ -14,6 +14,7 @@ import React from "react";
 /**
  * The component is able to show the number of changes. If there aren't any changes it renders nothing.
  */
+
 var NumberOfChanges = function NumberOfChanges(props) {
   return React.createElement(React.Fragment, null, props.changes && props.changes.length ? React.createElement("div", {
     id: props.id
@@ -21,7 +22,7 @@ var NumberOfChanges = function NumberOfChanges(props) {
     className: "pr-1"
   }, "Muutokset:"), React.createElement("span", {
     id: "".concat(props.id, ".number-of-changes"),
-    color: props.color
+    color: COLORS.OIVA_PURPLE
   }, props.changes.length)) : null);
 };
 
