@@ -3,17 +3,20 @@ import PropTypes from "prop-types";
 import * as R from "ramda";
 
 const defaultProps = {
-  styleClasses: ["text-base", "py-2"]
+  styleClasses: ["text-base"]
 };
 
 const StatusTextRow = React.memo(
   ({
     children,
+    isHidden,
+    isRequired,
+    isValid,
     labelStyles,
+    layout,
     statusText,
     statusTextStyleClasses,
-    styleClasses,
-    isHidden
+    styleClasses
   }) => {
     const [classNames, setClassNames] = useState(defaultProps.styleClasses);
 
@@ -22,6 +25,13 @@ const StatusTextRow = React.memo(
         setClassNames(styleClasses);
       }
     }, [styleClasses]);
+
+    useEffect(() => {
+      const paddingClass = layout && layout.dense ? "pt-2" : "py-2";
+      setClassNames(prevValue => {
+        return R.append(paddingClass, prevValue);
+      });
+    }, [layout]);
 
     if (!isHidden) {
       return (
@@ -32,6 +42,14 @@ const StatusTextRow = React.memo(
                 {statusText}
               </div>
             )}
+            {isRequired && (
+              <span
+                className={`text-${
+                  isValid ? "green" : "red"
+                }-500 text-2xl pr-4`}>
+                *
+              </span>
+            )}{" "}
             {children}
           </div>
         </div>
@@ -41,11 +59,14 @@ const StatusTextRow = React.memo(
 );
 
 StatusTextRow.propTypes = {
+  isHidden: PropTypes.bool,
+  isRequired: PropTypes.bool,
+  isValid: PropTypes.bool,
   labelStyles: PropTypes.object,
+  layout: PropTypes.object,
   styleClasses: PropTypes.array,
   statusText: PropTypes.string,
-  statusTextStyleClasses: PropTypes.array,
-  isHidden: PropTypes.bool
+  statusTextStyleClasses: PropTypes.array
 };
 
 export default StatusTextRow;
