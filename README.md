@@ -21,13 +21,11 @@ import Table from "okm-frontend-components/dist/02-organisms/Table"
 
 ## How to develop this library
 
-Add components under src/lib/components, following the known (assumed) structure (http://atomicdesign.bradfrost.com/chapter-2/). Make storybook examples to components. Run storybook by
+Add components under src/lib/components, following the known (assumed) structure (http://atomicdesign.bradfrost.com/chapter-2/). Make storybook examples to components. Run storybook with ```npm run storybook```
 
-```
-npm run storybook
-````
+Commit your changes in src/ directory.
 
-Build by running the following. Incrementing library version. Try to adhere to semantic versioning. After the work makes it to master, make release as "v0.3.7" or so in github project.
+Build by running ```npm run build```. Run ```npm install```, commit package.json, package-lock.json and dist/ directory. Increment library version. Try to adhere to semantic versioning. After the work makes it to master, make release as "v0.3.7" or whatever matches your version in github project.
 
 ```
 npm run build
