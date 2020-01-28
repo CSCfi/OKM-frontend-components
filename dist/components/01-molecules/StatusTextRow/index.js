@@ -2,15 +2,18 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useEffect, useState } from "react";
 import * as R from "ramda";
 var defaultProps = {
-  styleClasses: ["text-base", "py-2"]
+  styleClasses: ["text-base"]
 };
 var StatusTextRow = React.memo(function (_ref) {
   var children = _ref.children,
+      isHidden = _ref.isHidden,
+      isRequired = _ref.isRequired,
+      isValid = _ref.isValid,
       labelStyles = _ref.labelStyles,
+      layout = _ref.layout,
       statusText = _ref.statusText,
       statusTextStyleClasses = _ref.statusTextStyleClasses,
-      styleClasses = _ref.styleClasses,
-      isHidden = _ref.isHidden;
+      styleClasses = _ref.styleClasses;
 
   var _useState = useState(defaultProps.styleClasses),
       _useState2 = _slicedToArray(_useState, 2),
@@ -22,6 +25,12 @@ var StatusTextRow = React.memo(function (_ref) {
       setClassNames(styleClasses);
     }
   }, [styleClasses]);
+  useEffect(function () {
+    var paddingClass = layout && layout.dense ? "pt-2" : "py-2";
+    setClassNames(function (prevValue) {
+      return R.append(paddingClass, prevValue);
+    });
+  }, [layout]);
 
   if (!isHidden) {
     return React.createElement("div", {
@@ -31,7 +40,9 @@ var StatusTextRow = React.memo(function (_ref) {
       className: "flex"
     }, statusText && React.createElement("div", {
       className: R.join(" ", statusTextStyleClasses)
-    }, statusText), children));
+    }, statusText), isRequired && React.createElement("span", {
+      className: "text-".concat(isValid ? "green" : "red", "-500 text-2xl pr-4")
+    }, "*"), " ", children));
   }
 });
 export default StatusTextRow;
