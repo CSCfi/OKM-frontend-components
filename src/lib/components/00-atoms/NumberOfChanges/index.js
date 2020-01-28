@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { COLORS } from "modules/styles";
+import { COLORS } from "../../../modules/styles";
 
 /**
  * Components
