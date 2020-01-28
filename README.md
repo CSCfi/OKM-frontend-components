@@ -41,3 +41,7 @@ npm run build
 * increment version in oiva-frontend and replace local references to the component and its dependencies with library references
 * remove component and its dependencies from oiva-frontend
 * resolve potential issues
+
+## How to run locally against this library
+
+Replace your dependency source as "file:../OKM-frontend-components" or whatever is the path to your locally cloned project, instead of "github:CSCfi/OKM-frontend-components#v0.1.7"
