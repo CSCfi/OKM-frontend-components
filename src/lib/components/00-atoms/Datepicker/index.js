@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import {
+  MuiPickersUtilsProvider,
   DatePicker
 } from "@material-ui/pickers";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { createStyles } from "@material-ui/styles";
-import { green } from "@material-ui/core/colors";
+import green from "@material-ui/core/colors/green";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
@@ -34,15 +34,13 @@ class LocalizedUtils extends DateFnsUtils {
 }
 
 const Datepicker = props => {
-  const { classes } = props;
+  const { classes, messages, locale } = props;
   const [selectedDate, setSelectedDate] = useState(props.value);
   const localeMap = {
     en: enLocale,
     fi: fiLocale,
     sv: svLocale
   };
-
-  const locale = props.intl.locale;
 
   const handleDateChange = date => {
     props.onChanges(props.payload, { value: date });
@@ -79,14 +77,14 @@ const Datepicker = props => {
           value={selectedDate || null}
           inputVariant="outlined"
           showTodayButton={props.showTodayButton}
-          okLabel={props.okLabel}
-          clearLabel={props.clearLabel}
-          cancelLabel={props.cancelLabel}
-          todayLabel={props.todayLabel}
+          okLabel={messages.ok}
+          clearLabel={messages.clear}
+          cancelLabel={messages.cancel}
+          todayLabel={messages.today}
           clearable={props.clearable}
-          maxDateMessage={props.maxDateMessage}
-          minDateMessage={props.minDateMessage}
-          invalidDateMessage={props.invalidDateMessage}
+          maxDateMessage={messages.datemax}
+          minDateMessage={messages.datemin}
+          invalidDateMessage={messages.dateinvalid}
           minDate={props.minDate}
           maxDate={props.maxDate}
           disablePast={props.disablePast}
@@ -135,13 +133,8 @@ Datepicker.propTypes = {
   disableFuture: PropTypes.bool,
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
-  okLabel: PropTypes.string,
-  clearLabel: PropTypes.string,
-  todayLabel: PropTypes.string,
-  maxDateMessage: PropTypes.string,
-  minDateMessage: PropTypes.string,
-  invalidDateMessage: PropTypes.string,
-  intl: PropTypes.object
+  locale: PropTypes.string,
+  messages: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DatePicker);
+export default withStyles(styles)(Datepicker);
