@@ -1,7 +1,9 @@
 {
   "name": "okm-frontend-components",
   "version": "0.1.10",
-  "dependencies": {},
+  "dependencies": {
+    "clsx": "^1.0.4"
+  },
   "scripts": {
     "start": "npm-run-all --parallel watch:css watch:component-css storybook",
     "build-dist": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
