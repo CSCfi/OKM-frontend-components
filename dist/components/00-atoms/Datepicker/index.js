@@ -6,10 +6,9 @@ import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/esm/inherits";
 import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { DatePicker } from "@material-ui/pickers";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import { createStyles } from "@material-ui/styles";
-import { green } from "@material-ui/core/colors";
+import green from "@material-ui/core/colors/green";
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
@@ -54,7 +53,9 @@ function (_DateFnsUtils) {
 }(DateFnsUtils);
 
 var Datepicker = function Datepicker(props) {
-  var classes = props.classes;
+  var classes = props.classes,
+      messages = props.messages,
+      locale = props.locale;
 
   var _useState = useState(props.value),
       _useState2 = _slicedToArray(_useState, 2),
@@ -66,7 +67,6 @@ var Datepicker = function Datepicker(props) {
     fi: fiLocale,
     sv: svLocale
   };
-  var locale = props.intl.locale;
 
   var handleDateChange = function handleDateChange(date) {
     props.onChanges(props.payload, {
@@ -107,14 +107,14 @@ var Datepicker = function Datepicker(props) {
     value: selectedDate || null,
     inputVariant: "outlined",
     showTodayButton: props.showTodayButton,
-    okLabel: props.okLabel,
-    clearLabel: props.clearLabel,
-    cancelLabel: props.cancelLabel,
-    todayLabel: props.todayLabel,
+    okLabel: messages.ok,
+    clearLabel: messages.clear,
+    cancelLabel: messages.cancel,
+    todayLabel: messages.today,
     clearable: props.clearable,
-    maxDateMessage: props.maxDateMessage,
-    minDateMessage: props.minDateMessage,
-    invalidDateMessage: props.invalidDateMessage,
+    maxDateMessage: messages.datemax,
+    minDateMessage: messages.datemin,
+    invalidDateMessage: messages.dateinvalid,
     minDate: props.minDate,
     maxDate: props.maxDate,
     disablePast: props.disablePast,
@@ -138,4 +138,4 @@ Datepicker.defaultProps = {
   disablePast: false,
   disableFuture: false
 };
-export default withStyles(styles)(DatePicker);
+export default withStyles(styles)(Datepicker);
