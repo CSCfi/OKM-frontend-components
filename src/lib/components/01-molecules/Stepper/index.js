@@ -6,12 +6,9 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepButton from "@material-ui/core/StepButton";
 import StepLabel from "@material-ui/core/StepLabel";
-import green from "@material-ui/core/colors/green";
 import Completed from "@material-ui/icons/CheckCircleRounded";
 import Incomplete from "@material-ui/icons/ErrorOutlined";
 import Normal from "@material-ui/icons/Lens";
-
-import * as R from "ramda";
 
 /**
  * @module Components/01-molecules
@@ -29,26 +26,29 @@ import * as R from "ramda";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
+    width: "100%",
+    "& .MuiStepLabel-label ": {
+      color: "#1d804c !important"
+    },
+    "& .MuiStepLabel-label:hover ": {
+      color: "#104e2d !important"
+    },
+    "& .Mui-error": {
+      color: "#1d804c !important"
+    },
+    "& .Mui-error:hover": {
+      color: "#104e2d !important"
+    },
+    "& .MuiStepLabel-active ": {
+      color: "black !important",
+      fontWeight: "500 !important"
+    },
+    "& .MuiButtonBase-root:hover": {
+      backgroundColor: "#f0f0f0",
+      color: "#104e2d !important"
+    }
   }
 }));
-
-const getSteps = () => {
-  return ["Select campaign settings", "Create an ad group", "Create an ad"];
-};
-
-const getStepContent = step => {
-  switch (step) {
-    case 0:
-      return "Select campaign settings...";
-    case 1:
-      return "What is an ad group anyways?";
-    case 2:
-      return "This is the bit I really care about!";
-    default:
-      return "Unknown step";
-  }
-};
 
 const iconStyles = makeStyles({
   root: {
@@ -58,23 +58,21 @@ const iconStyles = makeStyles({
     color: "#a2a4a3"
   },
   active: {
-    color: "#1c804c"
+    color: "#1d804c"
   },
   completed: {
-    color: "#1c804c",
+    color: "#1d804c",
     zIndex: 1,
-    fontSize: 24
+    fontSize: 30
   },
   error: {
     color: "#e5c317",
     zIndex: 1,
-    fontSize: 24
+    fontSize: 30
   }
 });
 
 function StepIcons(props) {
-  // const classes = iconStyles();
-  // return <Incomplete className={classes.incomplete} />;
   const classes = iconStyles();
   const { active, completed, error, icon } = props;
 
@@ -82,22 +80,23 @@ function StepIcons(props) {
     <div
       className={clsx(classes.root, {
         [classes.active]: active,
-        [classes.error]: error
+        [classes.error]: error,
+        [classes.completed]: completed
       })}>
       {error ? (
-        <Incomplete className={classes.error} />
+        <Incomplete style={{ fontSize: 30 }} className={classes.error} />
       ) : completed ? (
         <Completed className={classes.completed} />
       ) : (
-        <div style={{ marginRight: "1.5em", marginTop: "-24px" }}>
-          <Normal style={{ position: "absolute" }} />
+        <div style={{ marginRight: "1.8em", marginBottom: "1.8em" }}>
+          <Normal style={{ position: "absolute", fontSize: 30 }} />
           <span
             style={{
               position: "absolute",
-              marginLeft: "7px",
-              marginTop: "1px",
+              marginLeft: "0.55em",
+              marginTop: "0.2em",
               color: "#fff",
-              font: "1.1rem Inconsolata, monospace"
+              font: "1.1em Inconsolata, monospace"
             }}>
             {icon}
           </span>
@@ -109,45 +108,54 @@ function StepIcons(props) {
 
 const StepperNavigation = React.memo(props => {
   const classes = useStyles();
-  const [completed, setCompleted] = React.useState({});
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const getSteps = () => {
+    if (!props.step) {
+      return [
+        { title: "Phase 1" },
+        { title: "Phase 2", isFailed: true },
+        { title: "Phase 3", isCompleted: true }
+      ];
+    } else {
+      return props.steps;
+    }
+  };
+
   const steps = getSteps();
 
-  const isStepFailed = step => {
-    return step === 1;
-  };
-
-  const isStepCompleted = step => {
-    return step === 0;
-  };
-
-  const handleStep = step => () => {
+  const handleStep = (step, url) => () => {
     setActiveStep(step);
+    // go to url
   };
 
   return (
     <div className={classes.root}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => {
+      <Stepper
+        nonLinear
+        activeStep={activeStep}
+        orientation={window.innerWidth >= 768 ? "horizontal" : "vertical"}
+        style={{ backgroundColor: "transparent" }}>
+        {steps.map((item, index) => {
           const labelProps = {};
 
-          if (isStepFailed(index)) {
+          if (item.isFailed === true) {
             labelProps.error = true;
           }
-          if (isStepFailed(index)) {
-            labelProps.error = true;
-          }
-          if (isStepCompleted(index)) {
+          if (item.isCompleted === true) {
             labelProps.completed = true;
           }
 
           return (
-            <Step key={label}>
+            <Step key={item.title}>
               <StepButton
-                onClick={handleStep(index)}
-                completed={completed[index]}>
-                <StepLabel StepIconComponent={StepIcons} {...labelProps}>
-                  {label}
+                onClick={handleStep(index, item.url)}
+                completed={item.isCompleted}>
+                <StepLabel
+                  style={{ marginBottom: "0.1em" }}
+                  StepIconComponent={StepIcons}
+                  {...labelProps}>
+                  {item.title}
                 </StepLabel>
               </StepButton>
             </Step>
@@ -177,7 +185,8 @@ StepperNavigation.propTypes = {
    */
   labelStyles: PropTypes.object,
   payload: PropTypes.object,
-  isReadOnly: PropTypes.bool
+  isReadOnly: PropTypes.bool,
+  stepArray: PropTypes.array
 };
 
 export default StepperNavigation;

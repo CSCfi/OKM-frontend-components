@@ -6,11 +6,14 @@ import { isInLupa, isAdded, isRemoved } from "../../../css/label";
 
 storiesOf("StepperNavigation", module)
   .addDecorator(withInfo)
-  .add("is unchecked", () => (
-    <StepperNavigation
-      name="example"
-      isChecked={false}
-      onChanges={() => {
-        console.info("Clicked!");
-      }}></StepperNavigation>
+  .add("Stepper example", () => (
+    <div>
+      <br />
+      <StepperNavigation
+        name="example"
+        isChecked={false}
+        onChanges={() => {
+          console.info("Clicked!");
+        }}></StepperNavigation>
+    </div>
   ));
