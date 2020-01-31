@@ -17,7 +17,7 @@ import Normal from "@material-ui/icons/Lens";
 /**
  * Stepper with states, links
  * Parameters:
- * stepArray: { title: string, isCompleted: boolean, onChange: function }
+ * stepProps: { title: string, isCompleted: boolean, onChange: function }
  * @example
  * title: "Phase 3", isCompleted: true
  */
@@ -108,12 +108,6 @@ const StepperNavigation = React.memo(props => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const getSteps = () => {
-    return props.stepArray;
-  };
-
-  const steps = getSteps();
-
   const handleStep = (step, onChange) => () => {
     setActiveStep(step);
     if (onChange) onChange();
@@ -126,7 +120,7 @@ const StepperNavigation = React.memo(props => {
         activeStep={activeStep}
         orientation={window.innerWidth >= 768 ? "horizontal" : "vertical"}
         style={{ backgroundColor: "transparent" }}>
-        {steps.map((item, index) => {
+        {props.stepProps.map((item, index) => {
           const labelProps = {};
 
           if (item.isFailed === true) {
@@ -157,7 +151,7 @@ const StepperNavigation = React.memo(props => {
 });
 
 StepperNavigation.defaultProps = {
-  stepArray: [
+  stepProps: [
     { title: "Phase 1" },
     { title: "Phase 2", isFailed: true },
     { title: "Phase 3", isCompleted: true }
@@ -165,7 +159,7 @@ StepperNavigation.defaultProps = {
 };
 
 StepperNavigation.propTypes = {
-  stepArray: PropTypes.array
+  stepProps: PropTypes.array
 };
 
 export default StepperNavigation;

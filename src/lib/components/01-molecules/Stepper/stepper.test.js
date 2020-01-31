@@ -1,60 +1,36 @@
 import React from "react";
 import { fireEvent, render } from "react-testing-library";
-import CheckboxWithLabel from "./index";
+import StepperNavigation from "./index";
 
-it("renders the correct label", () => {
-  const labelText = "Label text";
-  const div = document.createElement("div");
+const props = [
+  {
+    title: "Step 1",
+    isFailed: true,
+    onChange: jest.fn()
+  },
+  {
+    title: "Step 2",
+    isCompleted: true,
+    onChange: jest.fn()
+  },
+  { title: "Step 3", onChange: jest.fn() }
+];
+
+it("renders the correct titles", () => {
   const { getByLabelText } = render(
-    <CheckboxWithLabel name="test-checkbox" onChanges={jest.fn()}>
-      {labelText}
-    </CheckboxWithLabel>,
-    div
+    <StepperNavigation name="example" stepProps={props} />
   );
-  expect(getByLabelText(labelText)).toBeInTheDocument();
-});
-
-it("renders input as checked", () => {
-  const labelText = "Label text";
-  const div = document.createElement("div");
-  const { container } = render(
-    <CheckboxWithLabel
-      name="test-checkbox"
-      isChecked={true}
-      onChanges={jest.fn()}
-    >
-      {labelText}
-    </CheckboxWithLabel>,
-    div
-  );
-  expect(container.querySelector('input[type="checkbox"]').checked).toBe(true);
-});
-
-it("handles the click", () => {
-  const { container } = render(
-    <CheckboxWithLabel
-      name="test-checkbox"
-      isChecked={false}
-      onChanges={jest.fn()}
-    >
-      Label text
-    </CheckboxWithLabel>
-  );
-
-  fireEvent.click(container.querySelector("label"));
-
-  expect(container.querySelector('input[type="checkbox"]').checked).toBe(true);
+  expect(getByLabelText(props[0].title)).toBeInTheDocument();
+  expect(getByLabelText(props[1].title)).toBeInTheDocument();
+  expect(getByLabelText(props[2].title)).toBeInTheDocument();
 });
 
 it("checks if the callback method is called on click", () => {
-  const f = jest.fn();
   const { container } = render(
-    <CheckboxWithLabel name="test-checkbox" isChecked={false} onChanges={f}>
-      Label text
-    </CheckboxWithLabel>
+    <StepperNavigation name="example" stepProps={props} />
   );
 
-  fireEvent.click(container.querySelector("label"));
+  fireEvent.click(container.querySelector(props[0].title));
 
-  expect(f).toHaveBeenCalled();
+  expect(props[0].onChange).toHaveBeenCalled();
 });
