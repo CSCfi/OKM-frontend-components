@@ -16,15 +16,13 @@ import Normal from "@material-ui/icons/Lens";
 
 /**
  * Stepper with states, links
+ * Parameters:
+ * stepArray: { title: string, isCompleted: boolean, onChange: function }
  * @example
- * const size = 12
- * const text = 'I am documented!'
- * return (
- *   <Documented size={size} text={text} />
- * )
+ * title: "Phase 3", isCompleted: true
  */
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     "& .MuiStepLabel-label ": {
@@ -111,22 +109,14 @@ const StepperNavigation = React.memo(props => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const getSteps = () => {
-    if (!props.step) {
-      return [
-        { title: "Phase 1" },
-        { title: "Phase 2", isFailed: true },
-        { title: "Phase 3", isCompleted: true }
-      ];
-    } else {
-      return props.steps;
-    }
+    return props.stepArray;
   };
 
   const steps = getSteps();
 
-  const handleStep = (step, url) => () => {
+  const handleStep = (step, onChange) => () => {
     setActiveStep(step);
-    // go to url
+    if (onChange) onChange();
   };
 
   return (
@@ -149,7 +139,7 @@ const StepperNavigation = React.memo(props => {
           return (
             <Step key={item.title}>
               <StepButton
-                onClick={handleStep(index, item.url)}
+                onClick={handleStep(index, item.onChange)}
                 completed={item.isCompleted}>
                 <StepLabel
                   style={{ marginBottom: "0.1em" }}
@@ -167,25 +157,14 @@ const StepperNavigation = React.memo(props => {
 });
 
 StepperNavigation.defaultProps = {
-  isChecked: false,
-  isDisabled: false,
-  isReadOnly: false,
-  payload: {}
+  stepArray: [
+    { title: "Phase 1" },
+    { title: "Phase 2", isFailed: true },
+    { title: "Phase 3", isCompleted: true }
+  ]
 };
 
 StepperNavigation.propTypes = {
-  isChecked: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  /**
-   * Will be called after checking or unchecking the checkbox.
-   */
-  onChanges: PropTypes.func.isRequired,
-  /**
-   * A parameter of the onChanges function.
-   */
-  labelStyles: PropTypes.object,
-  payload: PropTypes.object,
-  isReadOnly: PropTypes.bool,
   stepArray: PropTypes.array
 };
 
