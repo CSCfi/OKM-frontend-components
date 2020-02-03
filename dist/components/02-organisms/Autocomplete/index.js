@@ -120,7 +120,9 @@ var Autocomplete = React.memo(function (props) {
 
   return React.createElement(React.Fragment, null, props.title && React.createElement("label", {
     className: "block py-2"
-  }, props.title), React.createElement(Select, {
+  }, props.isRequired && React.createElement("span", {
+    className: "text-".concat(props.isValid ? "green" : "red", "-500 text-2xl pr-4")
+  }, "*"), props.title), React.createElement(Select, {
     autosize: false,
     name: props.name,
     isMulti: props.isMulti,
@@ -144,6 +146,8 @@ var Autocomplete = React.memo(function (props) {
 });
 Autocomplete.defaultProps = {
   isMulti: true,
+  isRequired: false,
+  isValid: true,
   placeholder: "Valitse...",
   value: []
 };
