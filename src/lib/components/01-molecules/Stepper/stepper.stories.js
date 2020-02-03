@@ -17,11 +17,37 @@ const props = [
   { title: "Step 3", onChange: () => console.log("Clicked 3") }
 ];
 
+let currentStep = 0;
+
+let onHandleStepChange = () => {
+  console.log("Clicked:" + currentStep);
+};
+
 storiesOf("StepperNavigation", module)
   .addDecorator(withInfo)
   .add("Stepper example", () => (
     <div>
       <br />
-      <StepperNavigation name="example" stepProps={props} />
+      <StepperNavigation
+        name="example"
+        stepProps={props}
+        activeStep={currentStep}
+        handleStepChange={onHandleStepChange}
+      />
+      {/* <button
+        onClick={() => {
+          currentStep--;
+          console.log(currentStep);
+        }}>
+        Prev
+      </button>
+      |
+      <button
+        onClick={() => {
+          currentStep++;
+          console.log(currentStep);
+        }}>
+        Next
+      </button> */}
     </div>
   ));

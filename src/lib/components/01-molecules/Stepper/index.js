@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import clsx from "clsx";
@@ -17,9 +17,11 @@ import Normal from "@material-ui/icons/Lens";
 /**
  * Stepper with states, links
  * Parameters:
- * stepProps: { title: string, isCompleted: boolean, onChange: function }
+ *  activeStep
+ *  handleStepChange
+ *  stepProps: { title: string, isCompleted: boolean, isFailed: boolean}
  * @example
- * title: "Phase 3", isCompleted: true
+ *  <StepperNavigation activeStep={1} stepProps=[{title: "Phase 3", isCompleted: true}] handleStepChange={handleStepChange} />
  */
 
 const useStyles = makeStyles(() => ({
@@ -92,7 +94,7 @@ function StepIcons(props) {
             style={{
               position: "absolute",
               marginLeft: "0.55em",
-              marginTop: "0.2em",
+              marginTop: "0.25em",
               color: "#fff",
               font: "1.1em Inconsolata, monospace"
             }}>
@@ -106,20 +108,17 @@ function StepIcons(props) {
 
 const StepperNavigation = React.memo(props => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleStep = (step, onChange) => () => {
-    setActiveStep(step);
-    if (onChange) onChange();
-  };
-
   return (
     <div className={classes.root}>
       <Stepper
         nonLinear
-        activeStep={activeStep}
+        activeStep={props.activeStep}
         orientation={window.innerWidth >= 768 ? "horizontal" : "vertical"}
-        style={{ backgroundColor: "transparent" }}>
+        style={{
+          backgroundColor: "transparent",
+          paddingLeft: 0,
+          paddingRight: 0
+        }}>
         {props.stepProps.map((item, index) => {
           const labelProps = {};
 
@@ -133,7 +132,7 @@ const StepperNavigation = React.memo(props => {
           return (
             <Step key={item.title}>
               <StepButton
-                onClick={handleStep(index, item.onChange)}
+                onClick={() => props.handleStepChange(index + 1)}
                 completed={item.isCompleted}>
                 <StepLabel
                   style={{ marginBottom: "0.1em" }}
@@ -159,7 +158,9 @@ StepperNavigation.defaultProps = {
 };
 
 StepperNavigation.propTypes = {
-  stepProps: PropTypes.array
+  stepProps: PropTypes.array,
+  activeStep: PropTypes.number,
+  handleStepChange: PropTypes.func
 };
 
 export default StepperNavigation;
