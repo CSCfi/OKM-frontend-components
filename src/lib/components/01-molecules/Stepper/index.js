@@ -30,8 +30,11 @@ const useStyles = makeStyles(() => ({
     "& .MuiStepLabel-label ": {
       fontFamily: "inherit",
       fontWeight: "500",
-      color: "#1d804c !important",
+      color: "#1d804c",
       letterSpacing: "0.15px" // to prevent text move when bolding
+    },
+    "& .MuiStepLabel-label:hover": {
+      color: "#104e2d !important"
     },
     "& .Mui-error": {
       color: "#1d804c !important"
@@ -39,7 +42,7 @@ const useStyles = makeStyles(() => ({
     "& .Mui-error:hover": {
       color: "#104e2d !important"
     },
-    "& .MuiStepLabel-active ": {
+    "& .MuiStepLabel-active": {
       color: "black !important",
       fontWeight: "600",
       letterSpacing: "0" // to prevent text move when bolding
@@ -48,8 +51,10 @@ const useStyles = makeStyles(() => ({
       marginTop: "-28px"
     },
     "& .MuiButtonBase-root:hover": {
-      backgroundColor: "#f0f0f0",
-      color: "#104e2d !important"
+      // backgroundColor: "#f0f0f0",
+      "& span.MuiStepLabel-label": {
+        color: "#104e2d !important"
+      }
     },
     "& .MuiStepper-vertical ": {
       margin: "12px 12px 0 12px"
