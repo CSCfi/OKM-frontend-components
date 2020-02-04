@@ -10,12 +10,23 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
 
   var today = new Date(Date.now());
   var yesterday = new Date(Date.now() - 86400000);
+  var messages = {
+    ok: "ok",
+    cancel: "cancel",
+    clear: "clear",
+    today: "today",
+    datemax: "datemax",
+    datemin: "datemin",
+    dateinvalid: "dateinvalid"
+  };
   return React.createElement("div", null, React.createElement("p", null, "Normal"), React.createElement(Datepicker, {
     value: today,
     payload: {
       value: today
     },
-    onChanges: onChanges
+    onChanges: onChanges,
+    messages: messages,
+    locale: "fi"
   }), React.createElement("p", null, "Error + clearable"), React.createElement(Datepicker, {
     value: yesterday,
     payload: {
@@ -24,10 +35,14 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     onChanges: onChanges,
     error: true,
     clearable: true,
-    showTodayButton: false
+    showTodayButton: false,
+    messages: messages,
+    locale: "fi"
   }), React.createElement("p", null, "Wide"), React.createElement(Datepicker, {
     value: today,
     onChanges: onChanges,
+    messages: messages,
+    locale: "fi",
     fullWidth: true
   }));
 });
