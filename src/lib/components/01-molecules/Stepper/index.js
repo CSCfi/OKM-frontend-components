@@ -51,7 +51,6 @@ const useStyles = makeStyles(() => ({
       marginTop: "-28px"
     },
     "& .MuiButtonBase-root:hover": {
-      // backgroundColor: "#f0f0f0",
       "& span.MuiStepLabel-label": {
         color: "#104e2d !important"
       }
@@ -145,6 +144,7 @@ const StepperNavigation = React.memo(props => {
             <Step key={item.title}>
               <StepButton
                 onClick={() => props.handleStepChange(index + 1)}
+                disabled={index === props.activeStep}
                 completed={item.isCompleted}>
                 <StepLabel
                   style={{ marginBottom: "0.1em" }}
