@@ -44,7 +44,7 @@ var useStyles = makeStyles(function () {
         color: "#104e2d !important"
       },
       "& .MuiStepLabel-active": {
-        color: "black !important",
+        color: "#333333 !important",
         fontWeight: "600",
         letterSpacing: "0" // to prevent text move when bolding
 
