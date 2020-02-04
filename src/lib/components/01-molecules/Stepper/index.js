@@ -50,6 +50,9 @@ const useStyles = makeStyles(() => ({
     "& .MuiButtonBase-root:hover": {
       backgroundColor: "#f0f0f0",
       color: "#104e2d !important"
+    },
+    "& .MuiStepper-vertical ": {
+      margin: "12px 12px 0 12px"
     }
   }
 }));
