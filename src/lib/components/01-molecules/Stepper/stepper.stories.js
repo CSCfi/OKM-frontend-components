@@ -22,7 +22,12 @@ storiesOf("StepperNavigation", module)
     "Stepper example",
     withState({ currentStep: 0 })(({ store }) => (
       <React.Fragment>
-        <div style={{ border: "1px solid red" }}>
+        <div
+          style={{
+            marginTop: "1em",
+            borderTop: "1px solid red",
+            borderBottom: "1px solid red"
+          }}>
           <StepperNavigation
             name="example"
             stepProps={props}

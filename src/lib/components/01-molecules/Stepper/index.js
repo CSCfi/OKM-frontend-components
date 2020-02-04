@@ -33,9 +33,6 @@ const useStyles = makeStyles(() => ({
       color: "#1d804c !important",
       letterSpacing: "0.15px" // to prevent text move when bolding
     },
-    "& .MuiStepLabel-label:hover ": {
-      color: "#104e2d !important"
-    },
     "& .Mui-error": {
       color: "#1d804c !important"
     },
@@ -46,6 +43,9 @@ const useStyles = makeStyles(() => ({
       color: "black !important",
       fontWeight: "600",
       letterSpacing: "0" // to prevent text move when bolding
+    },
+    "& .MuiButtonBase-root": {
+      marginTop: "-28px"
     },
     "& .MuiButtonBase-root:hover": {
       backgroundColor: "#f0f0f0",
