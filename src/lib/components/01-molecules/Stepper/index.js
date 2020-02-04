@@ -28,7 +28,10 @@ const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     "& .MuiStepLabel-label ": {
-      color: "#1d804c !important"
+      fontFamily: "inherit",
+      fontWeight: "500",
+      color: "#1d804c !important",
+      letterSpacing: "0.15px" // to prevent text move when bolding
     },
     "& .MuiStepLabel-label:hover ": {
       color: "#104e2d !important"
@@ -41,7 +44,8 @@ const useStyles = makeStyles(() => ({
     },
     "& .MuiStepLabel-active ": {
       color: "black !important",
-      fontWeight: "500 !important"
+      fontWeight: "600",
+      letterSpacing: "0" // to prevent text move when bolding
     },
     "& .MuiButtonBase-root:hover": {
       backgroundColor: "#f0f0f0",

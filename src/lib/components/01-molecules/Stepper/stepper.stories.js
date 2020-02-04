@@ -21,14 +21,15 @@ storiesOf("StepperNavigation", module)
   .add(
     "Stepper example",
     withState({ currentStep: 0 })(({ store }) => (
-      <div>
-        <br />
-        <StepperNavigation
-          name="example"
-          stepProps={props}
-          activeStep={store.state.currentStep}
-          handleStepChange={step => store.set({ currentStep: step - 1 })}
-        />
+      <React.Fragment>
+        <div style={{ border: "1px solid red" }}>
+          <StepperNavigation
+            name="example"
+            stepProps={props}
+            activeStep={store.state.currentStep}
+            handleStepChange={step => store.set({ currentStep: step - 1 })}
+          />
+        </div>
         <button
           onClick={() => {
             store.set({ currentStep: store.state.currentStep - 1 });
@@ -42,6 +43,6 @@ storiesOf("StepperNavigation", module)
           }}>
           Next +
         </button>
-      </div>
+      </React.Fragment>
     ))
   );
