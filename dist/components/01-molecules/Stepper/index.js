@@ -53,7 +53,6 @@ var useStyles = makeStyles(function () {
         marginTop: "-28px"
       },
       "& .MuiButtonBase-root:hover": {
-        // backgroundColor: "#f0f0f0",
         "& span.MuiStepLabel-label": {
           color: "#104e2d !important"
         }
@@ -154,6 +153,7 @@ var StepperNavigation = React.memo(function (props) {
       onClick: function onClick() {
         return props.handleStepChange(index + 1);
       },
+      disabled: index === props.activeStep,
       completed: item.isCompleted
     }, React.createElement(StepLabel, Object.assign({
       style: {
