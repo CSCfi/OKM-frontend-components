@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import _ from "lodash";
-import { withStyles } from "@material-ui/core";
+import { withStyles, useStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 
 import styles from "./input.module.css";
 
-const CssTextField = withStyles({
+const inputStyles = {
   root: {
     "& MuiInputBase-input": {
       "& .Mui-disabled": {
@@ -31,24 +31,30 @@ const CssTextField = withStyles({
       "&.Mui-disabled fieldset": {
         border: "none"
       }
+    },
+
+    "& input:valid:focus + fieldset": {
+      padding: "4px !important"
+    },
+    "& input:invalid + fieldset ": {
+      borderColor: props => (props.isFieldVisited === "true" ? "orange" : ")")
+    }
+  },
+  requiredVisited: {
+    "& input:invalid + fieldset ": {
+      borderColor: "orange"
     }
   }
-})(TextField);
+};
 
 const Input = props => {
   const changesOutDelayed = _.debounce(props.onChanges, props.delay);
+  const [isVisited, setIsVisited] = useState(false);
+  const { classes } = props;
 
   return (
     <div className="flex items-center">
-      {props.isRequired && (
-        <span
-          className={`text-${
-            props.isValid ? "green" : "red"
-          }-500 text-2xl pr-4`}>
-          *
-        </span>
-      )}
-      <CssTextField
+      <TextField
         id={props.id}
         aria-label={props.ariaLabel}
         defaultValue={props.value}
@@ -63,12 +69,11 @@ const Input = props => {
         rows={props.rows}
         margin="dense"
         rowsMax={props.rowsMax}
-        className={`
-        ${props.isHidden ? "hidden" : ""}
-        ${props.isReadOnly ? "text-black border-collapse" : ""} p-2`}
         onChange={e =>
           changesOutDelayed(props.payload, { value: e.target.value })
         }
+        required={props.isRequired}
+        isValid={props.isValid}
         error={props.error}
         InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
         variant="outlined"
@@ -79,6 +84,14 @@ const Input = props => {
         }
         fullWidth={props.fullWidth}
         type={props.type}
+        onFocus={() => setIsVisited(true)}
+        className={
+          props.isHidden
+            ? "hidden"
+            : isVisited & props.isRequired
+            ? classes.requiredVisited
+            : classes.root
+        }
       />
       {!isEmpty(props.tooltip) && (
         <div className="ml-8">
@@ -112,7 +125,8 @@ Input.defaultProps = {
   width: "20em",
   fullWidth: false,
   tooltip: {},
-  type: "text"
+  type: "text",
+  isVisited: false
 };
 
 Input.propTypes = {
@@ -136,7 +150,8 @@ Input.propTypes = {
   tooltip: PropTypes.object,
   width: PropTypes.string,
   fullWidth: PropTypes.bool,
-  type: PropTypes.string
+  type: PropTypes.string,
+  isVisited: PropTypes.bool
 };
 
-export default Input;
+export default withStyles(inputStyles)(Input);
