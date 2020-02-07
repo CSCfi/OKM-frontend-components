@@ -4,12 +4,26 @@ import PropTypes from "prop-types";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import { withStyles } from "@material-ui/core";
 
 import styles from "./textbox.module.css";
 
+const textboxStyles = {
+  root: {
+    boxShadow: "none"
+  },
+  requiredVisited: {
+    "& textarea:invalid + fieldset ": {
+      borderColor: "orange"
+    }
+  }
+};
+
 const TextBox = props => {
+  const [isVisited, setIsVisited] = useState(true);
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
+  const { classes } = props;
 
   const updateValue = e => {
     setValue(e.target.value);
@@ -62,13 +76,17 @@ const TextBox = props => {
                 props.isReadOnly
                   ? "text-black"
                   : "border border-solid border-gray-500 rounded"
-              }
-            w-full p-2 resize-none`}
+              } ${
+                isVisited & props.isRequired
+                  ? classes.requiredVisited
+                  : classes.root
+              } w-full p-2 resize-none`}
               onChange={updateValue}
               value={value}
               inputprops={{
                 readOnly: props.isReadOnly
               }}
+              onFocus={() => setIsVisited(true)}
             />
             {!isEmpty(props.tooltip) && (
               <div className="ml-8">
@@ -127,4 +145,4 @@ TextBox.propTypes = {
   value: PropTypes.string
 };
 
-export default TextBox;
+export default withStyles(textboxStyles)(TextBox);

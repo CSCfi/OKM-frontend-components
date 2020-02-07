@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
-import _ from "lodash";
-import { withStyles, useStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
@@ -10,36 +9,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import styles from "./input.module.css";
 
 const inputStyles = {
-  root: {
-    "& MuiInputBase-input": {
-      "& .Mui-disabled": {
-        color: "pink"
-      }
-    },
-    "& label.Mui-focused": {
-      color: "green"
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green"
-    },
-    "& .MuiInputBase-root": {
-      "&.Mui-disabled": {
-        color: "rgba(0, 0, 0, 0.87)"
-      }
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-disabled fieldset": {
-        border: "none"
-      }
-    },
-
-    "& input:valid:focus + fieldset": {
-      padding: "4px !important"
-    },
-    "& input:invalid + fieldset ": {
-      borderColor: props => (props.isFieldVisited === "true" ? "orange" : ")")
-    }
-  },
+  root: {},
   requiredVisited: {
     "& input:invalid + fieldset ": {
       borderColor: "orange"
@@ -48,9 +18,30 @@ const inputStyles = {
 };
 
 const Input = props => {
-  const changesOutDelayed = _.debounce(props.onChanges, props.delay);
   const [isVisited, setIsVisited] = useState(false);
   const { classes } = props;
+  const [value, setValue] = useState(null);
+  const [handle, setHandle] = useState(null);
+
+  const updateValue = e => {
+    setValue(e.target.value);
+    if (handle) {
+      clearTimeout(handle);
+    }
+    setHandle(
+      (v => {
+        return setTimeout(() => {
+          props.onChanges(props.payload, { value: v });
+        }, props.delay);
+      })(e.target.value)
+    );
+  };
+
+  useEffect(() => {
+    if (props.value !== value || !value) {
+      setValue(props.value);
+    }
+  }, [props.value]);
 
   return (
     <div className="flex items-center">
@@ -69,9 +60,7 @@ const Input = props => {
         rows={props.rows}
         margin="dense"
         rowsMax={props.rowsMax}
-        onChange={e =>
-          changesOutDelayed(props.payload, { value: e.target.value })
-        }
+        onChange={updateValue}
         required={props.isRequired}
         isValid={props.isValid}
         error={props.error}
@@ -85,13 +74,10 @@ const Input = props => {
         fullWidth={props.fullWidth}
         type={props.type}
         onFocus={() => setIsVisited(true)}
-        className={
-          props.isHidden
-            ? "hidden"
-            : isVisited & props.isRequired
-            ? classes.requiredVisited
-            : classes.root
+        className={`${props.isHidden ? "hidden" : ""} ${
+          isVisited & props.isRequired ? classes.requiredVisited : classes.root
         }
+        `}
       />
       {!isEmpty(props.tooltip) && (
         <div className="ml-8">

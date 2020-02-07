@@ -40,6 +40,13 @@ storiesOf("Input", module)
           type={"number"}
         />
         <Input
+          payload={{ testProp: 2 }}
+          onChanges={onChanges}
+          type={"number"}
+          isRequired
+          label="Required"
+        />
+        <Input
           label="Readonly"
           payload={{ testProp: 2 }}
           onChanges={onChanges}

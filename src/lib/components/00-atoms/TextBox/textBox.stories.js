@@ -13,6 +13,13 @@ storiesOf("TextBox", module)
       <div>
         <p>Open developer tool console to see callback values.</p>
         <TextBox payload={{ testProp: 1 }} onChanges={onChanges} />
+        <br />
+        <TextBox
+          label="Required"
+          isRequired
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+        />
       </div>
     );
   });
