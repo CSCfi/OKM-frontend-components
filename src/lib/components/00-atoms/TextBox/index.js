@@ -4,12 +4,31 @@ import PropTypes from "prop-types";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import { withStyles } from "@material-ui/core";
 
 import styles from "./textbox.module.css";
 
+const textboxStyles = {
+  root: {
+    boxShadow: "none",
+    border: "1px solid #C4C4C4",
+    "&:disabled": {
+      borderColor: "transparent !important",
+      paddingLeft: 0,
+      paddingRight: 0
+    }
+  },
+  requiredVisited: {
+    boxShadow: "none",
+    border: "1px solid #E5C317"
+  }
+};
+
 const TextBox = props => {
+  const [isVisited, setIsVisited] = useState(false);
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
+  const { classes } = props;
 
   const updateValue = e => {
     setValue(e.target.value);
@@ -62,13 +81,17 @@ const TextBox = props => {
                 props.isReadOnly
                   ? "text-black"
                   : "border border-solid border-gray-500 rounded"
-              }
-            w-full p-2 resize-none`}
+              } ${
+                isVisited && props.isRequired && !value
+                  ? classes.requiredVisited
+                  : classes.root
+              } w-full p-2 resize-none`}
               onChange={updateValue}
               value={value}
               inputprops={{
                 readOnly: props.isReadOnly
               }}
+              onFocus={() => setIsVisited(true)}
             />
             {!isEmpty(props.tooltip) && (
               <div className="ml-8">
@@ -102,7 +125,8 @@ TextBox.defaultProps = {
   rows: 2,
   rowsMax: 100,
   title: "",
-  tooltip: {}
+  tooltip: {},
+  isVisited: false
 };
 
 TextBox.propTypes = {
@@ -112,7 +136,7 @@ TextBox.propTypes = {
   isDisabled: PropTypes.bool,
   isHidden: PropTypes.bool,
   /** Is called with the payload and the value. */
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object,
   placeholder: PropTypes.string,
@@ -124,7 +148,8 @@ TextBox.propTypes = {
   rowsMax: PropTypes.number,
   title: PropTypes.string,
   tooltip: PropTypes.object,
-  value: PropTypes.string
+  value: PropTypes.string,
+  isVisited: PropTypes.bool
 };
 
-export default TextBox;
+export default withStyles(textboxStyles)(TextBox);

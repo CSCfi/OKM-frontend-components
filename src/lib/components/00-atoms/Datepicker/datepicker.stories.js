@@ -12,13 +12,13 @@ storiesOf("Datepicker", module)
     const today = new Date(Date.now());
     const yesterday = new Date(Date.now() - 86400000);
     const messages = {
-        ok: "ok",
-        cancel: "cancel",
-        clear: "clear",
-        today: "today",
-        datemax: "datemax",
-        datemin: "datemin",
-        dateinvalid: "dateinvalid"
+      ok: "ok",
+      cancel: "cancel",
+      clear: "clear",
+      today: "today",
+      datemax: "datemax",
+      datemin: "datemin",
+      dateinvalid: "dateinvalid"
     };
 
     return (
@@ -41,6 +41,23 @@ storiesOf("Datepicker", module)
           showTodayButton={false}
           messages={messages}
           locale={"fi"}
+        />
+        <p>Read only</p>
+        <Datepicker
+          value={yesterday}
+          payload={{ value: yesterday }}
+          showTodayButton={false}
+          messages={messages}
+          locale={"fi"}
+          isReadonly
+        />
+        <p>Required</p>
+        <Datepicker
+          showTodayButton={false}
+          messages={messages}
+          onChanges={onChanges}
+          locale={"fi"}
+          isRequired
         />
         <p>Wide</p>
         <Datepicker

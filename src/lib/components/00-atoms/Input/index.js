@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
-import _ from "lodash";
 import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
@@ -9,46 +8,56 @@ import HelpIcon from "@material-ui/icons/Help";
 
 import styles from "./input.module.css";
 
-const CssTextField = withStyles({
+const inputStyles = {
   root: {
-    "& MuiInputBase-input": {
-      "& .Mui-disabled": {
-        color: "pink"
-      }
+    "& .Mui-disabled": {
+      color: "#333",
+      paddingLeft: 0,
+      paddingRight: 0
     },
-    "& label.Mui-focused": {
-      color: "green"
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(0.75)"
     },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green"
-    },
-    "& .MuiInputBase-root": {
-      "&.Mui-disabled": {
-        color: "rgba(0, 0, 0, 0.87)"
-      }
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-disabled fieldset": {
-        border: "none"
-      }
+    "& input:disabled + fieldset": {
+      borderColor: "transparent !important"
+    }
+  },
+  requiredVisited: {
+    "& input:invalid + fieldset ": {
+      borderColor: "#E5C317"
     }
   }
-})(TextField);
+};
 
 const Input = props => {
-  const changesOutDelayed = _.debounce(props.onChanges, props.delay);
+  const [isVisited, setIsVisited] = useState(false);
+  const { classes } = props;
+  const [value, setValue] = useState(null);
+  const [handle, setHandle] = useState(null);
+
+  const updateValue = e => {
+    setValue(e.target.value);
+    if (handle) {
+      clearTimeout(handle);
+    }
+    setHandle(
+      (v => {
+        return setTimeout(() => {
+          props.onChanges(props.payload, { value: v });
+        }, props.delay);
+      })(e.target.value)
+    );
+  };
+
+  useEffect(() => {
+    if (props.value !== value || !value) {
+      setValue(props.value);
+    }
+  }, [props.value]);
 
   return (
     <div className="flex items-center">
-      {props.isRequired && (
-        <span
-          className={`text-${
-            props.isValid ? "green" : "red"
-          }-500 text-2xl pr-4`}>
-          *
-        </span>
-      )}
-      <CssTextField
+      <TextField
         id={props.id}
         aria-label={props.ariaLabel}
         defaultValue={props.value}
@@ -63,12 +72,8 @@ const Input = props => {
         rows={props.rows}
         margin="dense"
         rowsMax={props.rowsMax}
-        className={`
-        ${props.isHidden ? "hidden" : ""}
-        ${props.isReadOnly ? "text-black border-collapse" : ""} p-2`}
-        onChange={e =>
-          changesOutDelayed(props.payload, { value: e.target.value })
-        }
+        onChange={updateValue}
+        required={props.isRequired}
         error={props.error}
         InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
         variant="outlined"
@@ -79,6 +84,14 @@ const Input = props => {
         }
         fullWidth={props.fullWidth}
         type={props.type}
+        onFocus={() => setIsVisited(true)}
+        className={`${props.isHidden ? "hidden" : ""} 
+          ${
+            isVisited && props.isRequired
+              ? classes.requiredVisited
+              : classes.root
+          } 
+        `}
       />
       {!isEmpty(props.tooltip) && (
         <div className="ml-8">
@@ -112,7 +125,8 @@ Input.defaultProps = {
   width: "20em",
   fullWidth: false,
   tooltip: {},
-  type: "text"
+  type: "text",
+  isVisited: false
 };
 
 Input.propTypes = {
@@ -126,7 +140,7 @@ Input.propTypes = {
   isValid: PropTypes.bool,
   label: PropTypes.string,
   /** Is called with the payload and the value. */
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object,
   placeholder: PropTypes.string,
@@ -136,7 +150,8 @@ Input.propTypes = {
   tooltip: PropTypes.object,
   width: PropTypes.string,
   fullWidth: PropTypes.bool,
-  type: PropTypes.string
+  type: PropTypes.string,
+  isVisited: PropTypes.bool
 };
 
-export default Input;
+export default withStyles(inputStyles)(Input);
