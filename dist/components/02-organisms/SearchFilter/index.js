@@ -1,5 +1,5 @@
 import React from "react";
-import TextBox from "../../00-atoms/TextBox";
+import Input from "../../00-atoms/Input";
 
 /**
  * SearchFilter wraps a TextBox, stripping away payload and propagating only
@@ -13,7 +13,7 @@ var SearchFilter = function SearchFilter(props) {
     props.onValueChanged(changePayload.value);
   };
 
-  return React.createElement(React.Fragment, null, React.createElement(TextBox, {
+  return React.createElement(React.Fragment, null, React.createElement(Input, {
     placeholder: props.placeholder,
     onChanges: handleChanges
   }));
