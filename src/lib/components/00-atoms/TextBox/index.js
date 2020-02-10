@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PropTypes from "prop-types";
 import Tooltip from "../../02-organisms/Tooltip";
-import { isEmpty } from "ramda";
+import { isEmpty, propSatisfies } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
 
@@ -10,17 +10,17 @@ import styles from "./textbox.module.css";
 
 const textboxStyles = {
   root: {
-    boxShadow: "none"
+    boxShadow: "none",
+    border: "1px solid #C4C4C4"
   },
   requiredVisited: {
-    "& textarea:invalid + fieldset ": {
-      borderColor: "orange"
-    }
+    boxShadow: "none",
+    border: "1px solid orange"
   }
 };
 
 const TextBox = props => {
-  const [isVisited, setIsVisited] = useState(true);
+  const [isVisited, setIsVisited] = useState(false);
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
   const { classes } = props;
@@ -77,7 +77,7 @@ const TextBox = props => {
                   ? "text-black"
                   : "border border-solid border-gray-500 rounded"
               } ${
-                isVisited & props.isRequired
+                isVisited && props.isRequired && !value
                   ? classes.requiredVisited
                   : classes.root
               } w-full p-2 resize-none`}
@@ -120,7 +120,8 @@ TextBox.defaultProps = {
   rows: 2,
   rowsMax: 100,
   title: "",
-  tooltip: {}
+  tooltip: {},
+  isVisited: false
 };
 
 TextBox.propTypes = {
@@ -142,7 +143,8 @@ TextBox.propTypes = {
   rowsMax: PropTypes.number,
   title: PropTypes.string,
   tooltip: PropTypes.object,
-  value: PropTypes.string
+  value: PropTypes.string,
+  isVisited: PropTypes.bool
 };
 
 export default withStyles(textboxStyles)(TextBox);

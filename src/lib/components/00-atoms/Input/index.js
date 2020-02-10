@@ -75,7 +75,7 @@ const Input = props => {
         type={props.type}
         onFocus={() => setIsVisited(true)}
         className={`${props.isHidden ? "hidden" : ""} ${
-          isVisited & props.isRequired ? classes.requiredVisited : classes.root
+          isVisited && props.isRequired ? classes.requiredVisited : classes.root
         }
         `}
       />
