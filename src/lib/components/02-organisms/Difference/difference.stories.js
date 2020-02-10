@@ -21,8 +21,9 @@ storiesOf("Difference", module)
         initialValue={0}
         applyForValue={0}
         titles={story1.titles}
+        isRequired
       />
-    )
+    );
   })
   .add("Read-only", () => {
     return (
@@ -32,5 +33,5 @@ storiesOf("Difference", module)
         titles={story1.titles}
         isReadOnly={true}
       />
-    )
+    );
   });

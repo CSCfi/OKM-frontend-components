@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  MuiPickersUtilsProvider,
-  DatePicker
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import { createStyles } from "@material-ui/styles";
 import green from "@material-ui/core/colors/green";
 import { createMuiTheme } from "@material-ui/core";
@@ -16,6 +13,23 @@ import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
 
 const styles = createStyles(theme => ({
+  root: {
+    "& .Mui-disabled": {
+      color: "#333",
+      padding: 0
+    },
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(0.75)"
+    },
+    "& input:disabled + fieldset": {
+      borderColor: "transparent !important"
+    }
+  },
+  requiredVisited: {
+    "& input + fieldset ": {
+      borderColor: "#E5C317"
+    }
+  },
   dense: {
     marginTop: theme.spacing(2)
   }
@@ -36,6 +50,7 @@ class LocalizedUtils extends DateFnsUtils {
 const Datepicker = props => {
   const { classes, messages, locale } = props;
   const [selectedDate, setSelectedDate] = useState(props.value);
+  const [isVisited, setIsVisited] = useState(false);
   const localeMap = {
     en: enLocale,
     fi: fiLocale,
@@ -57,13 +72,12 @@ const Datepicker = props => {
       <MuiPickersUtilsProvider
         utils={LocalizedUtils}
         locale={localeMap[locale]}
-        theme={materialTheme}
-      >
+        theme={materialTheme}>
         <DatePicker
           format="d.M.yyyy" // Always is Finnish format
           aria-label={props.ariaLabel}
           label={props.label}
-          disabled={props.isDisabled}
+          disabled={props.isDisabled || props.isReadonly}
           placeholder={props.placeholder}
           margin="dense"
           className={`${props.isHidden ? "hidden" : ""} p-2`}
@@ -89,6 +103,14 @@ const Datepicker = props => {
           maxDate={props.maxDate}
           disablePast={props.disablePast}
           disableFuture={props.disableFuture}
+          className={`${props.isHidden ? "hidden" : ""} 
+            ${
+              isVisited && props.isRequired && !props.value
+                ? classes.requiredVisited
+                : classes.root
+            } 
+        `}
+          onFocus={() => setIsVisited(true)}
         />
       </MuiPickersUtilsProvider>
     </ThemeProvider>
@@ -119,7 +141,7 @@ Datepicker.propTypes = {
   isDisabled: PropTypes.bool,
   isHidden: PropTypes.bool,
   /** Is called with the payload and the value. */
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object,
   placeholder: PropTypes.string,
@@ -134,7 +156,9 @@ Datepicker.propTypes = {
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
   locale: PropTypes.string,
-  messages: PropTypes.object.isRequired
+  messages: PropTypes.object.isRequired,
+  isRequired: PropTypes.bool,
+  isReadonly: PropTypes.bool
 };
 
 export default withStyles(styles)(Datepicker);

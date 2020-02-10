@@ -22,7 +22,6 @@ const inputStyles = {
       borderColor: "transparent !important"
     }
   },
-  readOnly: {},
   requiredVisited: {
     "& input:invalid + fieldset ": {
       borderColor: "#E5C317"
@@ -75,7 +74,6 @@ const Input = props => {
         rowsMax={props.rowsMax}
         onChange={updateValue}
         required={props.isRequired}
-        isValid={props.isValid}
         error={props.error}
         InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
         variant="outlined"
@@ -93,7 +91,6 @@ const Input = props => {
               ? classes.requiredVisited
               : classes.root
           } 
-          ${props.isReadOnly ? classes.readOnly : ""}
         `}
       />
       {!isEmpty(props.tooltip) && (
@@ -143,7 +140,7 @@ Input.propTypes = {
   isValid: PropTypes.bool,
   label: PropTypes.string,
   /** Is called with the payload and the value. */
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object,
   placeholder: PropTypes.string,

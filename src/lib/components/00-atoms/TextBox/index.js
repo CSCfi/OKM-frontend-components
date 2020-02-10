@@ -136,7 +136,7 @@ TextBox.propTypes = {
   isDisabled: PropTypes.bool,
   isHidden: PropTypes.bool,
   /** Is called with the payload and the value. */
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object,
   placeholder: PropTypes.string,

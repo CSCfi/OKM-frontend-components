@@ -20,8 +20,12 @@ storiesOf("TextBox", module)
           payload={{ testProp: 1 }}
           onChanges={onChanges}
         />
-        <br />
-        <TextBox label="Required" isRequired value="Read only" isReadOnly />
+        <TextBox
+          label="read only"
+          isReadOnly
+          value="Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
+          isReadOnly
+        />
       </div>
     );
   });

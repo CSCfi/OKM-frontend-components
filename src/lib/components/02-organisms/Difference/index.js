@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
-import TextField from "@material-ui/core/TextField";
+import Input from "../../00-atoms/Input";
 import Typography from "@material-ui/core/Typography";
 import * as R from "ramda";
 
@@ -38,15 +38,19 @@ const Difference = ({
 }) => {
   const [timeoutHandle, setTimeoutHandle] = useState(null);
   const [value, setValue] = useState(initialValue);
-  const required = R.path(["component","properties","isRequired"],payload) || isRequired;
-  const readonly = R.path(["component","properties","isReadOnly"],payload) || isReadOnly;
+  const required =
+    R.path(["component", "properties", "isRequired"], payload) || isRequired;
+  const readonly =
+    R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
 
-  const isValid = isValueValid(required, value)
+  const isValid = isValueValid(required, value);
 
   const handleChange = useCallback(
     (actionResults, payload) => {
       const resultIsNaN = isNaN(actionResults.value);
-      const result = resultIsNaN ? emptySelectionPlaceholderValue : actionResults.value;
+      const result = resultIsNaN
+        ? emptySelectionPlaceholderValue
+        : actionResults.value;
 
       const resultIsValid = isValueValid(required, result);
 
@@ -67,13 +71,17 @@ const Difference = ({
   );
 
   useEffect(() => {
-    setValue(applyForValue === initialValue ? emptySelectionPlaceholderValue : applyForValue);
+    setValue(
+      applyForValue === initialValue
+        ? emptySelectionPlaceholderValue
+        : applyForValue
+    );
   }, [applyForValue, initialValue]);
 
-  const containerClass = isValid ? "flex" : "flex bg-yellow-300";
+  const containerClass = "flex";
 
   const initialAreaTitle = titles[0];
-  const inputAreaTitle = required ? titles[1]+'*' : titles[1];
+  const inputAreaTitle = required ? titles[1] + "*" : titles[1];
   const changeAreaTitle = titles[2];
 
   return (
@@ -85,16 +93,18 @@ const Difference = ({
         </div>
         <div className="flex-1 flex-col">
           <Typography>{inputAreaTitle}</Typography>
-          {!readonly &&
-            <TextField
+          {!readonly && (
+            <Input
               type="number"
               inputProps={{ min: "0" }}
               onChange={e =>
-                handleChange({value: parseInt(e.target.value, 10)}, payload)
+                handleChange({ value: parseInt(e.target.value, 10) }, payload)
               }
               value={value}
+              width="12em"
+              isRequired={isRequired}
             />
-          }
+          )}
           {readonly && applyForValue}
         </div>
         <div className="flex-1 flex-col">
