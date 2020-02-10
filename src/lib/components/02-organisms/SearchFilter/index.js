@@ -1,5 +1,5 @@
 import React from "react";
-import TextBox from "../../00-atoms/TextBox";
+import Input from "../../00-atoms/Input";
 import PropTypes from "prop-types";
 
 /**
@@ -16,7 +16,7 @@ const SearchFilter = (props) => {
 
   return (
     <React.Fragment>
-      <TextBox placeholder={props.placeholder} onChanges={handleChanges} />
+      <Input placeholder={props.placeholder} onChanges={handleChanges} />
     </React.Fragment>
   )
 };

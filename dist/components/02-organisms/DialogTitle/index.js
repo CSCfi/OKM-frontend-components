@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import React from "react";
-import '../../../css/tailwind.css';
 var DialogTitle = withStyles(function (theme) {
   return {
     root: {
