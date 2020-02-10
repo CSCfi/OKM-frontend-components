@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PropTypes from "prop-types";
 import Tooltip from "../../02-organisms/Tooltip";
-import { isEmpty, propSatisfies } from "ramda";
+import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
 
@@ -11,11 +11,16 @@ import styles from "./textbox.module.css";
 const textboxStyles = {
   root: {
     boxShadow: "none",
-    border: "1px solid #C4C4C4"
+    border: "1px solid #C4C4C4",
+    "&:disabled": {
+      borderColor: "transparent !important",
+      paddingLeft: 0,
+      paddingRight: 0
+    }
   },
   requiredVisited: {
     boxShadow: "none",
-    border: "1px solid orange"
+    border: "1px solid #E5C317"
   }
 };
 

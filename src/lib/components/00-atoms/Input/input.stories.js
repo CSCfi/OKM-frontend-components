@@ -33,14 +33,21 @@ storiesOf("Input", module)
         />
         <p>Wide</p>
         <Input payload={{ testProp: 2 }} onChanges={onChanges} width={"100%"} />
+        <Input
+          label="Readonly"
+          payload={{ testProp: 2 }}
+          onChanges={onChanges}
+          isReadOnly
+          value="readonly"
+        />
         <p>Number</p>
         <Input
-          payload={{ testProp: 2 }}
+          payload={{ testProp: 123 }}
           onChanges={onChanges}
           type={"number"}
         />
         <Input
-          payload={{ testProp: 2 }}
+          payload={{ testProp: 123 }}
           onChanges={onChanges}
           type={"number"}
           isRequired
@@ -48,10 +55,11 @@ storiesOf("Input", module)
         />
         <Input
           label="Readonly"
-          payload={{ testProp: 2 }}
+          payload={{ testProp: 123 }}
+          type={"number"}
           onChanges={onChanges}
           isReadOnly
-          value="readonly"
+          value={123}
         />
       </div>
     );

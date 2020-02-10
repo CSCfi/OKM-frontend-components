@@ -9,10 +9,23 @@ import HelpIcon from "@material-ui/icons/Help";
 import styles from "./input.module.css";
 
 const inputStyles = {
-  root: {},
+  root: {
+    "& .Mui-disabled": {
+      color: "#333",
+      paddingLeft: 0,
+      paddingRight: 0
+    },
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(0.75)"
+    },
+    "& input:disabled + fieldset": {
+      borderColor: "transparent !important"
+    }
+  },
+  readOnly: {},
   requiredVisited: {
     "& input:invalid + fieldset ": {
-      borderColor: "orange"
+      borderColor: "#E5C317"
     }
   }
 };
@@ -74,9 +87,13 @@ const Input = props => {
         fullWidth={props.fullWidth}
         type={props.type}
         onFocus={() => setIsVisited(true)}
-        className={`${props.isHidden ? "hidden" : ""} ${
-          isVisited && props.isRequired ? classes.requiredVisited : classes.root
-        }
+        className={`${props.isHidden ? "hidden" : ""} 
+          ${
+            isVisited && props.isRequired
+              ? classes.requiredVisited
+              : classes.root
+          } 
+          ${props.isReadOnly ? classes.readOnly : ""}
         `}
       />
       {!isEmpty(props.tooltip) && (
