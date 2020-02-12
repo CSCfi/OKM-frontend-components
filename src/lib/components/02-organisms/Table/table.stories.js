@@ -4,6 +4,9 @@ import { withInfo } from "@storybook/addon-info";
 import multidimensionalTable from "./storydata/multidimensionalTable";
 import simpleTable from "./storydata/simpleTable";
 import Table from "./index";
+import SearchFilter from "../SearchFilter/index";
+import Dropdown from "../../00-atoms/Dropdown/index";
+
 import conditionalMenuInTableCell from "./storydata/conditionalMenuInTableCell";
 
 /**
@@ -23,4 +26,17 @@ storiesOf("Table", module)
   })
   .add("Conditional menu in table cell", () => {
     return <Table structure={conditionalMenuInTableCell} />;
+  })
+  .add("Table with filters", () => {
+    return (
+      <>
+        <div className="flex flex-row mb-4">
+          <div className="mr-4">
+            <SearchFilter />
+          </div>
+          <Dropdown isTall />
+        </div>
+        <Table structure={conditionalMenuInTableCell} />
+      </>
+    );
   });

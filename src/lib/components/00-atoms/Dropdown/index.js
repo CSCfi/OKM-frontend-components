@@ -7,8 +7,20 @@ import "./dropdown.css";
 const selectCustomStyles = {
   control: provided => ({
     ...provided,
-    height: "34px",
+    height: "100%",
     minHeight: "34px",
+    "* span": {
+      backgroundColor: "transparent"
+    },
+    "div:first-of-type": {
+      padding: "0 8px",
+      ":nth-child(2)": {
+        padding: "6px"
+      }
+    },
+    "& indicatorContainer": {
+      padding: "0"
+    },
     minWidth: "200px"
   }),
   indicatorsContainer: provided => ({
@@ -19,10 +31,11 @@ const selectCustomStyles = {
 };
 
 const Dropdown = React.memo(props => {
-  const handleChanges = (selectedOption) => {
+  const handleChanges = selectedOption => {
     props.onChanges(props.payload, { selectedOption });
   };
 
+  console.log(props.isTall);
   return (
     <Select
       autosize={false}
@@ -32,8 +45,11 @@ const Dropdown = React.memo(props => {
       options={props.options}
       isDisabled={props.isDisabled}
       placeholder={props.placeholder}
-      className="select-element"
+      className={`${props.isTall > 0 ? "h-13" : ""} 
+        `}
       styles={selectCustomStyles}
+      variant="contained"
+      height={props.height}
     />
   );
 });
@@ -44,7 +60,9 @@ Dropdown.propTypes = {
   onChanges: PropTypes.func,
   options: PropTypes.array,
   placeholder: PropTypes.string,
-  value: PropTypes.object
+  value: PropTypes.object,
+  isTall: PropTypes.bool,
+  height: PropTypes.string
 };
 
 export default Dropdown;

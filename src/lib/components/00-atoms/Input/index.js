@@ -10,6 +10,7 @@ import styles from "./input.module.css";
 
 const inputStyles = {
   root: {
+    height: "100%",
     "& .Mui-disabled": {
       color: "#333",
       paddingLeft: 0,
@@ -70,7 +71,7 @@ const Input = props => {
           props.isDisabled || props.isReadOnly ? "" : props.placeholder
         }
         rows={props.rows}
-        margin="dense"
+        margin={props.isDense ? "dense" : ""}
         rowsMax={props.rowsMax}
         onChange={updateValue}
         required={props.isRequired}
@@ -126,7 +127,8 @@ Input.defaultProps = {
   fullWidth: false,
   tooltip: {},
   type: "text",
-  isVisited: false
+  isVisited: false,
+  isDense: true
 };
 
 Input.propTypes = {
@@ -151,7 +153,8 @@ Input.propTypes = {
   width: PropTypes.string,
   fullWidth: PropTypes.bool,
   type: PropTypes.string,
-  isVisited: PropTypes.bool
+  isVisited: PropTypes.bool,
+  isDense: PropTypes.bool
 };
 
 export default withStyles(inputStyles)(Input);
