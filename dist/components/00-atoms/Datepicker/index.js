@@ -1,3 +1,4 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
@@ -18,6 +19,23 @@ import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
 var styles = createStyles(function (theme) {
   return {
+    root: {
+      "& .Mui-disabled": {
+        color: "#333",
+        padding: 0
+      },
+      "& label.Mui-disabled": {
+        transform: "translate(0, -6px) scale(0.75)"
+      },
+      "& input:disabled + fieldset": {
+        borderColor: "transparent !important"
+      }
+    },
+    requiredVisited: {
+      "& input + fieldset ": {
+        borderColor: "#E5C317"
+      }
+    },
     dense: {
       marginTop: theme.spacing(2)
     }
@@ -53,6 +71,8 @@ function (_DateFnsUtils) {
 }(DateFnsUtils);
 
 var Datepicker = function Datepicker(props) {
+  var _React$createElement;
+
   var classes = props.classes,
       messages = props.messages,
       locale = props.locale;
@@ -61,6 +81,11 @@ var Datepicker = function Datepicker(props) {
       _useState2 = _slicedToArray(_useState, 2),
       selectedDate = _useState2[0],
       setSelectedDate = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isVisited = _useState4[0],
+      setIsVisited = _useState4[1];
 
   var localeMap = {
     en: enLocale,
@@ -86,12 +111,12 @@ var Datepicker = function Datepicker(props) {
     utils: LocalizedUtils,
     locale: localeMap[locale],
     theme: materialTheme
-  }, React.createElement(DatePicker, {
+  }, React.createElement(DatePicker, (_React$createElement = {
     format: "d.M.yyyy" // Always is Finnish format
     ,
     "aria-label": props.ariaLabel,
     label: props.label,
-    disabled: props.isDisabled,
+    disabled: props.isDisabled || props.isReadonly,
     placeholder: props.placeholder,
     margin: "dense",
     className: "".concat(props.isHidden ? "hidden" : "", " p-2"),
@@ -119,7 +144,9 @@ var Datepicker = function Datepicker(props) {
     maxDate: props.maxDate,
     disablePast: props.disablePast,
     disableFuture: props.disableFuture
-  })));
+  }, _defineProperty(_React$createElement, "className", "".concat(props.isHidden ? "hidden" : "", " \n            ").concat(isVisited && props.isRequired && !props.value ? classes.requiredVisited : classes.root, " \n        ")), _defineProperty(_React$createElement, "onFocus", function onFocus() {
+    return setIsVisited(true);
+  }), _React$createElement))));
 };
 
 Datepicker.defaultProps = {

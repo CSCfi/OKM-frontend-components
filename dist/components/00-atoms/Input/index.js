@@ -1,45 +1,75 @@
-import React from "react";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
-import _ from "lodash";
 import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import styles from "./input.module.css";
-var CssTextField = withStyles({
+var inputStyles = {
   root: {
-    "& MuiInputBase-input": {
-      "& .Mui-disabled": {
-        color: "pink"
-      }
+    height: "100%",
+    "& .Mui-disabled": {
+      color: "#333",
+      paddingLeft: 0,
+      paddingRight: 0
     },
-    "& label.Mui-focused": {
-      color: "green"
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(0.75)"
     },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "green"
-    },
-    "& .MuiInputBase-root": {
-      "&.Mui-disabled": {
-        color: "rgba(0, 0, 0, 0.87)"
-      }
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-disabled fieldset": {
-        border: "none"
-      }
+    "& input:disabled + fieldset": {
+      borderColor: "transparent !important"
+    }
+  },
+  requiredVisited: {
+    "& input:invalid + fieldset ": {
+      borderColor: "#E5C317"
     }
   }
-})(TextField);
+};
 
 var Input = function Input(props) {
-  var changesOutDelayed = _.debounce(props.onChanges, props.delay);
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isVisited = _useState2[0],
+      setIsVisited = _useState2[1];
 
+  var classes = props.classes;
+
+  var _useState3 = useState(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  var _useState5 = useState(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      handle = _useState6[0],
+      setHandle = _useState6[1];
+
+  var updateValue = function updateValue(e) {
+    setValue(e.target.value);
+
+    if (handle) {
+      clearTimeout(handle);
+    }
+
+    setHandle(function (v) {
+      return setTimeout(function () {
+        props.onChanges(props.payload, {
+          value: v
+        });
+      }, props.delay);
+    }(e.target.value));
+  };
+
+  useEffect(function () {
+    if (props.value !== value || !value) {
+      setValue(props.value);
+    }
+  }, [props.value]);
   return React.createElement("div", {
     className: "flex items-center"
-  }, props.isRequired && React.createElement("span", {
-    className: "text-".concat(props.isValid ? "green" : "red", "-500 text-2xl pr-4")
-  }, "*"), React.createElement(CssTextField, {
+  }, React.createElement(TextField, {
     id: props.id,
     "aria-label": props.ariaLabel,
     defaultValue: props.value,
@@ -50,14 +80,10 @@ var Input = function Input(props) {
     },
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.rows,
-    margin: "dense",
+    margin: props.isDense ? "dense" : "",
     rowsMax: props.rowsMax,
-    className: "\n        ".concat(props.isHidden ? "hidden" : "", "\n        ").concat(props.isReadOnly ? "text-black border-collapse" : "", " p-2"),
-    onChange: function onChange(e) {
-      return changesOutDelayed(props.payload, {
-        value: e.target.value
-      });
-    },
+    onChange: updateValue,
+    required: props.isRequired,
     error: props.error,
     InputLabelProps: props.isReadOnly ? {
       shrink: true
@@ -70,7 +96,11 @@ var Input = function Input(props) {
       border: "none"
     },
     fullWidth: props.fullWidth,
-    type: props.type
+    type: props.type,
+    onFocus: function onFocus() {
+      return setIsVisited(true);
+    },
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired ? classes.requiredVisited : classes.root, " \n        ")
   }), !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
@@ -100,6 +130,8 @@ Input.defaultProps = {
   width: "20em",
   fullWidth: false,
   tooltip: {},
-  type: "text"
+  type: "text",
+  isVisited: false,
+  isDense: true
 };
-export default Input;
+export default withStyles(inputStyles)(Input);

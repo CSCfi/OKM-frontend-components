@@ -13,13 +13,9 @@ const selectCustomStyles = {
       backgroundColor: "transparent"
     },
     "div:first-of-type": {
-      padding: "0 8px",
       ":nth-child(2)": {
         padding: "6px"
       }
-    },
-    "& indicatorContainer": {
-      padding: "0"
     },
     minWidth: "200px"
   }),
@@ -45,7 +41,7 @@ const Dropdown = React.memo(props => {
       options={props.options}
       isDisabled={props.isDisabled}
       placeholder={props.placeholder}
-      className={`${props.isTall > 0 ? "h-13" : ""} 
+      className={`${props.isTall > 0 ? "h-full" : ""} 
         `}
       styles={selectCustomStyles}
       variant="contained"

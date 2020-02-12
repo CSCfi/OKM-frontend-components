@@ -4,18 +4,41 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import { withStyles } from "@material-ui/core";
 import styles from "./textbox.module.css";
+var textboxStyles = {
+  root: {
+    boxShadow: "none",
+    border: "1px solid #C4C4C4",
+    "&:disabled": {
+      borderColor: "transparent !important",
+      paddingLeft: 0,
+      paddingRight: 0
+    }
+  },
+  requiredVisited: {
+    boxShadow: "none",
+    border: "1px solid #E5C317"
+  }
+};
 
 var TextBox = function TextBox(props) {
-  var _useState = useState(null),
+  var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
+      isVisited = _useState2[0],
+      setIsVisited = _useState2[1];
 
   var _useState3 = useState(null),
       _useState4 = _slicedToArray(_useState3, 2),
-      handle = _useState4[0],
-      setHandle = _useState4[1];
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  var _useState5 = useState(null),
+      _useState6 = _slicedToArray(_useState5, 2),
+      handle = _useState6[0],
+      setHandle = _useState6[1];
+
+  var classes = props.classes;
 
   var updateValue = function updateValue(e) {
     setValue(e.target.value);
@@ -51,11 +74,14 @@ var TextBox = function TextBox(props) {
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.isReadOnly ? 1 : props.rows,
     rowsMax: props.isReadOnly ? Infinity : props.rowsMax,
-    className: "".concat(props.isHidden ? "hidden" : "", " ").concat(props.isReadOnly ? "text-black" : "border border-solid border-gray-500 rounded", "\n            w-full p-2 resize-none"),
+    className: "".concat(props.isHidden ? "hidden" : "", " ").concat(props.isReadOnly ? "text-black" : "border border-solid border-gray-500 rounded", " ").concat(isVisited && props.isRequired && !value ? classes.requiredVisited : classes.root, " w-full p-2 resize-none"),
     onChange: updateValue,
     value: value,
     inputprops: {
       readOnly: props.isReadOnly
+    },
+    onFocus: function onFocus() {
+      return setIsVisited(true);
     }
   }), !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
@@ -83,6 +109,7 @@ TextBox.defaultProps = {
   rows: 2,
   rowsMax: 100,
   title: "",
-  tooltip: {}
+  tooltip: {},
+  isVisited: false
 };
-export default TextBox;
+export default withStyles(textboxStyles)(TextBox);

@@ -4,6 +4,9 @@ import { withInfo } from "@storybook/addon-info";
 import multidimensionalTable from "./storydata/multidimensionalTable";
 import simpleTable from "./storydata/simpleTable";
 import Table from "./index";
+import SearchFilter from "../SearchFilter/index";
+import Dropdown from "../../00-atoms/Dropdown/index";
+import Pill from "../../00-atoms/Chip/index";
 import conditionalMenuInTableCell from "./storydata/conditionalMenuInTableCell";
 /**
  * Tables are created using descriptive structures. One per table.
@@ -25,4 +28,21 @@ storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", 
   return React.createElement(Table, {
     structure: conditionalMenuInTableCell
   });
+}).add("Table with filters", function () {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "flex flex-col lg:flex-row mb-4"
+  }, React.createElement("div", {
+    className: "lg:mr-4 h-13"
+  }, React.createElement(SearchFilter, null)), React.createElement("div", {
+    className: "mt-2 md:mt-0 md:mr-4 h-13"
+  }, React.createElement(Dropdown, {
+    isTall: true
+  })), React.createElement("div", {
+    className: "mt-2 md:ml-4 mt:md-auto"
+  }, React.createElement(Pill, {
+    label: "Something",
+    onDelete: function onDelete() {}
+  }))), React.createElement(Table, {
+    structure: conditionalMenuInTableCell
+  }));
 });

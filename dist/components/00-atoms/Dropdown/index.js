@@ -10,8 +10,16 @@ import "./dropdown.css";
 var selectCustomStyles = {
   control: function control(provided) {
     return _objectSpread({}, provided, {
-      height: "34px",
+      height: "100%",
       minHeight: "34px",
+      "* span": {
+        backgroundColor: "transparent"
+      },
+      "div:first-of-type": {
+        ":nth-child(2)": {
+          padding: "6px"
+        }
+      },
       minWidth: "200px"
     });
   },
@@ -29,6 +37,7 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
+  console.log(props.isTall);
   return React.createElement(Select, {
     autosize: false,
     name: props.name,
@@ -37,8 +46,10 @@ var Dropdown = React.memo(function (props) {
     options: props.options,
     isDisabled: props.isDisabled,
     placeholder: props.placeholder,
-    className: "select-element",
-    styles: selectCustomStyles
+    className: "".concat(props.isTall > 0 ? "h-full" : "", " \n        "),
+    styles: selectCustomStyles,
+    variant: "contained",
+    height: props.height
   });
 });
 export default Dropdown;

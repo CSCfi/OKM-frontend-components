@@ -19,17 +19,58 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     },
     onChanges: onChanges,
     error: true
+  }), React.createElement("p", null, "Required and valid or not yet visited/validated"), React.createElement(Input, {
+    payload: {
+      testProp: 1
+    },
+    onChanges: onChanges,
+    isRequired: true,
+    isValid: true,
+    label: "Required"
+  }), React.createElement("p", null, "Required and invalid"), React.createElement(Input, {
+    payload: {
+      testProp: 1
+    },
+    onChanges: onChanges,
+    isRequired: true,
+    isValid: false,
+    label: "Required"
   }), React.createElement("p", null, "Wide"), React.createElement(Input, {
     payload: {
       testProp: 2
     },
     onChanges: onChanges,
     width: "100%"
-  }), React.createElement("p", null, "Number"), React.createElement(Input, {
+  }), React.createElement(Input, {
+    label: "Readonly",
     payload: {
       testProp: 2
     },
     onChanges: onChanges,
+    isReadOnly: true,
+    value: "readonly"
+  }), React.createElement("p", null, "Number"), React.createElement(Input, {
+    payload: {
+      testProp: 123
+    },
+    onChanges: onChanges,
     type: "number"
+  }), React.createElement(Input, {
+    payload: {
+      testProp: 123
+    },
+    onChanges: onChanges,
+    type: "number",
+    isRequired: true,
+    label: "Required"
+  }), React.createElement(Input, {
+    label: "Readonly",
+    payload: {
+      testProp: 123
+    },
+    type: "number",
+    onChanges: onChanges,
+    isReadOnly: true,
+    value: 123
   }));
 });
