@@ -16,11 +16,11 @@ var selectCustomStyles = {
         backgroundColor: "transparent"
       },
       "div:first-of-type": {
-        ":nth-child(2)": {
+        ":nth-of-type(2)": {
           padding: "6px"
         }
       },
-      minWidth: "200px"
+      minWidth: "24em"
     });
   },
   indicatorsContainer: function indicatorsContainer(provided) {
@@ -37,7 +37,6 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  console.log(props.isTall);
   return React.createElement(Select, {
     autosize: false,
     name: props.name,
@@ -46,10 +45,12 @@ var Dropdown = React.memo(function (props) {
     options: props.options,
     isDisabled: props.isDisabled,
     placeholder: props.placeholder,
-    className: "".concat(props.isTall > 0 ? "h-full" : "", " \n        "),
+    className: "".concat(props.isTall ? "h-full" : "", " \n        "),
     styles: selectCustomStyles,
     variant: "contained",
-    height: props.height
+    height: props.height,
+    width: props.width,
+    autoWidth: !props.width
   });
 });
 export default Dropdown;

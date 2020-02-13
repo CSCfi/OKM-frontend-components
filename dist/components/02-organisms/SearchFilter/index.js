@@ -1,10 +1,7 @@
 import React from "react";
-import Input from "../../00-atoms/Input";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 /**
  * SearchFilter wraps a TextBox, stripping away payload and propagating only
@@ -35,7 +32,7 @@ var SearchFilter = function SearchFilter(props) {
   var classes = useStyles();
 
   var handleChanges = function handleChanges(_, changePayload) {
-    props.onValueChanged(changePayload.value);
+    if (changePayload) props.onValueChanged(changePayload.value);
   };
 
   return React.createElement(Paper, {
@@ -44,7 +41,7 @@ var SearchFilter = function SearchFilter(props) {
   }, React.createElement(InputBase, {
     className: classes.input,
     placeholder: props.placeholder,
-    onChanges: handleChanges
+    onChange: handleChanges
   }), React.createElement(SearchIcon, {
     className: "ml-2"
   }));

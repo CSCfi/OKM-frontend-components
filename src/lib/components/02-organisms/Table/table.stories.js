@@ -35,10 +35,10 @@ storiesOf("Table", module)
           <div className="lg:mr-4 h-13">
             <SearchFilter />
           </div>
-          <div className="mt-2 md:mt-0 md:mr-4 h-13">
-            <Dropdown isTall={true} />
+          <div className="mt-2 lg:mt-0 lg:mr-4 h-13">
+            <Dropdown isTall={true} className="w-20" />
           </div>
-          <div className="mt-2 md:ml-4 mt:md-auto">
+          <div className="mt-2 lg:ml-4 lg:mt-auto">
             <Pill label="Something" onDelete={() => {}} />
           </div>
         </div>

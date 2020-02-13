@@ -34,11 +34,12 @@ storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", 
   }, React.createElement("div", {
     className: "lg:mr-4 h-13"
   }, React.createElement(SearchFilter, null)), React.createElement("div", {
-    className: "mt-2 md:mt-0 md:mr-4 h-13"
+    className: "mt-2 lg:mt-0 lg:mr-4 h-13"
   }, React.createElement(Dropdown, {
-    isTall: true
+    isTall: true,
+    className: "w-20"
   })), React.createElement("div", {
-    className: "mt-2 md:ml-4 mt:md-auto"
+    className: "mt-2 lg:ml-4 lg:mt-auto"
   }, React.createElement(Pill, {
     label: "Something",
     onDelete: function onDelete() {}
