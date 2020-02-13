@@ -13,7 +13,8 @@ storiesOf("Difference", module).addDecorator(withInfo).add("Modifiable and not r
   return React.createElement(Difference, {
     initialValue: 0,
     applyForValue: 0,
-    titles: story1.titles
+    titles: story1.titles,
+    isRequired: true
   });
 }).add("Read-only", function () {
   return React.createElement(Difference, {

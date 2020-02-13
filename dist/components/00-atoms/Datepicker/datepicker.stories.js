@@ -38,6 +38,21 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     showTodayButton: false,
     messages: messages,
     locale: "fi"
+  }), React.createElement("p", null, "Read only"), React.createElement(Datepicker, {
+    value: yesterday,
+    payload: {
+      value: yesterday
+    },
+    showTodayButton: false,
+    messages: messages,
+    locale: "fi",
+    isReadonly: true
+  }), React.createElement("p", null, "Required"), React.createElement(Datepicker, {
+    showTodayButton: false,
+    messages: messages,
+    onChanges: onChanges,
+    locale: "fi",
+    isRequired: true
   }), React.createElement("p", null, "Wide"), React.createElement(Datepicker, {
     value: today,
     onChanges: onChanges,

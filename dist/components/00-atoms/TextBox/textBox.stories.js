@@ -1,3 +1,4 @@
+import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from "react";
 import TextBox from "./index";
 import { storiesOf } from "@storybook/react";
@@ -13,5 +14,16 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
       testProp: 1
     },
     onChanges: onChanges
-  }));
+  }), React.createElement("br", null), React.createElement(TextBox, {
+    label: "Required",
+    isRequired: true,
+    payload: {
+      testProp: 1
+    },
+    onChanges: onChanges
+  }), React.createElement(TextBox, _defineProperty({
+    label: "read only",
+    isReadOnly: true,
+    value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
+  }, "isReadOnly", true)));
 });

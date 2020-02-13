@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState, useCallback, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
+import Input from "../../00-atoms/Input";
 import Typography from "@material-ui/core/Typography";
 import * as R from "ramda";
 var defaultValues = {
@@ -77,9 +77,9 @@ var Difference = function Difference(_ref) {
   useEffect(function () {
     setValue(applyForValue === initialValue ? emptySelectionPlaceholderValue : applyForValue);
   }, [applyForValue, initialValue]);
-  var containerClass = isValid ? "flex" : "flex bg-yellow-300";
+  var containerClass = "flex";
   var initialAreaTitle = titles[0];
-  var inputAreaTitle = required ? titles[1] + '*' : titles[1];
+  var inputAreaTitle = required ? titles[1] + "*" : titles[1];
   var changeAreaTitle = titles[2];
   return React.createElement(React.Fragment, null, React.createElement("div", {
     className: containerClass
@@ -87,7 +87,7 @@ var Difference = function Difference(_ref) {
     className: "flex-1 flex-col"
   }, React.createElement(Typography, null, initialAreaTitle), initialValue), React.createElement("div", {
     className: "flex-1 flex-col"
-  }, React.createElement(Typography, null, inputAreaTitle), !readonly && React.createElement(TextField, {
+  }, React.createElement(Typography, null, inputAreaTitle), !readonly && React.createElement(Input, {
     type: "number",
     inputProps: {
       min: "0"
@@ -97,7 +97,9 @@ var Difference = function Difference(_ref) {
         value: parseInt(e.target.value, 10)
       }, payload);
     },
-    value: value
+    value: value,
+    width: "12em",
+    isRequired: isRequired
   }), readonly && applyForValue), React.createElement("div", {
     className: "flex-1 flex-col"
   }, React.createElement(Typography, null, changeAreaTitle), (value ? value : applyForValue) - initialValue)));

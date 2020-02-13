@@ -10,9 +10,17 @@ import "./dropdown.css";
 var selectCustomStyles = {
   control: function control(provided) {
     return _objectSpread({}, provided, {
-      height: "34px",
+      height: "100%",
       minHeight: "34px",
-      minWidth: "200px"
+      "* span": {
+        backgroundColor: "transparent"
+      },
+      "div:first-of-type": {
+        ":nth-of-type(2)": {
+          padding: "6px"
+        }
+      },
+      minWidth: "24em"
     });
   },
   indicatorsContainer: function indicatorsContainer(provided) {
@@ -37,8 +45,12 @@ var Dropdown = React.memo(function (props) {
     options: props.options,
     isDisabled: props.isDisabled,
     placeholder: props.placeholder,
-    className: "select-element",
-    styles: selectCustomStyles
+    className: "".concat(props.isTall ? "h-full" : "", " \n        "),
+    styles: selectCustomStyles,
+    variant: "contained",
+    height: props.height,
+    width: props.width,
+    autoWidth: !props.width
   });
 });
 export default Dropdown;
