@@ -29,8 +29,8 @@ const useStyles = makeStyles(theme => ({
 
 const SearchFilter = props => {
   const classes = useStyles();
-  const handleChanges = (_, changePayload) => {
-    if (changePayload) props.onValueChanged(changePayload.value);
+  const handleChanges = event => {
+    props.onValueChanged(event.target.value);
   };
 
   return (

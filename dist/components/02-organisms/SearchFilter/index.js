@@ -31,8 +31,8 @@ var useStyles = makeStyles(function (theme) {
 var SearchFilter = function SearchFilter(props) {
   var classes = useStyles();
 
-  var handleChanges = function handleChanges(_, changePayload) {
-    if (changePayload) props.onValueChanged(changePayload.value);
+  var handleChanges = function handleChanges(event) {
+    props.onValueChanged(event.target.value);
   };
 
   return React.createElement(Paper, {
