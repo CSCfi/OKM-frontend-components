@@ -5,6 +5,8 @@ import multidimensionalTable from "./storydata/multidimensionalTable";
 import simpleTable from "./storydata/simpleTable";
 import Table from "./index";
 import SearchFilter from "../SearchFilter/index";
+import Autocomplete from "../Autocomplete/index";
+
 import Dropdown from "../../00-atoms/Dropdown/index";
 import Pill from "../../00-atoms/Chip/index";
 
@@ -32,13 +34,21 @@ storiesOf("Table", module)
     return (
       <>
         <div className="flex flex-col lg:flex-row mb-4">
-          <div className="lg:mr-4 h-13">
-            <SearchFilter />
+          <div className="lg:mr-4 h-13 w-full lg:w-1/4">
+            <Autocomplete
+              isFilter
+              options={[
+                { label: "Aaaaaaaa", value: "Aaaaaaaa" },
+                { label: "Bbbbbb", value: "Bbbbbb" },
+                { label: "Ccccccccccc", value: "Ccccccccccc" }
+              ]}
+              callback={() => {}}
+            />
           </div>
           <div className="mt-2 lg:mt-0 lg:mr-4 h-13">
             <Dropdown isTall={true} className="w-20" />
           </div>
-          <div className="mt-2 lg:ml-4 lg:mt-auto">
+          <div className="mt-2 lg:ml-4 lg:mx-auto">
             <Pill label="Something" onDelete={() => {}} />
           </div>
         </div>

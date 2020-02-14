@@ -1,4 +1,3 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
@@ -71,8 +70,6 @@ function (_DateFnsUtils) {
 }(DateFnsUtils);
 
 var Datepicker = function Datepicker(props) {
-  var _React$createElement;
-
   var classes = props.classes,
       messages = props.messages,
       locale = props.locale;
@@ -111,7 +108,7 @@ var Datepicker = function Datepicker(props) {
     utils: LocalizedUtils,
     locale: localeMap[locale],
     theme: materialTheme
-  }, React.createElement(DatePicker, (_React$createElement = {
+  }, React.createElement(DatePicker, {
     format: "d.M.yyyy" // Always is Finnish format
     ,
     "aria-label": props.ariaLabel,
@@ -119,7 +116,6 @@ var Datepicker = function Datepicker(props) {
     disabled: props.isDisabled || props.isReadonly,
     placeholder: props.placeholder,
     margin: "dense",
-    className: "".concat(props.isHidden ? "hidden" : "", " p-2"),
     onChange: handleDateChange,
     error: props.error,
     style: props.fullWidth ? {} : {
@@ -143,10 +139,12 @@ var Datepicker = function Datepicker(props) {
     minDate: props.minDate,
     maxDate: props.maxDate,
     disablePast: props.disablePast,
-    disableFuture: props.disableFuture
-  }, _defineProperty(_React$createElement, "className", "".concat(props.isHidden ? "hidden" : "", " \n            ").concat(isVisited && props.isRequired && !props.value ? classes.requiredVisited : classes.root, " \n        ")), _defineProperty(_React$createElement, "onFocus", function onFocus() {
-    return setIsVisited(true);
-  }), _React$createElement))));
+    disableFuture: props.disableFuture,
+    className: "".concat(props.isHidden ? "hidden" : "", " \n            ").concat(isVisited && props.isRequired && !props.value ? classes.requiredVisited : classes.root, " \n            p-2\n        "),
+    onFocus: function onFocus() {
+      return setIsVisited(true);
+    }
+  })));
 };
 
 Datepicker.defaultProps = {

@@ -6,9 +6,10 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import chroma from "chroma-js";
 import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
+import SearchIcon from "@material-ui/icons/Search";
 var Autocomplete = React.memo(function (props) {
   var _useState = useState([]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -19,6 +20,11 @@ var Autocomplete = React.memo(function (props) {
       _useState4 = _slicedToArray(_useState3, 2),
       value = _useState4[0],
       setValue = _useState4[1];
+
+  var _useState5 = useState(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isOptionsShown = _useState6[0],
+      setIsOptionsShown = _useState6[1];
 
   useEffect(function () {
     setValue(props.value);
@@ -52,6 +58,11 @@ var Autocomplete = React.memo(function (props) {
           backgroundColor: !isDisabled && (isSelected ? data.color : color.css())
         })
       });
+    },
+    indicatorSeparator: function indicatorSeparator(styles) {
+      return {
+        display: "none"
+      };
     },
     menu: function menu(styles) {
       return _objectSpread({}, styles, {
@@ -89,7 +100,7 @@ var Autocomplete = React.memo(function (props) {
     switch (action) {
       case "remove-value":
       case "pop-value":
-        if (removedValue.isFixed) {
+        if (removedValue && removedValue.isFixed) {
           return;
         }
 
@@ -118,12 +129,24 @@ var Autocomplete = React.memo(function (props) {
     return option.data.label.toLowerCase().includes(searchText.toLowerCase());
   };
 
+  var DropdownIndicator = function DropdownIndicator(props) {
+    return React.createElement(components.DropdownIndicator, props, React.createElement(SearchIcon, null));
+  };
+
+  var onInputChange = function onInputChange(value) {
+    if (value.length >= props.minChars) {
+      setIsOptionsShown(true);
+    } else {
+      setIsOptionsShown(false);
+    }
+  };
+
   return React.createElement(React.Fragment, null, props.title && React.createElement("label", {
     className: "block py-2"
   }, props.isRequired && React.createElement("span", {
     className: "text-".concat(props.isValid ? "green" : "red", "-500 text-2xl pr-4")
   }, "*"), props.title), React.createElement(Select, {
-    autosize: false,
+    autosize: props.autosize,
     name: props.name,
     isMulti: props.isMulti,
     value: value,
@@ -132,7 +155,7 @@ var Autocomplete = React.memo(function (props) {
     inputProps: {
       id: "select-multiple"
     },
-    options: options,
+    options: isOptionsShown ? options : [],
     getOptionLabel: function getOptionLabel(option) {
       return "".concat(option.label);
     },
@@ -141,7 +164,14 @@ var Autocomplete = React.memo(function (props) {
     },
     isSearchable: true,
     searchFilter: searchFilter,
-    styles: optionStyles
+    styles: optionStyles,
+    components: props.isFilter && {
+      DropdownIndicator: DropdownIndicator
+    },
+    hideSelectedOptions: props.isFilter,
+    onInputChange: onInputChange,
+    menuIsOpen: isOptionsShown,
+    width: props.width
   }));
 });
 Autocomplete.defaultProps = {
@@ -149,6 +179,10 @@ Autocomplete.defaultProps = {
   isRequired: false,
   isValid: true,
   placeholder: "Valitse...",
-  value: []
+  value: [],
+  isFilter: false,
+  minChars: 3,
+  width: "100%",
+  autoSize: false
 };
 export default Autocomplete;
