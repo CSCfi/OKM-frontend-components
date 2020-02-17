@@ -18,7 +18,9 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
     }],
     callback: function callback(payload, values) {
       console.log(values.value[0]);
-    }
+    },
+    isRequired: true,
+    title: "test"
   }), React.createElement("br", null), React.createElement(Autocomplete, {
     name: "filter example",
     options: [{

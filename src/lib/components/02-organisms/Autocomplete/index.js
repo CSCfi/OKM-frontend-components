@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import chroma from "chroma-js";
 import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
+import InputLabel from "@material-ui/core/InputLabel";
 
 /**
  * Autocomplete wraps a Select
@@ -143,7 +144,13 @@ const Autocomplete = React.memo(props => {
 
   return (
     <React.Fragment>
-      {props.title && <label className="block py-2">{props.title}</label>}
+      {props.title && (
+        <InputLabel
+          required={props.isRequired}
+          style={{ marginBottom: "0.2em" }}>
+          {props.title}
+        </InputLabel>
+      )}
       {props.isSearch ? (
         <Select
           autosize={props.autosize}
@@ -215,11 +222,11 @@ Autocomplete.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.array,
   height: PropTypes.string,
-  title: PropTypes.string,
   isSearch: PropTypes.bool,
   minChars: PropTypes.number,
   width: PropTypes.string,
-  autosize: PropTypes.bool
+  autosize: PropTypes.bool,
+  title: PropTypes.string
 };
 
 export default Autocomplete;

@@ -19,6 +19,8 @@ storiesOf("Autocomplete", module)
         callback={(payload, values) => {
           console.log(values.value[0]);
         }}
+        isRequired
+        title="test"
       />
       <br />
       <Autocomplete

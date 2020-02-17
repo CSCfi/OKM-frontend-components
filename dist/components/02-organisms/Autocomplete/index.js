@@ -10,6 +10,7 @@ import Select, { components } from "react-select";
 import chroma from "chroma-js";
 import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
+import InputLabel from "@material-ui/core/InputLabel";
 /**
  * Autocomplete wraps a Select
  * Sends value to callback.
@@ -159,8 +160,11 @@ var Autocomplete = React.memo(function (props) {
     value.length >= props.minChars ? setIsOptionsShown(true) : setIsOptionsShown(false);
   };
 
-  return React.createElement(React.Fragment, null, props.title && React.createElement("label", {
-    className: "block py-2"
+  return React.createElement(React.Fragment, null, props.title && React.createElement(InputLabel, {
+    required: props.isRequired,
+    style: {
+      marginBottom: "0.2em"
+    }
   }, props.title), props.isSearch ? React.createElement(Select, {
     autosize: props.autosize,
     name: props.name,
