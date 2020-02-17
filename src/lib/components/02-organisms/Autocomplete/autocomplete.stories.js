@@ -16,7 +16,9 @@ storiesOf("Autocomplete", module)
           { label: "Bbbbbb", value: "Bbbbbb" },
           { label: "Ccccccccccc", value: "Ccccccccccc" }
         ]}
-        callback={() => {}}
+        callback={(payload, values) => {
+          console.log(values.value[0]);
+        }}
       />
       <br />
       <Autocomplete
@@ -26,8 +28,10 @@ storiesOf("Autocomplete", module)
           { label: "Bbbbbb", value: "Bbbbbb" },
           { label: "Ccccccccccc", value: "Ccccccccccc" }
         ]}
-        isFilter
-        callback={() => {}}
+        isSearch
+        callback={(payload, values) => {
+          console.log(values.value[0]);
+        }}
       />
     </div>
   ))
@@ -42,7 +46,9 @@ storiesOf("Autocomplete", module)
           { label: "Ccccccccccc", value: "Ccccccccccc" }
         ]}
         height={heights.SHORT}
-        callback={() => {}}
+        callback={(payload, values) => {
+          console.log(values.value[0]);
+        }}
       />
     </div>
   ));

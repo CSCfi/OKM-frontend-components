@@ -35,13 +35,18 @@ var SearchFilter = function SearchFilter(props) {
     props.onValueChanged(event.target.value);
   };
 
+  var preventRefresh = function preventRefresh(e) {
+    e.key === "Enter" && e.preventDefault();
+  };
+
   return React.createElement(Paper, {
     component: "form",
     className: classes.root
   }, React.createElement(InputBase, {
     className: classes.input,
     placeholder: props.placeholder,
-    onChange: handleChanges
+    onChange: handleChanges,
+    onKeyPress: preventRefresh
   }), React.createElement(SearchIcon, {
     className: "ml-2"
   }));

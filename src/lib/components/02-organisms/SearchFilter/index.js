@@ -33,12 +33,17 @@ const SearchFilter = props => {
     props.onValueChanged(event.target.value);
   };
 
+  const preventRefresh = e => {
+    e.key === "Enter" && e.preventDefault();
+  };
+
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
         placeholder={props.placeholder}
         onChange={handleChanges}
+        onKeyPress={preventRefresh}
       />
       <SearchIcon className="ml-2" />
     </Paper>

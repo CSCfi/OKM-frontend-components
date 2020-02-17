@@ -16,7 +16,9 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
       label: "Ccccccccccc",
       value: "Ccccccccccc"
     }],
-    callback: function callback() {}
+    callback: function callback(payload, values) {
+      console.log(values.value[0]);
+    }
   }), React.createElement("br", null), React.createElement(Autocomplete, {
     name: "filter example",
     options: [{
@@ -29,8 +31,10 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
       label: "Ccccccccccc",
       value: "Ccccccccccc"
     }],
-    isFilter: true,
-    callback: function callback() {}
+    isSearch: true,
+    callback: function callback(payload, values) {
+      console.log(values.value[0]);
+    }
   }));
 }).add("Short height", function () {
   return React.createElement("div", null, React.createElement("br", null), React.createElement(Autocomplete, {
@@ -46,6 +50,8 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
       value: "Ccccccccccc"
     }],
     height: heights.SHORT,
-    callback: function callback() {}
+    callback: function callback(payload, values) {
+      console.log(values.value[0]);
+    }
   }));
 });
