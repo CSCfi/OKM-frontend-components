@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import PropTypes from "prop-types";
 import chroma from "chroma-js";
 import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
+import SearchIcon from "@material-ui/icons/Search";
+import InputLabel from "@material-ui/core/InputLabel";
+
+/**
+ * Autocomplete wraps a Select
+ * Sends value to callback.
+ * Two versions:
+ *  [isSearch = false] autocomplete with arrow (list can be opened anytime)
+ *  [isSearch = true] autocomplete with search icon (list opens when typed character >= minChars)
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 
 const Autocomplete = React.memo(props => {
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState([]);
+  const [minCharacters, setMinCharacters] = useState(3);
+  const [isOptionsShown, setIsOptionsShown] = useState(false);
 
   useEffect(() => {
     setValue(props.value);
@@ -18,6 +33,7 @@ const Autocomplete = React.memo(props => {
 
   const optionStyles = {
     ...(props.height === heights.SHORT ? autocompleteShortStyles : null),
+
     control:
       props.height === heights.SHORT
         ? autocompleteShortStyles.control
@@ -52,6 +68,7 @@ const Autocomplete = React.memo(props => {
         }
       };
     },
+    indicatorSeparator: styles => ({ display: "none" }),
     menu: styles => ({ ...styles, zIndex: 999 }),
     multiValue: styles => {
       const color = chroma("#c3dafe");
@@ -78,7 +95,7 @@ const Autocomplete = React.memo(props => {
     switch (action) {
       case "remove-value":
       case "pop-value":
-        if (removedValue.isFixed) {
+        if (removedValue && removedValue.isFixed) {
           return;
         }
         break;
@@ -97,42 +114,87 @@ const Autocomplete = React.memo(props => {
     setOptions(props.options);
   }, [props.options]);
 
+  useEffect(() => {
+    console.log(props.minChars);
+    setMinCharacters(3);
+    console.log(minCharacters);
+
+    props.minChars <= 0
+      ? setMinCharacters(props.minChars)
+      : props.isSearch && setMinCharacters(3);
+  }, [props.minChars]);
+
   const searchFilter = (option, searchText) => {
     return option.data.label.toLowerCase().includes(searchText.toLowerCase());
+  };
+
+  const DropdownIndicator = props => {
+    return (
+      <components.DropdownIndicator {...props}>
+        <SearchIcon />
+      </components.DropdownIndicator>
+    );
+  };
+
+  const onInputChange = value => {
+    value.length >= props.minChars
+      ? setIsOptionsShown(true)
+      : setIsOptionsShown(false);
   };
 
   return (
     <React.Fragment>
       {props.title && (
-        <label className="block py-2">
-          {props.isRequired && (
-            <span
-              className={`text-${
-                props.isValid ? "green" : "red"
-              }-500 text-2xl pr-4`}>
-              *
-            </span>
-          )}
+        <InputLabel
+          required={props.isRequired}
+          style={{ marginBottom: "0.2em" }}>
           {props.title}
-        </label>
+        </InputLabel>
       )}
-      <Select
-        autosize={false}
-        name={props.name}
-        isMulti={props.isMulti}
-        value={value}
-        onChange={handleSelectChange}
-        placeholder={props.placeholder}
-        inputProps={{
-          id: "select-multiple"
-        }}
-        options={options}
-        getOptionLabel={option => `${option.label}`}
-        getOptionValue={option => `${option.value}`}
-        isSearchable={true}
-        searchFilter={searchFilter}
-        styles={optionStyles}
-      />
+      {props.isSearch ? (
+        <Select
+          autosize={props.autosize}
+          name={props.name}
+          isMulti={props.isMulti}
+          value={value}
+          onChange={handleSelectChange}
+          placeholder={props.placeholder}
+          inputProps={{
+            id: "select-multiple"
+          }}
+          options={isOptionsShown ? options : []}
+          getOptionLabel={option => `${option.label}`}
+          getOptionValue={option => `${option.value}`}
+          isSearchable={true}
+          searchFilter={searchFilter}
+          styles={optionStyles}
+          components={props.isSearch && { DropdownIndicator }}
+          hideSelectedOptions={props.isSearch}
+          onInputChange={onInputChange}
+          menuIsOpen={isOptionsShown}
+          width={props.width}
+        />
+      ) : (
+        <Select
+          autosize={props.autosize}
+          name={props.name}
+          isMulti={props.isMulti}
+          value={value}
+          onChange={handleSelectChange}
+          placeholder={props.placeholder}
+          inputProps={{
+            id: "select-multiple"
+          }}
+          options={options}
+          getOptionLabel={option => `${option.label}`}
+          getOptionValue={option => `${option.value}`}
+          isSearchable={true}
+          searchFilter={searchFilter}
+          styles={optionStyles}
+          hideSelectedOptions={props.isSearch}
+          width={props.width}
+        />
+      )}
     </React.Fragment>
   );
 });
@@ -142,7 +204,11 @@ Autocomplete.defaultProps = {
   isRequired: false,
   isValid: true,
   placeholder: "Valitse...",
-  value: []
+  value: [],
+  isSearch: false,
+  minChars: 3,
+  width: "100%",
+  autoSize: false
 };
 
 Autocomplete.propTypes = {
@@ -156,6 +222,10 @@ Autocomplete.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.array,
   height: PropTypes.string,
+  isSearch: PropTypes.bool,
+  minChars: PropTypes.number,
+  width: PropTypes.string,
+  autosize: PropTypes.bool,
   title: PropTypes.string
 };
 

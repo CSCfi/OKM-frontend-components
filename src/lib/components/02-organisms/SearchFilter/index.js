@@ -29,8 +29,12 @@ const useStyles = makeStyles(theme => ({
 
 const SearchFilter = props => {
   const classes = useStyles();
-  const handleChanges = (_, changePayload) => {
-    if (changePayload) props.onValueChanged(changePayload.value);
+  const handleChanges = event => {
+    props.onValueChanged(event.target.value);
+  };
+
+  const preventRefresh = e => {
+    e.key === "Enter" && e.preventDefault();
   };
 
   return (
@@ -39,6 +43,7 @@ const SearchFilter = props => {
         className={classes.input}
         placeholder={props.placeholder}
         onChange={handleChanges}
+        onKeyPress={preventRefresh}
       />
       <SearchIcon className="ml-2" />
     </Paper>

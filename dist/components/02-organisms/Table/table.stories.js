@@ -32,14 +32,26 @@ storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", 
   return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-col lg:flex-row mb-4"
   }, React.createElement("div", {
-    className: "lg:mr-4 h-13"
-  }, React.createElement(SearchFilter, null)), React.createElement("div", {
+    className: "lg:mr-4 h-13 w-full lg:w-1/4"
+  }, React.createElement(SearchFilter, {
+    callback: function callback() {}
+  })), React.createElement("div", {
     className: "mt-2 lg:mt-0 lg:mr-4 h-13"
   }, React.createElement(Dropdown, {
     isTall: true,
-    className: "w-20"
+    className: "w-20",
+    options: [{
+      label: "Aaaaaaaa",
+      value: "Aaaaaaaa"
+    }, {
+      label: "Bbbbbb",
+      value: "Bbbbbb"
+    }, {
+      label: "Ccccccccccc",
+      value: "Ccccccccccc"
+    }]
   })), React.createElement("div", {
-    className: "mt-2 lg:ml-4 lg:mt-auto"
+    className: "mt-2 lg:ml-4 lg:mx-auto"
   }, React.createElement(Pill, {
     label: "Something",
     onDelete: function onDelete() {}

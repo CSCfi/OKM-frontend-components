@@ -31,8 +31,12 @@ var useStyles = makeStyles(function (theme) {
 var SearchFilter = function SearchFilter(props) {
   var classes = useStyles();
 
-  var handleChanges = function handleChanges(_, changePayload) {
-    if (changePayload) props.onValueChanged(changePayload.value);
+  var handleChanges = function handleChanges(event) {
+    props.onValueChanged(event.target.value);
+  };
+
+  var preventRefresh = function preventRefresh(e) {
+    e.key === "Enter" && e.preventDefault();
   };
 
   return React.createElement(Paper, {
@@ -41,7 +45,8 @@ var SearchFilter = function SearchFilter(props) {
   }, React.createElement(InputBase, {
     className: classes.input,
     placeholder: props.placeholder,
-    onChange: handleChanges
+    onChange: handleChanges,
+    onKeyPress: preventRefresh
   }), React.createElement(SearchIcon, {
     className: "ml-2"
   }));

@@ -80,7 +80,6 @@ const Datepicker = props => {
           disabled={props.isDisabled || props.isReadonly}
           placeholder={props.placeholder}
           margin="dense"
-          className={`${props.isHidden ? "hidden" : ""} p-2`}
           onChange={handleDateChange}
           error={props.error}
           style={props.fullWidth ? {} : { width: props.width }}
@@ -109,6 +108,7 @@ const Datepicker = props => {
                 ? classes.requiredVisited
                 : classes.root
             } 
+            p-2
         `}
           onFocus={() => setIsVisited(true)}
         />
