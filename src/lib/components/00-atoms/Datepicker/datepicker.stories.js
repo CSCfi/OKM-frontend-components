@@ -33,6 +33,7 @@ storiesOf("Datepicker", module)
         />
         <p>Error + clearable</p>
         <Datepicker
+          label="Datepicker"
           value={yesterday}
           payload={{ value: yesterday }}
           onChanges={onChanges}
@@ -41,9 +42,11 @@ storiesOf("Datepicker", module)
           showTodayButton={false}
           messages={messages}
           locale={"fi"}
+          errorText="Errori"
         />
         <p>Read only</p>
         <Datepicker
+          label="Datepicker"
           value={yesterday}
           payload={{ value: yesterday }}
           showTodayButton={false}
@@ -53,14 +56,17 @@ storiesOf("Datepicker", module)
         />
         <p>Required</p>
         <Datepicker
+          label="Datepicker"
           showTodayButton={false}
           messages={messages}
           onChanges={onChanges}
           locale={"fi"}
           isRequired
+          requiredMessage="Pakollinen"
         />
         <p>Wide</p>
         <Datepicker
+          label="Datepicker"
           value={today}
           onChanges={onChanges}
           messages={messages}
