@@ -42,7 +42,6 @@ storiesOf("Datepicker", module)
           showTodayButton={false}
           messages={messages}
           locale={"fi"}
-          errorText="Errori"
         />
         <p>Read only</p>
         <Datepicker
@@ -57,6 +56,14 @@ storiesOf("Datepicker", module)
         <p>Required</p>
         <Datepicker
           label="Datepicker"
+          showTodayButton={false}
+          messages={messages}
+          onChanges={onChanges}
+          locale={"fi"}
+          isRequired
+        />
+        <Datepicker
+          label="requiredMessage"
           showTodayButton={false}
           messages={messages}
           onChanges={onChanges}

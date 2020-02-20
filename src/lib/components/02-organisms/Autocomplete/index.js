@@ -115,10 +115,7 @@ const Autocomplete = React.memo(props => {
   }, [props.options]);
 
   useEffect(() => {
-    console.log(props.minChars);
     setMinCharacters(3);
-    console.log(minCharacters);
-
     props.minChars <= 0
       ? setMinCharacters(props.minChars)
       : props.isSearch && setMinCharacters(3);
