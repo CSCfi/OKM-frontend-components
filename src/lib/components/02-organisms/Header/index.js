@@ -82,9 +82,16 @@ const Header = React.memo(
           <span className="font-bold">{authenticationLink.text[1]}</span>
         )}
       </NavLink>,
-      <NavLink className="link-to-own-organisation" to={organisation.path} exact={false}>
-        <span className="text-gray-600">{organisation.text}</span>
-      </NavLink>
+      organisation.path ? (
+        <NavLink
+          className="link-to-own-organisation"
+          to={organisation.path}
+          exact={false}>
+          <span className="text-gray-600">{organisation.text}</span>
+        </NavLink>
+      ) : (
+        <span className="text-gray-800">{organisation.text}</span>
+      )
     ];
 
     const breakpointTabletMin = useMediaQuery(MEDIA_QUERIES.TABLET_MIN);

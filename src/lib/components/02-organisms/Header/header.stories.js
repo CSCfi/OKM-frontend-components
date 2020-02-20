@@ -190,92 +190,37 @@ storiesOf("Header", module)
         </Router>
       </React.Fragment>
     );
+  })
+  .add("Header without organisation link", () => {
+    return (
+      <Router history={createBrowserHistory()}>
+        <Header
+          inFinnish="Suomeksi"
+          inSwedish="På svenska"
+          isLoggedIn={false}
+          locale="fi"
+          logIn="Kirjaudu sisään"
+          logo={{ text: "Oiva", path: "/" }}
+          authenticationLink={{
+            text: ["Kirjaudu ulos", "(oiva-sanni)"],
+            path: "example.path.fi"
+          }}
+          onLocaleChange={(...props) => {
+            console.info(props);
+          }}
+          onLoginButtonClick={(...props) => {
+            console.info(props);
+          }}
+          onMenuClick={(...props) => {
+            console.info(props);
+          }}
+          organisation={{
+            text: "Jyväskylän koulutuskuntayhtymä"
+          }}
+          shortDescription={{
+            text: "Opetushallinnon ohjaus- ja säätelypalvelu",
+            path: "/"
+          }}></Header>
+      </Router>
+    );
   });
-
-//   <div >
-//   {props.user && props.user.username && (
-//     <Card>
-//       <CardHeader
-//         avatar={
-//           <Avatar aria-label="Recipe" className={classes.avatar}>
-//             {R.head(props.user.username)}
-//           </Avatar>
-//         }
-//         title={props.user.username}
-//         subheader={formatMessage(authMessages.loggedInInfo)}
-//       />
-//     </Card>
-//   )}
-//   {props.ytunnus && (
-//     <List>
-//       <ListItem button key="oma_organisaatio">
-//         <ListItemIcon>
-//           <Home />
-//         </ListItemIcon>
-//         <NavLink
-//           className="no-underline"
-//           ytunnus={props.ytunnus}
-//           to={{
-//             pathname: "/jarjestajat/" + props.ytunnus + "/omattiedot",
-//             ytunnus: props.ytunnus
-//           }}
-//           exact>
-//           Oma organisaatio
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-//   <Divider />
-//   <List>
-//     {props.pageLinks.map(link => (
-//       <ListItem button key={link.text}>
-//         <NavLink to={link.path} className="no-underline">
-//           {link.text}
-//         </NavLink>
-//       </ListItem>
-//     ))}
-//   </List>
-//   <Divider />
-//   <List>
-//     {[
-//       { path: "/fi", key: "inFinnish", text: "Suomeksi", value: "fi" },
-//       { path: "/sv", key: "inSwedish", text: "På svenska", value: "sv" }
-//     ].map(item => (
-//       <ListItem button key={item.key}>
-//         <ListItemIcon>
-//           <Language />
-//         </ListItemIcon>
-//         <Button
-//           onClick={() => handleLocaleChange(item.value)}
-//           size="small">
-//           {formatMessage(langMessages[item.key])}
-//         </Button>
-//       </ListItem>
-//     ))}
-//   </List>
-//   <Divider />
-//   {!sessionStorage.getItem("role") && (
-//     <List>
-//       <ListItem button key="login">
-//         <ListItemIcon>
-//           <Fingerprint />
-//         </ListItemIcon>
-//         <NavLink to="/cas-auth" className="no-underline">
-//           {formatMessage(authMessages.logIn)}
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-//   {props.user && props.user.username && (
-//     <List>
-//       <ListItem button key="logout">
-//         <ListItemIcon>
-//           <Fingerprint />
-//         </ListItemIcon>
-//         <NavLink to="/cas-logout" className="no-underline">
-//           {formatMessage(authMessages.logOut)}
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-// </div>
