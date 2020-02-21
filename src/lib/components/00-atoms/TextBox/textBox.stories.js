@@ -40,6 +40,7 @@ storiesOf("TextBox", module)
           payload={{ testProp: 1 }}
           onChanges={onChanges}
           isValid={false}
+          requiredMessage={"Pakollinen tieto"}
         />
       </div>
     );

@@ -28,6 +28,7 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     messages: messages,
     locale: "fi"
   }), React.createElement("p", null, "Error + clearable"), React.createElement(Datepicker, {
+    label: "Datepicker",
     value: yesterday,
     payload: {
       value: yesterday
@@ -39,6 +40,7 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     messages: messages,
     locale: "fi"
   }), React.createElement("p", null, "Read only"), React.createElement(Datepicker, {
+    label: "Datepicker",
     value: yesterday,
     payload: {
       value: yesterday
@@ -48,12 +50,22 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     locale: "fi",
     isReadonly: true
   }), React.createElement("p", null, "Required"), React.createElement(Datepicker, {
+    label: "Datepicker",
     showTodayButton: false,
     messages: messages,
     onChanges: onChanges,
     locale: "fi",
     isRequired: true
+  }), React.createElement(Datepicker, {
+    label: "requiredMessage",
+    showTodayButton: false,
+    messages: messages,
+    onChanges: onChanges,
+    locale: "fi",
+    isRequired: true,
+    requiredMessage: "Pakollinen"
   }), React.createElement("p", null, "Wide"), React.createElement(Datepicker, {
+    label: "Datepicker",
     value: today,
     onChanges: onChanges,
     messages: messages,

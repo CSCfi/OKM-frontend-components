@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import { FormHelperText } from "@material-ui/core";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
@@ -22,8 +23,12 @@ var inputStyles = {
     }
   },
   requiredVisited: {
-    "& input:invalid + fieldset ": {
-      borderColor: "#E5C317"
+    "& input + fieldset ": {
+      borderColor: "#E5C317",
+      borderWidth: 2
+    },
+    "& label": {
+      color: "#757600 !important"
     }
   }
 };
@@ -34,17 +39,22 @@ var Input = function Input(props) {
       isVisited = _useState2[0],
       setIsVisited = _useState2[1];
 
-  var classes = props.classes;
-
-  var _useState3 = useState(null),
+  var _useState3 = useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      value = _useState4[0],
-      setValue = _useState4[1];
+      isFocused = _useState4[0],
+      setIsFocused = _useState4[1];
+
+  var classes = props.classes;
 
   var _useState5 = useState(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      handle = _useState6[0],
-      setHandle = _useState6[1];
+      value = _useState6[0],
+      setValue = _useState6[1];
+
+  var _useState7 = useState(null),
+      _useState8 = _slicedToArray(_useState7, 2),
+      handle = _useState8[0],
+      setHandle = _useState8[1];
 
   var updateValue = function updateValue(e) {
     setValue(e.target.value);
@@ -67,7 +77,7 @@ var Input = function Input(props) {
       setValue(props.value);
     }
   }, [props.value]);
-  return React.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex items-center"
   }, React.createElement(TextField, {
     id: props.id,
@@ -84,7 +94,7 @@ var Input = function Input(props) {
     rowsMax: props.rowsMax,
     onChange: updateValue,
     required: props.isRequired,
-    error: props.error,
+    error: props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
     InputLabelProps: props.isReadOnly ? {
       shrink: true
     } : {},
@@ -97,10 +107,18 @@ var Input = function Input(props) {
     },
     fullWidth: props.fullWidth,
     type: props.type,
-    onFocus: function onFocus() {
+    onBlurCapture: !props.value ? function () {
       return setIsVisited(true);
+    } : function () {
+      return setIsVisited(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired ? classes.requiredVisited : classes.root, " \n        ")
+    onFocus: function onFocus() {
+      return setIsFocused(true);
+    },
+    onBlur: function onBlur() {
+      return setIsFocused(false);
+    },
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n        ")
   }), !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
@@ -111,7 +129,15 @@ var Input = function Input(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  }))));
+  })))), props.requiredMessage && React.createElement(FormHelperText, {
+    id: "component-message-text",
+    style: {
+      marginTop: "0.1em",
+      paddingLeft: "1.2em",
+      marginBottom: "0.5em",
+      color: "#757600"
+    }
+  }, isVisited && !value && props.requiredMessage));
 };
 
 Input.defaultProps = {
