@@ -27,6 +27,20 @@ storiesOf("TextBox", module)
           value="Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
           isReadOnly
         />
+        <TextBox
+          title="invalid"
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+        />
+        <br />
+        <TextBox
+          title="invalid and required"
+          isRequired
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+        />
       </div>
     );
   });

@@ -39,7 +39,7 @@ const styles = createStyles(theme => ({
       borderWidth: 2
     },
     "& input:focus + fieldset": {
-      borderColor: "#E5C317 !important"
+      borderColor: "blue !important"
     },
     "& label": {
       color: "#757600 !important"
@@ -66,6 +66,7 @@ const Datepicker = props => {
   const { classes, messages, locale } = props;
   const [selectedDate, setSelectedDate] = useState(props.value);
   const [isVisited, setIsVisited] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const localeMap = {
     en: enLocale,
     fi: fiLocale,
@@ -122,13 +123,17 @@ const Datepicker = props => {
             disableFuture={props.disableFuture}
             className={`${props.isHidden ? "hidden" : ""} 
             ${
-              isVisited && props.isRequired && !props.value
+              isVisited && props.isRequired && !props.value && !isFocused
                 ? classes.requiredVisited
                 : classes.root
             } 
             p-2
         `}
-            onBlurCapture={() => setIsVisited(true)}
+            onBlurCapture={() =>
+              !selectedDate ? setIsVisited(true) : setIsVisited(false)
+            }
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           />
           {props.requiredMessage && (
             <FormHelperText

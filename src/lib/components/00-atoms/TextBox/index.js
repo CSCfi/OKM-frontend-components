@@ -12,10 +12,10 @@ import styles from "./textbox.module.css";
 
 const textboxStyles = {
   root: {
-    boxShadow: "none",
+    outline: "none !important",
     border: "1px solid #C4C4C4",
-    margin: "1px 0",
-    padding: "0.5em 1em",
+    paddingLeft: "1em",
+    paddingRight: "1em",
     "&:disabled": {
       borderColor: "transparent !important",
       paddingLeft: 0,
@@ -25,21 +25,56 @@ const textboxStyles = {
       }
     }
   },
+  required: {
+    marginBottom: "-2px"
+  },
+  focused: {
+    outline: "none !important",
+    border: "2px solid blue",
+    paddingLeft: "0.95em",
+    paddingRight: "0.95em",
+    paddingTop: "0.45em"
+  },
   requiredVisited: {
-    padding: "0.5em 1em",
     boxShadow: "none",
-    border: "2px solid #E5C317",
-    "& label": {
-      color: "#757600 !important"
-    }
+    border: "2px solid #E5C317"
+  },
+  requiredVisitedFocus: {
+    outline: "none !important",
+    border: "2px solid blue",
+    paddingLeft: "0.95em",
+    paddingRight: "0.95em",
+    paddingTop: "0.45em"
+  },
+  error: {
+    outlineColor: "red",
+    boxShadow: "none",
+    border: "1px solid red"
+  },
+  errorFocused: {
+    outlineColor: "red",
+    boxShadow: "none",
+    border: "2px solid red"
   },
   cssLabel: {
     top: "1em",
-    position: "relative"
+    left: "-0.5em",
+    position: "relative",
+    ".Mui-error": {
+      color: "red"
+    }
   },
-  inputLabelShrink: {},
+  cssLabelFocused: {
+    color: "blue"
+  },
+  cssLabelRequired: {
+    color: "#757600 !important"
+  },
+  inputLabelShrink: {
+    left: "0"
+  },
   inputLabelReadonly: {
-    marginLeft: "-0.9em"
+    marginLeft: "-1em"
   }
 };
 
@@ -51,6 +86,7 @@ const TextBox = props => {
   const { classes } = props;
 
   const updateValue = e => {
+    !e.target.value && !isFocused ? setIsVisited(true) : setIsVisited(false);
     setValue(e.target.value);
     if (handle) {
       clearTimeout(handle);
@@ -81,11 +117,24 @@ const TextBox = props => {
                 htmlFor="props.id"
                 shrink={(isFocused || value) && true}
                 variant="outlined"
+                error={
+                  props.isErroneous
+                    ? props.isErroneous
+                    : (props.isRequired && value && !props.isValid) ||
+                      (!props.isRequired && !props.isValid)
+                }
                 classes={{
                   root: classes.cssLabel,
                   shrink: classes.inputLabelShrink,
                   disabled: classes.inputLabelReadonly
-                }}>
+                }}
+                className={`${
+                  isFocused
+                    ? classes.cssLabelFocused
+                    : props.isRequired && isVisited
+                    ? classes.cssLabelRequired
+                    : classes.cssLabel
+                }`}>
                 <span style={{ padding: "0 0.3em", background: "white" }}>
                   {props.title}
                   {props.isRequired && "*"}
@@ -101,24 +150,49 @@ const TextBox = props => {
               }
               rows={props.isReadOnly ? 1 : props.rows}
               rowsMax={props.isReadOnly ? Infinity : props.rowsMax}
-              className={`${props.isHidden ? "hidden" : "rounded"} ${
+              className={`${props.isHidden ? "hidden" : "rounded"} 
+              ${props.required ? classes.required : ""}
+              ${
                 props.isReadOnly
                   ? "text-black"
                   : "border border-solid border-gray-500"
               } ${
-                isVisited && props.isRequired && !value
+                isVisited && props.isRequired && !value && !isFocused
                   ? classes.requiredVisited
                   : classes.root
-              } w-full p-2 resize-none`}
+              } ${
+                isFocused
+                  ? props.isRequired
+                    ? classes.requiredVisitedFocus
+                    : classes.focused
+                  : ""
+              } ${
+                props.isErroneous ||
+                (!props.isValid && !props.isRequired) ||
+                (!props.isValid && value && props.isRequired)
+                  ? isFocused
+                    ? classes.errorFocused
+                    : classes.error
+                  : ""
+              } 
+              w-full p-2 resize-none`}
               onChange={updateValue}
               value={value}
               inputprops={{
                 readOnly: props.isReadOnly
               }}
-              onBlurCapture={() => setIsVisited(true)}
+              onBlurCapture={() =>
+                !value ? setIsVisited(true) : setIsVisited(false)
+              }
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               label={props.label}
+              error={
+                props.isErroneous
+                  ? props.isErroneous
+                  : (props.isRequired && value && !props.isValid) ||
+                    (!props.isRequired && !props.isValid)
+              }
             />
             {!isEmpty(props.tooltip) && (
               <div className="ml-8">

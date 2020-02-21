@@ -170,6 +170,7 @@ const Autocomplete = React.memo(props => {
           onInputChange={onInputChange}
           menuIsOpen={isOptionsShown}
           width={props.width}
+          required={props.isRequired}
         />
       ) : (
         <Select
@@ -190,6 +191,7 @@ const Autocomplete = React.memo(props => {
           styles={optionStyles}
           hideSelectedOptions={props.isSearch}
           width={props.width}
+          required={props.isRequired}
         />
       )}
     </React.Fragment>

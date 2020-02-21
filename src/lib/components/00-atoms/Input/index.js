@@ -37,6 +37,7 @@ const inputStyles = {
 
 const Input = props => {
   const [isVisited, setIsVisited] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const { classes } = props;
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
@@ -81,7 +82,12 @@ const Input = props => {
           rowsMax={props.rowsMax}
           onChange={updateValue}
           required={props.isRequired}
-          error={props.error}
+          error={
+            props.error
+              ? props.error
+              : (props.isRequired && value && !props.isValid) ||
+                (!props.isRequired && !props.isValid)
+          }
           InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
           variant="outlined"
           style={
@@ -94,9 +100,11 @@ const Input = props => {
           onBlurCapture={
             !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
           }
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           className={`${props.isHidden ? "hidden" : ""} 
           ${
-            isVisited && props.isRequired && !value
+            isVisited && props.isRequired && !value && !isFocused
               ? classes.requiredVisited
               : classes.root
           } 

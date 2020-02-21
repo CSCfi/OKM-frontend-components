@@ -47,6 +47,7 @@ const Dropdown = React.memo(props => {
       height={props.height}
       width={props.width}
       autoWidth={!props.width}
+      required={props.isRequired}
     />
   );
 });
@@ -60,7 +61,8 @@ Dropdown.propTypes = {
   value: PropTypes.object,
   isTall: PropTypes.bool,
   height: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.string,
+  isRequired: PropTypes.bool
 };
 
 export default Dropdown;

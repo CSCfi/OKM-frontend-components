@@ -24,6 +24,13 @@ storiesOf("Input", module)
           isValid={true}
           label="Required"
         />
+        <p>Invalid</p>
+        <Input
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+          label="Invalid"
+        />
         <p>Required and invalid</p>
         <Input
           payload={{ testProp: 1 }}
