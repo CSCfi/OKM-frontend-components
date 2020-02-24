@@ -183,7 +183,8 @@ Input.propTypes = {
   fullWidth: PropTypes.bool,
   type: PropTypes.string,
   isVisited: PropTypes.bool,
-  isDense: PropTypes.bool
+  isDense: PropTypes.bool,
+  requiredMessage: PropTypes.string
 };
 
 export default withStyles(inputStyles)(Input);
