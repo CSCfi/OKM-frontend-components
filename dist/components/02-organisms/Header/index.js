@@ -66,13 +66,15 @@ var Header = React.memo(function (_ref) {
     className: "inline-block no-underline text-gray-800 hover:underline"
   }, React.createElement("span", null, authenticationLink.text[0], " "), authenticationLink.text[1] && React.createElement("span", {
     className: "font-bold"
-  }, authenticationLink.text[1])), React.createElement(NavLink, {
+  }, authenticationLink.text[1])), organisation.path ? React.createElement(NavLink, {
     className: "link-to-own-organisation",
     to: organisation.path,
     exact: false
   }, React.createElement("span", {
     className: "text-gray-600"
-  }, organisation.text))];
+  }, organisation.text)) : React.createElement("span", {
+    className: "text-gray-800"
+  }, organisation.text)];
   var breakpointTabletMin = useMediaQuery(MEDIA_QUERIES.TABLET_MIN);
   return React.createElement(React.Fragment, null, !breakpointTabletMin && React.createElement(React.Fragment, null, template === "C" && React.createElement(VerticalLayout, {
     items: items

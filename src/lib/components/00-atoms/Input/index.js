@@ -110,7 +110,7 @@ const Input = props => {
           } 
         `}
         />
-        {!isEmpty(props.tooltip) && (
+        {!props.readOnly && !isEmpty(props.tooltip) && (
           <div className="ml-8">
             <Tooltip tooltip={props.tooltip.text} trigger="click">
               <HelpIcon

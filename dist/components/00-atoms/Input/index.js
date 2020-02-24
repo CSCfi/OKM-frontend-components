@@ -119,7 +119,7 @@ var Input = function Input(props) {
       return setIsFocused(false);
     },
     className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n        ")
-  }), !isEmpty(props.tooltip) && React.createElement("div", {
+  }), !props.readOnly && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,

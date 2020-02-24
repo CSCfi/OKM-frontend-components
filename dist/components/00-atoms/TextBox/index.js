@@ -162,7 +162,7 @@ var TextBox = function TextBox(props) {
     },
     label: props.label,
     error: props.isErroneous ? props.isErroneous : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid
-  }), !isEmpty(props.tooltip) && React.createElement("div", {
+  }), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
