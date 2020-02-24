@@ -46,9 +46,9 @@ const TextBox = props => {
 
   useEffect(() => {
     if (props.value !== value || !value) {
-      setValue(props.value);
+      setValue(props.value || ""); // props.value might be undefined
     }
-  }, [props.value]);
+  }, [props.value]); // If value is added the component won't work.
 
   return (
     <React.Fragment>
