@@ -194,7 +194,7 @@ const TextBox = props => {
                     (!props.isRequired && !props.isValid)
               }
             />
-            {!isEmpty(props.tooltip) && (
+            {!props.isReadOnly && !isEmpty(props.tooltip) && (
               <div className="ml-8">
                 <Tooltip tooltip={props.tooltip.text} trigger="click">
                   <HelpIcon
