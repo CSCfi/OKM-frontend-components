@@ -115,10 +115,7 @@ const Autocomplete = React.memo(props => {
   }, [props.options]);
 
   useEffect(() => {
-    console.log(props.minChars);
     setMinCharacters(3);
-    console.log(minCharacters);
-
     props.minChars <= 0
       ? setMinCharacters(props.minChars)
       : props.isSearch && setMinCharacters(3);
@@ -173,6 +170,7 @@ const Autocomplete = React.memo(props => {
           onInputChange={onInputChange}
           menuIsOpen={isOptionsShown}
           width={props.width}
+          required={props.isRequired}
         />
       ) : (
         <Select
@@ -193,6 +191,7 @@ const Autocomplete = React.memo(props => {
           styles={optionStyles}
           hideSelectedOptions={props.isSearch}
           width={props.width}
+          required={props.isRequired}
         />
       )}
     </React.Fragment>

@@ -50,7 +50,8 @@ var Dropdown = React.memo(function (props) {
     variant: "contained",
     height: props.height,
     width: props.width,
-    autoWidth: !props.width
+    autoWidth: !props.width,
+    required: props.isRequired
   });
 });
 export default Dropdown;

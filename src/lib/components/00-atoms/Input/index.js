@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import { FormHelperText } from "@material-ui/core";
 
 import styles from "./input.module.css";
 
@@ -24,14 +25,19 @@ const inputStyles = {
     }
   },
   requiredVisited: {
-    "& input:invalid + fieldset ": {
-      borderColor: "#E5C317"
+    "& input + fieldset ": {
+      borderColor: "#E5C317",
+      borderWidth: 2
+    },
+    "& label": {
+      color: "#757600 !important"
     }
   }
 };
 
 const Input = props => {
   const [isVisited, setIsVisited] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const { classes } = props;
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
@@ -57,56 +63,79 @@ const Input = props => {
   }, [props.value]);
 
   return (
-    <div className="flex items-center">
-      <TextField
-        id={props.id}
-        aria-label={props.ariaLabel}
-        defaultValue={props.value}
-        label={props.label}
-        disabled={props.isDisabled || props.isReadOnly}
-        inputprops={{
-          readOnly: props.isReadOnly
-        }}
-        placeholder={
-          props.isDisabled || props.isReadOnly ? "" : props.placeholder
-        }
-        rows={props.rows}
-        margin={props.isDense ? "dense" : ""}
-        rowsMax={props.rowsMax}
-        onChange={updateValue}
-        required={props.isRequired}
-        error={props.error}
-        InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
-        variant="outlined"
-        style={
-          props.fullWidth
-            ? { border: "none" }
-            : { width: props.width, border: "none" }
-        }
-        fullWidth={props.fullWidth}
-        type={props.type}
-        onFocus={() => setIsVisited(true)}
-        className={`${props.isHidden ? "hidden" : ""} 
+    <React.Fragment>
+      <div className="flex items-center">
+        <TextField
+          id={props.id}
+          aria-label={props.ariaLabel}
+          defaultValue={props.value}
+          label={props.label}
+          disabled={props.isDisabled || props.isReadOnly}
+          inputprops={{
+            readOnly: props.isReadOnly
+          }}
+          placeholder={
+            props.isDisabled || props.isReadOnly ? "" : props.placeholder
+          }
+          rows={props.rows}
+          margin={props.isDense ? "dense" : ""}
+          rowsMax={props.rowsMax}
+          onChange={updateValue}
+          required={props.isRequired}
+          error={
+            props.error
+              ? props.error
+              : (props.isRequired && value && !props.isValid) ||
+                (!props.isRequired && !props.isValid)
+          }
+          InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
+          variant="outlined"
+          style={
+            props.fullWidth
+              ? { border: "none" }
+              : { width: props.width, border: "none" }
+          }
+          fullWidth={props.fullWidth}
+          type={props.type}
+          onBlurCapture={
+            !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
+          }
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={`${props.isHidden ? "hidden" : ""} 
           ${
-            isVisited && props.isRequired
+            isVisited && props.isRequired && !value && !isFocused
               ? classes.requiredVisited
               : classes.root
           } 
         `}
-      />
-      {!isEmpty(props.tooltip) && (
-        <div className="ml-8">
-          <Tooltip tooltip={props.tooltip.text} trigger="click">
-            <HelpIcon
-              classes={{
-                colorPrimary: styles.tooltipBg
-              }}
-              color="primary"
-            />
-          </Tooltip>
-        </div>
+        />
+        {!props.readOnly && !isEmpty(props.tooltip) && (
+          <div className="ml-8">
+            <Tooltip tooltip={props.tooltip.text} trigger="click">
+              <HelpIcon
+                classes={{
+                  colorPrimary: styles.tooltipBg
+                }}
+                color="primary"
+              />
+            </Tooltip>
+          </div>
+        )}
+      </div>
+      {props.requiredMessage && (
+        <FormHelperText
+          id="component-message-text"
+          style={{
+            marginTop: "0.1em",
+            paddingLeft: "1.2em",
+            marginBottom: "0.5em",
+            color: "#757600"
+          }}>
+          {isVisited && !value && props.requiredMessage}
+        </FormHelperText>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 
@@ -154,7 +183,8 @@ Input.propTypes = {
   fullWidth: PropTypes.bool,
   type: PropTypes.string,
   isVisited: PropTypes.bool,
-  isDense: PropTypes.bool
+  isDense: PropTypes.bool,
+  requiredMessage: PropTypes.string
 };
 
 export default withStyles(inputStyles)(Input);

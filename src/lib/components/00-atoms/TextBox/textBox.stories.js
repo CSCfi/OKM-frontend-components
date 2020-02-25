@@ -15,16 +15,32 @@ storiesOf("TextBox", module)
         <TextBox payload={{ testProp: 1 }} onChanges={onChanges} />
         <br />
         <TextBox
-          label="Required"
+          title="Required"
           isRequired
           payload={{ testProp: 1 }}
           onChanges={onChanges}
         />
+        <br />
         <TextBox
-          label="read only"
+          title="read only"
           isReadOnly
           value="Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
           isReadOnly
+        />
+        <TextBox
+          title="invalid"
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+        />
+        <br />
+        <TextBox
+          title="invalid and required"
+          isRequired
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+          requiredMessage={"Pakollinen tieto"}
         />
       </div>
     );

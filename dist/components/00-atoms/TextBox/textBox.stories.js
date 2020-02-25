@@ -15,15 +15,31 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
     },
     onChanges: onChanges
   }), React.createElement("br", null), React.createElement(TextBox, {
-    label: "Required",
+    title: "Required",
     isRequired: true,
     payload: {
       testProp: 1
     },
     onChanges: onChanges
-  }), React.createElement(TextBox, _defineProperty({
-    label: "read only",
+  }), React.createElement("br", null), React.createElement(TextBox, _defineProperty({
+    title: "read only",
     isReadOnly: true,
     value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
-  }, "isReadOnly", true)));
+  }, "isReadOnly", true)), React.createElement(TextBox, {
+    title: "invalid",
+    payload: {
+      testProp: 1
+    },
+    onChanges: onChanges,
+    isValid: false
+  }), React.createElement("br", null), React.createElement(TextBox, {
+    title: "invalid and required",
+    isRequired: true,
+    payload: {
+      testProp: 1
+    },
+    onChanges: onChanges,
+    isValid: false,
+    requiredMessage: "Pakollinen tieto"
+  }));
 });
