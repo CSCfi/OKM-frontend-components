@@ -72,7 +72,7 @@ const Attachment = React.memo(props => {
     <React.Fragment>
       <FileInput>
         <div className="flex flex-row uppercase">
-          <FaPlus /> {props.messages.addAttachment}...
+          <FaPlus /> {props.messages.attachmentAdd}...
         </div>
         <input
           id={props.id}
