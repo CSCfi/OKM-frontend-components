@@ -13,7 +13,7 @@ import Dropdown from "../../../00-atoms/Dropdown";
 import CheckIcon from "@material-ui/icons/Check";
 import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
-// import Attachments from "../../Attachments";
+import Attachments from "../../Attachments";
 import * as R from "ramda";
 import _ from "lodash";
 
@@ -553,7 +553,7 @@ const CategorizedList = React.memo(
                             );
                           })(category)
                         : null}
-                      {/* {component.name === "Attachments"
+                      {component.name === "Attachments"
                         ? (category => {
                             const previousSibling =
                               category.components[ii - 1] || {};
@@ -574,6 +574,7 @@ const CategorizedList = React.memo(
                                 change.properties.isChecked
                               );
                             let attachments = propsObj.attachments || [];
+                            console.info(component);
                             return (
                               <div className={component.styleClasses}>
                                 <Attachments
@@ -590,6 +591,7 @@ const CategorizedList = React.memo(
                                     siblings: props.categories,
                                     attachments: attachments
                                   }}
+                                  messages={component.messages}
                                   placement={props.placement}
                                   isReadOnly={
                                     propsObj.isReadOnly || props.isReadOnly
@@ -598,7 +600,7 @@ const CategorizedList = React.memo(
                               </div>
                             );
                           })(category)
-                        : null} */}
+                        : null}
                       {component.name === "StatusTextRow"
                         ? (category => {
                             const codeMarkup = propsObj.code ? (
