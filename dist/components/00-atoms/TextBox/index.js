@@ -58,9 +58,10 @@ var TextBox = function TextBox(props) {
 
   useEffect(function () {
     if (props.value !== value || !value) {
-      setValue(props.value);
+      setValue(props.value || ""); // props.value might be undefined
     }
-  }, [props.value]);
+  }, [props.value]); // If value is added the component won't work.
+
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, props.title && React.createElement("label", {
     className: "text-bold text-base block my-2"
   }, props.isRequired && React.createElement("span", {

@@ -253,90 +253,50 @@ storiesOf("Header", module).add("Basic layout", function () {
       hoverColor: "gray-100"
     }
   }))))));
-}); //   <div >
-//   {props.user && props.user.username && (
-//     <Card>
-//       <CardHeader
-//         avatar={
-//           <Avatar aria-label="Recipe" className={classes.avatar}>
-//             {R.head(props.user.username)}
-//           </Avatar>
-//         }
-//         title={props.user.username}
-//         subheader={formatMessage(authMessages.loggedInInfo)}
-//       />
-//     </Card>
-//   )}
-//   {props.ytunnus && (
-//     <List>
-//       <ListItem button key="oma_organisaatio">
-//         <ListItemIcon>
-//           <Home />
-//         </ListItemIcon>
-//         <NavLink
-//           className="no-underline"
-//           ytunnus={props.ytunnus}
-//           to={{
-//             pathname: "/jarjestajat/" + props.ytunnus + "/omattiedot",
-//             ytunnus: props.ytunnus
-//           }}
-//           exact>
-//           Oma organisaatio
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-//   <Divider />
-//   <List>
-//     {props.pageLinks.map(link => (
-//       <ListItem button key={link.text}>
-//         <NavLink to={link.path} className="no-underline">
-//           {link.text}
-//         </NavLink>
-//       </ListItem>
-//     ))}
-//   </List>
-//   <Divider />
-//   <List>
-//     {[
-//       { path: "/fi", key: "inFinnish", text: "Suomeksi", value: "fi" },
-//       { path: "/sv", key: "inSwedish", text: "På svenska", value: "sv" }
-//     ].map(item => (
-//       <ListItem button key={item.key}>
-//         <ListItemIcon>
-//           <Language />
-//         </ListItemIcon>
-//         <Button
-//           onClick={() => handleLocaleChange(item.value)}
-//           size="small">
-//           {formatMessage(langMessages[item.key])}
-//         </Button>
-//       </ListItem>
-//     ))}
-//   </List>
-//   <Divider />
-//   {!sessionStorage.getItem("role") && (
-//     <List>
-//       <ListItem button key="login">
-//         <ListItemIcon>
-//           <Fingerprint />
-//         </ListItemIcon>
-//         <NavLink to="/cas-auth" className="no-underline">
-//           {formatMessage(authMessages.logIn)}
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-//   {props.user && props.user.username && (
-//     <List>
-//       <ListItem button key="logout">
-//         <ListItemIcon>
-//           <Fingerprint />
-//         </ListItemIcon>
-//         <NavLink to="/cas-logout" className="no-underline">
-//           {formatMessage(authMessages.logOut)}
-//         </NavLink>
-//       </ListItem>
-//     </List>
-//   )}
-// </div>
+}).add("Header without organisation link", function () {
+  return React.createElement(Router, {
+    history: createBrowserHistory()
+  }, React.createElement(Header, {
+    inFinnish: "Suomeksi",
+    inSwedish: "P\xE5 svenska",
+    isLoggedIn: false,
+    locale: "fi",
+    logIn: "Kirjaudu sis\xE4\xE4n",
+    logo: {
+      text: "Oiva",
+      path: "/"
+    },
+    authenticationLink: {
+      text: ["Kirjaudu ulos", "(oiva-sanni)"],
+      path: "example.path.fi"
+    },
+    onLocaleChange: function onLocaleChange() {
+      for (var _len12 = arguments.length, props = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        props[_key12] = arguments[_key12];
+      }
+
+      console.info(props);
+    },
+    onLoginButtonClick: function onLoginButtonClick() {
+      for (var _len13 = arguments.length, props = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        props[_key13] = arguments[_key13];
+      }
+
+      console.info(props);
+    },
+    onMenuClick: function onMenuClick() {
+      for (var _len14 = arguments.length, props = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        props[_key14] = arguments[_key14];
+      }
+
+      console.info(props);
+    },
+    organisation: {
+      text: "Jyväskylän koulutuskuntayhtymä"
+    },
+    shortDescription: {
+      text: "Opetushallinnon ohjaus- ja säätelypalvelu",
+      path: "/"
+    }
+  }));
+});
