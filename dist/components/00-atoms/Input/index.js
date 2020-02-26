@@ -30,6 +30,11 @@ var inputStyles = {
     "& label": {
       color: "#757600 !important"
     }
+  },
+  readonlyNoValue: {
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(1)"
+    }
   }
 };
 
@@ -93,11 +98,13 @@ var Input = function Input(props) {
     margin: props.isDense ? "dense" : "",
     rowsMax: props.rowsMax,
     onChange: updateValue,
-    required: props.isRequired,
+    required: props.isRequired && !props.isReadOnly,
     error: props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
-    InputLabelProps: props.isReadOnly ? {
+    InputLabelProps: !value ? {
+      shrink: false
+    } : {
       shrink: true
-    } : {},
+    },
     variant: "outlined",
     style: props.fullWidth ? {
       border: "none"
@@ -118,8 +125,8 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n        ")
-  }), !props.readOnly && !isEmpty(props.tooltip) && React.createElement("div", {
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && !value && classes.readonlyNoValue, "\n        ")
+  }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
@@ -129,7 +136,7 @@ var Input = function Input(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  })))), props.requiredMessage && React.createElement(FormHelperText, {
+  })))), !props.isReadOnly && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

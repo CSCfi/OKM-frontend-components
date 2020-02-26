@@ -32,6 +32,11 @@ const inputStyles = {
     "& label": {
       color: "#757600 !important"
     }
+  },
+  readonlyNoValue: {
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(1)"
+    }
   }
 };
 
@@ -61,7 +66,6 @@ const Input = props => {
       setValue(props.value);
     }
   }, [props.value]);
-
   return (
     <React.Fragment>
       <div className="flex items-center">
@@ -81,14 +85,14 @@ const Input = props => {
           margin={props.isDense ? "dense" : ""}
           rowsMax={props.rowsMax}
           onChange={updateValue}
-          required={props.isRequired}
+          required={props.isRequired && !props.isReadOnly}
           error={
             props.error
               ? props.error
               : (props.isRequired && value && !props.isValid) ||
                 (!props.isRequired && !props.isValid)
           }
-          InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
+          InputLabelProps={!value ? { shrink: false } : { shrink: true }}
           variant="outlined"
           style={
             props.fullWidth
@@ -108,9 +112,10 @@ const Input = props => {
               ? classes.requiredVisited
               : classes.root
           } 
+          ${props.isReadOnly && !value && classes.readonlyNoValue}
         `}
         />
-        {!props.readOnly && !isEmpty(props.tooltip) && (
+        {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
           <div className="ml-8">
             <Tooltip tooltip={props.tooltip.text} trigger="click">
               <HelpIcon
@@ -123,7 +128,7 @@ const Input = props => {
           </div>
         )}
       </div>
-      {props.requiredMessage && (
+      {!props.isReadOnly && props.requiredMessage && (
         <FormHelperText
           id="component-message-text"
           style={{

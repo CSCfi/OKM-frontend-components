@@ -60,7 +60,7 @@ const textboxStyles = {
     top: "1em",
     left: "-0.5em",
     position: "relative",
-    ".Mui-error": {
+    "& .Mui-error": {
       color: "red"
     }
   },
@@ -74,7 +74,9 @@ const textboxStyles = {
     left: "0"
   },
   inputLabelReadonly: {
-    marginLeft: "-1em"
+    top: "-1em",
+    marginLeft: "-0.7em",
+    color: "#333 !important"
   }
 };
 
@@ -110,92 +112,99 @@ const TextBox = props => {
     <React.Fragment>
       {value !== null ? (
         <React.Fragment>
-          <div>
-            {props.title && (
-              <InputLabel
+          <div className="flex flex-row">
+            <div className="flex flex-col w-full">
+              {props.title && (
+                <InputLabel
+                  disabled={props.isDisabled || props.isReadOnly}
+                  htmlFor="props.id"
+                  shrink={isFocused || value ? true : false}
+                  variant="outlined"
+                  error={
+                    props.isErroneous
+                      ? props.isErroneous
+                      : (props.isRequired && value && !props.isValid) ||
+                        (!props.isRequired && !props.isValid)
+                  }
+                  classes={{
+                    root: classes.cssLabel,
+                    shrink: classes.inputLabelShrink,
+                    disabled: classes.inputLabelReadonly
+                  }}
+                  className={`${
+                    isFocused
+                      ? classes.cssLabelFocused
+                      : props.isRequired && isVisited
+                      ? classes.cssLabelRequired
+                      : classes.cssLabel
+                  }`}>
+                  <span style={{ padding: "0 0.3em", background: "white" }}>
+                    {props.title}
+                    {!props.isReadOnly && props.isRequired && "*"}
+                  </span>
+                </InputLabel>
+              )}
+              <TextareaAutosize
+                aria-label={props.ariaLabel}
                 disabled={props.isDisabled || props.isReadOnly}
-                htmlFor="props.id"
-                shrink={(isFocused || value) && true}
-                variant="outlined"
-                error={
-                  props.isErroneous
-                    ? props.isErroneous
-                    : (props.isRequired && value && !props.isValid) ||
-                      (!props.isRequired && !props.isValid)
+                id={props.id}
+                placeholder={
+                  props.isDisabled || props.isReadOnly ? "" : props.placeholder
                 }
-                classes={{
-                  root: classes.cssLabel,
-                  shrink: classes.inputLabelShrink,
-                  disabled: classes.inputLabelReadonly
-                }}
-                className={`${
-                  isFocused
-                    ? classes.cssLabelFocused
-                    : props.isRequired && isVisited
-                    ? classes.cssLabelRequired
-                    : classes.cssLabel
-                }`}>
-                <span style={{ padding: "0 0.3em", background: "white" }}>
-                  {props.title}
-                  {props.isRequired && "*"}
-                </span>
-              </InputLabel>
-            )}
-            <TextareaAutosize
-              aria-label={props.ariaLabel}
-              disabled={props.isDisabled || props.isReadOnly}
-              id={props.id}
-              placeholder={
-                props.isDisabled || props.isReadOnly ? "" : props.placeholder
-              }
-              rows={props.isReadOnly ? 1 : props.rows}
-              rowsMax={props.isReadOnly ? Infinity : props.rowsMax}
-              className={`${props.isHidden ? "hidden" : "rounded"} 
+                rows={props.isReadOnly ? 1 : props.rows}
+                rowsMax={props.isReadOnly ? Infinity : props.rowsMax}
+                className={`${props.isHidden ? "hidden" : "rounded"} 
               ${props.required ? classes.required : ""}
               ${
                 props.isReadOnly
                   ? "text-black"
                   : "border border-solid border-gray-500"
               } ${
-                isVisited && props.isRequired && !value && !isFocused
-                  ? classes.requiredVisited
-                  : classes.root
-              } ${
-                isFocused
-                  ? props.isRequired
-                    ? classes.requiredVisitedFocus
-                    : classes.focused
-                  : ""
-              } ${
-                props.isErroneous ||
-                (!props.isValid && !props.isRequired) ||
-                (!props.isValid && value && props.isRequired)
-                  ? isFocused
-                    ? classes.errorFocused
-                    : classes.error
-                  : ""
-              } 
+                  isVisited && props.isRequired && !value && !isFocused
+                    ? classes.requiredVisited
+                    : classes.root
+                } ${
+                  isFocused
+                    ? props.isRequired
+                      ? classes.requiredVisitedFocus
+                      : classes.focused
+                    : ""
+                } ${
+                  props.isErroneous ||
+                  (!props.isValid && !props.isRequired) ||
+                  (!props.isValid && value && props.isRequired)
+                    ? isFocused
+                      ? classes.errorFocused
+                      : classes.error
+                    : ""
+                } 
               w-full p-2 resize-none`}
-              onChange={updateValue}
-              value={value}
-              inputprops={{
-                readOnly: props.isReadOnly
-              }}
-              onBlurCapture={() =>
-                !value ? setIsVisited(true) : setIsVisited(false)
-              }
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              label={props.label}
-              error={
-                props.isErroneous
-                  ? props.isErroneous
-                  : (props.isRequired && value && !props.isValid) ||
-                    (!props.isRequired && !props.isValid)
-              }
-            />
+                onChange={updateValue}
+                value={value}
+                inputprops={{
+                  readOnly: props.isReadOnly
+                }}
+                onBlurCapture={() =>
+                  !value ? setIsVisited(true) : setIsVisited(false)
+                }
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                label={props.label}
+              />
+              {props.requiredMessage && (
+                <FormHelperText
+                  id="component-message-text"
+                  style={{
+                    paddingLeft: "0.5em",
+                    marginBottom: "0.5em",
+                    color: "#757600"
+                  }}>
+                  {isVisited && !value && props.requiredMessage}
+                </FormHelperText>
+              )}
+            </div>
             {!props.isReadOnly && !isEmpty(props.tooltip) && (
-              <div className="ml-8">
+              <div className="ml-8 mr-1 mt-4">
                 <Tooltip tooltip={props.tooltip.text} trigger="click">
                   <HelpIcon
                     classes={{
@@ -205,17 +214,6 @@ const TextBox = props => {
                   />
                 </Tooltip>
               </div>
-            )}
-            {props.requiredMessage && (
-              <FormHelperText
-                id="component-message-text"
-                style={{
-                  paddingLeft: "0.5em",
-                  marginBottom: "0.5em",
-                  color: "#757600"
-                }}>
-                {isVisited && !value && props.requiredMessage}
-              </FormHelperText>
             )}
           </div>
         </React.Fragment>

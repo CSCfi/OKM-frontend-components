@@ -1,4 +1,3 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React from "react";
 import TextBox from "./index";
 import { storiesOf } from "@storybook/react";
@@ -21,17 +20,24 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
       testProp: 1
     },
     onChanges: onChanges
-  }), React.createElement("br", null), React.createElement(TextBox, _defineProperty({
+  }), React.createElement("br", null), React.createElement(TextBox, {
     title: "read only",
     isReadOnly: true,
-    value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
-  }, "isReadOnly", true)), React.createElement(TextBox, {
+    value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text ",
+    isRequired: true,
+    tooltip: {
+      text: "This is info text"
+    }
+  }), React.createElement(TextBox, {
     title: "invalid",
     payload: {
       testProp: 1
     },
     onChanges: onChanges,
-    isValid: false
+    isValid: false,
+    tooltip: {
+      text: "This is info text"
+    }
   }), React.createElement("br", null), React.createElement(TextBox, {
     title: "invalid and required",
     isRequired: true,

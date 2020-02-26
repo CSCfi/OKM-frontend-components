@@ -27,14 +27,20 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     onChanges: onChanges,
     isRequired: true,
     isValid: true,
-    label: "Required"
+    label: "Required",
+    tooltip: {
+      text: "This is info text"
+    }
   }), React.createElement("p", null, "Invalid"), React.createElement(Input, {
     payload: {
       testProp: 1
     },
     onChanges: onChanges,
     isValid: false,
-    label: "Invalid"
+    label: "Invalid",
+    tooltip: {
+      text: "This is info text"
+    }
   }), React.createElement("p", null, "Required and invalid"), React.createElement(Input, {
     payload: {
       testProp: 1
@@ -79,7 +85,23 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     type: "number",
     onChanges: onChanges,
     isReadOnly: true,
-    value: 123
+    isRequired: true,
+    value: 123,
+    tooltip: {
+      text: "This is info text"
+    }
+  }), React.createElement(Input, {
+    label: "Readonly empty",
+    payload: {
+      testProp: 123
+    },
+    type: "number",
+    onChanges: onChanges,
+    isReadOnly: true,
+    isRequired: true,
+    tooltip: {
+      text: "This is info text"
+    }
   }));
 }).add("Requirement example", withState({
   values: ["", "", "", "", ""]
