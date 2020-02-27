@@ -407,7 +407,7 @@ const CategorizedList = React.memo(
                       {component.name === "TextBox"
                         ? (() => {
                             const isDisabled =
-                              R.includes(parentComponent.name, [
+                              parentComponent && R.includes(parentComponent.name, [
                                 "CheckboxWithLabel",
                                 "RadioButtonWithLabel"
                               ]) &&
