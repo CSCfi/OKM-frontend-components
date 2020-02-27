@@ -29,7 +29,7 @@ var textboxStyles = {
   },
   focused: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
@@ -46,7 +46,7 @@ var textboxStyles = {
   },
   requiredVisitedFocus: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
@@ -70,7 +70,7 @@ var textboxStyles = {
     }
   },
   cssLabelFocused: {
-    color: "blue"
+    color: "green"
   },
   cssLabelRequired: {
     color: COLORS.OIVA_ORANGE_TEXT + " !important"
@@ -136,13 +136,13 @@ var TextBox = function TextBox(props) {
   }, [props.value]); // If value is added the component won't work.
 
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
-    className: "flex flex-row"
+    className: "flex flex-row w-full"
   }, React.createElement("div", {
     className: "flex flex-col w-full"
   }, props.title && React.createElement(InputLabel, {
     disabled: props.isDisabled || props.isReadOnly,
     htmlFor: "props.id",
-    shrink: isFocused || value ? true : false,
+    shrink: isFocused || value || props.placeholder ? true : false,
     variant: "outlined",
     error: props.isErroneous ? props.isErroneous : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
     classes: {

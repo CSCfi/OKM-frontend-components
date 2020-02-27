@@ -245,21 +245,13 @@ const CategorizedList = React.memo(
               {isCategoryTitleVisible && (
                 <div className={categoryTitleClasses}>
                   <h4>
-                    {category.isRequired && (
-                      <span
-                        className={`text-${
-                          category.isValid ? "green" : "red"
-                        }-500 text-2xl pr-4`}>
-                        {category.isValid && (
-                          <CheckIcon fontSize="small"></CheckIcon>
-                        )}
-                        {!category.isValid && <span>*</span>}
-                      </span>
-                    )}
                     {category.code && (
                       <span className="mr-4">{category.code}</span>
                     )}
                     <span>{category.title}</span>
+                    {!category.isReadonly && category.isRequired && (
+                      <span className="pr-4">*</span>
+                    )}
                   </h4>
                 </div>
               )}
@@ -600,6 +592,7 @@ const CategorizedList = React.memo(
                                     propsObj.statusTextStyleClasses
                                   }
                                   isHidden={propsObj.isHidden}
+                                  isReadOnly={propsObj.isReadOnly}
                                   isRequired={propsObj.isRequired}
                                   isValid={propsObj.isValid}>
                                   <div className="flex">

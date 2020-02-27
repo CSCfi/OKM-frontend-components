@@ -31,7 +31,7 @@ const textboxStyles = {
   },
   focused: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
@@ -48,7 +48,7 @@ const textboxStyles = {
   },
   requiredVisitedFocus: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
@@ -72,7 +72,7 @@ const textboxStyles = {
     }
   },
   cssLabelFocused: {
-    color: "blue"
+    color: "green"
   },
   cssLabelRequired: {
     color: COLORS.OIVA_ORANGE_TEXT + " !important"
@@ -123,13 +123,15 @@ const TextBox = props => {
     <React.Fragment>
       {value !== null ? (
         <React.Fragment>
-          <div className="flex flex-row">
+          <div className="flex flex-row w-full">
             <div className="flex flex-col w-full">
               {props.title && (
                 <InputLabel
                   disabled={props.isDisabled || props.isReadOnly}
                   htmlFor="props.id"
-                  shrink={isFocused || value ? true : false}
+                  shrink={
+                    isFocused || value || props.placeholder ? true : false
+                  }
                   variant="outlined"
                   error={
                     props.isErroneous

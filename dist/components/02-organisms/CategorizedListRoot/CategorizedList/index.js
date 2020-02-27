@@ -179,13 +179,11 @@ var CategorizedList = React.memo(function (props) {
       "data-level": props.level
     }, isCategoryTitleVisible && React.createElement("div", {
       className: categoryTitleClasses
-    }, React.createElement("h4", null, category.isRequired && React.createElement("span", {
-      className: "text-".concat(category.isValid ? "green" : "red", "-500 text-2xl pr-4")
-    }, category.isValid && React.createElement(CheckIcon, {
-      fontSize: "small"
-    }), !category.isValid && React.createElement("span", null, "*")), category.code && React.createElement("span", {
+    }, React.createElement("h4", null, category.code && React.createElement("span", {
       className: "mr-4"
-    }, category.code), React.createElement("span", null, category.title))), React.createElement("div", {
+    }, category.code), React.createElement("span", null, category.title), !category.isReadonly && category.isRequired && React.createElement("span", {
+      className: "pr-4"
+    }, "*"))), React.createElement("div", {
       className: R.join(" ", componentContainerClasses)
     }, _.map(category.components, function (component, ii) {
       var fullAnchor = "".concat(anchor, ".").concat(component.anchor);
@@ -399,6 +397,7 @@ var CategorizedList = React.memo(function (props) {
           statusText: propsObj.statusText,
           statusTextStyleClasses: propsObj.statusTextStyleClasses,
           isHidden: propsObj.isHidden,
+          isReadOnly: propsObj.isReadOnly,
           isRequired: propsObj.isRequired,
           isValid: propsObj.isValid
         }, React.createElement("div", {
