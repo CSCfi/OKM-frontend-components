@@ -131,9 +131,10 @@ var TextBox = function TextBox(props) {
 
   useEffect(function () {
     if (props.value !== value || !value) {
-      setValue(props.value);
+      setValue(props.value || ""); // props.value might be undefined
     }
-  }, [props.value]);
+  }, [props.value]); // If value is added the component won't work.
+
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-row"
   }, React.createElement("div", {

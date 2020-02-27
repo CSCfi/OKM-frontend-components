@@ -87,7 +87,7 @@ const textboxStyles = {
   },
   inputLabelReadonlyShrink: {
     top: "0",
-    marginLeft: "-1.2em"
+    marginLeft: "-1.1em"
   }
 };
 
@@ -115,9 +115,9 @@ const TextBox = props => {
 
   useEffect(() => {
     if (props.value !== value || !value) {
-      setValue(props.value);
+      setValue(props.value || ""); // props.value might be undefined
     }
-  }, [props.value]);
+  }, [props.value]); // If value is added the component won't work.
 
   return (
     <React.Fragment>
