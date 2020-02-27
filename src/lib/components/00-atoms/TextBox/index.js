@@ -5,32 +5,88 @@ import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
+import { InputLabel } from "@material-ui/core";
+import { FormHelperText } from "@material-ui/core";
 
 import styles from "./textbox.module.css";
 
 const textboxStyles = {
   root: {
-    boxShadow: "none",
+    outline: "none !important",
     border: "1px solid #C4C4C4",
+    paddingLeft: "1em",
+    paddingRight: "1em",
     "&:disabled": {
       borderColor: "transparent !important",
       paddingLeft: 0,
-      paddingRight: 0
+      paddingRight: 0,
+      "& label": {
+        margin: "2em"
+      }
     }
+  },
+  required: {
+    marginBottom: "-2px"
+  },
+  focused: {
+    outline: "none !important",
+    border: "2px solid blue",
+    paddingLeft: "0.95em",
+    paddingRight: "0.95em",
+    paddingTop: "0.45em"
   },
   requiredVisited: {
     boxShadow: "none",
-    border: "1px solid #E5C317"
+    border: "2px solid #E5C317"
+  },
+  requiredVisitedFocus: {
+    outline: "none !important",
+    border: "2px solid blue",
+    paddingLeft: "0.95em",
+    paddingRight: "0.95em",
+    paddingTop: "0.45em"
+  },
+  error: {
+    outlineColor: "red",
+    boxShadow: "none",
+    border: "1px solid red"
+  },
+  errorFocused: {
+    outlineColor: "red",
+    boxShadow: "none",
+    border: "2px solid red"
+  },
+  cssLabel: {
+    top: "1em",
+    left: "-0.5em",
+    position: "relative",
+    ".Mui-error": {
+      color: "red"
+    }
+  },
+  cssLabelFocused: {
+    color: "blue"
+  },
+  cssLabelRequired: {
+    color: "#757600 !important"
+  },
+  inputLabelShrink: {
+    left: "0"
+  },
+  inputLabelReadonly: {
+    marginLeft: "-1em"
   }
 };
 
 const TextBox = props => {
   const [isVisited, setIsVisited] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(null);
   const [handle, setHandle] = useState(null);
   const { classes } = props;
 
   const updateValue = e => {
+    !e.target.value && !isFocused ? setIsVisited(true) : setIsVisited(false);
     setValue(e.target.value);
     if (handle) {
       clearTimeout(handle);
@@ -54,20 +110,37 @@ const TextBox = props => {
     <React.Fragment>
       {value !== null ? (
         <React.Fragment>
-          {props.title && (
-            <label className="text-bold text-base block my-2">
-              {props.isRequired && (
-                <span
-                  className={`text-${
-                    props.isValid ? "green" : "red"
-                  }-500 text-2xl pr-4`}>
-                  *
+          <div>
+            {props.title && (
+              <InputLabel
+                disabled={props.isDisabled || props.isReadOnly}
+                htmlFor="props.id"
+                shrink={(isFocused || value) && true}
+                variant="outlined"
+                error={
+                  props.isErroneous
+                    ? props.isErroneous
+                    : (props.isRequired && value && !props.isValid) ||
+                      (!props.isRequired && !props.isValid)
+                }
+                classes={{
+                  root: classes.cssLabel,
+                  shrink: classes.inputLabelShrink,
+                  disabled: classes.inputLabelReadonly
+                }}
+                className={`${
+                  isFocused
+                    ? classes.cssLabelFocused
+                    : props.isRequired && isVisited
+                    ? classes.cssLabelRequired
+                    : classes.cssLabel
+                }`}>
+                <span style={{ padding: "0 0.3em", background: "white" }}>
+                  {props.title}
+                  {props.isRequired && "*"}
                 </span>
-              )}
-              {props.title}
-            </label>
-          )}
-          <div className="flex">
+              </InputLabel>
+            )}
             <TextareaAutosize
               aria-label={props.ariaLabel}
               disabled={props.isDisabled || props.isReadOnly}
@@ -77,23 +150,51 @@ const TextBox = props => {
               }
               rows={props.isReadOnly ? 1 : props.rows}
               rowsMax={props.isReadOnly ? Infinity : props.rowsMax}
-              className={`${props.isHidden ? "hidden" : ""} ${
+              className={`${props.isHidden ? "hidden" : "rounded"} 
+              ${props.required ? classes.required : ""}
+              ${
                 props.isReadOnly
                   ? "text-black"
-                  : "border border-solid border-gray-500 rounded"
+                  : "border border-solid border-gray-500"
               } ${
-                isVisited && props.isRequired && !value
+                isVisited && props.isRequired && !value && !isFocused
                   ? classes.requiredVisited
                   : classes.root
-              } w-full p-2 resize-none`}
+              } ${
+                isFocused
+                  ? props.isRequired
+                    ? classes.requiredVisitedFocus
+                    : classes.focused
+                  : ""
+              } ${
+                props.isErroneous ||
+                (!props.isValid && !props.isRequired) ||
+                (!props.isValid && value && props.isRequired)
+                  ? isFocused
+                    ? classes.errorFocused
+                    : classes.error
+                  : ""
+              } 
+              w-full p-2 resize-none`}
               onChange={updateValue}
               value={value}
               inputprops={{
                 readOnly: props.isReadOnly
               }}
-              onFocus={() => setIsVisited(true)}
+              onBlurCapture={() =>
+                !value ? setIsVisited(true) : setIsVisited(false)
+              }
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              label={props.label}
+              error={
+                props.isErroneous
+                  ? props.isErroneous
+                  : (props.isRequired && value && !props.isValid) ||
+                    (!props.isRequired && !props.isValid)
+              }
             />
-            {!isEmpty(props.tooltip) && (
+            {!props.isReadOnly && !isEmpty(props.tooltip) && (
               <div className="ml-8">
                 <Tooltip tooltip={props.tooltip.text} trigger="click">
                   <HelpIcon
@@ -104,6 +205,17 @@ const TextBox = props => {
                   />
                 </Tooltip>
               </div>
+            )}
+            {props.requiredMessage && (
+              <FormHelperText
+                id="component-message-text"
+                style={{
+                  paddingLeft: "0.5em",
+                  marginBottom: "0.5em",
+                  color: "#757600"
+                }}>
+                {isVisited && !value && props.requiredMessage}
+              </FormHelperText>
             )}
           </div>
         </React.Fragment>
@@ -149,7 +261,9 @@ TextBox.propTypes = {
   title: PropTypes.string,
   tooltip: PropTypes.object,
   value: PropTypes.string,
-  isVisited: PropTypes.bool
+  isVisited: PropTypes.bool,
+  label: PropTypes.string,
+  requiredMessage: PropTypes.string
 };
 
 export default withStyles(textboxStyles)(TextBox);

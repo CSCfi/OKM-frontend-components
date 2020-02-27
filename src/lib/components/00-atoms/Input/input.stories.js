@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
+import { withState } from "@dump247/storybook-state";
 
 storiesOf("Input", module)
   .addDecorator(withInfo)
@@ -22,6 +23,13 @@ storiesOf("Input", module)
           isRequired
           isValid={true}
           label="Required"
+        />
+        <p>Invalid</p>
+        <Input
+          payload={{ testProp: 1 }}
+          onChanges={onChanges}
+          isValid={false}
+          label="Invalid"
         />
         <p>Required and invalid</p>
         <Input
@@ -63,4 +71,52 @@ storiesOf("Input", module)
         />
       </div>
     );
-  });
+  })
+  .add(
+    "Requirement example",
+    withState({ values: ["", "", "", "", ""] })(({ store }) => {
+      const onChanges = (payload, { value }, index) => {
+        console.info(payload, value);
+        store.set({ values: store.state.currentStep + 1 });
+      };
+      return (
+        <div className="p-4">
+          <Input
+            payload={{ testProp: store.state.values[0] }}
+            onChanges={(payload, value) => onChanges(payload, { value }, 0)}
+            isRequired
+            isValid={true}
+            label="Perustele muutos"
+          />
+          <Input
+            payload={{ testProp: store.state.values[1] }}
+            onChanges={(payload, value) => onChanges(payload, { value }, 1)}
+            isRequired
+            isValid={true}
+            label="Perustele muutos"
+          />
+          <Input
+            payload={{ testProp: store.state.values[2] }}
+            onChanges={(payload, value) => onChanges(payload, { value }, 2)}
+            isRequired
+            isValid={true}
+            label="Perustele muutos"
+          />
+          <Input
+            payload={{ testProp: store.state.values[3] }}
+            onChanges={(payload, value) => onChanges(payload, { value }, 3)}
+            isRequired
+            isValid={true}
+            label="Perustele muutos"
+          />
+          <Input
+            payload={{ testProp: store.state.values[4] }}
+            onChanges={(payload, value) => onChanges(payload, { value }, 4)}
+            isRequired
+            isValid={true}
+            label="Perustele muutos"
+          />
+        </div>
+      );
+    })
+  );

@@ -142,9 +142,7 @@ var Autocomplete = React.memo(function (props) {
     setOptions(props.options);
   }, [props.options]);
   useEffect(function () {
-    console.log(props.minChars);
     setMinCharacters(3);
-    console.log(minCharacters);
     props.minChars <= 0 ? setMinCharacters(props.minChars) : props.isSearch && setMinCharacters(3);
   }, [props.minChars]);
 
@@ -191,7 +189,8 @@ var Autocomplete = React.memo(function (props) {
     hideSelectedOptions: props.isSearch,
     onInputChange: onInputChange,
     menuIsOpen: isOptionsShown,
-    width: props.width
+    width: props.width,
+    required: props.isRequired
   }) : React.createElement(Select, {
     autosize: props.autosize,
     name: props.name,
@@ -213,7 +212,8 @@ var Autocomplete = React.memo(function (props) {
     searchFilter: searchFilter,
     styles: optionStyles,
     hideSelectedOptions: props.isSearch,
-    width: props.width
+    width: props.width,
+    required: props.isRequired
   }));
 });
 Autocomplete.defaultProps = {
