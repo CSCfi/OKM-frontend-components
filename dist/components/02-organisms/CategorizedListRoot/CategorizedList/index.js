@@ -1,9 +1,4 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import React, { useCallback } from "react";
 import RadioButtonWithLabel from "../../../01-molecules/RadioButtonWithLabel";
 import CheckboxWithLabel from "../../../01-molecules/CheckboxWithLabel";
@@ -281,7 +276,9 @@ var CategorizedList = React.memo(function (props) {
             siblings: props.categories
           },
           value: propsObj.selectedOption,
-          isDisabled: isDisabled
+          isDisabled: isDisabled,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "TextBox" ? function () {
         var isDisabled = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || !parentChangeObj.properties.isChecked);
@@ -314,7 +311,9 @@ var CategorizedList = React.memo(function (props) {
           placeholder: propsObj.placeholder,
           title: propsObj.title,
           tooltip: propsObj.tooltip,
-          value: value
+          value: value,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
         });
       }() : null, component.name === "Input" ? function (category) {
         var change = getChangeObjByAnchor(fullAnchor, props.changes);
@@ -354,7 +353,9 @@ var CategorizedList = React.memo(function (props) {
           tooltip: propsObj.tooltip,
           type: propsObj.type,
           value: value,
-          width: propsObj.width
+          width: propsObj.width,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "Attachments" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};
@@ -363,7 +364,6 @@ var CategorizedList = React.memo(function (props) {
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
         var attachments = propsObj.attachments || [];
-        console.info(component);
         return React.createElement("div", {
           className: component.styleClasses
         }, React.createElement(Attachments, {
@@ -382,7 +382,9 @@ var CategorizedList = React.memo(function (props) {
           },
           messages: component.messages,
           placement: props.placement,
-          isReadOnly: propsObj.isReadOnly || props.isReadOnly
+          isReadOnly: propsObj.isReadOnly,
+          requiredMessage: propsObj.requiredMessage,
+          showValidationErrors: propsObj.showValidationErrors
         }));
       }(category) : null, component.name === "StatusTextRow" ? function (category) {
         var codeMarkup = propsObj.code ? React.createElement("span", {
@@ -494,7 +496,9 @@ var CategorizedList = React.memo(function (props) {
           parent: props.parent,
           rootPath: props.rootPath,
           siblings: props.categories
-        }
+        },
+        requiredMessage: propsObj.requiredMessage,
+        showValidationErrors: propsObj.showValidationErrors
       })));
     })), category.categories && React.createElement(CategorizedList, {
       anchor: anchor,

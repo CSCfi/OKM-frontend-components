@@ -85,7 +85,7 @@ var textboxStyles = {
   },
   inputLabelReadonlyShrink: {
     top: "0",
-    marginLeft: "-1.2em"
+    marginLeft: "-1.1em"
   }
 };
 

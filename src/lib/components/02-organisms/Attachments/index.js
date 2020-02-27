@@ -9,6 +9,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "../DialogTitle";
 import { downloadFileFn } from "./utils";
+import { FormHelperText } from "@material-ui/core";
+import Incomplete from "@material-ui/icons/ErrorOutlined";
 import { COLORS } from "./styles";
 import * as R from "ramda";
 
@@ -455,6 +457,27 @@ const Attachments = React.memo(
           />
         )}
         {fileError && <Error>{props.messages.attachmentError}</Error>}
+        {props.showValidationErrors &&
+          props.isRequired &&
+          props.requiredMessage &&
+          (!attachments || (attachments && attachments.length === 0)) && (
+            <FormHelperText
+              id="component-message-text"
+              style={{
+                marginTop: "0.1em",
+                marginBottom: "0.5em",
+                color: COLORS.OIVA_ORANGE_TEXT
+              }}>
+              <Incomplete
+                style={{
+                  fontSize: 24,
+                  color: COLORS.OIVA_ORANGE,
+                  marginRight: "0.2em"
+                }}
+              />
+              {props.requiredMessage}
+            </FormHelperText>
+          )}
         {!props.listHidden && !props.isReadOnly && <LiiteList />}
         {!props.listHidden && props.isReadOnly && <LiiteListReadOnly />}
         <Dialog
@@ -525,7 +548,9 @@ Attachments.propTypes = {
   payload: PropTypes.object,
   placement: PropTypes.string,
   selectedAttachment: PropTypes.object,
-  showListOnly: PropTypes.bool
+  showListOnly: PropTypes.bool,
+  requiredMessage: PropTypes.string,
+  showValidationErrors: PropTypes.boolean
 };
 
 export default Attachments;

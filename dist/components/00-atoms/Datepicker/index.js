@@ -62,9 +62,7 @@ var materialTheme = createMuiTheme({
   }
 });
 
-var LocalizedUtils =
-/*#__PURE__*/
-function (_DateFnsUtils) {
+var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
 
   function LocalizedUtils() {

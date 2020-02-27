@@ -52,6 +52,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "../DialogTitle";
 import { downloadFileFn } from "./utils";
+import { FormHelperText } from "@material-ui/core";
+import Incomplete from "@material-ui/icons/ErrorOutlined";
 import { COLORS } from "./styles";
 import * as R from "ramda";
 var Error = styled.div(_templateObject(), COLORS.OIVA_RED);
@@ -305,7 +307,20 @@ var Attachments = React.memo(function (props) {
     messages: props.messages,
     setAttachment: setAttachment,
     setAttachmentName: setAttachmentName
-  }), fileError && React.createElement(Error, null, props.messages.attachmentError), !props.listHidden && !props.isReadOnly && React.createElement(LiiteList, null), !props.listHidden && props.isReadOnly && React.createElement(LiiteListReadOnly, null), React.createElement(Dialog, {
+  }), fileError && React.createElement(Error, null, props.messages.attachmentError), props.showValidationErrors && props.isRequired && props.requiredMessage && (!attachments || attachments && attachments.length === 0) && React.createElement(FormHelperText, {
+    id: "component-message-text",
+    style: {
+      marginTop: "0.1em",
+      marginBottom: "0.5em",
+      color: COLORS.OIVA_ORANGE_TEXT
+    }
+  }, React.createElement(Incomplete, {
+    style: {
+      fontSize: 24,
+      color: COLORS.OIVA_ORANGE,
+      marginRight: "0.2em"
+    }
+  }), props.requiredMessage), !props.listHidden && !props.isReadOnly && React.createElement(LiiteList, null), !props.listHidden && props.isReadOnly && React.createElement(LiiteListReadOnly, null), React.createElement(Dialog, {
     open: isNameModalOpen,
     "aria-labelledby": "name-dialog",
     fullWidth: true,
