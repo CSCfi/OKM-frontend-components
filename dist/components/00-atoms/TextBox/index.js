@@ -7,6 +7,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 import styles from "./textbox.module.css";
 var textboxStyles = {
   root: {
@@ -35,7 +36,13 @@ var textboxStyles = {
   },
   requiredVisited: {
     boxShadow: "none",
-    border: "2px solid #E5C317"
+    border: "2px solid",
+    borderColor: COLORS.OIVA_ORANGE
+  },
+  readOnly: {
+    boxShadow: "none",
+    border: 0,
+    marginTop: "-1em"
   },
   requiredVisitedFocus: {
     outline: "none !important",
@@ -66,7 +73,7 @@ var textboxStyles = {
     color: "blue"
   },
   cssLabelRequired: {
-    color: "#757600 !important"
+    color: COLORS.OIVA_ORANGE_TEXT + " !important"
   },
   inputLabelShrink: {
     left: "0"
@@ -74,7 +81,11 @@ var textboxStyles = {
   inputLabelReadonly: {
     top: "-1em",
     marginLeft: "-0.7em",
-    color: "#333 !important"
+    color: COLORS.OIVA_TEXT + " !important"
+  },
+  inputLabelReadonlyShrink: {
+    top: "0",
+    marginLeft: "-1.2em"
   }
 };
 
@@ -138,7 +149,7 @@ var TextBox = function TextBox(props) {
       shrink: classes.inputLabelShrink,
       disabled: classes.inputLabelReadonly
     },
-    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && isVisited ? classes.cssLabelRequired : classes.cssLabel)
+    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && isVisited ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
   }, React.createElement("span", {
     style: {
       padding: "0 0.3em",
@@ -151,7 +162,7 @@ var TextBox = function TextBox(props) {
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.isReadOnly ? 1 : props.rows,
     rowsMax: props.isReadOnly ? Infinity : props.rowsMax,
-    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n              ").concat(props.required ? classes.required : "", "\n              ").concat(props.isReadOnly ? "text-black" : "border border-solid border-gray-500", " ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
+    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
     onChange: updateValue,
     value: value,
     inputprops: {
@@ -167,12 +178,12 @@ var TextBox = function TextBox(props) {
       return setIsFocused(false);
     },
     label: props.label
-  }), props.requiredMessage && React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       paddingLeft: "0.5em",
       marginBottom: "0.5em",
-      color: "#757600"
+      color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8 mr-1 mt-4"

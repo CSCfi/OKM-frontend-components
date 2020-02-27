@@ -20,7 +20,7 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
       testProp: 1
     },
     onChanges: onChanges
-  }), React.createElement("br", null), React.createElement(TextBox, {
+  }), React.createElement("br", null), React.createElement("br", null), React.createElement(TextBox, {
     title: "read only",
     isReadOnly: true,
     value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text ",

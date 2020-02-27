@@ -7,6 +7,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 
 import styles from "./textbox.module.css";
 
@@ -37,7 +38,13 @@ const textboxStyles = {
   },
   requiredVisited: {
     boxShadow: "none",
-    border: "2px solid #E5C317"
+    border: "2px solid",
+    borderColor: COLORS.OIVA_ORANGE
+  },
+  readOnly: {
+    boxShadow: "none",
+    border: 0,
+    marginTop: "-1em"
   },
   requiredVisitedFocus: {
     outline: "none !important",
@@ -68,7 +75,7 @@ const textboxStyles = {
     color: "blue"
   },
   cssLabelRequired: {
-    color: "#757600 !important"
+    color: COLORS.OIVA_ORANGE_TEXT + " !important"
   },
   inputLabelShrink: {
     left: "0"
@@ -76,7 +83,11 @@ const textboxStyles = {
   inputLabelReadonly: {
     top: "-1em",
     marginLeft: "-0.7em",
-    color: "#333 !important"
+    color: COLORS.OIVA_TEXT + " !important"
+  },
+  inputLabelReadonlyShrink: {
+    top: "0",
+    marginLeft: "-1.2em"
   }
 };
 
@@ -137,7 +148,9 @@ const TextBox = props => {
                       : props.isRequired && isVisited
                       ? classes.cssLabelRequired
                       : classes.cssLabel
-                  }`}>
+                  } ${props.isReadOnly &&
+                    value &&
+                    classes.inputLabelReadonlyShrink}`}>
                   <span style={{ padding: "0 0.3em", background: "white" }}>
                     {props.title}
                     {!props.isReadOnly && props.isRequired && "*"}
@@ -154,30 +167,29 @@ const TextBox = props => {
                 rows={props.isReadOnly ? 1 : props.rows}
                 rowsMax={props.isReadOnly ? Infinity : props.rowsMax}
                 className={`${props.isHidden ? "hidden" : "rounded"} 
-              ${props.required ? classes.required : ""}
-              ${
-                props.isReadOnly
-                  ? "text-black"
-                  : "border border-solid border-gray-500"
-              } ${
-                  isVisited && props.isRequired && !value && !isFocused
-                    ? classes.requiredVisited
-                    : classes.root
-                } ${
-                  isFocused
-                    ? props.isRequired
-                      ? classes.requiredVisitedFocus
-                      : classes.focused
-                    : ""
-                } ${
-                  props.isErroneous ||
-                  (!props.isValid && !props.isRequired) ||
-                  (!props.isValid && value && props.isRequired)
-                    ? isFocused
-                      ? classes.errorFocused
-                      : classes.error
-                    : ""
-                } 
+                    ${props.required && classes.required}
+                    ${
+                      isVisited && props.isRequired && !value && !isFocused
+                        ? classes.requiredVisited
+                        : classes.root
+                    } 
+                    ${
+                      isFocused
+                        ? props.isRequired
+                          ? classes.requiredVisitedFocus
+                          : classes.focused
+                        : ""
+                    } 
+                    ${props.isReadOnly && classes.readOnly} 
+                  ${
+                    props.isErroneous ||
+                    (!props.isValid && !props.isRequired) ||
+                    (!props.isValid && value && props.isRequired)
+                      ? isFocused
+                        ? classes.errorFocused
+                        : classes.error
+                      : ""
+                  } 
               w-full p-2 resize-none`}
                 onChange={updateValue}
                 value={value}
@@ -191,13 +203,13 @@ const TextBox = props => {
                 onBlur={() => setIsFocused(false)}
                 label={props.label}
               />
-              {props.requiredMessage && (
+              {props.showValidationErrors && props.requiredMessage && (
                 <FormHelperText
                   id="component-message-text"
                   style={{
                     paddingLeft: "0.5em",
                     marginBottom: "0.5em",
-                    color: "#757600"
+                    color: COLORS.OIVA_ORANGE_TEXT
                   }}>
                   {isVisited && !value && props.requiredMessage}
                 </FormHelperText>
@@ -261,7 +273,8 @@ TextBox.propTypes = {
   value: PropTypes.string,
   isVisited: PropTypes.bool,
   label: PropTypes.string,
-  requiredMessage: PropTypes.string
+  requiredMessage: PropTypes.string,
+  showValidationErrors: PropTypes.bool
 };
 
 export default withStyles(textboxStyles)(TextBox);

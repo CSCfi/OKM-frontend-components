@@ -6,12 +6,13 @@ import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
     height: "100%",
     "& .Mui-disabled": {
-      color: "#333",
+      color: COLORS.OIVA_TEXT,
       paddingLeft: 0,
       paddingRight: 0
     },
@@ -24,11 +25,11 @@ var inputStyles = {
   },
   requiredVisited: {
     "& input + fieldset ": {
-      borderColor: "#E5C317",
+      borderColor: COLORS.OIVA_ORANGE,
       borderWidth: 2
     },
     "& label": {
-      color: "#757600 !important"
+      color: COLORS.OIVA_ORANGE_TEXT + " !important"
     }
   },
   readonlyNoValue: {
@@ -136,13 +137,13 @@ var Input = function Input(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  })))), !props.isReadOnly && props.requiredMessage && React.createElement(FormHelperText, {
+  })))), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
       paddingLeft: "1.2em",
       marginBottom: "0.5em",
-      color: "#757600"
+      color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !value && props.requiredMessage));
 };
