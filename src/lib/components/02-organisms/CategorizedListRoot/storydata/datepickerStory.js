@@ -1,3 +1,13 @@
+const localizations = {
+  ok: "Ok",
+  clear: "Tyhjennä",
+  cancel: "Peruuta",
+  today: "Tänään",
+  datemax: "Päiväys on liian suuri",
+  datemin: "Päiväys on liian pieni",
+  dateinvalid: "Päiväys on virheellinen"
+};
+
 export const datepickerStory = {
   changes: [],
   categories: [
@@ -10,6 +20,7 @@ export const datepickerStory = {
           anchor: "A",
           name: "Datepicker",
           properties: {
+            localizations,
             code: "A.A",
             name: "example-datepicker-1",
             title: "Row item"
@@ -26,6 +37,7 @@ export const datepickerStory = {
               anchor: "A",
               name: "Datepicker",
               properties: {
+                localizations,
                 code: "A.A.A",
                 name: "example-datepicker-1-1",
                 title: "Row item"
