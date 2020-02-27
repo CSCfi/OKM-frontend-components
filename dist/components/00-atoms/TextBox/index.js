@@ -118,7 +118,7 @@ var TextBox = function TextBox(props) {
 
   useEffect(function () {
     if (props.value !== value || !value) {
-      setValue(props.value);
+      setValue(props.value || ""); // props.value might be undefined
     }
   }, [props.value]);
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", null, props.title && React.createElement(InputLabel, {
