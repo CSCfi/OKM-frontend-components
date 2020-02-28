@@ -23,6 +23,7 @@ storiesOf("Input", module)
           isRequired
           isValid={true}
           label="Required"
+          tooltip={{ text: "This is info text" }}
         />
         <p>Invalid</p>
         <Input
@@ -30,6 +31,7 @@ storiesOf("Input", module)
           onChanges={onChanges}
           isValid={false}
           label="Invalid"
+          tooltip={{ text: "This is info text" }}
         />
         <p>Required and invalid</p>
         <Input
@@ -67,7 +69,18 @@ storiesOf("Input", module)
           type={"number"}
           onChanges={onChanges}
           isReadOnly
+          isRequired
           value={123}
+          tooltip={{ text: "This is info text" }}
+        />
+        <Input
+          label="Readonly empty"
+          payload={{ testProp: 123 }}
+          type={"number"}
+          onChanges={onChanges}
+          isReadOnly
+          isRequired
+          tooltip={{ text: "This is info text" }}
         />
       </div>
     );

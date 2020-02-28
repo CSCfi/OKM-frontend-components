@@ -1,3 +1,12 @@
+var localizations = {
+  ok: "Ok",
+  clear: "Tyhjennä",
+  cancel: "Peruuta",
+  today: "Tänään",
+  datemax: "Päiväys on liian suuri",
+  datemin: "Päiväys on liian pieni",
+  dateinvalid: "Päiväys on virheellinen"
+};
 export var datepickerStory = {
   changes: [],
   categories: [{
@@ -8,6 +17,7 @@ export var datepickerStory = {
       anchor: "A",
       name: "Datepicker",
       properties: {
+        localizations: localizations,
         code: "A.A",
         name: "example-datepicker-1",
         title: "Row item"
@@ -21,6 +31,7 @@ export var datepickerStory = {
         anchor: "A",
         name: "Datepicker",
         properties: {
+          localizations: localizations,
           code: "A.A.A",
           name: "example-datepicker-1-1",
           title: "Row item"

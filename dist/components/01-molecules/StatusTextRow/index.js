@@ -13,7 +13,8 @@ var StatusTextRow = React.memo(function (_ref) {
       layout = _ref.layout,
       statusText = _ref.statusText,
       statusTextStyleClasses = _ref.statusTextStyleClasses,
-      styleClasses = _ref.styleClasses;
+      styleClasses = _ref.styleClasses,
+      isReadOnly = _ref.isReadOnly;
 
   var _useState = useState(defaultProps.styleClasses),
       _useState2 = _slicedToArray(_useState, 2),
@@ -40,9 +41,9 @@ var StatusTextRow = React.memo(function (_ref) {
       className: "flex"
     }, statusText && React.createElement("div", {
       className: R.join(" ", statusTextStyleClasses)
-    }, statusText), isRequired && React.createElement("span", {
-      className: "text-".concat(isValid ? "green" : "red", "-500 text-2xl pr-4")
-    }, "*"), " ", children));
+    }, statusText), children, !isReadOnly && isRequired && React.createElement("span", {
+      className: "pr-4"
+    }, "*"), " "));
   }
 });
 export default StatusTextRow;

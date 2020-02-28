@@ -1,11 +1,9 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-import React from "react";
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import { COLORS } from "../../../modules/styles";
+import { FormHelperText } from "@material-ui/core";
 import "./dropdown.css";
 var selectCustomStyles = {
   control: function control(provided) {
@@ -31,13 +29,23 @@ var selectCustomStyles = {
   }
 };
 var Dropdown = React.memo(function (props) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isVisited = _useState2[0],
+      setIsVisited = _useState2[1];
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isFocused = _useState4[0],
+      setIsFocused = _useState4[1];
+
   var handleChanges = function handleChanges(selectedOption) {
     props.onChanges(props.payload, {
       selectedOption: selectedOption
     });
   };
 
-  return React.createElement(Select, {
+  return React.createElement(React.Fragment, null, React.createElement(Select, {
     autosize: false,
     name: props.name,
     value: props.value,
@@ -51,7 +59,26 @@ var Dropdown = React.memo(function (props) {
     height: props.height,
     width: props.width,
     autoWidth: !props.width,
-    required: props.isRequired
-  });
+    required: props.isRequired,
+    onBlurCapture: !props.value ? function () {
+      return setIsVisited(true);
+    } : function () {
+      return setIsVisited(false);
+    },
+    onFocus: function onFocus() {
+      return setIsFocused(true);
+    },
+    onBlur: function onBlur() {
+      return setIsFocused(false);
+    }
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+    id: "component-message-text",
+    style: {
+      marginTop: "0.1em",
+      paddingLeft: "1.2em",
+      marginBottom: "0.5em",
+      color: COLORS.OIVA_ORANGE_TEXT
+    }
+  }, isVisited && !props.value && props.requiredMessage));
 });
 export default Dropdown;

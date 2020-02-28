@@ -6,12 +6,13 @@ import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
     height: "100%",
     "& .Mui-disabled": {
-      color: "#333",
+      color: COLORS.OIVA_TEXT,
       paddingLeft: 0,
       paddingRight: 0
     },
@@ -24,11 +25,16 @@ var inputStyles = {
   },
   requiredVisited: {
     "& input + fieldset ": {
-      borderColor: "#E5C317",
+      borderColor: COLORS.OIVA_ORANGE,
       borderWidth: 2
     },
     "& label": {
-      color: "#757600 !important"
+      color: COLORS.OIVA_ORANGE_TEXT + " !important"
+    }
+  },
+  readonlyNoValue: {
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(1)"
     }
   }
 };
@@ -93,11 +99,13 @@ var Input = function Input(props) {
     margin: props.isDense ? "dense" : "",
     rowsMax: props.rowsMax,
     onChange: updateValue,
-    required: props.isRequired,
+    required: props.isRequired && !props.isReadOnly,
     error: props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
-    InputLabelProps: props.isReadOnly ? {
+    InputLabelProps: !value ? {
+      shrink: false
+    } : {
       shrink: true
-    } : {},
+    },
     variant: "outlined",
     style: props.fullWidth ? {
       border: "none"
@@ -118,8 +126,8 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n        ")
-  }), !props.readOnly && !isEmpty(props.tooltip) && React.createElement("div", {
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && !value && classes.readonlyNoValue, "\n        ")
+  }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
@@ -129,13 +137,13 @@ var Input = function Input(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  })))), props.requiredMessage && React.createElement(FormHelperText, {
+  })))), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
       paddingLeft: "1.2em",
       marginBottom: "0.5em",
-      color: "#757600"
+      color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !value && props.requiredMessage));
 };

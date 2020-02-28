@@ -17,14 +17,15 @@ import fiLocale from "date-fns/locale/fi";
 import svLocale from "date-fns/locale/sv";
 import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
+import { COLORS } from "../../../modules/styles";
 var styles = createStyles(function (theme) {
   return {
     root: {
       "& input:focus + fieldset": {
-        borderColor: "blue !important"
+        borderColor: "green !important"
       },
       "& .Mui-disabled": {
-        color: "#333",
+        color: COLORS.OIVA_TEXT,
         marginTop: "0.6em",
         padding: 0
       },
@@ -35,19 +36,19 @@ var styles = createStyles(function (theme) {
         borderColor: "transparent !important"
       },
       "& label": {
-        color: "#333 !important"
+        color: COLORS.OIVA_TEXT + " !important"
       }
     },
     requiredVisited: {
       "& input + fieldset ": {
-        borderColor: "#E5C317",
+        borderColor: COLORS.OIVA_ORANGE,
         borderWidth: 2
       },
       "& input:focus + fieldset": {
-        borderColor: "blue !important"
+        borderColor: "green !important"
       },
       "& label": {
-        color: "#757600 !important"
+        color: COLORS.OIVA_ORANGE_TEXT + " !important"
       }
     },
     dense: {
@@ -61,9 +62,7 @@ var materialTheme = createMuiTheme({
   }
 });
 
-var LocalizedUtils =
-/*#__PURE__*/
-function (_DateFnsUtils) {
+var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
 
   function LocalizedUtils() {
@@ -174,13 +173,13 @@ var Datepicker = function Datepicker(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.requiredMessage && React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
       paddingLeft: "1.2em",
       marginBottom: "0.5em",
-      color: "#757600"
+      color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !selectedDate && props.requiredMessage))));
 };

@@ -21,17 +21,20 @@ storiesOf("TextBox", module)
           onChanges={onChanges}
         />
         <br />
+        <br />
         <TextBox
           title="read only"
           isReadOnly
           value="Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
-          isReadOnly
+          isRequired
+          tooltip={{ text: "This is info text" }}
         />
         <TextBox
           title="invalid"
           payload={{ testProp: 1 }}
           onChanges={onChanges}
           isValid={false}
+          tooltip={{ text: "This is info text" }}
         />
         <br />
         <TextBox

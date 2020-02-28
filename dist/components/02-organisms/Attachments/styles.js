@@ -1,5 +1,5 @@
 // Colors
-export const COLORS = {
+export var COLORS = {
   OIVA_GREEN: "#5A8A70",
   OIVA_RED: "#cc3300",
   OIVA_PURPLE: "#9B26B6",
@@ -27,7 +27,6 @@ export const COLORS = {
   OIVA_ORANGE_TEXT: "#757600",
   OIVA_TEXT: "#333"
 };
-
-export const TRANSITIONS = {
+export var TRANSITIONS = {
   EASE_IN_OUT_QUICK: "all 0.05s ease-in-out"
 };

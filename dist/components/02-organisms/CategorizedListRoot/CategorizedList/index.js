@@ -1,9 +1,4 @@
-import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import React, { useCallback } from "react";
 import RadioButtonWithLabel from "../../../01-molecules/RadioButtonWithLabel";
 import CheckboxWithLabel from "../../../01-molecules/CheckboxWithLabel";
@@ -17,8 +12,8 @@ import Datepicker from "../../../00-atoms/Datepicker";
 import Dropdown from "../../../00-atoms/Dropdown";
 import CheckIcon from "@material-ui/icons/Check";
 import TextBox from "../../../00-atoms/TextBox";
-import Input from "../../../00-atoms/Input"; // import Attachments from "../../Attachments";
-
+import Input from "../../../00-atoms/Input";
+import Attachments from "../../Attachments";
 import * as R from "ramda";
 import _ from "lodash";
 /** @namespace components */
@@ -184,13 +179,11 @@ var CategorizedList = React.memo(function (props) {
       "data-level": props.level
     }, isCategoryTitleVisible && React.createElement("div", {
       className: categoryTitleClasses
-    }, React.createElement("h4", null, category.isRequired && React.createElement("span", {
-      className: "text-".concat(category.isValid ? "green" : "red", "-500 text-2xl pr-4")
-    }, category.isValid && React.createElement(CheckIcon, {
-      fontSize: "small"
-    }), !category.isValid && React.createElement("span", null, "*")), category.code && React.createElement("span", {
+    }, React.createElement("h4", null, category.code && React.createElement("span", {
       className: "mr-4"
-    }, category.code), React.createElement("span", null, category.title))), React.createElement("div", {
+    }, category.code), React.createElement("span", null, category.title), !category.isReadonly && category.isRequired && React.createElement("span", {
+      className: "pr-4"
+    }, "*"))), React.createElement("div", {
       className: R.join(" ", componentContainerClasses)
     }, _.map(category.components, function (component, ii) {
       var fullAnchor = "".concat(anchor, ".").concat(component.anchor);
@@ -281,10 +274,12 @@ var CategorizedList = React.memo(function (props) {
             siblings: props.categories
           },
           value: propsObj.selectedOption,
-          isDisabled: isDisabled
+          isDisabled: isDisabled,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "TextBox" ? function () {
-        var isDisabled = R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || !parentChangeObj.properties.isChecked);
+        var isDisabled = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || !parentChangeObj.properties.isChecked);
         var value = R.path(["properties", "value"], changeObj);
 
         if (parentComponent && (parentComponent.name === "CheckboxWithLabel" || parentComponent.name === "RadioButtonWithLabel") && !R.equals(parentPropsObj.isChecked, true) && !R.isNil(value) && !R.isEmpty(value)) {
@@ -314,7 +309,9 @@ var CategorizedList = React.memo(function (props) {
           placeholder: propsObj.placeholder,
           title: propsObj.title,
           tooltip: propsObj.tooltip,
-          value: value
+          value: value,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
         });
       }() : null, component.name === "Input" ? function (category) {
         var change = getChangeObjByAnchor(fullAnchor, props.changes);
@@ -354,7 +351,38 @@ var CategorizedList = React.memo(function (props) {
           tooltip: propsObj.tooltip,
           type: propsObj.type,
           value: value,
-          width: propsObj.width
+          width: propsObj.width,
+          showValidationErrors: propsObj.showValidationErrors,
+          requiredMessage: propsObj.requiredMessage
+        }));
+      }(category) : null, component.name === "Attachments" ? function (category) {
+        var previousSibling = category.components[ii - 1] || {};
+        var isPreviousSiblingCheckedByDefault = !!(previousSibling.properties || {}).isChecked;
+        var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
+        var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
+        var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
+        var attachments = propsObj.attachments || [];
+        return React.createElement("div", {
+          className: component.styleClasses
+        }, React.createElement(Attachments, {
+          id: fullAnchor,
+          isDisabled: isDisabled,
+          onUpdate: handleChanges,
+          payload: {
+            anchor: anchor,
+            categories: category.categories,
+            component: component,
+            fullPath: fullPath,
+            parent: props.parent,
+            rootPath: props.rootPath,
+            siblings: props.categories,
+            attachments: attachments
+          },
+          messages: component.messages,
+          placement: props.placement,
+          isReadOnly: propsObj.isReadOnly,
+          requiredMessage: propsObj.requiredMessage,
+          showValidationErrors: propsObj.showValidationErrors
         }));
       }(category) : null, component.name === "StatusTextRow" ? function (category) {
         var codeMarkup = propsObj.code ? React.createElement("span", {
@@ -369,6 +397,7 @@ var CategorizedList = React.memo(function (props) {
           statusText: propsObj.statusText,
           statusTextStyleClasses: propsObj.statusTextStyleClasses,
           isHidden: propsObj.isHidden,
+          isReadOnly: propsObj.isReadOnly,
           isRequired: propsObj.isRequired,
           isValid: propsObj.isValid
         }, React.createElement("div", {
@@ -441,7 +470,7 @@ var CategorizedList = React.memo(function (props) {
       })), component.name === "Datepicker" && React.createElement("div", {
         className: "".concat(component.styleClasses, " flex-2")
       }, React.createElement(Datepicker, {
-        text: propsObj.text,
+        label: propsObj.label,
         variant: propsObj.variant,
         onChanges: handleChanges,
         value: propsObj.value,
@@ -466,7 +495,9 @@ var CategorizedList = React.memo(function (props) {
           parent: props.parent,
           rootPath: props.rootPath,
           siblings: props.categories
-        }
+        },
+        requiredMessage: propsObj.requiredMessage,
+        showValidationErrors: propsObj.showValidationErrors
       })));
     })), category.categories && React.createElement(CategorizedList, {
       anchor: anchor,

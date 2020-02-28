@@ -1,3 +1,17 @@
+var messages = {
+  addAttachment: "Lisää liite",
+  attachmentDownload: "Lataa koneellesi",
+  attachmentError: "Virhe liitteen käsiteltyssä",
+  attachmentErrorName: "Virhe",
+  attachmentName: "Liitteen nimi",
+  attachmentNone: "Ei liitteitä",
+  attachmentRemove: "Poista",
+  attachmentSecretSelect: "Aseta salaiseksi",
+  attachmentSecretUnselect: "Aseta julkiseksi",
+  attachmentSecret: "Liite on salainen",
+  cancel: "Peruuta",
+  ok: "OK"
+};
 export var attachmentsStory = {
   changes: [],
   categories: [{
@@ -7,6 +21,7 @@ export var attachmentsStory = {
     components: [{
       anchor: "A",
       name: "Attachments",
+      messages: messages,
       properties: {
         code: "A.A",
         name: "example-attachment-1",
@@ -18,6 +33,7 @@ export var attachmentsStory = {
       code: "1",
       title: "Category",
       components: [{
+        messages: messages,
         anchor: "A",
         name: "Attachments"
       }]

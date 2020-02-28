@@ -245,21 +245,13 @@ const CategorizedList = React.memo(
               {isCategoryTitleVisible && (
                 <div className={categoryTitleClasses}>
                   <h4>
-                    {category.isRequired && (
-                      <span
-                        className={`text-${
-                          category.isValid ? "green" : "red"
-                        }-500 text-2xl pr-4`}>
-                        {category.isValid && (
-                          <CheckIcon fontSize="small"></CheckIcon>
-                        )}
-                        {!category.isValid && <span>*</span>}
-                      </span>
-                    )}
                     {category.code && (
                       <span className="mr-4">{category.code}</span>
                     )}
                     <span>{category.title}</span>
+                    {!category.isReadonly && category.isRequired && (
+                      <span className="pr-4">*</span>
+                    )}
                   </h4>
                 </div>
               )}
@@ -399,6 +391,10 @@ const CategorizedList = React.memo(
                                   }}
                                   value={propsObj.selectedOption}
                                   isDisabled={isDisabled}
+                                  showValidationErrors={
+                                    propsObj.showValidationErrors
+                                  }
+                                  requiredMessage={propsObj.requiredMessage}
                                 />
                               </div>
                             );
@@ -407,7 +403,8 @@ const CategorizedList = React.memo(
                       {component.name === "TextBox"
                         ? (() => {
                             const isDisabled =
-                              parentComponent && R.includes(parentComponent.name, [
+                              parentComponent &&
+                              R.includes(parentComponent.name, [
                                 "CheckboxWithLabel",
                                 "RadioButtonWithLabel"
                               ]) &&
@@ -456,41 +453,14 @@ const CategorizedList = React.memo(
                                 title={propsObj.title}
                                 tooltip={propsObj.tooltip}
                                 value={value}
+                                showValidationErrors={
+                                  propsObj.showValidationErrors
+                                }
+                                requiredMessage={propsObj.requiredMessage}
                               />
                             );
                           })()
                         : null}
-                      {/* // <TextBox
-                        //   changeObj={changeObj}
-                        //   parentComponent={parentComponent}
-                          // payload={{
-                          //   anchor,
-                          //   categories: category.categories,
-                          //   component,
-                          //   fullPath,
-                          //   parent: props.parent,
-                          //   rootPath: props.rootPath,
-                          //   siblings: props.categories
-                          // }}
-                        //   tooltip={propsObj.tooltip}
-                        //   _props={props}
-                        //   onChanges={handleChanges}
-                        //   id={fullAnchor}
-                        //   idSuffix
-                        //   isHidden={
-                        //     parentComponent && !parentPropsObj.isChecked
-                        //   }
-                        //   value={
-                        //     parentComponent && !parentPropsObj.isChecked
-                        //       ? ""
-                        //       : propsObj.value
-                        //   }
-                        //   propsObj={propsObj}
-                        //   parentChangeObj={parentChangeObj}
-                        //   parentPropsObj={parentPropsObj}
-                        //   title={propsObj.title}
-                        // />
-                      // )} */}
                       {component.name === "Input"
                         ? (category => {
                             const change = getChangeObjByAnchor(
@@ -548,6 +518,10 @@ const CategorizedList = React.memo(
                                   type={propsObj.type}
                                   value={value}
                                   width={propsObj.width}
+                                  showValidationErrors={
+                                    propsObj.showValidationErrors
+                                  }
+                                  requiredMessage={propsObj.requiredMessage}
                                 />
                               </div>
                             );
@@ -574,7 +548,6 @@ const CategorizedList = React.memo(
                                 change.properties.isChecked
                               );
                             let attachments = propsObj.attachments || [];
-                            console.info(component);
                             return (
                               <div className={component.styleClasses}>
                                 <Attachments
@@ -593,8 +566,10 @@ const CategorizedList = React.memo(
                                   }}
                                   messages={component.messages}
                                   placement={props.placement}
-                                  isReadOnly={
-                                    propsObj.isReadOnly || props.isReadOnly
+                                  isReadOnly={propsObj.isReadOnly}
+                                  requiredMessage={propsObj.requiredMessage}
+                                  showValidationErrors={
+                                    propsObj.showValidationErrors
                                   }
                                 />
                               </div>
@@ -617,6 +592,7 @@ const CategorizedList = React.memo(
                                     propsObj.statusTextStyleClasses
                                   }
                                   isHidden={propsObj.isHidden}
+                                  isReadOnly={propsObj.isReadOnly}
                                   isRequired={propsObj.isRequired}
                                   isValid={propsObj.isValid}>
                                   <div className="flex">
@@ -720,7 +696,7 @@ const CategorizedList = React.memo(
                       {component.name === "Datepicker" && (
                         <div className={`${component.styleClasses} flex-2`}>
                           <Datepicker
-                            text={propsObj.text}
+                            label={propsObj.label}
                             variant={propsObj.variant}
                             onChanges={handleChanges}
                             value={propsObj.value}
@@ -746,6 +722,8 @@ const CategorizedList = React.memo(
                               rootPath: props.rootPath,
                               siblings: props.categories
                             }}
+                            requiredMessage={propsObj.requiredMessage}
+                            showValidationErrors={propsObj.showValidationErrors}
                           />
                         </div>
                       )}

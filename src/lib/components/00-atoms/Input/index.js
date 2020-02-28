@@ -6,6 +6,7 @@ import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 
 import styles from "./input.module.css";
 
@@ -13,7 +14,7 @@ const inputStyles = {
   root: {
     height: "100%",
     "& .Mui-disabled": {
-      color: "#333",
+      color: COLORS.OIVA_TEXT,
       paddingLeft: 0,
       paddingRight: 0
     },
@@ -26,11 +27,16 @@ const inputStyles = {
   },
   requiredVisited: {
     "& input + fieldset ": {
-      borderColor: "#E5C317",
+      borderColor: COLORS.OIVA_ORANGE,
       borderWidth: 2
     },
     "& label": {
-      color: "#757600 !important"
+      color: COLORS.OIVA_ORANGE_TEXT + " !important"
+    }
+  },
+  readonlyNoValue: {
+    "& label.Mui-disabled": {
+      transform: "translate(0, -6px) scale(1)"
     }
   }
 };
@@ -61,7 +67,6 @@ const Input = props => {
       setValue(props.value);
     }
   }, [props.value]);
-
   return (
     <React.Fragment>
       <div className="flex items-center">
@@ -81,14 +86,14 @@ const Input = props => {
           margin={props.isDense ? "dense" : ""}
           rowsMax={props.rowsMax}
           onChange={updateValue}
-          required={props.isRequired}
+          required={props.isRequired && !props.isReadOnly}
           error={
             props.error
               ? props.error
               : (props.isRequired && value && !props.isValid) ||
                 (!props.isRequired && !props.isValid)
           }
-          InputLabelProps={props.isReadOnly ? { shrink: true } : {}}
+          InputLabelProps={!value ? { shrink: false } : { shrink: true }}
           variant="outlined"
           style={
             props.fullWidth
@@ -108,9 +113,10 @@ const Input = props => {
               ? classes.requiredVisited
               : classes.root
           } 
+          ${props.isReadOnly && !value && classes.readonlyNoValue}
         `}
         />
-        {!props.readOnly && !isEmpty(props.tooltip) && (
+        {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
           <div className="ml-8">
             <Tooltip tooltip={props.tooltip.text} trigger="click">
               <HelpIcon
@@ -123,14 +129,14 @@ const Input = props => {
           </div>
         )}
       </div>
-      {props.requiredMessage && (
+      {props.showValidationErrors && props.requiredMessage && (
         <FormHelperText
           id="component-message-text"
           style={{
             marginTop: "0.1em",
             paddingLeft: "1.2em",
             marginBottom: "0.5em",
-            color: "#757600"
+            color: COLORS.OIVA_ORANGE_TEXT
           }}>
           {isVisited && !value && props.requiredMessage}
         </FormHelperText>
@@ -184,7 +190,8 @@ Input.propTypes = {
   type: PropTypes.string,
   isVisited: PropTypes.bool,
   isDense: PropTypes.bool,
-  requiredMessage: PropTypes.string
+  requiredMessage: PropTypes.string,
+  showValidationErrors: PropTypes.bool
 };
 
 export default withStyles(inputStyles)(Input);

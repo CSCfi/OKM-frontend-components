@@ -7,6 +7,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import { withStyles } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
+import { COLORS } from "../../../modules/styles";
 import styles from "./textbox.module.css";
 var textboxStyles = {
   root: {
@@ -28,18 +29,24 @@ var textboxStyles = {
   },
   focused: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
   },
   requiredVisited: {
     boxShadow: "none",
-    border: "2px solid #E5C317"
+    border: "2px solid",
+    borderColor: COLORS.OIVA_ORANGE
+  },
+  readOnly: {
+    boxShadow: "none",
+    border: 0,
+    marginTop: "-1em"
   },
   requiredVisitedFocus: {
     outline: "none !important",
-    border: "2px solid blue",
+    border: "2px solid green",
     paddingLeft: "0.95em",
     paddingRight: "0.95em",
     paddingTop: "0.45em"
@@ -58,21 +65,27 @@ var textboxStyles = {
     top: "1em",
     left: "-0.5em",
     position: "relative",
-    ".Mui-error": {
+    "& .Mui-error": {
       color: "red"
     }
   },
   cssLabelFocused: {
-    color: "blue"
+    color: "green"
   },
   cssLabelRequired: {
-    color: "#757600 !important"
+    color: COLORS.OIVA_ORANGE_TEXT + " !important"
   },
   inputLabelShrink: {
     left: "0"
   },
   inputLabelReadonly: {
-    marginLeft: "-1em"
+    top: "-1em",
+    marginLeft: "-0.7em",
+    color: COLORS.OIVA_TEXT + " !important"
+  },
+  inputLabelReadonlyShrink: {
+    top: "0",
+    marginLeft: "-1.1em"
   }
 };
 
@@ -120,11 +133,16 @@ var TextBox = function TextBox(props) {
     if (props.value !== value || !value) {
       setValue(props.value || ""); // props.value might be undefined
     }
-  }, [props.value]);
-  return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", null, props.title && React.createElement(InputLabel, {
+  }, [props.value]); // If value is added the component won't work.
+
+  return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
+    className: "flex flex-row w-full"
+  }, React.createElement("div", {
+    className: "flex flex-col w-full"
+  }, props.title && React.createElement(InputLabel, {
     disabled: props.isDisabled || props.isReadOnly,
     htmlFor: "props.id",
-    shrink: (isFocused || value) && true,
+    shrink: isFocused || value || props.placeholder ? true : false,
     variant: "outlined",
     error: props.isErroneous ? props.isErroneous : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
     classes: {
@@ -132,20 +150,20 @@ var TextBox = function TextBox(props) {
       shrink: classes.inputLabelShrink,
       disabled: classes.inputLabelReadonly
     },
-    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && isVisited ? classes.cssLabelRequired : classes.cssLabel)
+    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && isVisited ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
   }, React.createElement("span", {
     style: {
       padding: "0 0.3em",
       background: "white"
     }
-  }, props.title, props.isRequired && "*")), React.createElement(TextareaAutosize, {
+  }, props.title, !props.isReadOnly && props.isRequired && "*")), React.createElement(TextareaAutosize, {
     "aria-label": props.ariaLabel,
     disabled: props.isDisabled || props.isReadOnly,
     id: props.id,
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.isReadOnly ? 1 : props.rows,
     rowsMax: props.isReadOnly ? Infinity : props.rowsMax,
-    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n              ").concat(props.required ? classes.required : "", "\n              ").concat(props.isReadOnly ? "text-black" : "border border-solid border-gray-500", " ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
+    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
     onChange: updateValue,
     value: value,
     inputprops: {
@@ -160,10 +178,16 @@ var TextBox = function TextBox(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    label: props.label,
-    error: props.isErroneous ? props.isErroneous : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid
-  }), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
-    className: "ml-8"
+    label: props.label
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+    id: "component-message-text",
+    style: {
+      paddingLeft: "0.5em",
+      marginBottom: "0.5em",
+      color: COLORS.OIVA_ORANGE_TEXT
+    }
+  }, isVisited && !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
+    className: "ml-8 mr-1 mt-4"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
     trigger: "click"
@@ -172,14 +196,7 @@ var TextBox = function TextBox(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  }))), props.requiredMessage && React.createElement(FormHelperText, {
-    id: "component-message-text",
-    style: {
-      paddingLeft: "0.5em",
-      marginBottom: "0.5em",
-      color: "#757600"
-    }
-  }, isVisited && !value && props.requiredMessage))) : null);
+  }))))) : null);
 };
 
 TextBox.defaultProps = {
