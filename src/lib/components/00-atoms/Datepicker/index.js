@@ -17,7 +17,7 @@ import { COLORS } from "../../../modules/styles";
 const styles = createStyles(theme => ({
   root: {
     "& input:focus + fieldset": {
-      borderColor: "blue !important"
+      borderColor: "green !important"
     },
     "& .Mui-disabled": {
       color: COLORS.OIVA_TEXT,
@@ -40,7 +40,7 @@ const styles = createStyles(theme => ({
       borderWidth: 2
     },
     "& input:focus + fieldset": {
-      borderColor: "blue !important"
+      borderColor: "green !important"
     },
     "& label": {
       color: COLORS.OIVA_ORANGE_TEXT + " !important"

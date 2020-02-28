@@ -22,7 +22,7 @@ var styles = createStyles(function (theme) {
   return {
     root: {
       "& input:focus + fieldset": {
-        borderColor: "blue !important"
+        borderColor: "green !important"
       },
       "& .Mui-disabled": {
         color: COLORS.OIVA_TEXT,
@@ -45,7 +45,7 @@ var styles = createStyles(function (theme) {
         borderWidth: 2
       },
       "& input:focus + fieldset": {
-        borderColor: "blue !important"
+        borderColor: "green !important"
       },
       "& label": {
         color: COLORS.OIVA_ORANGE_TEXT + " !important"

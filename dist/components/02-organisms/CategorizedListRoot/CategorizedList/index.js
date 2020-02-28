@@ -470,7 +470,7 @@ var CategorizedList = React.memo(function (props) {
       })), component.name === "Datepicker" && React.createElement("div", {
         className: "".concat(component.styleClasses, " flex-2")
       }, React.createElement(Datepicker, {
-        text: propsObj.text,
+        label: propsObj.label,
         variant: propsObj.variant,
         onChanges: handleChanges,
         value: propsObj.value,

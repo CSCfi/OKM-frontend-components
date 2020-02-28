@@ -696,7 +696,7 @@ const CategorizedList = React.memo(
                       {component.name === "Datepicker" && (
                         <div className={`${component.styleClasses} flex-2`}>
                           <Datepicker
-                            text={propsObj.text}
+                            label={propsObj.label}
                             variant={propsObj.variant}
                             onChanges={handleChanges}
                             value={propsObj.value}
