@@ -181,7 +181,7 @@ var CategorizedList = React.memo(function (props) {
       className: categoryTitleClasses
     }, React.createElement("h4", null, category.code && React.createElement("span", {
       className: "mr-4"
-    }, category.code), React.createElement("span", null, category.title), !category.isReadonly && category.isRequired && React.createElement("span", {
+    }, category.code), React.createElement("span", null, category.title), !category.isReadOnly && category.isRequired && React.createElement("span", {
       className: "pr-4"
     }, "*"))), React.createElement("div", {
       className: R.join(" ", componentContainerClasses)
@@ -381,6 +381,7 @@ var CategorizedList = React.memo(function (props) {
           messages: component.messages,
           placement: props.placement,
           isReadOnly: propsObj.isReadOnly,
+          isRequired: propsObj.isRequired,
           requiredMessage: propsObj.requiredMessage,
           showValidationErrors: propsObj.showValidationErrors
         }));
@@ -404,7 +405,9 @@ var CategorizedList = React.memo(function (props) {
           className: "flex"
         }, React.createElement("div", {
           className: "flex-1"
-        }, codeMarkup, React.createElement("span", null, title)))));
+        }, codeMarkup, React.createElement("span", null, title), !propsObj.isReadOnly && propsObj.isRequired && React.createElement("span", {
+          className: "pr-4"
+        }, "*"), " "))));
       }(category) : null, component.name === "Autocomplete" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};
         var isPreviousSiblingCheckedByDefault = !!(previousSibling.properties || {}).isChecked;
@@ -418,6 +421,7 @@ var CategorizedList = React.memo(function (props) {
           id: "autocomplete-".concat(idSuffix),
           isMulti: propsObj.isMulti,
           isRequired: propsObj.isRequired,
+          isReadOnly: propsObj.isReadOnly,
           isValid: propsObj.isValid,
           options: propsObj.options,
           payload: {
@@ -496,6 +500,7 @@ var CategorizedList = React.memo(function (props) {
           rootPath: props.rootPath,
           siblings: props.categories
         },
+        isReadOnly: propsObj.isReadOnly,
         requiredMessage: propsObj.requiredMessage,
         showValidationErrors: propsObj.showValidationErrors
       })));
