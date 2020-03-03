@@ -249,7 +249,7 @@ const CategorizedList = React.memo(
                       <span className="mr-4">{category.code}</span>
                     )}
                     <span>{category.title}</span>
-                    {!category.isReadonly && category.isRequired && (
+                    {!category.isReadOnly && category.isRequired && (
                       <span className="pr-4">*</span>
                     )}
                   </h4>
@@ -567,6 +567,7 @@ const CategorizedList = React.memo(
                                   messages={component.messages}
                                   placement={props.placement}
                                   isReadOnly={propsObj.isReadOnly}
+                                  isRequired={propsObj.isRequired}
                                   requiredMessage={propsObj.requiredMessage}
                                   showValidationErrors={
                                     propsObj.showValidationErrors
@@ -599,6 +600,10 @@ const CategorizedList = React.memo(
                                     <div className="flex-1">
                                       {codeMarkup}
                                       <span>{title}</span>
+                                      {!propsObj.isReadOnly &&
+                                        propsObj.isRequired && (
+                                          <span className="pr-4">*</span>
+                                        )}{" "}
                                     </div>
                                   </div>
                                 </StatusTextRow>
@@ -634,6 +639,7 @@ const CategorizedList = React.memo(
                                   id={`autocomplete-${idSuffix}`}
                                   isMulti={propsObj.isMulti}
                                   isRequired={propsObj.isRequired}
+                                  isReadOnly={propsObj.isReadOnly}
                                   isValid={propsObj.isValid}
                                   options={propsObj.options}
                                   payload={{
@@ -722,6 +728,7 @@ const CategorizedList = React.memo(
                               rootPath: props.rootPath,
                               siblings: props.categories
                             }}
+                            isReadOnly={propsObj.isReadOnly}
                             requiredMessage={propsObj.requiredMessage}
                             showValidationErrors={propsObj.showValidationErrors}
                           />
