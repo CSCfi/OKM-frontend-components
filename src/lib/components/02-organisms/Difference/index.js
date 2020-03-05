@@ -43,13 +43,14 @@ const Difference = ({
   const readonly =
     R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
 
-  const isValid = isValueValid(required, value);
+  // const isValid = isValueValid(required, value);
 
   const handleChange = useCallback(
-    (actionResults, payload) => {
-      const valueInt = parseInt(actionResults.value.value, 10);
-      const resultIsNaN = isNaN(valueInt);
-      const result = resultIsNaN ? emptySelectionPlaceholderValue : valueInt;
+    (payload, properties) => {
+      const resultIsNaN = isNaN(properties.value);
+      const result = resultIsNaN
+        ? emptySelectionPlaceholderValue
+        : properties.value;
 
       const resultIsValid = isValueValid(required, result);
 
@@ -60,7 +61,7 @@ const Difference = ({
       setTimeoutHandle(
         setTimeout(() => {
           onChanges(payload, {
-            applyForValue: resultIsNaN ? initialValue : actionResults.value,
+            applyForValue: resultIsNaN ? initialValue : properties.value,
             isValid: resultIsValid
           });
         }, delay)
@@ -99,7 +100,7 @@ const Difference = ({
             <Input
               type="number"
               inputProps={{ min: "0" }}
-              onChanges={(e, value) => handleChange({ value }, payload)}
+              onChanges={handleChange}
               value={value}
               width="12em"
               isRequired={isRequired}
@@ -120,7 +121,7 @@ Difference.propTypes = {
   applyForValue: PropTypes.number,
   delay: PropTypes.number,
   initialValue: PropTypes.number,
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
   titles: PropTypes.array,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool
