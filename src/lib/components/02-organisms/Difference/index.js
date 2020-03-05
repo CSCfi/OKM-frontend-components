@@ -47,11 +47,10 @@ const Difference = ({
 
   const handleChange = useCallback(
     (payload, properties) => {
-      const resultIsNaN = isNaN(properties.value);
+      const resultIsNaN = isNaN(parseInt(properties.value, 10));
       const result = resultIsNaN
         ? emptySelectionPlaceholderValue
         : properties.value;
-
       const resultIsValid = isValueValid(required, result);
 
       setValue(result);
@@ -84,9 +83,6 @@ const Difference = ({
   const inputAreaTitle = required ? titles[1] + "*" : titles[1];
   const changeAreaTitle = titles[2];
 
-  const changeValue =
-    (value && value.value ? value.value : applyForValue) - initialValue;
-
   return (
     <React.Fragment>
       <div className={containerClass}>
@@ -110,7 +106,7 @@ const Difference = ({
         </div>
         <div className="flex-1 flex-col">
           <Typography>{changeAreaTitle}</Typography>
-          {changeValue}
+          {(value ? value : applyForValue) - initialValue}
         </div>
       </div>
     </React.Fragment>
