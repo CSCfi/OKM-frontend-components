@@ -96,7 +96,8 @@ var getPropertiesObject = function getPropertiesObject() {
 
 var CategorizedList = React.memo(function (props) {
   var onChangesUpdate = props.onChangesUpdate,
-      removeChangeObject = props.removeChangeObject;
+      removeChangeObject = props.removeChangeObject,
+      showValidationErrors = props.showValidationErrors;
 
   var handleButtonClick = function handleButtonClick(payload, changeProps) {
     payload.component.onClick(payload, changeProps);
@@ -275,7 +276,7 @@ var CategorizedList = React.memo(function (props) {
           },
           value: propsObj.selectedOption,
           isDisabled: isDisabled,
-          showValidationErrors: propsObj.showValidationErrors,
+          showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "TextBox" ? function () {
@@ -310,7 +311,7 @@ var CategorizedList = React.memo(function (props) {
           title: propsObj.title,
           tooltip: propsObj.tooltip,
           value: value,
-          showValidationErrors: propsObj.showValidationErrors,
+          showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         });
       }() : null, component.name === "Input" ? function (category) {
@@ -352,7 +353,7 @@ var CategorizedList = React.memo(function (props) {
           type: propsObj.type,
           value: value,
           width: propsObj.width,
-          showValidationErrors: propsObj.showValidationErrors,
+          showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "Attachments" ? function (category) {
@@ -383,7 +384,7 @@ var CategorizedList = React.memo(function (props) {
           isReadOnly: propsObj.isReadOnly,
           isRequired: propsObj.isRequired,
           requiredMessage: propsObj.requiredMessage,
-          showValidationErrors: propsObj.showValidationErrors
+          showValidationErrors: showValidationErrors
         }));
       }(category) : null, component.name === "StatusTextRow" ? function (category) {
         var codeMarkup = propsObj.code ? React.createElement("span", {
@@ -502,7 +503,7 @@ var CategorizedList = React.memo(function (props) {
         },
         isReadOnly: propsObj.isReadOnly,
         requiredMessage: propsObj.requiredMessage,
-        showValidationErrors: propsObj.showValidationErrors
+        showValidationErrors: showValidationErrors
       })));
     })), category.categories && React.createElement(CategorizedList, {
       anchor: anchor,

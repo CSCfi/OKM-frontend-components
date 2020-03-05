@@ -58,8 +58,9 @@ var Difference = function Difference(_ref) {
   var readonly = R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
   var isValid = isValueValid(required, value);
   var handleChange = useCallback(function (actionResults, payload) {
-    var resultIsNaN = isNaN(actionResults.value);
-    var result = resultIsNaN ? emptySelectionPlaceholderValue : actionResults.value;
+    var valueInt = parseInt(actionResults.value.value, 10);
+    var resultIsNaN = isNaN(valueInt);
+    var result = resultIsNaN ? emptySelectionPlaceholderValue : valueInt;
     var resultIsValid = isValueValid(required, result);
     setValue(result);
 
@@ -81,6 +82,7 @@ var Difference = function Difference(_ref) {
   var initialAreaTitle = titles[0];
   var inputAreaTitle = required ? titles[1] + "*" : titles[1];
   var changeAreaTitle = titles[2];
+  var changeValue = (value && value.value ? value.value : applyForValue) - initialValue;
   return React.createElement(React.Fragment, null, React.createElement("div", {
     className: containerClass
   }, React.createElement("div", {
@@ -92,9 +94,9 @@ var Difference = function Difference(_ref) {
     inputProps: {
       min: "0"
     },
-    onChange: function onChange(e) {
+    onChanges: function onChanges(e, value) {
       return handleChange({
-        value: parseInt(e.target.value, 10)
+        value: value
       }, payload);
     },
     value: value,
@@ -102,7 +104,7 @@ var Difference = function Difference(_ref) {
     isRequired: isRequired
   }), readonly && applyForValue), React.createElement("div", {
     className: "flex-1 flex-col"
-  }, React.createElement(Typography, null, changeAreaTitle), (value ? value : applyForValue) - initialValue)));
+  }, React.createElement(Typography, null, changeAreaTitle), changeValue)));
 };
 
 export default Difference;

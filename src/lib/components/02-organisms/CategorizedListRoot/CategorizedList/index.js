@@ -96,7 +96,7 @@ const getPropertiesObject = (
 
 const CategorizedList = React.memo(
   props => {
-    const { onChangesUpdate, removeChangeObject } = props;
+    const { onChangesUpdate, removeChangeObject, showValidationErrors } = props;
 
     const handleButtonClick = (payload, changeProps) => {
       payload.component.onClick(payload, changeProps);
@@ -391,9 +391,7 @@ const CategorizedList = React.memo(
                                   }}
                                   value={propsObj.selectedOption}
                                   isDisabled={isDisabled}
-                                  showValidationErrors={
-                                    propsObj.showValidationErrors
-                                  }
+                                  showValidationErrors={showValidationErrors}
                                   requiredMessage={propsObj.requiredMessage}
                                 />
                               </div>
@@ -453,9 +451,7 @@ const CategorizedList = React.memo(
                                 title={propsObj.title}
                                 tooltip={propsObj.tooltip}
                                 value={value}
-                                showValidationErrors={
-                                  propsObj.showValidationErrors
-                                }
+                                showValidationErrors={showValidationErrors}
                                 requiredMessage={propsObj.requiredMessage}
                               />
                             );
@@ -518,9 +514,7 @@ const CategorizedList = React.memo(
                                   type={propsObj.type}
                                   value={value}
                                   width={propsObj.width}
-                                  showValidationErrors={
-                                    propsObj.showValidationErrors
-                                  }
+                                  showValidationErrors={showValidationErrors}
                                   requiredMessage={propsObj.requiredMessage}
                                 />
                               </div>
@@ -569,9 +563,7 @@ const CategorizedList = React.memo(
                                   isReadOnly={propsObj.isReadOnly}
                                   isRequired={propsObj.isRequired}
                                   requiredMessage={propsObj.requiredMessage}
-                                  showValidationErrors={
-                                    propsObj.showValidationErrors
-                                  }
+                                  showValidationErrors={showValidationErrors}
                                 />
                               </div>
                             );
@@ -730,7 +722,7 @@ const CategorizedList = React.memo(
                             }}
                             isReadOnly={propsObj.isReadOnly}
                             requiredMessage={propsObj.requiredMessage}
-                            showValidationErrors={propsObj.showValidationErrors}
+                            showValidationErrors={showValidationErrors}
                           />
                         </div>
                       )}
