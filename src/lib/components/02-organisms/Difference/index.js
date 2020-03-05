@@ -77,15 +77,13 @@ const Difference = ({
     );
   }, [applyForValue, initialValue]);
 
-  const containerClass = "flex";
-
   const initialAreaTitle = titles[0];
   const inputAreaTitle = required ? titles[1] + "*" : titles[1];
   const changeAreaTitle = titles[2];
 
   return (
     <React.Fragment>
-      <div className={containerClass}>
+      <div className="flex">
         <div className="flex-1 flex-col">
           <Typography>{initialAreaTitle}</Typography>
           {initialValue}
@@ -97,6 +95,7 @@ const Difference = ({
               type="number"
               inputProps={{ min: "0" }}
               onChanges={handleChange}
+              payload={payload}
               value={value}
               width="12em"
               isRequired={isRequired}
@@ -118,6 +117,7 @@ Difference.propTypes = {
   delay: PropTypes.number,
   initialValue: PropTypes.number,
   onChanges: PropTypes.func,
+  payload: PropTypes.object,
   titles: PropTypes.array,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool

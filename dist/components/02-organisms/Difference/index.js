@@ -77,12 +77,11 @@ var Difference = function Difference(_ref) {
   useEffect(function () {
     setValue(applyForValue === initialValue ? emptySelectionPlaceholderValue : applyForValue);
   }, [applyForValue, initialValue]);
-  var containerClass = "flex";
   var initialAreaTitle = titles[0];
   var inputAreaTitle = required ? titles[1] + "*" : titles[1];
   var changeAreaTitle = titles[2];
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: containerClass
+    className: "flex"
   }, React.createElement("div", {
     className: "flex-1 flex-col"
   }, React.createElement(Typography, null, initialAreaTitle), initialValue), React.createElement("div", {
@@ -93,6 +92,7 @@ var Difference = function Difference(_ref) {
       min: "0"
     },
     onChanges: handleChange,
+    payload: payload,
     value: value,
     width: "12em",
     isRequired: isRequired
