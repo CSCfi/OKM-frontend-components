@@ -109,7 +109,10 @@ const Input = props => {
           onBlur={() => setIsFocused(false)}
           className={`${props.isHidden ? "hidden" : ""} 
           ${
-            isVisited && props.isRequired && !value && !isFocused
+            !value &&
+            !isFocused &&
+            props.isRequired &&
+            (isVisited || props.showValidationErrors)
               ? classes.requiredVisited
               : classes.root
           } 
@@ -138,7 +141,7 @@ const Input = props => {
             marginBottom: "0.5em",
             color: COLORS.OIVA_ORANGE_TEXT
           }}>
-          {isVisited && !value && props.requiredMessage}
+          {!value && props.requiredMessage}
         </FormHelperText>
       )}
     </React.Fragment>

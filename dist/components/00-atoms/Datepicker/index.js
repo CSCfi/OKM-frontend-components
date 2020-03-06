@@ -163,7 +163,7 @@ var Datepicker = function Datepicker(props) {
     maxDate: props.maxDate,
     disablePast: props.disablePast,
     disableFuture: props.disableFuture,
-    className: "".concat(props.isHidden ? "hidden" : "", " \n            ").concat(isVisited && props.isRequired && !props.value && !isFocused ? classes.requiredVisited : classes.root, " \n            p-2\n        "),
+    className: "".concat(props.isHidden ? "hidden" : "", " \n            ").concat((isVisited || props.showValidationErrors) && props.isRequired && !props.value && !isFocused ? classes.requiredVisited : classes.root, " \n            p-2\n        "),
     onBlurCapture: function onBlurCapture() {
       return !selectedDate ? setIsVisited(true) : setIsVisited(false);
     },

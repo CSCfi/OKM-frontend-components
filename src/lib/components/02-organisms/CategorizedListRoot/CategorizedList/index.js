@@ -752,6 +752,8 @@ const CategorizedList = React.memo(
                   showCategoryTitles={props.showCategoryTitles}
                   onChangesUpdate={props.onChangesUpdate}
                   removeChangeObject={props.removeChangeObject}
+                  showValidationErrors={showValidationErrors}
+                  requiredMessage={props.requiredMessage}
                 />
               )}
             </div>

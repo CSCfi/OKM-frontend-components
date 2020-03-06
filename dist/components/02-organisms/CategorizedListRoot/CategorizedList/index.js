@@ -525,7 +525,9 @@ var CategorizedList = React.memo(function (props) {
       runRootOperations: props.runRootOperations,
       showCategoryTitles: props.showCategoryTitles,
       onChangesUpdate: props.onChangesUpdate,
-      removeChangeObject: props.removeChangeObject
+      removeChangeObject: props.removeChangeObject,
+      showValidationErrors: showValidationErrors,
+      requiredMessage: props.requiredMessage
     }));
   }).filter(Boolean));
 }, function (prevState, nextState) {

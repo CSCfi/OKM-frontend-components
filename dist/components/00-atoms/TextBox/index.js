@@ -135,6 +135,7 @@ var TextBox = function TextBox(props) {
     }
   }, [props.value]); // If value is added the component won't work.
 
+  console.log("props", props);
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-row w-full"
   }, React.createElement("div", {
@@ -150,7 +151,7 @@ var TextBox = function TextBox(props) {
       shrink: classes.inputLabelShrink,
       disabled: classes.inputLabelReadonly
     },
-    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && isVisited ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
+    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && (!value && props.showValidationErrors || isVisited) ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
   }, React.createElement("span", {
     style: {
       padding: "0 0.3em",
@@ -163,7 +164,7 @@ var TextBox = function TextBox(props) {
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.isReadOnly ? 1 : props.rows,
     rowsMax: props.isReadOnly ? Infinity : props.rowsMax,
-    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
+    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(!value && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
     onChange: updateValue,
     value: value,
     inputprops: {
@@ -186,7 +187,7 @@ var TextBox = function TextBox(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, isVisited && !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
+  }, !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
   }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,

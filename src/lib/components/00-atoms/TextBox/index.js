@@ -119,6 +119,8 @@ const TextBox = props => {
     }
   }, [props.value]); // If value is added the component won't work.
 
+  console.log("props", props);
+
   return (
     <React.Fragment>
       {value !== null ? (
@@ -147,7 +149,8 @@ const TextBox = props => {
                   className={`${
                     isFocused
                       ? classes.cssLabelFocused
-                      : props.isRequired && isVisited
+                      : props.isRequired &&
+                        ((!value && props.showValidationErrors) || isVisited)
                       ? classes.cssLabelRequired
                       : classes.cssLabel
                   } ${props.isReadOnly &&
@@ -171,7 +174,10 @@ const TextBox = props => {
                 className={`${props.isHidden ? "hidden" : "rounded"} 
                     ${props.required && classes.required}
                     ${
-                      isVisited && props.isRequired && !value && !isFocused
+                      !value &&
+                      !isFocused &&
+                      props.isRequired &&
+                      (isVisited || props.showValidationErrors)
                         ? classes.requiredVisited
                         : classes.root
                     } 
@@ -213,7 +219,7 @@ const TextBox = props => {
                     marginBottom: "0.5em",
                     color: COLORS.OIVA_ORANGE_TEXT
                   }}>
-                  {isVisited && !value && props.requiredMessage}
+                  {!value && props.requiredMessage}
                 </FormHelperText>
               )}
             </div>
