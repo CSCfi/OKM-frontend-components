@@ -12,7 +12,7 @@ Created with:
 Add dependency with the version you want
 
 ```
-"okm-frontend-components": "github:CSCfi/OKM-frontend-components#v0.1.7"
+"okm-frontend-components": "github:CSCfi/okm-frontend-components#v0.1.7"
 ```
 
 import components like this
@@ -40,7 +40,7 @@ Build by running `npm run build`. Run `npm install`, commit package.json, packag
 
 ## How to run locally against this library
 
-Replace your dependency source in package.json as "file:../OKM-frontend-components" or whatever is the path to your locally cloned project, instead of "github:CSCfi/OKM-frontend-components#v0.1.7"
+Replace your dependency source in package.json as "file:../okm-frontend-components" or whatever is the path to your locally cloned project, instead of "github:CSCfi/okm-frontend-components#v0.1.7"
 
 NOTE: If you have done `npm install` in the local components project, this will introduce a duplicate React when you import the module into a frontend project ("Invalid hook call"). Remove the library's node_modules or you will encounter problems when importing components using React Hooks. You can do that by typing:
 rm -rf node_modules

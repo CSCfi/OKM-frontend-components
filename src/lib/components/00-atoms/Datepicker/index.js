@@ -124,7 +124,10 @@ const Datepicker = props => {
             disableFuture={props.disableFuture}
             className={`${props.isHidden ? "hidden" : ""} 
             ${
-              isVisited && props.isRequired && !props.value && !isFocused
+              (isVisited || props.showValidationErrors) &&
+              props.isRequired &&
+              !props.value &&
+              !isFocused
                 ? classes.requiredVisited
                 : classes.root
             } 

@@ -42,7 +42,8 @@ const ExpandableRowRoot = ({
   sectionId,
   showCategoryTitles = defaultProps.showCategoryTitles,
   title,
-  isReadOnly
+  isReadOnly,
+  showValidationErrors
 }) => {
   const classes = useStyles();
   const [isToggledOpen, setIsToggleOpen] = useState(false);
@@ -100,6 +101,7 @@ const ExpandableRowRoot = ({
                 sectionId={sectionId}
                 showCategoryTitles={showCategoryTitles}
                 isReadOnly={isReadOnly}
+                showValidationErrors={showValidationErrors}
               />
             ) : (
               children
@@ -126,7 +128,8 @@ ExpandableRowRoot.propTypes = {
   sectionId: PropTypes.string,
   showCategoryTitles: PropTypes.bool,
   title: PropTypes.string,
-  isReadOnly: PropTypes.bool
+  isReadOnly: PropTypes.bool,
+  showValidationErrors: PropTypes.bool
 };
 
 export default ExpandableRowRoot;

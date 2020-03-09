@@ -55,11 +55,11 @@ var Difference = function Difference(_ref) {
       setValue = _useState4[1];
 
   var required = R.path(["component", "properties", "isRequired"], payload) || isRequired;
-  var readonly = R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
-  var isValid = isValueValid(required, value);
-  var handleChange = useCallback(function (actionResults, payload) {
-    var resultIsNaN = isNaN(actionResults.value);
-    var result = resultIsNaN ? emptySelectionPlaceholderValue : actionResults.value;
+  var readonly = R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly; // const isValid = isValueValid(required, value);
+
+  var handleChange = useCallback(function (payload, properties) {
+    var resultIsNaN = isNaN(parseInt(properties.value, 10));
+    var result = resultIsNaN ? emptySelectionPlaceholderValue : properties.value;
     var resultIsValid = isValueValid(required, result);
     setValue(result);
 
@@ -69,7 +69,7 @@ var Difference = function Difference(_ref) {
 
     setTimeoutHandle(setTimeout(function () {
       onChanges(payload, {
-        applyForValue: resultIsNaN ? initialValue : actionResults.value,
+        applyForValue: resultIsNaN ? initialValue : properties.value,
         isValid: resultIsValid
       });
     }, delay));
@@ -77,12 +77,11 @@ var Difference = function Difference(_ref) {
   useEffect(function () {
     setValue(applyForValue === initialValue ? emptySelectionPlaceholderValue : applyForValue);
   }, [applyForValue, initialValue]);
-  var containerClass = "flex";
   var initialAreaTitle = titles[0];
   var inputAreaTitle = required ? titles[1] + "*" : titles[1];
   var changeAreaTitle = titles[2];
   return React.createElement(React.Fragment, null, React.createElement("div", {
-    className: containerClass
+    className: "flex"
   }, React.createElement("div", {
     className: "flex-1 flex-col"
   }, React.createElement(Typography, null, initialAreaTitle), initialValue), React.createElement("div", {
@@ -92,11 +91,8 @@ var Difference = function Difference(_ref) {
     inputProps: {
       min: "0"
     },
-    onChange: function onChange(e) {
-      return handleChange({
-        value: parseInt(e.target.value, 10)
-      }, payload);
-    },
+    onChanges: handleChange,
+    payload: payload,
     value: value,
     width: "12em",
     isRequired: isRequired

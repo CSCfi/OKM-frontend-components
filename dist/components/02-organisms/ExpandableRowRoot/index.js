@@ -49,7 +49,8 @@ var ExpandableRowRoot = function ExpandableRowRoot(_ref) {
       _ref$showCategoryTitl = _ref.showCategoryTitles,
       showCategoryTitles = _ref$showCategoryTitl === void 0 ? defaultProps.showCategoryTitles : _ref$showCategoryTitl,
       title = _ref.title,
-      isReadOnly = _ref.isReadOnly;
+      isReadOnly = _ref.isReadOnly,
+      showValidationErrors = _ref.showValidationErrors;
   var classes = useStyles();
 
   var _useState = useState(false),
@@ -100,7 +101,8 @@ var ExpandableRowRoot = function ExpandableRowRoot(_ref) {
     onUpdate: onUpdate,
     sectionId: sectionId,
     showCategoryTitles: showCategoryTitles,
-    isReadOnly: isReadOnly
+    isReadOnly: isReadOnly,
+    showValidationErrors: showValidationErrors
   }) : children)));
 };
 

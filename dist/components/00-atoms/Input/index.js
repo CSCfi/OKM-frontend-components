@@ -126,7 +126,7 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(isVisited && props.isRequired && !value && !isFocused ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && !value && classes.readonlyNoValue, "\n        ")
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!value && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && !value && classes.readonlyNoValue, "\n        ")
   }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
@@ -145,7 +145,7 @@ var Input = function Input(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, isVisited && !value && props.requiredMessage));
+  }, !value && props.requiredMessage));
 };
 
 Input.defaultProps = {

@@ -29,7 +29,8 @@ var CategorizedListRoot = React.memo(function (_ref) {
       _ref$nodeIndex = _ref.nodeIndex,
       nodeIndex = _ref$nodeIndex === void 0 ? defaultProps.nodeIndex : _ref$nodeIndex,
       updateNodeIndex = _ref.updateNodeIndex,
-      isReadOnly = _ref.isReadOnly;
+      isReadOnly = _ref.isReadOnly,
+      showValidationErrors = _ref.showValidationErrors;
   var changesRef = useRef(null);
   changesRef.current = useMemo(function () {
     return changes;
@@ -75,7 +76,8 @@ var CategorizedListRoot = React.memo(function (_ref) {
       showCategoryTitles: showCategoryTitles,
       onChangesUpdate: onChangesUpdate,
       removeChangeObject: removeChangeObject,
-      isReadOnly: isReadOnly
+      isReadOnly: isReadOnly,
+      showValidationErrors: showValidationErrors
     });
   }() : null);
 }, function (prevState, nextState) {

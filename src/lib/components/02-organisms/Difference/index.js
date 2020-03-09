@@ -43,15 +43,14 @@ const Difference = ({
   const readonly =
     R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
 
-  const isValid = isValueValid(required, value);
+  // const isValid = isValueValid(required, value);
 
   const handleChange = useCallback(
-    (actionResults, payload) => {
-      const resultIsNaN = isNaN(actionResults.value);
+    (payload, properties) => {
+      const resultIsNaN = isNaN(parseInt(properties.value, 10));
       const result = resultIsNaN
         ? emptySelectionPlaceholderValue
-        : actionResults.value;
-
+        : properties.value;
       const resultIsValid = isValueValid(required, result);
 
       setValue(result);
@@ -61,7 +60,7 @@ const Difference = ({
       setTimeoutHandle(
         setTimeout(() => {
           onChanges(payload, {
-            applyForValue: resultIsNaN ? initialValue : actionResults.value,
+            applyForValue: resultIsNaN ? initialValue : properties.value,
             isValid: resultIsValid
           });
         }, delay)
@@ -78,15 +77,13 @@ const Difference = ({
     );
   }, [applyForValue, initialValue]);
 
-  const containerClass = "flex";
-
   const initialAreaTitle = titles[0];
   const inputAreaTitle = required ? titles[1] + "*" : titles[1];
   const changeAreaTitle = titles[2];
 
   return (
     <React.Fragment>
-      <div className={containerClass}>
+      <div className="flex">
         <div className="flex-1 flex-col">
           <Typography>{initialAreaTitle}</Typography>
           {initialValue}
@@ -97,9 +94,8 @@ const Difference = ({
             <Input
               type="number"
               inputProps={{ min: "0" }}
-              onChange={e =>
-                handleChange({ value: parseInt(e.target.value, 10) }, payload)
-              }
+              onChanges={handleChange}
+              payload={payload}
               value={value}
               width="12em"
               isRequired={isRequired}
@@ -120,7 +116,8 @@ Difference.propTypes = {
   applyForValue: PropTypes.number,
   delay: PropTypes.number,
   initialValue: PropTypes.number,
-  onChanges: PropTypes.func.isRequired,
+  onChanges: PropTypes.func,
+  payload: PropTypes.object,
   titles: PropTypes.array,
   isReadOnly: PropTypes.bool,
   isRequired: PropTypes.bool
