@@ -119,8 +119,6 @@ const TextBox = props => {
     }
   }, [props.value]); // If value is added the component won't work.
 
-  console.log("props", props);
-
   return (
     <React.Fragment>
       {value !== null ? (

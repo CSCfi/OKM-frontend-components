@@ -43,8 +43,6 @@ const Difference = ({
   const readonly =
     R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
 
-  // const isValid = isValueValid(required, value);
-
   const handleChange = useCallback(
     (payload, properties) => {
       const resultIsNaN = isNaN(parseInt(properties.value, 10));

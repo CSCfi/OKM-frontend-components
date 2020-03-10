@@ -14,6 +14,7 @@ import { textBoxStory } from "./storydata/textBoxStory";
 import { attachmentsStory } from "./storydata/attachmentsStory";
 import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
+import { alertStory } from "./storydata/alertStory";
 import Stage from "./Stage";
 
 storiesOf("CategorizedListRoot", module)
@@ -29,12 +30,13 @@ storiesOf("CategorizedListRoot", module)
           { anchor: "C.0.A", properties: { isChecked: true } },
           { anchor: "A.0.A", properties: { isChecked: false } },
           { anchor: "B.0.A", properties: { isChecked: false } },
-          { anchor: "C.0.A", properties: { isChecked: false } },
+          { anchor: "C.0.A", properties: { isChecked: false } }
         ]}
         categories={longAndPlainStory.categories}
         changes={longAndPlainStory.changes}
-        render={props => <CategorizedListRoot showCategoryTitles={true} {...props} />}
-      ></Stage>
+        render={props => (
+          <CategorizedListRoot showCategoryTitles={true} {...props} />
+        )}></Stage>
     );
   })
   .add("Simple radio example", () => {
@@ -53,8 +55,7 @@ storiesOf("CategorizedListRoot", module)
         ]}
         categories={simpleRadioStory.categories}
         changes={simpleRadioStory.changes}
-        render={props => <CategorizedListRoot {...props} />}
-      ></Stage>
+        render={props => <CategorizedListRoot {...props} />}></Stage>
     );
   })
   .add("One checkbox example", () => {
@@ -74,8 +75,7 @@ storiesOf("CategorizedListRoot", module)
         changes={checkboxStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Simple example", () => {
@@ -96,8 +96,7 @@ storiesOf("CategorizedListRoot", module)
         changes={simpleStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Complex example", () => {
@@ -135,8 +134,7 @@ storiesOf("CategorizedListRoot", module)
         changes={complexStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Radio example", () => {
@@ -155,8 +153,7 @@ storiesOf("CategorizedListRoot", module)
         changes={radioStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Simple textbox example", () => {
@@ -172,8 +169,7 @@ storiesOf("CategorizedListRoot", module)
         changes={simpleTextBoxStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Textbox example", () => {
@@ -195,8 +191,7 @@ storiesOf("CategorizedListRoot", module)
         changes={textBoxStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Input example", () => {
@@ -218,8 +213,7 @@ storiesOf("CategorizedListRoot", module)
         changes={inputStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Datepicker example", () => {
@@ -246,8 +240,7 @@ storiesOf("CategorizedListRoot", module)
             {...props}
             placement="test"
           />
-        )}
-      ></Stage>
+        )}></Stage>
     );
   })
   .add("Dynamic subform example", () => {
@@ -271,7 +264,17 @@ storiesOf("CategorizedListRoot", module)
         changes={subformStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}
-      ></Stage>
+        )}></Stage>
+    );
+  })
+  .add("Alert example", () => {
+    return (
+      <CategorizedListRoot
+        anchor="alert"
+        changes={datepickerStory.changes}
+        categories={alertStory.categories}
+        onUpdate={() => {}}
+        showCategoryTitles={false}
+      />
     );
   });
