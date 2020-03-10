@@ -5,13 +5,12 @@ import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import Link from "@material-ui/core/Link";
 
-// https://material-ui.com/components/alert/
 /**
  * AlertMessage wraps a Alert
+ * https://material-ui.com/components/alert/
  * Uses handleClick to call callback.
  * @param props
- *    id: element id as string,
- *    ariaLabel: aria-label as striing,
+ *    ariaLabel: aria-label as string,
  *    title: title as string,
  *    message: message as string,
  *    type: type of alert info (default), warning, error, success
@@ -69,11 +68,16 @@ AlertMessage.defaultProps = {
 };
 
 AlertMessage.propTypes = {
-  ariaLabel: PropTypes.string,
   id: PropTypes.string,
+  // aria-label as string
+  ariaLabel: PropTypes.string,
+  // title as string
   title: PropTypes.string,
+  // message as string,
   message: PropTypes.string,
+  // type of alert info (default), warning, error, success
   type: PropTypes.string,
+  // click call back function (if a link)
   handleClick: PropTypes.func
 };
 
