@@ -62,7 +62,7 @@ const AlertMessage = React.memo(props => {
 });
 
 AlertMessage.defaultProps = {
-  name: "Alert",
+  id: "Alert",
   type: "info",
   ariaLabel: "alert"
 };
