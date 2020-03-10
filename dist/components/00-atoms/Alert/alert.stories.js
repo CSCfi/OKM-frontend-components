@@ -1,8 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import { withInfo } from "@storybook/addon-info";
 import AlertMessage from "./index";
-storiesOf("AlertMessage", module).add("default, contained", function () {
-  return React.createElement("div", null, React.createElement(AlertMessage, {
+storiesOf("AlertMessage", module).addDecorator(withInfo).add("default", function () {
+  return React.createElement("div", {
+    className: "mt-8"
+  }, React.createElement(AlertMessage, {
     title: "Title is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     message: "Message is here"
@@ -16,12 +19,12 @@ storiesOf("AlertMessage", module).add("default, contained", function () {
     message: "Message is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "warning",
-    title: "Title is here"
+    title: "Warning is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "error",
-    title: "Title is here"
+    title: "Error is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "success",
-    title: "Title is here"
+    title: "Success is here"
   }));
 });

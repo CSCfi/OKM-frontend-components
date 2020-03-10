@@ -5,7 +5,7 @@ import AlertMessage from "./index";
 
 storiesOf("AlertMessage", module)
   .addDecorator(withInfo)
-  .add("default, contained", () => (
+  .add("default", () => (
     <div className="mt-8">
       <AlertMessage title="Title is here" />
       <br />
@@ -18,10 +18,10 @@ storiesOf("AlertMessage", module)
       <br />
       <AlertMessage title="Title" message="Message is here" />
       <br />
-      <AlertMessage type="warning" title="Title is here" />
+      <AlertMessage type="warning" title="Warning is here" />
       <br />
-      <AlertMessage type="error" title="Title is here" />
+      <AlertMessage type="error" title="Error is here" />
       <br />
-      <AlertMessage type="success" title="Title is here" />
+      <AlertMessage type="success" title="Success is here" />
     </div>
   ));

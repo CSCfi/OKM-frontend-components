@@ -2,14 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
-import Link from "@material-ui/core/Link"; // https://material-ui.com/components/alert/
-
+import Link from "@material-ui/core/Link";
 /**
  * AlertMessage wraps a Alert
+ * https://material-ui.com/components/alert/
  * Uses handleClick to call callback.
  * @param props
- *    id: element id as string,
- *    ariaLabel: aria-label as striing,
+ *    ariaLabel: aria-label as string,
  *    title: title as string,
  *    message: message as string,
  *    type: type of alert info (default), warning, error, success
@@ -36,7 +35,8 @@ var useStyles = makeStyles(function (theme) {
     }
   };
 });
-var AlertMessage = React.memo(function (props) {
+
+var AlertMessage = function AlertMessage(props) {
   var classes = useStyles();
   return React.createElement("div", {
     className: classes.root
@@ -56,9 +56,10 @@ var AlertMessage = React.memo(function (props) {
     "aria-label": props.ariaLabel,
     severity: props.type
   }, props.title && React.createElement(AlertTitle, null, props.title), props.message && props.message));
-});
+};
+
 AlertMessage.defaultProps = {
-  name: "Alert",
+  id: "Alert",
   type: "info",
   ariaLabel: "alert"
 };
