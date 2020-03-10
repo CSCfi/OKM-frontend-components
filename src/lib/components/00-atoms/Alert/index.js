@@ -69,15 +69,15 @@ AlertMessage.defaultProps = {
 
 AlertMessage.propTypes = {
   id: PropTypes.string,
-  // aria-label as string
+  /** aria-label as string */
   ariaLabel: PropTypes.string,
-  // title as string
+  /**  title as string */
   title: PropTypes.string,
-  // message as string,
+  /**  message as string */
   message: PropTypes.string,
-  // type of alert info (default), warning, error, success
+  /**  type of alert info (default), warning, error, success */
   type: PropTypes.string,
-  // click call back function (if a link)
+  /**  click call back function (if a link) */
   handleClick: PropTypes.func
 };
 
