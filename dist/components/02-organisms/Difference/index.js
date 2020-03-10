@@ -55,8 +55,7 @@ var Difference = function Difference(_ref) {
       setValue = _useState4[1];
 
   var required = R.path(["component", "properties", "isRequired"], payload) || isRequired;
-  var readonly = R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly; // const isValid = isValueValid(required, value);
-
+  var readonly = R.path(["component", "properties", "isReadOnly"], payload) || isReadOnly;
   var handleChange = useCallback(function (payload, properties) {
     var resultIsNaN = isNaN(parseInt(properties.value, 10));
     var result = resultIsNaN ? emptySelectionPlaceholderValue : properties.value;

@@ -135,7 +135,6 @@ var TextBox = function TextBox(props) {
     }
   }, [props.value]); // If value is added the component won't work.
 
-  console.log("props", props);
   return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-row w-full"
   }, React.createElement("div", {

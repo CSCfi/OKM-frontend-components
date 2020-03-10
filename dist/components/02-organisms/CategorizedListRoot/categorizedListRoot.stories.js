@@ -14,6 +14,7 @@ import { textBoxStory } from "./storydata/textBoxStory";
 import { attachmentsStory } from "./storydata/attachmentsStory";
 import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
+import { alertStory } from "./storydata/alertStory";
 import Stage from "./Stage";
 storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and plain example", function () {
   return React.createElement(Stage, {
@@ -493,5 +494,13 @@ storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and pl
         showCategoryTitles: false
       }, props));
     }
+  });
+}).add("Alert example", function () {
+  return React.createElement(CategorizedListRoot, {
+    anchor: "alert",
+    changes: datepickerStory.changes,
+    categories: alertStory.categories,
+    onUpdate: function onUpdate() {},
+    showCategoryTitles: false
   });
 });

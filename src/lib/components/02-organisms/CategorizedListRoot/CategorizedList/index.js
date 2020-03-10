@@ -10,7 +10,7 @@ import { heights } from "../../../../css/autocomplete";
 import { flattenObj } from "../../../../utils/common";
 import Datepicker from "../../../00-atoms/Datepicker";
 import Dropdown from "../../../00-atoms/Dropdown";
-import CheckIcon from "@material-ui/icons/Check";
+import AlertMessage from "../../../00-atoms/Alert";
 import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
@@ -599,6 +599,23 @@ const CategorizedList = React.memo(
                                     </div>
                                   </div>
                                 </StatusTextRow>
+                              </div>
+                            );
+                          })(category)
+                        : null}
+                      {component.name === "Alert"
+                        ? (() => {
+                            return (
+                              <div
+                                className={`flex-1 mb-2 ${component.styleClasses}`}>
+                                <AlertMessage
+                                  id={fullAnchor}
+                                  ariaLabel={propsObj.ariaLabel}
+                                  type={propsObj.type}
+                                  title={propsObj.title}
+                                  message={propsObj.message}
+                                  handleClick={propsObj.handleClick}
+                                />
                               </div>
                             );
                           })(category)
