@@ -617,7 +617,7 @@ const CategorizedList = React.memo(
                                   linkText={propsObj.linkText}
                                   isVisible={propsObj.isVisible}
                                   handleClick={propsObj.handleClick}
-                                  handleVisibility={propsObj.handleVisibility}
+                                  onChanges={handleChanges}
                                 />
                               </div>
                             );

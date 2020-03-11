@@ -56,11 +56,19 @@ const useStyles = makeStyles(theme => ({
 
 const AlertMessage = props => {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState(true);
+
+  const clickCallback = e => {
+    e.preventDefault();
+    return props.handleClick();
+  };
+
+  const updateVisibility = (e, value) => {
+    props.onChanges(props.payload, { value: value });
+  };
 
   return (
-    <div className={classes.root} isvisible={!props.isVisible && "collapse"}>
-      <Collapse in={isOpen}>
+    <div className={classes.root}>
+      <Collapse in={props.isVisible}>
         <Alert
           id={props.id}
           aria-label={props.ariaLabel}
@@ -74,7 +82,7 @@ const AlertMessage = props => {
                 width: "100%"
               }}>
               {props.handleClick && props.linkText && (
-                <Link onClick={props.handleClick} style={{ cursor: "pointer" }}>
+                <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
                   {props.linkText}
                 </Link>
               )}
@@ -83,9 +91,7 @@ const AlertMessage = props => {
                 aria-label="close"
                 color="inherit"
                 size="small"
-                onClick={() => {
-                  setIsOpen(false);
-                }}>
+                onClick={e => updateVisibility(e, false)}>
                 <CloseIcon fontSize="inherit" />
               </IconButton>
             </div>
@@ -102,7 +108,8 @@ AlertMessage.defaultProps = {
   id: "Alert",
   type: "info",
   ariaLabel: "alert",
-  linkText: "<missing linkText prop>"
+  linkText: "<missing linkText prop>",
+  isVisible: true
 };
 
 AlertMessage.propTypes = {
@@ -121,8 +128,8 @@ AlertMessage.propTypes = {
   handleClick: PropTypes.func,
   /** sets if component is visible */
   isVisible: PropTypes.bool,
-  /** closing call back function */
-  handleVisibility: PropTypes.func
+  /** callback used for closing (visibility) */
+  onChanges: PropTypes.func
 };
 
 export default AlertMessage;
