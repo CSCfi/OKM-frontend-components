@@ -28,12 +28,11 @@ export const findCategoryAnchor = (
   path = []
 ) => {
   if (category.components) {
-    path = R.insert(-1, "components", path);
+    path = R.append("components", path);
     R.addIndex(R.forEach)((component, index) => {
-      path = R.insert(-1, index, path);
+      path = R.append(index, path);
       const fullAnchor = R.join(".", [anchor, component.anchor]);
-      structure = R.insert(
-        -1,
+      structure = R.append(
         {
           ...component,
           anchorParts: R.split(".", fullAnchor),
@@ -48,7 +47,7 @@ export const findCategoryAnchor = (
   }
 
   if (category.categories && category.categories.length) {
-    path = R.insert(-1, "categories", path);
+    path = R.append("categories", path);
     return R.map(_category => {
       return findCategoryAnchor(
         _category,
@@ -125,6 +124,10 @@ const findSiblings = (node, reducedStructure) => {
   return siblings;
 };
 
+const getChangeObjIndexByAnchor = (anchor, changes) => {
+  return R.findIndex(R.propEq("anchor", anchor), changes);
+};
+
 const getChangeObjByAnchor = (anchor, changes) => {
   return R.find(R.propEq("anchor", anchor), changes);
 };
@@ -143,8 +146,7 @@ const disableNodes = (nodes, reducedStructure, changes, index = 0) => {
       );
     }
   } else if (node.properties.isChecked) {
-    changes = R.insert(
-      -1,
+    changes = R.append(
       {
         anchor: node.fullAnchor,
         properties: {
@@ -166,30 +168,43 @@ const disableNodes = (nodes, reducedStructure, changes, index = 0) => {
   return changes;
 };
 
-export const checkLeafNode = (node, changes) => {
+function isNodeChecked(node, changes) {
+  const changeObj = getChangeObjByAnchor(node.fullAnchor, changes);
+  return !changeObj
+    ? node.properties.isChecked
+    : changeObj.properties.isChecked;
+}
+
+export const checkLeafNode = (node, reducedStructure, changes) => {
   const changeObj = getChangeObjByAnchor(node.fullAnchor, changes);
   if (changeObj && !changeObj.properties.isChecked) {
     changes = R.filter(R.compose(R.not, R.propEq("anchor")(node.fullAnchor)))(
       changes
     );
   } else if (!changeObj && !node.properties.isChecked) {
-    changes = R.insert(
-      -1,
+    const childNodes = getChildCheckboxNodes(node, reducedStructure);
+    const areAllChildNodesChecked = R.find(childNode => {
+      return isNodeChecked(childNode, changes);
+    }, childNodes);
+    console.info(areAllChildNodesChecked);
+    changes = R.append(
       {
         anchor: node.fullAnchor,
         properties: {
           metadata: node.properties.forChangeObject,
-          isChecked: true
+          isChecked: true,
+          isIndeterminate: !areAllChildNodesChecked
         }
       },
       changes
     );
   }
+  console.info(changes);
   return changes;
 };
 
 export const checkNode = (node, reducedStructure, changes) => {
-  changes = checkLeafNode(node, changes);
+  changes = checkLeafNode(node, reducedStructure, changes);
   const parentNode = findParent(node, reducedStructure);
   if (parentNode) {
     if (parentNode.name === "RadioButtonWithLabel") {
@@ -203,6 +218,12 @@ export const checkNode = (node, reducedStructure, changes) => {
   return changes;
 };
 
+/**
+ * Disables the node's siblings.
+ * @param {object} node - Target item.
+ * @param {array} reducedStructure - Flatten array of all items on the form.
+ * @param {array} changes - Array of change objects.
+ */
 const disableSiblings = (node, reducedStructure, changes) => {
   const radioSiblings = R.filter(
     R.and(
@@ -215,6 +236,59 @@ const disableSiblings = (node, reducedStructure, changes) => {
   }
   return changes;
 };
+
+function getChildNodes(
+  node,
+  reducedStructure,
+  names = ["CheckboxWithLabel", "RadioButtonWithLabel"]
+) {
+  // The beginning of descendants' full acnhors equals with the fullAnchorInit.
+  const fullAnchorInit = R.compose(
+    R.join("."),
+    R.init,
+    R.prop("anchorParts")
+  )(node);
+  // Let's find all the checkbox descendants of the checked node.
+  const childNodes = R.filter(item => {
+    // Both of the following conditions must be fulfilled:
+    return (
+      item.anchorParts.length - 1 === node.anchorParts.length &&
+      R.and(
+        // Item must be a descendant of the checked node.
+        R.compose(R.startsWith(fullAnchorInit), R.prop("fullAnchor"))(item),
+        // Item must be a checkbox.
+        R.includes(item.name, names)
+      )
+    );
+  }, reducedStructure);
+  return childNodes;
+}
+
+function getChildCheckboxNodes(node, reducedStructure) {
+  return getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]);
+}
+
+function checkChildNodes(node, reducedStructure, changes) {
+  const childNodes = getChildCheckboxNodes(node, reducedStructure);
+
+  // Let's check the node
+  changes = checkNode(node, reducedStructure, changes);
+
+  // Let's check / activate all the descendants.
+  if (childNodes.length) {
+    changes = R.uniq(
+      R.flatten(
+        R.map(childNode => {
+          return checkChildNodes(childNode, reducedStructure, changes);
+        }, childNodes)
+      )
+    );
+  } else {
+    console.info(changes);
+  }
+
+  return changes;
+}
 
 const runActivationProcedure = (
   node,
@@ -230,8 +304,7 @@ const runActivationProcedure = (
       R.compose(R.not, R.propEq("anchor")(node.fullAnchor))
     )(changesWithoutRootAnchor);
   } else if (!changeObj && !node.properties.isChecked) {
-    changesWithoutRootAnchor = R.insert(
-      -1,
+    changesWithoutRootAnchor = R.append(
       {
         anchor: node.fullAnchor,
         properties: {
@@ -245,6 +318,14 @@ const runActivationProcedure = (
 
   if (node.name === "RadioButtonWithLabel") {
     changesWithoutRootAnchor = disableSiblings(
+      node,
+      reducedStructure,
+      changesWithoutRootAnchor
+    );
+  }
+
+  if (node.name === "CheckboxWithLabel") {
+    changesWithoutRootAnchor = checkChildNodes(
       node,
       reducedStructure,
       changesWithoutRootAnchor
@@ -267,22 +348,38 @@ const runActivationProcedure = (
   return changesWithoutRootAnchor;
 };
 
+/**
+ * Function handles the unchecking / deactivation of a radio button or checkbox.
+ * @param {object} node - Target node a.k.a clicked checbox / radio button.
+ * @param {array} reducedStructure - Flatten array of all items on the form.
+ * @param {array} changesWithoutRootAnchor - Array of change objects.
+ */
 const runDeactivationProcedure = (
   node,
   reducedStructure,
   changesWithoutRootAnchor
 ) => {
+  // Let's find the change object of the node under activation.
   const changeObj = getChangeObjByAnchor(
     node.fullAnchor,
     changesWithoutRootAnchor
   );
   if (changeObj && changeObj.properties.isChecked === true) {
+    /**
+     * If change object was found and the node is already checked
+     * the change object must be removed.
+     **/
     changesWithoutRootAnchor = R.filter(
-      R.compose(R.not, R.propEq("anchor")(node.fullAnchor))
+      R.compose(R.not, R.propEq("anchor", node.fullAnchor))
     )(changesWithoutRootAnchor);
   } else if (!changeObj && node.properties.isChecked === true) {
-    changesWithoutRootAnchor = R.insert(
-      -1,
+    /**
+     * If there are no changes and node was already checked a new change
+     * object must be created and added to the array of change objects.
+     * The change object overrides the isChecked property of the node and it
+     * will include the metadata of the node too.
+     */
+    changesWithoutRootAnchor = R.append(
       {
         anchor: node.fullAnchor,
         properties: {
@@ -293,11 +390,49 @@ const runDeactivationProcedure = (
       changesWithoutRootAnchor
     );
   }
-  const categoryAnchor = R.dropLast(1, node.anchorParts);
-  const childNodes = R.filter(_node => {
-    return R.equals(R.dropLast(2, _node.anchorParts), categoryAnchor);
-  }, reducedStructure);
-  if (childNodes.length) {
+
+  /**
+   * Okay... the clicked node has been handled now. Next we have to handle it's
+   * parent node and child nodes. If the node has a parent and the name of the
+   * parent is CheckboxWithLabel the parent must be put to indeterminate state
+   * (-).
+   */
+  const parentNode = findParent(node, reducedStructure);
+
+  if (parentNode.name === "CheckboxWithLabel") {
+    // Let's find out the index of the parent's change object.
+    const parentChangeObjIndex = getChangeObjIndexByAnchor(
+      parentNode.fullAnchor,
+      changesWithoutRootAnchor
+    );
+    // Index's value greater than -1 means that change object was found.
+    if (parentChangeObjIndex > -1) {
+      /**
+       * This "complex" code sets the value of isIndeterminate property as
+       * true. The array of change objects will be updated.
+       **/
+      changesWithoutRootAnchor = R.over(
+        R.lensIndex(parentChangeObjIndex),
+        changeObject => {
+          return {
+            ...changeObject,
+            properties: { ...changeObject.properties, isIndeterminate: true }
+          };
+        },
+        changesWithoutRootAnchor
+      );
+      console.info(changesWithoutRootAnchor);
+    }
+  }
+
+  /**
+   * So what next... the child nodes. They must be walked through and
+   * deactivated. Let's find them first.
+   */
+  const childNodes = getChildNodes(node, reducedStructure);
+
+  // If there are any we deactivate them.
+  if (childNodes) {
     return disableNodes(childNodes, reducedStructure, changesWithoutRootAnchor);
   }
   return changesWithoutRootAnchor;
@@ -356,8 +491,7 @@ export const handleNodeMain = (
         return _changeObj;
       }, changesWithoutRootAnchor);
     } else {
-      changesWithoutRootAnchor = R.insert(
-        -1,
+      changesWithoutRootAnchor = R.append(
         updatedChangeObj,
         changesWithoutRootAnchor
       );
@@ -373,6 +507,7 @@ export const handleNodeMain = (
         );
       }, changesWithoutRootAnchor)
     : changesWithoutRootAnchor;
+  console.info(updatedChangesArr);
   return updatedChangesArr;
 };
 
