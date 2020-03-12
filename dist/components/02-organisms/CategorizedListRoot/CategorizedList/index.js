@@ -113,7 +113,11 @@ var CategorizedList = React.memo(function (props) {
   }, [onChangesUpdate]);
   return React.createElement("div", {
     "data-anchor": props.anchor
-  }, _.map(props.categories, function (category, i) {
+  },
+  /**
+  * Categories will be looped here.
+  */
+  _.map(props.categories, function (category, i) {
     if (category.isVisible === false) {
       return null;
     }
@@ -177,7 +181,8 @@ var CategorizedList = React.memo(function (props) {
     return React.createElement("div", {
       key: i,
       className: R.join(" ", categoryClasses),
-      "data-level": props.level
+      "data-level": props.level,
+      id: anchor
     }, isCategoryTitleVisible && React.createElement("div", {
       className: categoryTitleClasses
     }, React.createElement("h4", null, category.code && React.createElement("span", {
