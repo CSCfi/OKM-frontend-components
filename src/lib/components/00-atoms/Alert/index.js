@@ -12,14 +12,14 @@ import CloseIcon from "@material-ui/icons/Close";
  * https://material-ui.com/components/alert/
  * Uses handleClick to call callback.
  * @param props
- *    ariaLabel: aria-label as string,
- *    title: title as string,
- *    message: message as string,
+ *    ariaLabel: aria-label as string
+ *    title: title as string
+ *    message: message as string
  *    type: type of alert info (default), warning, error, success
- *    handleClick: click call back function (if a link)
+ *    handleLinkClick: click call back function (if a link)
  *    linkText: link text as string
- *    isVisible: sets if component is visible
- *    handleVisibility: closing call back function
+ *    onChanges: callback used for closing (visibility)
+ *    payload: Custom object defined by user
  * @returns {*}
  * @constructor
  */
@@ -59,7 +59,7 @@ const AlertMessage = props => {
 
   const clickCallback = e => {
     e.preventDefault();
-    return props.handleClick();
+    return props.handleLinkClick();
   };
 
   const updateVisibility = (e, value) => {
@@ -81,7 +81,7 @@ const AlertMessage = props => {
                 justifyContent: "space-between",
                 width: "100%"
               }}>
-              {props.handleClick && props.linkText && (
+              {props.handleLinkClick && props.linkText && (
                 <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
                   {props.linkText}
                 </Link>
@@ -122,14 +122,14 @@ AlertMessage.propTypes = {
   message: PropTypes.string,
   /** type of alert info (default), warning, error, success */
   type: PropTypes.string,
-  /** link text as string */
+  /** link text as string (optional) */
   linkText: PropTypes.string,
-  /** click call back function (if a link) */
-  handleClick: PropTypes.func,
-  /** sets if component is visible */
-  isVisible: PropTypes.bool,
+  /** link clicking call back function (optional) */
+  handleLinkClick: PropTypes.func,
   /** callback used for closing (visibility) */
-  onChanges: PropTypes.func
+  onChanges: PropTypes.func,
+  /** Custom object defined by user. */
+  payload: PropTypes.object
 };
 
 export default AlertMessage;

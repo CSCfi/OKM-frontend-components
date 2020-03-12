@@ -496,11 +496,14 @@ storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and pl
     }
   });
 }).add("Alert example", function () {
-  return React.createElement(CategorizedListRoot, {
+  return React.createElement(Stage, {
     anchor: "alert",
-    changes: datepickerStory.changes,
     categories: alertStory.categories,
-    onUpdate: function onUpdate() {},
-    showCategoryTitles: false
+    changes: alertStory.changes,
+    render: function render(props) {
+      return React.createElement(CategorizedListRoot, Object.assign({
+        showCategoryTitles: false
+      }, props));
+    }
   });
 });

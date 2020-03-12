@@ -616,8 +616,17 @@ const CategorizedList = React.memo(
                                   message={propsObj.message}
                                   linkText={propsObj.linkText}
                                   isVisible={propsObj.isVisible}
-                                  handleClick={propsObj.handleClick}
+                                  handleLinkClick={propsObj.handleLinkClick}
                                   onChanges={handleChanges}
+                                  payload={{
+                                    anchor,
+                                    categories: category.categories,
+                                    component,
+                                    fullPath,
+                                    parent: props.parent,
+                                    rootPath: props.rootPath,
+                                    siblings: props.categories
+                                  }}
                                 />
                               </div>
                             );

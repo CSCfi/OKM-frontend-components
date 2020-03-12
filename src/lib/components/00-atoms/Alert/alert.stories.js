@@ -16,7 +16,7 @@ storiesOf("AlertMessage", module)
       <AlertMessage
         message="The long message is here."
         linkText="This is the link"
-        handleClick={() => console.log("Link pressed")}
+        handleLinkClick={() => console.log("Link pressed")}
       />
     </div>
   ))
@@ -30,7 +30,7 @@ storiesOf("AlertMessage", module)
         type="warning"
         message="Message is here."
         linkText="This is the link"
-        handleClick={() => console.log("Link pressed")}
+        handleLinkClick={() => console.log("Link pressed")}
       />
       <br />
       <AlertMessage type="warning" title="Title" message="Message is here" />
@@ -46,7 +46,7 @@ storiesOf("AlertMessage", module)
         type="error"
         message="Message is here."
         linkText="This is the link"
-        handleClick={() => console.log("Link pressed")}
+        handleLinkClick={() => console.log("Link pressed")}
       />
       <br />
       <AlertMessage
@@ -66,7 +66,7 @@ storiesOf("AlertMessage", module)
         type="success"
         message="Message is here."
         linkText="This is the link"
-        handleClick={() => console.log("Link pressed")}
+        handleLinkClick={() => console.log("Link pressed")}
       />
       <br />
       <AlertMessage
