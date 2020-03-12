@@ -4,7 +4,12 @@ var labelStyles = {
   removal: isRemoved
 };
 export var alertStory = {
-  changes: [],
+  changes: [{
+    anchor: "A.A",
+    properties: {
+      isChecked: true
+    }
+  }],
   categories: [{
     anchor: "A",
     code: "0",
@@ -19,7 +24,7 @@ export var alertStory = {
         labelStyles: Object.assign({}, labelStyles, {
           custom: isInLupa
         }),
-        isChecked: false
+        isChecked: true
       }
     }, {}],
     categories: [{
@@ -29,7 +34,11 @@ export var alertStory = {
         anchor: "B",
         name: "Alert",
         properties: {
-          title: "This is a test"
+          title: "This is a test.",
+          linkText: "Link",
+          handleLinkClick: function handleLinkClick() {
+            console.log("Link was clicked");
+          }
         }
       }]
     }, {

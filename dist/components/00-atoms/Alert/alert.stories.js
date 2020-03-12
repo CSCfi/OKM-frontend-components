@@ -13,8 +13,9 @@ storiesOf("AlertMessage", module).addDecorator(withInfo).add("info (default)", f
     title: "Title is here",
     message: "Message is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
-    message: "Link message is here",
-    handleClick: function handleClick() {
+    message: "The long message is here.",
+    linkText: "This is the link",
+    handleLinkClick: function handleLinkClick() {
       return console.log("Link pressed");
     }
   }));
@@ -29,8 +30,9 @@ storiesOf("AlertMessage", module).addDecorator(withInfo).add("info (default)", f
     message: "Message is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "warning",
-    message: "Link message is here",
-    handleClick: function handleClick() {
+    message: "Message is here.",
+    linkText: "This is the link",
+    handleLinkClick: function handleLinkClick() {
       return console.log("Link pressed");
     }
   }), React.createElement("br", null), React.createElement(AlertMessage, {
@@ -49,8 +51,9 @@ storiesOf("AlertMessage", module).addDecorator(withInfo).add("info (default)", f
     message: "Message is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "error",
-    message: "Link message is here",
-    handleClick: function handleClick() {
+    message: "Message is here.",
+    linkText: "This is the link",
+    handleLinkClick: function handleLinkClick() {
       return console.log("Link pressed");
     }
   }), React.createElement("br", null), React.createElement(AlertMessage, {
@@ -69,8 +72,9 @@ storiesOf("AlertMessage", module).addDecorator(withInfo).add("info (default)", f
     message: "Message is here"
   }), React.createElement("br", null), React.createElement(AlertMessage, {
     type: "success",
-    message: "Link message is here",
-    handleClick: function handleClick() {
+    message: "Message is here.",
+    linkText: "This is the link",
+    handleLinkClick: function handleLinkClick() {
       return console.log("Link pressed");
     }
   }), React.createElement("br", null), React.createElement(AlertMessage, {

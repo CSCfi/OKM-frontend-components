@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import Link from "@material-ui/core/Link";
-
+import IconButton from "@material-ui/core/IconButton";
+import Collapse from "@material-ui/core/Collapse";
+import CloseIcon from "@material-ui/icons/Close";
 /**
  * AlertMessage wraps a Alert
  * https://material-ui.com/components/alert/
  * Uses handleClick to call callback.
  * @param props
- *    ariaLabel: aria-label as string,
- *    title: title as string,
- *    message: message as string,
+ *    ariaLabel: aria-label as string
+ *    title: title as string
+ *    message: message as string
  *    type: type of alert info (default), warning, error, success
- *    handleClick: click call back function (if a link)
+ *    handleLinkClick: click call back function (if a link)
+ *    linkText: link text as string
+ *    onChanges: callback used for closing (visibility)
+ *    payload: Custom object defined by user
  * @returns {*}
  * @constructor
  */
@@ -30,6 +35,21 @@ const useStyles = makeStyles(theme => ({
     },
     "& .MuiAlert-icon": {
       paddingTop: "8px" // overrides default 7px to center icon better with margin 0 of text
+    },
+    "& .MuiAlert-root": {
+      display: "flex"
+    },
+    "& .MuiAlert-action": {
+      marginLeft: 0,
+      paddingLeft: "0.5em",
+      flexGrow: "1"
+    },
+    "& .MuiButtonBase-root": {
+      marginLeft: "auto !important"
+    },
+    "& .MuiLink-root": {
+      color: "green",
+      padding: "2px 0.5em 0 0"
     }
   }
 }));
@@ -37,26 +57,49 @@ const useStyles = makeStyles(theme => ({
 const AlertMessage = props => {
   const classes = useStyles();
 
+  const clickCallback = e => {
+    e.preventDefault();
+    return props.handleLinkClick();
+  };
+
+  const updateVisibility = (e, value) => {
+    props.onChanges(props.payload, { value: value });
+  };
+
   return (
     <div className={classes.root}>
-      {props.handleClick ? (
-        // alert is a link
-        <Link onClick={props.handleClick} style={{ cursor: "pointer" }}>
-          <Alert
-            id={props.id}
-            aria-label={props.ariaLabel}
-            severity={props.type}>
-            {props.title && <AlertTitle>{props.title}</AlertTitle>}
-            {props.message && props.message}
-          </Alert>
-        </Link>
-      ) : (
-        // if not a link
-        <Alert id={props.id} aria-label={props.ariaLabel} severity={props.type}>
+      <Collapse in={props.isVisible}>
+        <Alert
+          id={props.id}
+          aria-label={props.ariaLabel}
+          severity={props.type}
+          variant="outlined"
+          action={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%"
+              }}>
+              {props.handleLinkClick && props.linkText && (
+                <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
+                  {props.linkText}
+                </Link>
+              )}
+              <IconButton
+                style={{ marginLeft: "1em" }}
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={e => updateVisibility(e, false)}>
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            </div>
+          }>
           {props.title && <AlertTitle>{props.title}</AlertTitle>}
-          {props.message && props.message}
+          <p>{props.message && props.message}</p>
         </Alert>
-      )}
+      </Collapse>
     </div>
   );
 };
@@ -64,7 +107,9 @@ const AlertMessage = props => {
 AlertMessage.defaultProps = {
   id: "Alert",
   type: "info",
-  ariaLabel: "alert"
+  ariaLabel: "alert",
+  linkText: "<missing linkText prop>",
+  isVisible: true
 };
 
 AlertMessage.propTypes = {
@@ -77,8 +122,14 @@ AlertMessage.propTypes = {
   message: PropTypes.string,
   /** type of alert info (default), warning, error, success */
   type: PropTypes.string,
-  /** click call back function (if a link) */
-  handleClick: PropTypes.func
+  /** link text as string (optional) */
+  linkText: PropTypes.string,
+  /** link clicking call back function (optional) */
+  handleLinkClick: PropTypes.func,
+  /** callback used for closing (visibility) */
+  onChanges: PropTypes.func,
+  /** Custom object defined by user. */
+  payload: PropTypes.object
 };
 
 export default AlertMessage;

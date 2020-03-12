@@ -269,12 +269,12 @@ storiesOf("CategorizedListRoot", module)
   })
   .add("Alert example", () => {
     return (
-      <CategorizedListRoot
-        anchor="alert"
-        changes={datepickerStory.changes}
+      <Stage
+        anchor={"alert"}
         categories={alertStory.categories}
-        onUpdate={() => {}}
-        showCategoryTitles={false}
-      />
+        changes={alertStory.changes}
+        render={props => (
+          <CategorizedListRoot showCategoryTitles={false} {...props} />
+        )}></Stage>
     );
   });

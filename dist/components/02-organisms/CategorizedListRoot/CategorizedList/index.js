@@ -418,7 +418,19 @@ var CategorizedList = React.memo(function (props) {
           type: propsObj.type,
           title: propsObj.title,
           message: propsObj.message,
-          handleClick: propsObj.handleClick
+          linkText: propsObj.linkText,
+          isVisible: propsObj.isVisible,
+          handleLinkClick: propsObj.handleLinkClick,
+          onChanges: handleChanges,
+          payload: {
+            anchor: anchor,
+            categories: category.categories,
+            component: component,
+            fullPath: fullPath,
+            parent: props.parent,
+            rootPath: props.rootPath,
+            siblings: props.categories
+          }
         }));
       }(category) : null, component.name === "Autocomplete" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};
