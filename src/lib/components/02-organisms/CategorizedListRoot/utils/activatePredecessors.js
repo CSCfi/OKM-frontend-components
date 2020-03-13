@@ -10,7 +10,7 @@ import { updateChanges } from "./updateChanges";
  * @param {*} reducedStructure
  * @param {*} changeObjects
  */
-export function activateParentNodes(node, reducedStructure, changeObjects) {
+export function activatePredecessors(node, reducedStructure, changeObjects) {
   console.group();
   /**
    * Let's find out if the node has a parent. The parent must be checked too
@@ -64,7 +64,8 @@ export function activateParentNodes(node, reducedStructure, changeObjects) {
     }
 
     // The parent node might have a parent. Let's handle the parent node next.
-    return activateParentNodes(parentNode, reducedStructure, changeObjects);
+    console.groupEnd();
+    return activatePredecessors(parentNode, reducedStructure, changeObjects);
   }
 
   // if (!childNodes.length) {

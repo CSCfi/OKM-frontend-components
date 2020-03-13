@@ -66,7 +66,6 @@ export function activateNodeAndItsDescendants(
         { isDeprecated: true },
         changesWithoutRootAnchor
       );
-      console.warn(changesWithoutRootAnchor);
     } else {
       /**
        * If the original value if not true and change object's isChecked

@@ -8,6 +8,7 @@ import { getChangeObjIndexByAnchor } from "../utils";
  * @param {*} changes
  */
 export function updateChanges(node, properties, changes) {
+    console.info(node, properties);
   // Parent node found. Let's find the change object of it.
   const changeObjIndex = getChangeObjIndexByAnchor(node.fullAnchor, changes);
   // If the parent has a change object we modify it.
@@ -46,5 +47,6 @@ export function updateChanges(node, properties, changes) {
       changes
     );
   }
+  console.info(changes);
   return changes;
 }

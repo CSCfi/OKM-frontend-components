@@ -3,6 +3,7 @@ import { getChangeObjByAnchor, getChangeObjIndexByAnchor } from "../utils";
 import { findParent } from "./findParent";
 import { getChildNodes } from "./getChildNodes";
 import { disableNodes } from "./disableNodes";
+import { updateChanges } from "./updateChanges";
 
 /**
  * Function handles the unchecking / deactivation of a radio button or checkbox.
@@ -18,13 +19,12 @@ export function runDeactivationProcedure(
   // Let's find the change object of the node under activation.
   const changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
   if (changeObj && changeObj.properties.isChecked === true) {
+    console.info(changeObj);
     /**
      * If change object was found and the node is already checked
      * the change object must be removed.
      **/
-    changeObjects = filter(compose(not, propEq("anchor", node.fullAnchor)))(
-      changeObjects
-    );
+    changeObjects = updateChanges(node, { isDeprecated: true }, changeObjects);
   } else if (!changeObj && node.properties.isChecked === true) {
     /**
      * If there are no changes and node was already checked a new change
@@ -84,10 +84,11 @@ export function runDeactivationProcedure(
    * deactivated. Let's find them first.
    */
   const childNodes = getChildNodes(node, reducedStructure);
-
+  console.info(changeObjects);
   // Let's activate all child nodes.
   if (childNodes.length) {
     return disableNodes(childNodes, reducedStructure, changeObjects);
   }
+
   return changeObjects;
 }
