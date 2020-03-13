@@ -38,7 +38,6 @@ export const alertStory = {
       categories: [
         {
           anchor: "B",
-          title: "Categories",
           components: [
             {
               anchor: "B",
@@ -46,24 +45,28 @@ export const alertStory = {
               properties: {
                 title: "This is a test.",
                 linkText: "Link",
-                handleLinkClick: () => {
-                  console.log("Link was clicked");
-                }
+                linkUrl: "#alert.A"
               }
             }
           ]
         },
         {
           anchor: "C",
-          title: "Categories",
           components: [
             {
               anchor: "B",
               name: "Alert",
               properties: {
-                title: "This is a test",
-                message: "Testing alert...",
-                type: "warning"
+                title: "This is a test!",
+                type: "warning",
+                linkText: "Link as func",
+                handleLinkClick: () => {
+                  let a = document.createElement("a");
+                  a.href = "#alert.A";
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                }
               }
             }
           ]
