@@ -1,9 +1,10 @@
 import * as R from "ramda";
-import { removeAnchorPart } from "../../../utils/common";
-import { disableSiblings } from "./utils/disableSiblings";
+import { activatePredecessors } from "./utils/activatePredecessors";
+import { deactivatePredecessors } from "./utils/deactivatePredecessors";
 import { activateNodeAndItsDescendants } from "./utils/activateNodeAndItsDescendants";
-import { activateParentNodes } from "./utils/activateParentNodes";
-import { runDeactivationProcedure } from "./utils/runDeactivationProcedure";
+import { deactivateNodeAndItsDescendants } from "./utils/deactivateNodeAndItsDescendants";
+import { removeAnchorPart } from "../../../utils/common";
+import { removeDeprecatedChanges } from "./utils/removeDeprecatedChanges";
 
 /**
  * @module CategorizedListRoot/utils
@@ -162,13 +163,24 @@ export const handleNodeMain = (
       changesWithoutRootAnchor
     );
     // 2) Activate node's predecessors.
-    changesWithoutRootAnchor = activateParentNodes(
+    changesWithoutRootAnchor = activatePredecessors(
       node,
       reducedStructure,
       changesWithoutRootAnchor
     );
   } else if (requestedChanges.isChecked === false) {
-    changesWithoutRootAnchor = runDeactivationProcedure(
+    /**
+     * If user has clicked a checked checkbox or a radio button we must do
+     * two things:
+     * 1) Deactivate the node and its descendants.
+     */
+    changesWithoutRootAnchor = deactivateNodeAndItsDescendants(
+      node,
+      reducedStructure,
+      changesWithoutRootAnchor
+    );
+    // 2) Deactivate node's predecessors.
+    changesWithoutRootAnchor = deactivatePredecessors(
       node,
       reducedStructure,
       changesWithoutRootAnchor
@@ -194,6 +206,8 @@ export const handleNodeMain = (
       );
     }
   }
+
+  changesWithoutRootAnchor = removeDeprecatedChanges(changesWithoutRootAnchor);
 
   const updatedChangesArr = rootAnchor
     ? R.map(changeObj => {
