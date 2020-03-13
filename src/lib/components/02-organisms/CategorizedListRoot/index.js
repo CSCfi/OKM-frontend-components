@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import CategorizedList from "./CategorizedList";
 import { handleNodeMain, getReducedStructure, getTargetNode } from "./utils";
@@ -9,10 +9,8 @@ const defaultProps = {
   categories: [],
   changes: [null],
   debug: false,
-  interval: 0,
   sectionId: "sectionidmissing",
-  showCategoryTitles: false,
-  nodeIndex: 0
+  showCategoryTitles: false
 };
 
 const CategorizedListRoot = React.memo(
@@ -21,11 +19,8 @@ const CategorizedListRoot = React.memo(
     categories = defaultProps.categories,
     changes = defaultProps.changes,
     debug = defaultProps.debug,
-    interval = defaultProps.interval,
     onUpdate,
     showCategoryTitles = defaultProps.showCategoryTitles,
-    nodeIndex = defaultProps.nodeIndex,
-    updateNodeIndex,
     isReadOnly,
     showValidationErrors
   }) => {
@@ -73,17 +68,6 @@ const CategorizedListRoot = React.memo(
       [anchor, changes, onUpdate]
     );
 
-    useEffect(() => {
-      if (interval && interval > 0) {
-        const handle = setTimeout(() => {
-          updateNodeIndex(nodeIndex);
-        }, interval);
-        return () => {
-          clearTimeout(handle);
-        };
-      }
-    }, [interval, nodeIndex, updateNodeIndex]);
-
     return (
       <React.Fragment>
         {!R.equals(R.head(changes), null)
@@ -116,6 +100,8 @@ CategorizedListRoot.propTypes = {
   categories: PropTypes.array,
   changes: PropTypes.array,
   index: PropTypes.number,
+  interval: PropTypes.number,
+  isPlaying: PropTypes.bool,
   onUpdate: PropTypes.func.isRequired,
   sectionId: PropTypes.string,
   showCategoryTitles: PropTypes.bool,
