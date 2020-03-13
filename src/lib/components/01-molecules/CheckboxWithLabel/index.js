@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -49,6 +49,7 @@ const CheckboxWithLabel = React.memo(
               control={
                 <Checkbox
                   checked={props.isChecked}
+                  indeterminate={props.isChecked && props.isIndeterminate}
                   value="1"
                   onChange={handleChanges}
                   readOnly={props.isReadOnly}
@@ -76,6 +77,7 @@ const CheckboxWithLabel = React.memo(
     return (
       R.equals(prevState.payload, currentState.payload) &&
       R.equals(prevState.isChecked, currentState.isChecked) &&
+      R.equals(prevState.isIndeterminate, currentState.isIndeterminate) &&
       R.equals(prevState.isDisabled, currentState.isDisabled)
     );
   }
@@ -84,6 +86,7 @@ const CheckboxWithLabel = React.memo(
 CheckboxWithLabel.defaultProps = {
   isChecked: false,
   isDisabled: false,
+  isIndeterminate: false,
   isReadOnly: false,
   payload: {}
 };
@@ -91,6 +94,7 @@ CheckboxWithLabel.defaultProps = {
 CheckboxWithLabel.propTypes = {
   isChecked: PropTypes.bool,
   isDisabled: PropTypes.bool,
+  isIndeterminate: PropTypes.bool,
   /**
    * Will be called after checking or unchecking the checkbox.
    */

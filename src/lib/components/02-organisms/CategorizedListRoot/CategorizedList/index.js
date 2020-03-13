@@ -295,8 +295,11 @@ const CategorizedList = React.memo(
                     (props.debug
                       ? props.rootPath.concat([i, "components", ii])
                       : "");
+
                   return (
-                    <React.Fragment key={`item-${ii}`}>
+                    <div
+                      key={`item-${ii}`}
+                      id={`item-${ii}-${new Date().getTime()}`}>
                       {component.name === "CheckboxWithLabel" && (
                         <div className={component.styleClasses}>
                           <CheckboxWithLabel
@@ -304,6 +307,7 @@ const CategorizedList = React.memo(
                             name={component.name}
                             isChecked={propsObj.isChecked}
                             isDisabled={propsObj.isDisabled}
+                            isIndeterminate={propsObj.isIndeterminate}
                             isReadOnly={propsObj.isReadOnly}
                             onChanges={handleChanges}
                             payload={{
@@ -743,7 +747,7 @@ const CategorizedList = React.memo(
                           />
                         </div>
                       )}
-                    </React.Fragment>
+                    </div>
                   );
                 })}
               </div>
