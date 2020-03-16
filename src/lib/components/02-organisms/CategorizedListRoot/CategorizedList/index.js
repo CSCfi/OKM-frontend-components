@@ -301,9 +301,7 @@ const CategorizedList = React.memo(
                       : "");
 
                   return (
-                    <div
-                      key={`item-${ii}`}
-                      id={`item-${ii}-${new Date().getTime()}`}>
+                    <React.Fragment key={`item-${ii}`}>
                       {component.name === "CheckboxWithLabel" && (
                         <div className={component.styleClasses}>
                           <CheckboxWithLabel
@@ -765,7 +763,7 @@ const CategorizedList = React.memo(
                           />
                         </div>
                       )}
-                    </div>
+                    </React.Fragment>
                   );
                 })}
               </div>
