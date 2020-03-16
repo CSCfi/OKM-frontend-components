@@ -1,6 +1,6 @@
 {
   "name": "okm-frontend-components",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "dependencies": {
     "clsx": "^1.0.4",
     "react-intl": "^3.12.0"
