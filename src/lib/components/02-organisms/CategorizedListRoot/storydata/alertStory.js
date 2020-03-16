@@ -6,7 +6,14 @@ const labelStyles = {
 };
 
 export const alertStory = {
-  changes: [],
+  changes: [
+    {
+      anchor: "alert.A.A",
+      properties: {
+        isChecked: true
+      }
+    }
+  ],
   categories: [
     {
       anchor: "A",
