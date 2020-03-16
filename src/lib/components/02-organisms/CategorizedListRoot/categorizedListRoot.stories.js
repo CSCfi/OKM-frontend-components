@@ -9,82 +9,72 @@ import { complexStory } from "./storydata/complexStory";
 import { radioStory } from "./storydata/radioStory";
 import { longAndPlainStory } from "./storydata/longAndPlainStory";
 import { simpleTextBoxStory } from "./storydata/simpleTextBoxStory";
-import { subformStory } from "./storydata/subformStory";
 import { textBoxStory } from "./storydata/textBoxStory";
 import { attachmentsStory } from "./storydata/attachmentsStory";
 import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
 import { alertStory } from "./storydata/alertStory";
 import Stage from "./Stage";
-import Stage2 from "./Stage2";
 
 storiesOf("CategorizedListRoot", module)
   .addDecorator(withInfo)
-  .add("Long and plain example", () => {
+  .add("Long and plain - Checkboxes only", () => {
     return (
-      <Stage2
+      <Stage
         anchor={"long-and-plain"}
         categories={longAndPlainStory.categories}
         changes={longAndPlainStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage2>
+        )}></Stage>
     );
   })
-  .add("Simple radio example", () => {
+  .add("Three levels of radio buttons", () => {
     return (
-      <Stage2
+      <Stage
         anchor={"simple-radio"}
         categories={simpleRadioStory.categories}
         changes={simpleRadioStory.changes}
-        render={props => <CategorizedListRoot {...props} />}></Stage2>
+        render={props => <CategorizedListRoot {...props} />}></Stage>
     );
   })
-  .add("One checkbox example", () => {
+  .add("Checkbox under a checkbox", () => {
     return (
-      <Stage2
+      <Stage
         anchor={"checkbox"}
         categories={checkboxStory.categories}
         changes={checkboxStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage2>
+        )}></Stage>
     );
   })
-  .add("Simple example", () => {
+  .add("Three levels of checkboxes", () => {
     return (
-      <Stage2
+      <Stage
         anchor={"simple"}
         categories={simpleStory.categories}
         changes={simpleStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage2>
+        )}></Stage>
     );
   })
-  .add("Complex example", () => {
+  .add("Checkboxes, radio buttons and dropdowns", () => {
     return (
-      <Stage2
+      <Stage
         anchor={"complex"}
         categories={complexStory.categories}
         changes={complexStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage2>
+        )}></Stage>
     );
   })
-  .add("Radio example", () => {
+  .add("Checkboxes, radio buttons and dropdowns (simpler)", () => {
     return (
       <Stage
         anchor={"radio"}
-        // interval={1000}
-        loopChanges={[
-          { anchor: "C.A.A", properties: { isChecked: true } },
-          { anchor: "B.A", properties: { isChecked: true } },
-          { anchor: "A.A.A", properties: { isChecked: true } },
-          { anchor: "A.C.A", properties: { isChecked: true } },
-          { anchor: "A.B.A", properties: { isChecked: true } }
-        ]}
         categories={radioStory.categories}
         changes={radioStory.changes}
         render={props => (
@@ -96,11 +86,6 @@ storiesOf("CategorizedListRoot", module)
     return (
       <Stage
         anchor={"simple-textbox"}
-        // interval={1000}
-        loopChanges={[
-          { anchor: "A.A", properties: { isChecked: true } },
-          { anchor: "A.A", properties: { isChecked: false } }
-        ]}
         categories={simpleTextBoxStory.categories}
         changes={simpleTextBoxStory.changes}
         render={props => (
@@ -108,21 +93,10 @@ storiesOf("CategorizedListRoot", module)
         )}></Stage>
     );
   })
-  .add("Textbox example", () => {
+  .add("Checkboxes, Dropdowns, textboxes and radio buttons", () => {
     return (
       <Stage
         anchor={"textbox"}
-        // interval={1000}
-        loopChanges={[
-          { anchor: "A.A", properties: { isChecked: true } },
-          { anchor: "C.A", properties: { isChecked: true } },
-          { anchor: "B.A", properties: { isChecked: false } },
-          { anchor: "A.A", properties: { isChecked: false } },
-          { anchor: "A.B.A.A", properties: { isChecked: true } },
-          { anchor: "B.A", properties: { isChecked: true } },
-          { anchor: "C.A", properties: { isChecked: false } },
-          { anchor: "A.A", properties: { isChecked: false } }
-        ]}
         categories={textBoxStory.categories}
         changes={textBoxStory.changes}
         render={props => (
@@ -130,21 +104,10 @@ storiesOf("CategorizedListRoot", module)
         )}></Stage>
     );
   })
-  .add("Input example", () => {
+  .add("Checkboxes, Dropdowns, inputs and radio buttons", () => {
     return (
       <Stage
         anchor={"input"}
-        // interval={1000}
-        loopChanges={[
-          { anchor: "A.A", properties: { isChecked: true } },
-          { anchor: "C.A", properties: { isChecked: true } },
-          { anchor: "B.A", properties: { isChecked: false } },
-          { anchor: "A.A", properties: { isChecked: false } },
-          { anchor: "A.B.A.A", properties: { isChecked: true } },
-          { anchor: "B.A", properties: { isChecked: true } },
-          { anchor: "C.A", properties: { isChecked: false } },
-          { anchor: "A.A", properties: { isChecked: false } }
-        ]}
         categories={inputStory.categories}
         changes={inputStory.changes}
         render={props => (
@@ -179,30 +142,6 @@ storiesOf("CategorizedListRoot", module)
         )}></Stage>
     );
   })
-  .add("Dynamic subform example", () => {
-    return (
-      <Stage
-        anchor={"dynamicSubforms"}
-        // interval={1000}
-        loopChanges={
-          [
-            // { anchor: "A.A", properties: { isChecked: true } },
-            // { anchor: "C.A", properties: { isChecked: true } },
-            // { anchor: "B.A", properties: { isChecked: false } },
-            // { anchor: "A.A", properties: { isChecked: false } },
-            // { anchor: "A.B.A.A", properties: { isChecked: true } },
-            // { anchor: "B.A", properties: { isChecked: true } },
-            // { anchor: "C.A", properties: { isChecked: false } },
-            // { anchor: "A.A", properties: { isChecked: false } }
-          ]
-        }
-        categories={subformStory.categories}
-        changes={subformStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
-    );
-  })
   .add("Alert example", () => {
     return (
       <Stage
@@ -211,6 +150,7 @@ storiesOf("CategorizedListRoot", module)
         changes={alertStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
+        )}
+        showValidationErrors={() => {}}></Stage>
     );
   });
