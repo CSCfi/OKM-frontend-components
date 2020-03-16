@@ -33,8 +33,6 @@ var RadioButtonWithLabel = React.memo(function (props) {
   return React.createElement(React.Fragment, null, !props.isReadOnly ? React.createElement(FormGroup, {
     row: true
   }, React.createElement(FormControlLabel, {
-    id: "label-".concat(props.payload.anchor),
-    htmlFor: props.payload.anchor,
     classes: {
       label: styles.label
     },

@@ -205,9 +205,8 @@ var CategorizedList = React.memo(function (props) {
       var labelStyles = Object.assign({}, isAddition ? (propsObj.labelStyles || {}).addition : {}, isRemoved ? (propsObj.labelStyles || {}).removal : {}, (propsObj.labelStyles || {}).custom || {});
       var styleClasses = component.styleClasses || [];
       var title = propsObj.title + (props.debug ? props.rootPath.concat([i, "components", ii]) : "");
-      return React.createElement("div", {
-        key: "item-".concat(ii),
-        id: "item-".concat(ii, "-").concat(new Date().getTime())
+      return React.createElement(React.Fragment, {
+        key: "item-".concat(ii)
       }, component.name === "CheckboxWithLabel" && React.createElement("div", {
         className: component.styleClasses
       }, React.createElement(CheckboxWithLabel, {
