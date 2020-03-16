@@ -1,139 +1,137 @@
-import React, { useCallback, useMemo, useState, useEffect } from "react";
-import { handleNodeMain, getReducedStructure, getTargetNode } from "../utils";
-import PropTypes from "prop-types";
-import * as R from "ramda";
-import { cloneDeep } from "lodash";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Button, Select, MenuItem, FormControl } from "@material-ui/core";
 
-function markRequiredFields(lomake, changeObjects = [], rules = []) {
-  let modifiedLomake = cloneDeep(lomake);
-  R.forEach(rule => {
-    const isRequired = rule.isRequired(modifiedLomake, changeObjects);
-    modifiedLomake = rule.markRequiredFields(modifiedLomake, isRequired);
-    const isValid = rule.isValid(modifiedLomake, changeObjects, isRequired)();
-    modifiedLomake = rule.showErrors(modifiedLomake, isValid);
-    console.info("Is valid: ", isValid);
-  }, rules);
-  return modifiedLomake;
+/**
+ * Get a random integer between `min` and `max`.
+ *
+ * @param {number} min - min number
+ * @param {number} max - max number
+ * @return {number} a random integer
+ */
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const Stage = props => {
+const intervalOptions = [500, 1000, 2000, 3000, 4000, 5000, 10000];
+let timeoutHandle = null;
+
+function Stage(props) {
+  let originalInterval = props.interval;
+
+  const [interval, setInterval] = useState(originalInterval || 3000);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [changes, setChanges] = useState(props.changes);
-  const [lomake, setLomake] = useState(props.categories);
-  const [nodeIndex, setNodeIndex] = useState(0);
-  const [interval, setInterval] = useState();
+
+  let originalChanges = props.changes;
 
   const handleUpdate = payload => {
     setChanges(payload.changes);
   };
 
-  const reducedStructure = useMemo(() => {
-    return getReducedStructure(props.categories);
-  }, [props.categories]);
+  function getElementToClick(elementsToClick) {
+    let randomElementIndex = getRandomInt(0, elementsToClick.length - 1);
+    let randomElement = elementsToClick[randomElementIndex];
+    return { randomElement, randomElementIndex };
+  }
 
-  const updateNodeIndex = useCallback(
-    nodeIndex => {
-      if (interval) {
-        if (props.loopChanges[nodeIndex + 1]) {
-          setNodeIndex(nodeIndex + 1);
-        } else if (props.isLoopEnabled) {
-          setNodeIndex(0);
-        } else {
-          console.info("Procedure ended.");
+  const runTest = useCallback(() => {
+    const elementsToClick = document.querySelectorAll(
+      'input[type="checkbox"], input[type="radio"]:not([checked])'
+    );
+    if (isPlaying) {
+      const { randomElement, randomElementIndex } = getElementToClick(
+        elementsToClick
+      );
+      if (randomElement) {
+        randomElement.parentNode.style["background-color"] = "#000000";
+        randomElement.parentNode.style["border"] = "1px dashed red";
+        if (elementsToClick && randomElementIndex > -1) {
+          timeoutHandle = setTimeout(() => {
+            randomElement.parentNode.style["background-color"] = "initial";
+            randomElement.parentNode.style["border"] = "initial";
+            elementsToClick[randomElementIndex].click();
+          }, interval);
         }
       }
-    },
-    [interval, props.isLoopEnabled, props.loopChanges]
-  );
-
-  const targetNode = useMemo(() => {
-    let targetNode = null;
-    if (interval) {
-      const loopChange = R.view(R.lensIndex(nodeIndex))(props.loopChanges);
-      targetNode = getTargetNode(loopChange, reducedStructure);
-      console.group();
-      console.info("Target node", targetNode);
-      console.info("Reduced structure", reducedStructure);
-      console.groupEnd();
-    }
-    return targetNode;
-  }, [nodeIndex, interval, props.loopChanges, reducedStructure]);
-
-  useEffect(() => {
-    if (props.rules.length) {
-      const updatedLomake = markRequiredFields(lomake, changes, props.rules);
-      if (!R.equals(updatedLomake, lomake)) {
-        setLomake(updatedLomake);
+    } else {
+      if (timeoutHandle) {
+        clearTimeout(timeoutHandle);
+        timeoutHandle = null;
+        setChanges(originalChanges);
+        elementsToClick.forEach(randomInput => {
+          randomInput.parentNode.style["background-color"] = "initial";
+          randomInput.parentNode.style["border"] = "initial";
+        });
       }
     }
-  }, [changes, lomake, props.rules]);
+  }, [interval, isPlaying, originalChanges]);
 
   useEffect(() => {
-    if (reducedStructure && targetNode) {
-      const nextChanges = handleNodeMain(
-        targetNode,
-        props.anchor,
-        reducedStructure,
-        changes
-      );
-      if (!R.equals(changes, nextChanges)) {
-        console.info("setting changes...");
-        setChanges(nextChanges);
-      }
-    }
-  }, [changes, props.anchor, reducedStructure, targetNode]);
-
-  useEffect(() => {
-    setInterval(props.interval);
-  }, [props.interval]);
+    runTest();
+  }, [changes, isPlaying, originalChanges, runTest]);
 
   return (
     <React.Fragment>
       {!!props.render
         ? props.render({
             anchor: props.anchor,
-            categories: lomake,
+            categories: props.categories,
             changes,
-            interval: R.isNil(interval) ? 2000 : interval,
-            onUpdate: handleUpdate,
-            updateNodeIndex,
-            nodeIndex
+            onUpdate: handleUpdate
           })
         : null}
-      {/* {props.children} */}
-      <div className="p-20">
-        <button
-          type="button"
-          onClick={() => {
-            setInterval(interval > 0 ? 0 : 1000);
-          }}>
-          {interval > 0 ? "Stop" : "Play"}
-        </button>
-        {targetNode && targetNode.original ? (
-          <div>
-            Target node:
-            <span className="font-bold">
-              {targetNode.original.fullAnchor}
-            </span>{" "}
-            <br />
-            <span className="pr-4">Latest operations:</span>
-            <code>{JSON.stringify(targetNode.requestedChanges)}</code>
-          </div>
-        ) : null}
+      <div className="p-16">
+        <hr />
+        <p className="pt-8 pb-8">
+          Test run simulates click events. Next click is marked with black
+          background and red dashed border. By folowing the test you can ensure
+          that the category structure above responses to clicks correctly.
+        </p>
+        <div className="flex items-center">
+          <label className="flex items-center mr-12">
+            <span className="inline-block mr-4">Interval between clicks:</span>
+            <FormControl>
+              <Select
+                labelId="test-run-interval"
+                value={interval}
+                autoWidth={true}
+                onChange={e => {
+                  setIsPlaying(false);
+                  setInterval(parseInt(e.target.value));
+                  setTimeout(() => {
+                    setIsPlaying(true);
+                  });
+                }}>
+                {intervalOptions.map(_interval => {
+                  return (
+                    <MenuItem key={_interval} value={_interval}>
+                      {_interval / 1000} s
+                    </MenuItem>
+                  );
+                })}
+                {originalInterval && (
+                  <MenuItem value={originalInterval}>
+                    User defined = {originalInterval / 1000} s
+                  </MenuItem>
+                )}
+              </Select>
+            </FormControl>
+          </label>
+          <Button
+            variant="contained"
+            color="primary"
+            // disabled={!isPlaying && !isNaN(timeoutHandle)}
+            onClick={() => {
+              setIsPlaying(prevState => !prevState);
+            }}>
+            {isPlaying ? "Stop test run" : "Start test run"}
+          </Button>
+        </div>
       </div>
     </React.Fragment>
   );
-};
+}
 
-Stage.defaultProps = {
-  isLoopEnabled: true,
-  loopChanges: [],
-  rules: []
-};
-
-Stage.propTypes = {
-  isLoopEnabled: PropTypes.bool,
-  loopChanges: PropTypes.array,
-  rules: PropTypes.array
-};
+Stage.propTypes = {};
 
 export default Stage;

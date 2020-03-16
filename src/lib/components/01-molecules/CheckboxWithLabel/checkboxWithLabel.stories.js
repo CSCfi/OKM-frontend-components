@@ -12,8 +12,7 @@ storiesOf("CheckboxWithLabel", module)
       isChecked={false}
       onChanges={() => {
         console.info("Clicked!");
-      }}
-    >
+      }}>
       Is unchecked
     </CheckboxWithLabel>
   ))
@@ -23,8 +22,7 @@ storiesOf("CheckboxWithLabel", module)
       isChecked={true}
       onChanges={() => {
         console.info("Clicked!");
-      }}
-    >
+      }}>
       Is checked
     </CheckboxWithLabel>
   ))
@@ -34,8 +32,7 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isInLupa)}
-    >
+      labelStyles={Object.assign({}, isInLupa)}>
       Is unchecked and in LUPA
     </CheckboxWithLabel>
   ))
@@ -46,8 +43,7 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isInLupa)}
-    >
+      labelStyles={Object.assign({}, isInLupa)}>
       Is checked and in LUPA
     </CheckboxWithLabel>
   ))
@@ -57,8 +53,7 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isRemoved)}
-    >
+      labelStyles={Object.assign({}, isRemoved)}>
       Is unchecked and removed
     </CheckboxWithLabel>
   ))
@@ -69,8 +64,7 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isAdded)}
-    >
+      labelStyles={Object.assign({}, isAdded)}>
       Is checked and added
     </CheckboxWithLabel>
   ))
@@ -80,8 +74,7 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isRemoved, isInLupa)}
-    >
+      labelStyles={Object.assign({}, isRemoved, isInLupa)}>
       Is unchecked, removed and in LUPA
     </CheckboxWithLabel>
   ))
@@ -92,8 +85,21 @@ storiesOf("CheckboxWithLabel", module)
       onChanges={() => {
         console.info("Clicked!");
       }}
-      labelStyles={Object.assign({}, isAdded, isInLupa)}
-    >
+      labelStyles={Object.assign({}, isAdded, isInLupa)}>
       Is checked, added and in LUPA
+    </CheckboxWithLabel>
+  ))
+  .add("is unchecked and indeterminate", () => (
+    <p>This state is not implemented.</p>
+  ))
+  .add("is checked and indeterminate", () => (
+    <CheckboxWithLabel
+      name="example"
+      isChecked={true}
+      isIndeterminate={true}
+      onChanges={() => {
+        console.info("Clicked!");
+      }}>
+      Is checked and indeterminate
     </CheckboxWithLabel>
   ));

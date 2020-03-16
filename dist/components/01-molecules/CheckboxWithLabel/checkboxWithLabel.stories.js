@@ -70,4 +70,15 @@ storiesOf("CheckboxWithLabel", module).addDecorator(withInfo).add("is unchecked"
     },
     labelStyles: Object.assign({}, isAdded, isInLupa)
   }, "Is checked, added and in LUPA");
+}).add("is unchecked and indeterminate", function () {
+  return React.createElement("p", null, "This state is not implemented.");
+}).add("is checked and indeterminate", function () {
+  return React.createElement(CheckboxWithLabel, {
+    name: "example",
+    isChecked: true,
+    isIndeterminate: true,
+    onChanges: function onChanges() {
+      console.info("Clicked!");
+    }
+  }, "Is checked and indeterminate");
 });

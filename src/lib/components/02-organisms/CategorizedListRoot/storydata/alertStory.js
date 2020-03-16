@@ -8,7 +8,7 @@ const labelStyles = {
 export const alertStory = {
   changes: [
     {
-      anchor: "A.A",
+      anchor: "alert.A.A",
       properties: {
         isChecked: true
       }

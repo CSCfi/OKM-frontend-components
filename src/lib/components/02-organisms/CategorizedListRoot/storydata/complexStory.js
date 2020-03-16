@@ -6,27 +6,7 @@ const labelStyles = {
 };
 
 export const complexStory = {
-  changes: [
-    {
-      anchor: "complex.A.A",
-      properties: {
-        isChecked: true
-      }
-    },
-    {
-      anchor: "complex.B.A",
-      properties: {
-        isChecked: true
-      }
-    },
-
-    {
-      anchor: "complex.A.B.A",
-      properties: {
-        isChecked: true
-      }
-    }
-  ],
+  changes: [],
   categories: [
     {
       anchor: "A",

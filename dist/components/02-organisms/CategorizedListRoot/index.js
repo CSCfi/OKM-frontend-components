@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import CategorizedList from "./CategorizedList";
 import { handleNodeMain, getReducedStructure, getTargetNode } from "./utils";
 import * as R from "ramda";
@@ -7,10 +7,8 @@ var defaultProps = {
   categories: [],
   changes: [null],
   debug: false,
-  interval: 0,
   sectionId: "sectionidmissing",
-  showCategoryTitles: false,
-  nodeIndex: 0
+  showCategoryTitles: false
 };
 var CategorizedListRoot = React.memo(function (_ref) {
   var _ref$anchor = _ref.anchor,
@@ -21,14 +19,9 @@ var CategorizedListRoot = React.memo(function (_ref) {
       changes = _ref$changes === void 0 ? defaultProps.changes : _ref$changes,
       _ref$debug = _ref.debug,
       debug = _ref$debug === void 0 ? defaultProps.debug : _ref$debug,
-      _ref$interval = _ref.interval,
-      interval = _ref$interval === void 0 ? defaultProps.interval : _ref$interval,
       onUpdate = _ref.onUpdate,
       _ref$showCategoryTitl = _ref.showCategoryTitles,
       showCategoryTitles = _ref$showCategoryTitl === void 0 ? defaultProps.showCategoryTitles : _ref$showCategoryTitl,
-      _ref$nodeIndex = _ref.nodeIndex,
-      nodeIndex = _ref$nodeIndex === void 0 ? defaultProps.nodeIndex : _ref$nodeIndex,
-      updateNodeIndex = _ref.updateNodeIndex,
       isReadOnly = _ref.isReadOnly,
       showValidationErrors = _ref.showValidationErrors;
   var changesRef = useRef(null);
@@ -57,16 +50,6 @@ var CategorizedListRoot = React.memo(function (_ref) {
       changes: R.filter(R.compose(R.not, R.propEq("anchor", _anchor)), changes)
     });
   }, [anchor, changes, onUpdate]);
-  useEffect(function () {
-    if (interval && interval > 0) {
-      var handle = setTimeout(function () {
-        updateNodeIndex(nodeIndex);
-      }, interval);
-      return function () {
-        clearTimeout(handle);
-      };
-    }
-  }, [interval, nodeIndex, updateNodeIndex]);
   return React.createElement(React.Fragment, null, !R.equals(R.head(changes), null) ? function () {
     return React.createElement(CategorizedList, {
       anchor: anchor,

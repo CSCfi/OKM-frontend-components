@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import green from "@material-ui/core/colors/green";
@@ -48,6 +48,7 @@ var CheckboxWithLabel = React.memo(function (props) {
     disabled: props.isDisabled,
     control: React.createElement(Checkbox, {
       checked: props.isChecked,
+      indeterminate: props.isChecked && props.isIndeterminate,
       value: "1",
       onChange: handleChanges,
       readOnly: props.isReadOnly,
@@ -63,11 +64,12 @@ var CheckboxWithLabel = React.memo(function (props) {
     className: "my-auto"
   }, props.children)));
 }, function (prevState, currentState) {
-  return R.equals(prevState.payload, currentState.payload) && R.equals(prevState.isChecked, currentState.isChecked) && R.equals(prevState.isDisabled, currentState.isDisabled);
+  return R.equals(prevState.payload, currentState.payload) && R.equals(prevState.isChecked, currentState.isChecked) && R.equals(prevState.isIndeterminate, currentState.isIndeterminate) && R.equals(prevState.isDisabled, currentState.isDisabled);
 });
 CheckboxWithLabel.defaultProps = {
   isChecked: false,
   isDisabled: false,
+  isIndeterminate: false,
   isReadOnly: false,
   payload: {}
 };
