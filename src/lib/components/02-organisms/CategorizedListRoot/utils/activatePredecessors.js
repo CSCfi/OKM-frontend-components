@@ -2,7 +2,8 @@ import { find } from "ramda";
 import { findParent } from "./findParent";
 import { findSiblings } from "./findSiblings";
 import { isNodeChecked } from "./isNodeChecked";
-import { updateChanges } from "./updateChanges";
+import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
+import { uncheckSiblings } from "./uncheckSiblings";
 
 /**
  *
@@ -45,7 +46,7 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     if (firstUncheckedSibling) {
       console.info("Parent node is ", parentNode, "and isIndeterminate: true");
       // isIndeterminate = true
-      changeObjects = updateChanges(
+      changeObjects = updateChangeObjectsArray(
         parentNode,
         { isChecked: true, isIndeterminate: true },
         changeObjects
@@ -56,9 +57,17 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
        * The target node and its every sibling are all checked. It's time to
        * set the parent's its isIndeterminate property as false.
        */
-      changeObjects = updateChanges(
+      changeObjects = updateChangeObjectsArray(
         parentNode,
         { isChecked: true, isIndeterminate: false },
+        changeObjects
+      );
+    }
+
+    if (parentNode.name === "RadioButtonWithLabel") {
+      changeObjects = uncheckSiblings(
+        parentNode,
+        reducedStructure,
         changeObjects
       );
     }
@@ -68,28 +77,6 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     return activatePredecessors(parentNode, reducedStructure, changeObjects);
   }
 
-  // if (!childNodes.length) {
-  //   const deprecated = R.uniq(
-  //     R.filter(
-  //       R.pathEq(["properties", "isDeprecated"], true),
-  //       changesWithoutRootAnchor
-  //     )
-  //   );
-  //   const anchorsOfTheDeprecatedOnes = R.map(R.prop("anchor"), deprecated);
-  //   changesWithoutRootAnchor = R.filter(changeObj => {
-  //     return !R.includes(changeObj.anchor, anchorsOfTheDeprecatedOnes);
-  //   }, changesWithoutRootAnchor);
-  // }
-
-  // if (parentNode && !childNodes.length) {
-  //   return activateNodeAndItsDescendants(
-  //     parentNode,
-  //     reducedStructure,
-  //     changesWithoutRootAnchor,
-  //     true,
-  //     false
-  //   );
-  // }
   console.groupEnd();
   return changeObjects;
 }

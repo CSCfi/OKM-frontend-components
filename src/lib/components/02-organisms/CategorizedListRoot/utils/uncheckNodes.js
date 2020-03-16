@@ -11,7 +11,7 @@ import {
 } from "ramda";
 import { getChangeObjByAnchor } from "../utils";
 
-export function disableNodes(nodes, reducedStructure, changes, index = 0) {
+export function uncheckNodes(nodes, reducedStructure, changes, index = 0) {
   const node = view(lensIndex(index))(nodes);
   const categoryAnchor = dropLast(1, node.anchorParts);
   const childNodes = filter(_node => {
@@ -38,11 +38,11 @@ export function disableNodes(nodes, reducedStructure, changes, index = 0) {
   }
 
   if (childNodes.length) {
-    changes = disableNodes(childNodes, reducedStructure, changes);
+    changes = uncheckNodes(childNodes, reducedStructure, changes);
   }
 
   if (index < nodes.length - 1) {
-    return disableNodes(nodes, reducedStructure, changes, index + 1);
+    return uncheckNodes(nodes, reducedStructure, changes, index + 1);
   }
   return changes;
 }

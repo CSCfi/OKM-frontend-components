@@ -3,6 +3,7 @@ import { filter, includes, map, pathEq, uniq } from "ramda";
 /**
  * Removes deprecated change objects from the array of change objects.
  * @param {array} changeObjects - Array of change objects.
+ * @returns {array} - Updated array of change objects.
  */
 export function removeDeprecatedChanges(changeObjects) {
   const isDeprecated = pathEq(["properties", "isDeprecated"], true);

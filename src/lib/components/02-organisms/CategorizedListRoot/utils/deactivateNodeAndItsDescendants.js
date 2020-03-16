@@ -1,8 +1,8 @@
 import { append, flatten, map, uniq } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
-import { disableSiblings } from "./disableSiblings";
-import { updateChanges } from "./updateChanges";
+import { uncheckSiblings } from "./uncheckSiblings";
+import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { isNodeChecked } from "./isNodeChecked";
 
 /**
@@ -26,7 +26,8 @@ export function deactivateNodeAndItsDescendants(
   }
 
   const childNodes = getChildNodes(node, reducedStructure, [
-    "CheckboxWithLabel"
+    "CheckboxWithLabel",
+    "RadioButtonWithLabel"
   ]);
 
   // We are not ready yet. Every checkbox child node must be checked.
@@ -57,14 +58,14 @@ export function deactivateNodeAndItsDescendants(
        * If the node's original isChecked value is falsy we just need
        * to get rid of the change object.
        **/
-      changeObjects = updateChanges(
+      changeObjects = updateChangeObjectsArray(
         node,
         { isDeprecated: true },
         changeObjects
       );
     } else {
       // Otherwise the change object have to be re-configured.
-      changeObjects = updateChanges(
+      changeObjects = updateChangeObjectsArray(
         node,
         { isChecked: false, isIndeterminate: false },
         changeObjects
@@ -89,7 +90,7 @@ export function deactivateNodeAndItsDescendants(
   }
 
   if (node.name === "RadioButtonWithLabel") {
-    changeObjects = disableSiblings(node, reducedStructure, changeObjects);
+    changeObjects = uncheckSiblings(node, reducedStructure, changeObjects);
   }
 
   console.groupEnd();

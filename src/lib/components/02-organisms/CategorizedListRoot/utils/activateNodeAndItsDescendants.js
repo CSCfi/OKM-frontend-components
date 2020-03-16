@@ -1,8 +1,8 @@
 import { addIndex, append, flatten, map, uniq } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
-import { disableSiblings } from "./disableSiblings";
-import { updateChanges } from "./updateChanges";
+import { uncheckSiblings } from "./uncheckSiblings";
+import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 
 /**
  * Function activates the target node and updates the situation of
@@ -61,7 +61,7 @@ export function activateNodeAndItsDescendants(
        * If original isChecked value of the node is true we just have to
        * remove the change object.
        **/
-      changesWithoutRootAnchor = updateChanges(
+      changesWithoutRootAnchor = updateChangeObjectsArray(
         node,
         { isDeprecated: true },
         changesWithoutRootAnchor
@@ -72,7 +72,7 @@ export function activateNodeAndItsDescendants(
        * value is not true then the isChecked's value on change object must
        * be updated to be true.
        */
-      changesWithoutRootAnchor = updateChanges(
+      changesWithoutRootAnchor = updateChangeObjectsArray(
         node,
         { isChecked: true, isIndeterminate: false },
         changesWithoutRootAnchor
@@ -98,33 +98,12 @@ export function activateNodeAndItsDescendants(
   }
 
   if (node.name === "RadioButtonWithLabel") {
-    changesWithoutRootAnchor = disableSiblings(
+    changesWithoutRootAnchor = uncheckSiblings(
       node,
       reducedStructure,
       changesWithoutRootAnchor
     );
   }
-
-  // console.info("Grant children: ", grantChildren);
-  // if (node.name === "CheckboxWithLabel") {
-  //   changesWithoutRootAnchor = checkChildNodes(
-  //     node,
-  //     reducedStructure,
-  //     changesWithoutRootAnchor
-  //   );
-  // }
-
-  // if (
-  //   parentNode &&
-  //   (parentNode.name === "CheckboxWithLabel" ||
-  //     parentNode.name === "RadioButtonWithLabel")
-  // ) {
-  //   changesWithoutRootAnchor = checkNode(
-  //     parentNode,
-  //     reducedStructure,
-  //     changesWithoutRootAnchor
-  //   );
-  // }
 
   console.groupEnd();
 

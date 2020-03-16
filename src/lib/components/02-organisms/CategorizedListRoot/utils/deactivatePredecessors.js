@@ -1,9 +1,8 @@
-import { append, find } from "ramda";
+import { append } from "ramda";
 import { findParent } from "./findParent";
-import { isNodeChecked } from "./isNodeChecked";
-import { updateChanges } from "./updateChanges";
+import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { getChangeObjByAnchor } from "../utils";
-import { disableSiblings } from "./disableSiblings";
+import { uncheckSiblings } from "./uncheckSiblings";
 
 /**
  * Sets the isIndeterminate property of node's descendants as true.
@@ -42,7 +41,7 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
         changeObjects
       );
     } else if (parentChangeObj && !parentChangeObj.properties.isIndeterminate) {
-      changeObjects = updateChanges(
+      changeObjects = updateChangeObjectsArray(
         parentNode,
         { isChecked: true, isIndeterminate: true },
         changeObjects
@@ -50,7 +49,7 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
     }
 
     if (parentNode.name === "RadioButtonWithLabel") {
-      changeObjects = disableSiblings(
+      changeObjects = uncheckSiblings(
         parentNode,
         reducedStructure,
         changeObjects

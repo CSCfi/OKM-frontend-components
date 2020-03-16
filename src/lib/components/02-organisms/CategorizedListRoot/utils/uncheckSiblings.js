@@ -1,14 +1,14 @@
 import { filter, and, propEq } from "ramda";
 import { findSiblings } from "./findSiblings";
-import { disableNodes } from "./disableNodes";
+import { uncheckNodes } from "./uncheckNodes";
 
 /**
- * Disables the node's siblings.
+ * Unchecks the node's siblings.
  * @param {object} node - Target item.
  * @param {array} reducedStructure - Flatten array of all items on the form.
  * @param {array} changes - Array of change objects.
  */
-export function disableSiblings(node, reducedStructure, changes) {
+export function uncheckSiblings(node, reducedStructure, changes) {
   const radioSiblings = filter(
     and(
       propEq("columnIndex", node.columnIndex),
@@ -16,7 +16,7 @@ export function disableSiblings(node, reducedStructure, changes) {
     )
   )(findSiblings(node, reducedStructure));
   if (radioSiblings.length) {
-    return disableNodes(radioSiblings, reducedStructure, changes);
+    return uncheckNodes(radioSiblings, reducedStructure, changes);
   }
   return changes;
 }
