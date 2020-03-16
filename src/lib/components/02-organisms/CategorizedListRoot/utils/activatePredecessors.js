@@ -6,13 +6,13 @@ import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { uncheckSiblings } from "./uncheckSiblings";
 
 /**
- *
- * @param {*} node
- * @param {*} reducedStructure
- * @param {*} changeObjects
+ * Activates the node's predecessors.
+ * @param {object} node - Target node a.k.a clicked checbox / radio button.
+ * @param {array} reducedStructure - Flatten array of all items on the form.
+ * @param {array} changeObjects - Array of change objects.
+ * @returns {array} - Updated array of change objects.
  */
 export function activatePredecessors(node, reducedStructure, changeObjects) {
-  console.group();
   /**
    * Let's find out if the node has a parent. The parent must be checked too
    * and if it exists its isIndeterminate property must be calculated. The
@@ -44,7 +44,6 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     }, siblings);
 
     if (firstUncheckedSibling) {
-      console.info("Parent node is ", parentNode, "and isIndeterminate: true");
       // isIndeterminate = true
       changeObjects = updateChangeObjectsArray(
         parentNode,
@@ -52,7 +51,6 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
         changeObjects
       );
     } else {
-      console.info("Parent node is ", parentNode, "and isIndeterminate: false");
       /**
        * The target node and its every sibling are all checked. It's time to
        * set the parent's its isIndeterminate property as false.
@@ -64,6 +62,7 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
       );
     }
 
+    // If the parent node is a radio button its siblings must be unchecked.
     if (parentNode.name === "RadioButtonWithLabel") {
       changeObjects = uncheckSiblings(
         parentNode,
@@ -73,10 +72,8 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     }
 
     // The parent node might have a parent. Let's handle the parent node next.
-    console.groupEnd();
     return activatePredecessors(parentNode, reducedStructure, changeObjects);
   }
 
-  console.groupEnd();
   return changeObjects;
 }

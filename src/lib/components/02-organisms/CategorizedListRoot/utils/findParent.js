@@ -1,8 +1,14 @@
 import { dropLast, equals, find, includes } from "ramda";
 
+/**
+ * Find the node's parent node.
+ * @param {object} node - Includes an anchor and a properties object.
+ * @param {array} reducedStructure - Flatten form structure.
+ * @param {array} nodeNames - Array of node / component names.
+ * @returns {object} - Parent node.
+ */
 export function findParent(node, reducedStructure, nodeNames = []) {
-  console.info("Finding the parent of ", node);
-  const parentNode = find(_node => {
+  return find(_node => {
     return (
       _node.level === node.level - 1 &&
       _node.columnIndex === 0 &&
@@ -10,6 +16,4 @@ export function findParent(node, reducedStructure, nodeNames = []) {
       equals(dropLast(1, _node.anchorParts), dropLast(2, node.anchorParts))
     );
   }, reducedStructure);
-  console.info("Found: ", parentNode);
-  return parentNode;
 }

@@ -6,13 +6,12 @@ import { uncheckSiblings } from "./uncheckSiblings";
 
 /**
  * Sets the isIndeterminate property of node's descendants as true.
- * @param {*} node
- * @param {*} reducedStructure
- * @param {*} changeObjects
+ * @param {*} node - Includes an anchor and a properties object.
+ * @param {*} reducedStructure - Flatten form structure.
+ * @param {*} changeObjects - Array of change Objects.
+ * @returns {array} - Updated array of change objects.
  */
 export function deactivatePredecessors(node, reducedStructure, changeObjects) {
-  console.group();
-  console.info("Deactivating the parent of...", node);
   /**
    * Let's find out if the node has a parent.
    */
@@ -48,6 +47,7 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
       );
     }
 
+    // If the parent node is a radio button its siblings must be unchecked.
     if (parentNode.name === "RadioButtonWithLabel") {
       changeObjects = uncheckSiblings(
         parentNode,
@@ -57,10 +57,8 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
     }
 
     // The parent node might have a parent. Let's handle it parent node next.
-    console.groupEnd();
     return deactivatePredecessors(parentNode, reducedStructure, changeObjects);
   }
 
-  console.groupEnd();
   return changeObjects;
 }
