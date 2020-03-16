@@ -31,8 +31,6 @@ const RadioButtonWithLabel = React.memo(props => {
       {!props.isReadOnly ? (
         <FormGroup row>
           <FormControlLabel
-            id={`label-${props.payload.anchor}`}
-            htmlFor={props.payload.anchor}
             classes={{
               label: styles.label
             }}
