@@ -43,7 +43,6 @@ function Stage(props) {
   function getElementToClick(elementsToClick) {
     var randomElementIndex = getRandomInt(0, elementsToClick.length - 1);
     var randomElement = elementsToClick[randomElementIndex];
-    console.info(randomElement);
     return {
       randomElement: randomElement,
       randomElementIndex: randomElementIndex
@@ -61,7 +60,6 @@ function Stage(props) {
       if (randomElement) {
         randomElement.parentNode.style["background-color"] = "#000000";
         randomElement.parentNode.style["border"] = "1px dashed red";
-        console.info("Random input: ", randomElement.parentNode);
 
         if (elementsToClick && randomElementIndex > -1) {
           timeoutHandle = setTimeout(function () {
