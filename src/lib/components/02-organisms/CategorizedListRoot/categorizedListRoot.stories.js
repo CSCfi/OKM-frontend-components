@@ -150,6 +150,7 @@ storiesOf("CategorizedListRoot", module)
         changes={alertStory.changes}
         render={props => (
           <CategorizedListRoot showCategoryTitles={false} {...props} />
+
         )}
         showValidationErrors={() => {}}></Stage>
     );

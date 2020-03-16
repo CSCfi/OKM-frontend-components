@@ -113,7 +113,11 @@ var CategorizedList = React.memo(function (props) {
   }, [onChangesUpdate]);
   return React.createElement("div", {
     "data-anchor": props.anchor
-  }, _.map(props.categories, function (category, i) {
+  },
+  /**
+  * Categories will be looped here.
+  */
+  _.map(props.categories, function (category, i) {
     if (category.isVisible === false) {
       return null;
     }
@@ -177,7 +181,8 @@ var CategorizedList = React.memo(function (props) {
     return React.createElement("div", {
       key: i,
       className: R.join(" ", categoryClasses),
-      "data-level": props.level
+      "data-level": props.level,
+      id: anchor
     }, isCategoryTitleVisible && React.createElement("div", {
       className: categoryTitleClasses
     }, React.createElement("h4", null, category.code && React.createElement("span", {
@@ -420,7 +425,19 @@ var CategorizedList = React.memo(function (props) {
           type: propsObj.type,
           title: propsObj.title,
           message: propsObj.message,
-          handleClick: propsObj.handleClick
+          linkText: propsObj.linkText,
+          isVisible: propsObj.isVisible,
+          handleLinkClick: propsObj.handleLinkClick,
+          onChanges: handleChanges,
+          payload: {
+            anchor: anchor,
+            categories: category.categories,
+            component: component,
+            fullPath: fullPath,
+            parent: props.parent,
+            rootPath: props.rootPath,
+            siblings: props.categories
+          }
         }));
       }(category) : null, component.name === "Autocomplete" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};

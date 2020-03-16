@@ -30,7 +30,7 @@ export const alertStory = {
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),
-            isChecked: false
+            isChecked: true
           }
         },
         {}
@@ -44,7 +44,11 @@ export const alertStory = {
               anchor: "B",
               name: "Alert",
               properties: {
-                title: "This is a test"
+                title: "This is a test.",
+                linkText: "Link",
+                handleLinkClick: () => {
+                  console.log("Link was clicked");
+                }
               }
             }
           ]

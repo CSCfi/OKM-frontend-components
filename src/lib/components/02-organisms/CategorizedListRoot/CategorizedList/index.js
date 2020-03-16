@@ -124,7 +124,10 @@ const CategorizedList = React.memo(
 
     return (
       <div data-anchor={props.anchor}>
-        {_.map(props.categories, (category, i) => {
+        {/**
+         * Categories will be looped here.
+         */
+        _.map(props.categories, (category, i) => {
           if (category.isVisible === false) {
             return null;
           }
@@ -241,7 +244,8 @@ const CategorizedList = React.memo(
             <div
               key={i}
               className={R.join(" ", categoryClasses)}
-              data-level={props.level}>
+              data-level={props.level}
+              id={anchor}>
               {isCategoryTitleVisible && (
                 <div className={categoryTitleClasses}>
                   <h4>
@@ -618,7 +622,19 @@ const CategorizedList = React.memo(
                                   type={propsObj.type}
                                   title={propsObj.title}
                                   message={propsObj.message}
-                                  handleClick={propsObj.handleClick}
+                                  linkText={propsObj.linkText}
+                                  isVisible={propsObj.isVisible}
+                                  handleLinkClick={propsObj.handleLinkClick}
+                                  onChanges={handleChanges}
+                                  payload={{
+                                    anchor,
+                                    categories: category.categories,
+                                    component,
+                                    fullPath,
+                                    parent: props.parent,
+                                    rootPath: props.rootPath,
+                                    siblings: props.categories
+                                  }}
                                 />
                               </div>
                             );
