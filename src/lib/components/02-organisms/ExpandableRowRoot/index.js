@@ -5,7 +5,8 @@ import CategorizedListRoot from "../CategorizedListRoot";
 import NumberOfChanges from "../../00-atoms/NumberOfChanges";
 import { makeStyles } from "@material-ui/core/styles";
 import UndoIcon from "@material-ui/icons/Undo";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+// import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
@@ -72,16 +73,18 @@ const ExpandableRowRoot = ({
                 {!disableReverting && (
                   <span className="mx-6">
                     <Tooltip title={messages.undo}>
-                      <IconButton
+                      <Button
+                        component="span"
+                        color="primary"
                         className={classes.button}
-                        variant="outlined"
-                        size="small"
+                        endIcon={<UndoIcon />}
                         onClick={e => {
                           e.stopPropagation();
                           return onChangesRemove(sectionId, anchor, index);
-                        }}>
-                        <UndoIcon />
-                      </IconButton>
+                        }}
+                        size="small">
+                        {messages.undo}
+                      </Button>
                     </Tooltip>
                   </span>
                 )}

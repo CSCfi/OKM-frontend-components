@@ -5,7 +5,8 @@ import CategorizedListRoot from "../CategorizedListRoot";
 import NumberOfChanges from "../../00-atoms/NumberOfChanges";
 import { makeStyles } from "@material-ui/core/styles";
 import UndoIcon from "@material-ui/icons/Undo";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button"; // import Icon from "@material-ui/core/Icon";
+
 import Tooltip from "@material-ui/core/Tooltip";
 var useStyles = makeStyles(function () {
   return {
@@ -82,15 +83,17 @@ var ExpandableRowRoot = function ExpandableRowRoot(_ref) {
     className: "mx-6"
   }, React.createElement(Tooltip, {
     title: messages.undo
-  }, React.createElement(IconButton, {
+  }, React.createElement(Button, {
+    component: "span",
+    color: "primary",
     className: classes.button,
-    variant: "outlined",
-    size: "small",
+    endIcon: React.createElement(UndoIcon, null),
     onClick: function onClick(e) {
       e.stopPropagation();
       return onChangesRemove(sectionId, anchor, index);
-    }
-  }, React.createElement(UndoIcon, null)))))), React.createElement("div", {
+    },
+    size: "small"
+  }, messages.undo))))), React.createElement("div", {
     "data-slot": "content",
     className: "w-full ".concat(!children ? "p-8" : "")
   }, !children && (isExpanded || isToggledOpen) ? React.createElement(CategorizedListRoot, {
