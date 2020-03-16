@@ -9,14 +9,10 @@ import { isNodeChecked } from "./isNodeChecked";
  * @param {object} node - Target node a.k.a clicked checbox / radio button.
  * @param {array} reducedStructure - Flatten array of all items on the form.
  * @param {array} changeObjects - Array of change objects.
+ * @returns {array} - Updated array of change objects.
  */
 
 export function deactivateNodeAndItsDescendants(node, reducedStructure, changeObjects) {
-  console.group();
-  console.info("Target node: ", node);
-  console.info("Is node checked: ", isNodeChecked(node, changeObjects));
-  console.groupEnd();
-
   if (!isNodeChecked(node, changeObjects)) {
     return changeObjects;
   }
@@ -24,14 +20,11 @@ export function deactivateNodeAndItsDescendants(node, reducedStructure, changeOb
   var childNodes = getChildNodes(node, reducedStructure, ["CheckboxWithLabel", "RadioButtonWithLabel"]); // We are not ready yet. Every checkbox child node must be checked.
 
   if (childNodes.length) {
-    console.info("Käydään lapsinodet läpi.", childNodes);
     changeObjects = uniq(flatten(map(function (childNode) {
-      console.groupEnd();
       return deactivateNodeAndItsDescendants(childNode, reducedStructure, changeObjects);
     }, childNodes)));
-  }
+  } // The first thing is to find out the change object of the target node.
 
-  console.info("Deactivating... ", node); // The first thing is to find out the change object of the target node.
 
   var changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
 
@@ -64,12 +57,12 @@ export function deactivateNodeAndItsDescendants(node, reducedStructure, changeOb
         isIndeterminate: false
       }
     }, changeObjects);
-  }
+  } // If the target node is a radio button its siblings must be unchecked.
+
 
   if (node.name === "RadioButtonWithLabel") {
     changeObjects = uncheckSiblings(node, reducedStructure, changeObjects);
   }
 
-  console.groupEnd();
   return changeObjects;
 }
