@@ -149,9 +149,9 @@ storiesOf("CategorizedListRoot", module)
         categories={alertStory.categories}
         changes={alertStory.changes}
         render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-
-        )}
-        showValidationErrors={() => {}}></Stage>
+          <div className="mb-64">
+            <CategorizedListRoot showCategoryTitles={false} {...props} />
+          </div>
+        )}></Stage>
     );
   });

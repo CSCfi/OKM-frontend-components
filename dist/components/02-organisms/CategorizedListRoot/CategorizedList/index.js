@@ -425,8 +425,10 @@ var CategorizedList = React.memo(function (props) {
           type: propsObj.type,
           title: propsObj.title,
           message: propsObj.message,
-          linkText: propsObj.linkText,
           isVisible: propsObj.isVisible,
+          link: propsObj.link,
+          linkUrl: propsObj.linkUrl,
+          linkText: propsObj.linkText,
           handleLinkClick: propsObj.handleLinkClick,
           onChanges: handleChanges,
           payload: {

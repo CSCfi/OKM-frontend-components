@@ -140,10 +140,11 @@ storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and pl
     categories: alertStory.categories,
     changes: alertStory.changes,
     render: function render(props) {
-      return React.createElement(CategorizedListRoot, Object.assign({
+      return React.createElement("div", {
+        className: "mb-64"
+      }, React.createElement(CategorizedListRoot, Object.assign({
         showCategoryTitles: false
-      }, props));
-    },
-    showValidationErrors: function showValidationErrors() {}
+      }, props)));
+    }
   });
 });

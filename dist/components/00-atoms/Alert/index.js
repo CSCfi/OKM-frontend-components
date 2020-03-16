@@ -86,7 +86,12 @@ var AlertMessage = function AlertMessage(props) {
         justifyContent: "space-between",
         width: "100%"
       }
-    }, props.handleLinkClick && props.linkText && React.createElement(Link, {
+    }, props.linkUrl && props.linkText && React.createElement(Link, {
+      href: props.linkUrl,
+      style: {
+        cursor: "pointer"
+      }
+    }, props.linkText), !props.linkUrl && props.handleLinkClick && props.linkText && React.createElement(Link, {
       onClick: clickCallback,
       style: {
         cursor: "pointer"

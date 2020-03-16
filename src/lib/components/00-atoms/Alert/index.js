@@ -65,7 +65,6 @@ const AlertMessage = props => {
   const updateVisibility = (e, value) => {
     props.onChanges(props.payload, { value: value });
   };
-
   return (
     <div className={classes.root}>
       <Collapse in={props.isVisible}>
@@ -81,7 +80,12 @@ const AlertMessage = props => {
                 justifyContent: "space-between",
                 width: "100%"
               }}>
-              {props.handleLinkClick && props.linkText && (
+              {props.linkUrl && props.linkText && (
+                <Link href={props.linkUrl} style={{ cursor: "pointer" }}>
+                  {props.linkText}
+                </Link>
+              )}
+              {!props.linkUrl && props.handleLinkClick && props.linkText && (
                 <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
                   {props.linkText}
                 </Link>
@@ -122,9 +126,11 @@ AlertMessage.propTypes = {
   message: PropTypes.string,
   /** type of alert info (default), warning, error, success */
   type: PropTypes.string,
+  /** link url as string (optional) */
+  linkUrl: PropTypes.string,
   /** link text as string (optional) */
   linkText: PropTypes.string,
-  /** link clicking call back function (optional) */
+  /** link clicking call back function (if no linkUrl given) */
   handleLinkClick: PropTypes.func,
   /** callback used for closing (visibility) */
   onChanges: PropTypes.func,
