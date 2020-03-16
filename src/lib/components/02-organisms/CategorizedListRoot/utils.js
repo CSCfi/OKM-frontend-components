@@ -126,102 +126,6 @@ const getPropertiesObject = (changeObj = {}, requestedChanges) => {
   return Object.assign({}, changeObj.properties || {}, requestedChanges);
 };
 
-/**
- * Main function. This will be run when user makes changes.
- *
- * @param {object} nodeWithRequestedChanges
- * @param {object} nodeWithRequestedChanges.requestedChanges - Property object.
- * @param {array} changes - Array of change objects.
- */
-export const handleNodeMain = (
-  nodeWithRequestedChanges,
-  rootAnchor,
-  reducedStructure,
-  changes = []
-) => {
-  // Target node.
-  const node = R.prop("original", nodeWithRequestedChanges);
-  // Requested changes.
-  const requestedChanges = R.prop("requestedChanges", nodeWithRequestedChanges);
-  // First part of every anchor will be removed.
-  let changesWithoutRootAnchor = rootAnchor
-    ? R.map(changeObj => {
-        const reducedAnchor = removeAnchorPart(changeObj.anchor, 0);
-        return R.assoc("anchor", reducedAnchor, changeObj);
-      }, changes)
-    : changes;
-
-  if (requestedChanges.isChecked) {
-    /**
-     * If user has clicked an unchecked checkbox or a radio button we must do
-     * two things:
-     * 1) Activate the node and its descendants.
-     */
-    changesWithoutRootAnchor = activateNodeAndItsDescendants(
-      node,
-      reducedStructure,
-      changesWithoutRootAnchor
-    );
-    // 2) Activate node's predecessors.
-    changesWithoutRootAnchor = activatePredecessors(
-      node,
-      reducedStructure,
-      changesWithoutRootAnchor
-    );
-  } else if (requestedChanges.isChecked === false) {
-    /**
-     * If user has clicked a checked checkbox or a radio button we must do
-     * two things:
-     * 1) Deactivate the node and its descendants.
-     */
-    changesWithoutRootAnchor = deactivateNodeAndItsDescendants(
-      node,
-      reducedStructure,
-      changesWithoutRootAnchor
-    );
-    // 2) Deactivate node's predecessors.
-    changesWithoutRootAnchor = deactivatePredecessors(
-      node,
-      reducedStructure,
-      changesWithoutRootAnchor
-    );
-  } else {
-    const changeObj = getChangeObjByAnchor(
-      node.fullAnchor,
-      changesWithoutRootAnchor
-    );
-    const propsObj = getPropertiesObject(changeObj, requestedChanges);
-    const updatedChangeObj = { anchor: node.fullAnchor, properties: propsObj };
-    if (changeObj) {
-      changesWithoutRootAnchor = R.map(_changeObj => {
-        if (R.equals(_changeObj.anchor, updatedChangeObj.anchor)) {
-          return updatedChangeObj;
-        }
-        return _changeObj;
-      }, changesWithoutRootAnchor);
-    } else {
-      changesWithoutRootAnchor = R.append(
-        updatedChangeObj,
-        changesWithoutRootAnchor
-      );
-    }
-  }
-
-  changesWithoutRootAnchor = removeDeprecatedChanges(changesWithoutRootAnchor);
-
-  const updatedChangesArr = rootAnchor
-    ? R.map(changeObj => {
-        return R.assoc(
-          "anchor",
-          `${rootAnchor}.${changeObj.anchor}`,
-          changeObj
-        );
-      }, changesWithoutRootAnchor)
-    : changesWithoutRootAnchor;
-  console.info(updatedChangesArr);
-  return updatedChangesArr;
-};
-
 export const getChangesForReadOnlyLomake = (
   reducedStructure,
   index = 0,
@@ -246,4 +150,135 @@ export const getChangesForReadOnlyLomake = (
     );
   }
   return cumulativeChanges;
+};
+
+/**
+ * Function handles the new changes of a form and returns an updated array of
+ * change objects.
+ * @param {object} nodeWithRequestedChanges - Target node and requested changes.
+ * @param {object} nodeWithRequestedChanges.requestedChanges - Properties object.
+ * @param {array} changes - Array of change objects.
+ */
+export const handleNodeMain = (
+  nodeWithRequestedChanges,
+  rootAnchor,
+  reducedStructure,
+  changes = []
+) => {
+  /**
+   * node = definition of a component that user has interacted with. Node
+   * is an object that includes a name (e.g. CheckboxWithLabel) and the
+   * properties defined on the current form.
+   * E.g.
+   *
+   * {
+   *   anchor: "A",
+   *   name: "CheckboxWithLabel",
+   *   properties: {
+   *     code: "A.A.A",
+   *     isChecked: false,
+   *     labelStyles: {
+   *       addition: { color: "purple" },
+   *       removal: { color: "purple", textDecoration: "line-through" },
+   *       custom: { fontWeight: 600 }
+   *     },
+   *     name: "example-checkbox",
+   *     title: "Osaamisala 1",
+   *     value: "Testi"
+   *   },
+   *   anchorParts: ["A", "A", "A"],
+   *   fullAnchor: "A.A.A",
+   *   level: 1,
+   *   columnIndex: 0,
+   *   path: ["components", 0, "categories", "components", 0]
+   * };
+   **/
+  const node = R.prop("original", nodeWithRequestedChanges);
+
+  // Requested changes. E.g. {"isChecked":true}
+  const requestedChanges = R.prop("requestedChanges", nodeWithRequestedChanges);
+
+  // First part of every anchor will be removed.
+  let changeObjects = rootAnchor
+    ? R.map(changeObj => {
+        const reducedAnchor = removeAnchorPart(changeObj.anchor, 0);
+        return R.assoc("anchor", reducedAnchor, changeObj);
+      }, changes)
+    : changes;
+
+  if (requestedChanges.isChecked) {
+    /**
+     * If user has clicked an unchecked checkbox or a radio button we must do
+     * two things:
+     * 1) Activate the node and its descendants.
+     */
+    changeObjects = activateNodeAndItsDescendants(
+      node,
+      reducedStructure,
+      changeObjects
+    );
+    // 2) Activate the node's predecessors.
+    changeObjects = activatePredecessors(node, reducedStructure, changeObjects);
+  } else if (requestedChanges.isChecked === false) {
+    /**
+     * If user has clicked a checked checkbox or a radio button we must do
+     * two things:
+     * 1) Deactivate the node and its descendants.
+     */
+    changeObjects = deactivateNodeAndItsDescendants(
+      node,
+      reducedStructure,
+      changeObjects
+    );
+    // 2) Deactivate the node's predecessors.
+    changeObjects = deactivatePredecessors(
+      node,
+      reducedStructure,
+      changeObjects
+    );
+  } else {
+    /**
+     * Otherwise the properties of the new change object will be merged with
+     * the properties of the earlier changes of the current node.
+     **/
+
+    const changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
+    const propsObj = getPropertiesObject(changeObj, requestedChanges);
+    const updatedChangeObj = { anchor: node.fullAnchor, properties: propsObj };
+
+    if (changeObj) {
+      /**
+       * The earlier change object related to the node will be replaced with the
+       * updated one.
+       **/
+      changeObjects = R.map(_changeObj => {
+        if (R.equals(_changeObj.anchor, updatedChangeObj.anchor)) {
+          return updatedChangeObj;
+        }
+        return _changeObj;
+      }, changeObjects);
+    } else {
+      /**
+       * If there wasn't an earlier change object then we add the freshly made
+       * change object on to the array of change objects.
+       **/
+      changeObjects = R.append(updatedChangeObj, changeObjects);
+    }
+  }
+
+  changeObjects = removeDeprecatedChanges(changeObjects);
+
+  // Last thing is to prefix the anchors of change objects with the root anchor.
+  const updatedChangesArr = rootAnchor
+    ? R.map(changeObj => {
+        return R.assoc(
+          "anchor",
+          `${rootAnchor}.${changeObj.anchor}`,
+          changeObj
+        );
+      }, changeObjects)
+    : changeObjects;
+
+  // Updated array of change objects will be returned.
+  return updatedChangesArr;
 };
