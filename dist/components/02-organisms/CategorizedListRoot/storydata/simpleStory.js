@@ -4,32 +4,7 @@ var labelStyles = {
   removal: isRemoved
 };
 export var simpleStory = {
-  changes: [{
-    anchor: "simple.A.A",
-    properties: {
-      isChecked: true
-    }
-  }, {
-    anchor: "simple.C.A",
-    properties: {
-      isChecked: true
-    }
-  }, {
-    anchor: "simple.B.B.A",
-    properties: {
-      isChecked: true
-    }
-  }, {
-    anchor: "simple.A.A.A",
-    properties: {
-      isChecked: true
-    }
-  }, {
-    anchor: "simple.B.B.A.A",
-    properties: {
-      isChecked: true
-    }
-  }],
+  changes: [],
   categories: [{
     anchor: "A",
     code: "1",
@@ -90,7 +65,7 @@ export var simpleStory = {
         name: "CheckboxWithLabel",
         properties: {
           code: "A.C.A",
-          isChecked: true,
+          isChecked: false,
           labelStyles: Object.assign({}, labelStyles, {
             custom: isInLupa
           }),
@@ -110,6 +85,7 @@ export var simpleStory = {
       properties: {
         code: "B.A",
         isChecked: true,
+        isIndeterminate: true,
         labelStyles: labelStyles,
         name: "example-checkbox-2",
         title: "Tutkinto 2"
@@ -124,7 +100,7 @@ export var simpleStory = {
         name: "CheckboxWithLabel",
         properties: {
           code: "B.A.A",
-          isChecked: true,
+          isChecked: false,
           labelStyles: labelStyles,
           name: "example-label",
           title: "Osaamisala 1",
@@ -141,6 +117,7 @@ export var simpleStory = {
         properties: {
           code: "B.B.A",
           isChecked: false,
+          isIndeterminate: false,
           labelStyles: labelStyles,
           name: "example-checkbox",
           title: "Osaamisala 2",
