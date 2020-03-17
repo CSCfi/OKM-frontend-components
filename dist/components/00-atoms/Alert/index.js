@@ -1,3 +1,4 @@
+import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
@@ -60,20 +61,19 @@ var useStyles = makeStyles(function (theme) {
 var AlertMessage = function AlertMessage(props) {
   var classes = useStyles();
 
+  var _useState = useState(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      isVisible = _useState2[0],
+      setVisible = _useState2[1];
+
   var clickCallback = function clickCallback(e) {
     e.preventDefault();
     return props.handleLinkClick();
   };
 
-  var updateVisibility = function updateVisibility(e, value) {
-    props.onChanges(props.payload, {
-      value: value
-    });
-  };
-
   return React.createElement("div", {
-    className: classes.root
-  }, React.createElement(Collapse, {
+    className: "".concat(classes.root, " ").concat(isVisible ? "" : "hidden")
+  }, isVisible, React.createElement(Collapse, {
     in: props.isVisible
   }, React.createElement(Alert, {
     id: props.id,
@@ -103,8 +103,8 @@ var AlertMessage = function AlertMessage(props) {
       "aria-label": "close",
       color: "inherit",
       size: "small",
-      onClick: function onClick(e) {
-        return updateVisibility(e, false);
+      onClick: function onClick() {
+        return setVisible(false);
       }
     }, React.createElement(CloseIcon, {
       fontSize: "inherit"

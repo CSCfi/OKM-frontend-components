@@ -18,7 +18,6 @@ import CloseIcon from "@material-ui/icons/Close";
  *    type: type of alert info (default), warning, error, success
  *    handleLinkClick: click call back function (if a link)
  *    linkText: link text as string
- *    onChanges: callback used for closing (visibility)
  *    payload: Custom object defined by user
  * @returns {*}
  * @constructor
@@ -56,17 +55,15 @@ const useStyles = makeStyles(theme => ({
 
 const AlertMessage = props => {
   const classes = useStyles();
+  const [isVisible, setVisible] = useState(true);
 
   const clickCallback = e => {
     e.preventDefault();
     return props.handleLinkClick();
   };
 
-  const updateVisibility = (e, value) => {
-    props.onChanges(props.payload, { value: value });
-  };
   return (
-    <div className={classes.root}>
+    <div className={`${classes.root} ${isVisible ? "" : "hidden"}`}>
       <Collapse in={props.isVisible}>
         <Alert
           id={props.id}
@@ -95,7 +92,7 @@ const AlertMessage = props => {
                 aria-label="close"
                 color="inherit"
                 size="small"
-                onClick={e => updateVisibility(e, false)}>
+                onClick={() => setVisible(false)}>
                 <CloseIcon fontSize="inherit" />
               </IconButton>
             </div>
@@ -132,8 +129,6 @@ AlertMessage.propTypes = {
   linkText: PropTypes.string,
   /** link clicking call back function (if no linkUrl given) */
   handleLinkClick: PropTypes.func,
-  /** callback used for closing (visibility) */
-  onChanges: PropTypes.func,
   /** Custom object defined by user. */
   payload: PropTypes.object
 };
