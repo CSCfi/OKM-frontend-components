@@ -4,6 +4,7 @@ import RadioButtonWithLabel from "../../../01-molecules/RadioButtonWithLabel";
 import CheckboxWithLabel from "../../../01-molecules/CheckboxWithLabel";
 import StatusTextRow from "../../../01-molecules/StatusTextRow";
 import Autocomplete from "../../../02-organisms/Autocomplete";
+import Multiselect from "../../../02-organisms/Multiselect";
 import Difference from "../../../02-organisms/Difference";
 import SimpleButton from "../../../00-atoms/SimpleButton";
 import { heights } from "../../../../css/autocomplete";
@@ -439,6 +440,40 @@ var CategorizedList = React.memo(function (props) {
             rootPath: props.rootPath,
             siblings: props.categories
           }
+        }));
+      }(category) : null, component.name === "Multiselect" ? function (category) {
+        var previousSibling = category.components[ii - 1] || {};
+        var isPreviousSiblingCheckedByDefault = !!(previousSibling.properties || {}).isChecked;
+        var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
+        var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
+        var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
+        return React.createElement("div", {
+          className: "flex-1 ".concat(component.styleClasses)
+        }, React.createElement(Multiselect, {
+          ariaLabel: propsObj.ariaLabel,
+          callback: handleChanges,
+          id: "multiselect-".concat(idSuffix),
+          isMulti: propsObj.isMulti,
+          isRequired: propsObj.isRequired,
+          isReadOnly: propsObj.isReadOnly,
+          isValid: propsObj.isValid,
+          options: propsObj.options,
+          payload: {
+            anchor: anchor,
+            categories: category.categories,
+            component: component,
+            fullPath: fullPath,
+            parent: props.parent,
+            rootPath: props.rootPath,
+            siblings: props.categories
+          },
+          placeholder: propsObj.placeholder,
+          value: R.flatten([propsObj.value]),
+          isDisabled: isDisabled,
+          height: heights.SHORT,
+          width: propsObj.width,
+          autoSize: propsObj.autoSize,
+          title: propsObj.title
         }));
       }(category) : null, component.name === "Autocomplete" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};

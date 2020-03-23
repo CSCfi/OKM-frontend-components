@@ -14,6 +14,7 @@ import { attachmentsStory } from "./storydata/attachmentsStory";
 import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
 import { alertStory } from "./storydata/alertStory";
+import { multiselectStory } from "./storydata/multiselectStory";
 import Stage from "./Stage";
 
 storiesOf("CategorizedListRoot", module)
@@ -148,6 +149,19 @@ storiesOf("CategorizedListRoot", module)
         anchor={"alert"}
         categories={alertStory.categories}
         changes={alertStory.changes}
+        render={props => (
+          <div className="mb-64">
+            <CategorizedListRoot showCategoryTitles={false} {...props} />
+          </div>
+        )}></Stage>
+    );
+  })
+  .add("Multiselect example WIP", () => {
+    return (
+      <Stage
+        anchor={"multiselect"}
+        categories={multiselectStory.categories}
+        changes={multiselectStory.changes}
         render={props => (
           <div className="mb-64">
             <CategorizedListRoot showCategoryTitles={false} {...props} />
