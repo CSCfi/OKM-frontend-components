@@ -19,6 +19,7 @@ import * as R from "ramda";
 // 2 If option is selected when it's group was already selected, unselect option,
 // deselect group but show all other options selected in that group
 // (or is not going to work, select it and deselect group?)
+// 3 Required styles
 
 const Multiselect = React.memo(props => {
   const [options, setOptions] = useState([]);
@@ -38,7 +39,7 @@ const Multiselect = React.memo(props => {
   };
 
   const handleSelectChange = (event, value, selected, groupItem) => {
-    // if removed by X in a chip, go through selected group if one needed to be removed
+    // Removed by X in a chip, go through selected group if one needed to be removed
     if (!groupItem) {
       const newSelectedGroups = R.filter(groupval => {
         return R.includes(
@@ -47,7 +48,7 @@ const Multiselect = React.memo(props => {
         );
       }, selectedGroups);
       setSelectedGroups(newSelectedGroups);
-
+      // Then set value and call call back
       setValue(value);
       props.callback(props.payload, {
         value: Array.isArray(value) ? orderOptions(value) : value
@@ -61,7 +62,7 @@ const Multiselect = React.memo(props => {
         value: Array.isArray(value) ? orderOptions(value) : value
       });
     } else {
-      // group clicked, removes group from selected groups
+      // group was already selected, removes group from selected groups
       var newArray = selectedGroups;
       newArray.splice(newArray.indexOf(groupItem), 1);
       setSelectedGroups(newArray);
@@ -80,25 +81,28 @@ const Multiselect = React.memo(props => {
   // shown options with grouping
   useEffect(() => {
     setOptions(
-      props.options[0].group
+      props.options && props.options[0].group
         ? props.options
-        : props.options.map(option => {
-            // if first option does not have a group, use first letters as groups
-            const firstLetter = option.label[0].toUpperCase();
-            return {
-              ...option,
-              group: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter
-            };
-          })
+        : props.options &&
+            props.options.map(option => {
+              // if first option does not have a group, use first letters as groups
+              const firstLetter = option.label && option.label[0].toUpperCase();
+              return {
+                ...option,
+                group: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter
+              };
+            })
     );
   }, [props.options]);
 
   // add selected groups from values
   useEffect(() => {
-    if (props.options[0].group) {
-      const groups = props.value.filter(option => {
-        return option.label === option.group;
-      });
+    if (props.options && props.options[0].group) {
+      const groups =
+        props.value &&
+        R.filter(option => {
+          return option.label === option.group;
+        }, props.value);
       if (groups)
         setSelectedGroups(
           R.map(prop => {
@@ -137,9 +141,10 @@ const Multiselect = React.memo(props => {
   return (
     <React.Fragment>
       <Autocomplete
+        id={props.id}
+        aria-label={props.ariaLabel}
         autoComplete={true}
         autosize={props.autosize}
-        name={props.name}
         multiple={props.isMulti}
         renderInput={params => (
           <TextField
@@ -164,12 +169,13 @@ const Multiselect = React.memo(props => {
         value={value}
         onChange={handleSelectChange}
         options={options}
-        getOptionLabel={option => option.label}
+        getOptionLabel={option => option && option.label}
         styles={optionStyles}
         width={props.width}
         required={props.isRequired}
         disableCloseOnSelect
         disableClearable
+        disabled={props.isDisabled}
       />
     </React.Fragment>
   );
@@ -187,21 +193,35 @@ Multiselect.defaultProps = {
 };
 
 Multiselect.propTypes = {
+  id: PropTypes.string,
+  /** aria-label as string */
+  ariaLabel: PropTypes.string,
+  /** If multiple selection is possible as boolean */
   isMulti: PropTypes.bool,
+  /** If required as boolean */
   isRequired: PropTypes.bool,
+  /** If valid as boolean */
   isValid: PropTypes.bool,
-  name: PropTypes.string,
+  /** Callback function for value change */
   callback: PropTypes.func,
+  /** Option for selection as array (with possible groups) */
   options: PropTypes.array,
+  /** Custom object defined by user. */
   payload: PropTypes.object,
+  /** Place holder text */
   placeholder: PropTypes.string,
+  /** Value as array */
   value: PropTypes.array,
+  /** Height as string (css) */
   height: PropTypes.string,
-  isSearch: PropTypes.bool,
-  minChars: PropTypes.number,
+  /** Width as string (css), default 100% */
   width: PropTypes.string,
+  /** If autosizing by text widh, default false */
   autosize: PropTypes.bool,
-  title: PropTypes.string
+  /** Label as string */
+  title: PropTypes.string,
+  /** If disabled as boolean */
+  isDisabled: PropTypes.bool
 };
 
 export default Multiselect;

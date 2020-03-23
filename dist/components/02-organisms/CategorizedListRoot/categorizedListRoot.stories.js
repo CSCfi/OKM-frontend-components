@@ -14,6 +14,7 @@ import { attachmentsStory } from "./storydata/attachmentsStory";
 import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
 import { alertStory } from "./storydata/alertStory";
+import { multiselectStory } from "./storydata/multiselectStory";
 import Stage from "./Stage";
 storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and plain - Checkboxes only", function () {
   return React.createElement(Stage, {
@@ -139,6 +140,19 @@ storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and pl
     anchor: "alert",
     categories: alertStory.categories,
     changes: alertStory.changes,
+    render: function render(props) {
+      return React.createElement("div", {
+        className: "mb-64"
+      }, React.createElement(CategorizedListRoot, Object.assign({
+        showCategoryTitles: false
+      }, props)));
+    }
+  });
+}).add("Multiselect example WIP", function () {
+  return React.createElement(Stage, {
+    anchor: "multiselect",
+    categories: multiselectStory.categories,
+    changes: multiselectStory.changes,
     render: function render(props) {
       return React.createElement("div", {
         className: "mb-64"

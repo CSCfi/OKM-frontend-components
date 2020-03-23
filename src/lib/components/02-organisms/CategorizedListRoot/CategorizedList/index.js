@@ -4,6 +4,7 @@ import RadioButtonWithLabel from "../../../01-molecules/RadioButtonWithLabel";
 import CheckboxWithLabel from "../../../01-molecules/CheckboxWithLabel";
 import StatusTextRow from "../../../01-molecules/StatusTextRow";
 import Autocomplete from "../../../02-organisms/Autocomplete";
+import Multiselect from "../../../02-organisms/Multiselect";
 import Difference from "../../../02-organisms/Difference";
 import SimpleButton from "../../../00-atoms/SimpleButton";
 import { heights } from "../../../../css/autocomplete";
@@ -635,6 +636,59 @@ const CategorizedList = React.memo(
                                     rootPath: props.rootPath,
                                     siblings: props.categories
                                   }}
+                                />
+                              </div>
+                            );
+                          })(category)
+                        : null}
+                      {component.name === "Multiselect"
+                        ? (category => {
+                            const previousSibling =
+                              category.components[ii - 1] || {};
+                            const isPreviousSiblingCheckedByDefault = !!(
+                              previousSibling.properties || {}
+                            ).isChecked;
+                            const previousSiblingFullAnchor = `${anchor}.${previousSibling.anchor}`;
+                            const change = getChangeObjByAnchor(
+                              previousSiblingFullAnchor,
+                              props.changes
+                            );
+                            const isDisabled =
+                              (previousSibling.name === "CheckboxWithLabel" ||
+                                previousSibling.name ===
+                                  "RadioButtonWithLabel") &&
+                              !(
+                                isPreviousSiblingCheckedByDefault ||
+                                change.properties.isChecked
+                              );
+                            return (
+                              <div
+                                className={`flex-1 ${component.styleClasses}`}>
+                                <Multiselect
+                                  ariaLabel={propsObj.ariaLabel}
+                                  callback={handleChanges}
+                                  id={`multiselect-${idSuffix}`}
+                                  isMulti={propsObj.isMulti}
+                                  isRequired={propsObj.isRequired}
+                                  isReadOnly={propsObj.isReadOnly}
+                                  isValid={propsObj.isValid}
+                                  options={propsObj.options}
+                                  payload={{
+                                    anchor,
+                                    categories: category.categories,
+                                    component,
+                                    fullPath,
+                                    parent: props.parent,
+                                    rootPath: props.rootPath,
+                                    siblings: props.categories
+                                  }}
+                                  placeholder={propsObj.placeholder}
+                                  value={R.flatten([propsObj.value])}
+                                  isDisabled={isDisabled}
+                                  height={heights.SHORT}
+                                  width={propsObj.width}
+                                  autoSize={propsObj.autoSize}
+                                  title={propsObj.title}
                                 />
                               </div>
                             );
