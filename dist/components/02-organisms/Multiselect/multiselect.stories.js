@@ -136,25 +136,10 @@ storiesOf("Multiselect", module).addDecorator(withInfo).add("Example 1", functio
     isRequired: true,
     title: "test",
     value: selectedValues
-  }), React.createElement("br", null), React.createElement(Multiselect, {
-    name: "filter example",
-    options: [{
-      label: "Aaaaaaaa",
-      value: "Aaaaaaaa"
-    }, {
-      label: "Bbbbbb",
-      value: "Bbbbbb"
-    }, {
-      label: "Ccccccccccc",
-      value: "Ccccccccccc"
-    }],
-    callback: function callback(payload, values) {
-      console.log(values);
-    }
   }));
-}).add("Short height", function () {
+}).add("Short height WIP", function () {
   return React.createElement("div", null, React.createElement("br", null), React.createElement(Multiselect, {
-    name: "example",
+    name: "example short WIP",
     options: [{
       label: "Aaaaaaaa",
       value: "Aaaaaaaa",

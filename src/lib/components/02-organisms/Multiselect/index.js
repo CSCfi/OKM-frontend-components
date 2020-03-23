@@ -63,7 +63,7 @@ const Multiselect = React.memo(props => {
       });
     } else {
       // group was already selected, removes group from selected groups
-      var newArray = selectedGroups;
+      let newArray = selectedGroups;
       newArray.splice(newArray.indexOf(groupItem), 1);
       setSelectedGroups(newArray);
       // ..., removes group from values groups
@@ -114,7 +114,9 @@ const Multiselect = React.memo(props => {
 
   // custom group headers with selecting and unselecting
   const renderGroup = params => {
-    var selected = selectedGroups ? selectedGroups.includes(params.key) : false;
+    const selected = selectedGroups
+      ? selectedGroups.includes(params.key)
+      : false;
     return [
       <div
         key={params.key}

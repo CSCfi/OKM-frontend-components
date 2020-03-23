@@ -68,25 +68,13 @@ storiesOf("Multiselect", module)
         title="test"
         value={selectedValues}
       />
-      <br />
-      <Multiselect
-        name="filter example"
-        options={[
-          { label: "Aaaaaaaa", value: "Aaaaaaaa" },
-          { label: "Bbbbbb", value: "Bbbbbb" },
-          { label: "Ccccccccccc", value: "Ccccccccccc" }
-        ]}
-        callback={(payload, values) => {
-          console.log(values);
-        }}
-      />
     </div>
   ))
-  .add("Short height", () => (
+  .add("Short height WIP", () => (
     <div>
       <br />
       <Multiselect
-        name="example"
+        name="example short WIP"
         options={[
           { label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" },
           { label: "Bbbbbb", value: "Bbbbbb", group: "2" },

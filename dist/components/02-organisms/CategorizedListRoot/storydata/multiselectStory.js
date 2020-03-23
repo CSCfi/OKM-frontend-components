@@ -19,7 +19,19 @@ export var multiselectStory = {
           custom: isInLupa
         }),
         name: "example-checkbox-1",
-        title: "Row item",
+        title: "Row item"
+      }
+    }],
+    categories: [{
+      anchor: "A",
+      code: "1",
+      title: "Category",
+      components: [{
+        anchor: "A",
+        name: "Multiselect",
+        properties: {
+          defaultValue: "Default value"
+        },
         options: [{
           label: "Aaaaaaaa",
           value: "Aaaaaaaa",
@@ -33,18 +45,6 @@ export var multiselectStory = {
           value: "Ccccccccccc",
           group: "2"
         }]
-      }
-    }],
-    categories: [{
-      anchor: "A",
-      code: "1",
-      title: "Category",
-      components: [{
-        anchor: "A",
-        name: "Multiselect",
-        properties: {
-          defaultValue: "Default value"
-        }
       }]
     }]
   }]

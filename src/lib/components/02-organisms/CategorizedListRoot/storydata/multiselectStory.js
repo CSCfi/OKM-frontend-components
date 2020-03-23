@@ -23,12 +23,7 @@ export const multiselectStory = {
               custom: isInLupa
             }),
             name: "example-checkbox-1",
-            title: "Row item",
-            options: [
-              { label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" },
-              { label: "Bbbbbb", value: "Bbbbbb", group: "2" },
-              { label: "Ccccccccccc", value: "Ccccccccccc", group: "2" }
-            ]
+            title: "Row item"
           }
         }
       ],
@@ -43,7 +38,12 @@ export const multiselectStory = {
               name: "Multiselect",
               properties: {
                 defaultValue: "Default value"
-              }
+              },
+              options: [
+                { label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" },
+                { label: "Bbbbbb", value: "Bbbbbb", group: "2" },
+                { label: "Ccccccccccc", value: "Ccccccccccc", group: "2" }
+              ]
             }
           ]
         }
