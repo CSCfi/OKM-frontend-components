@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import { Toolbar, makeStyles } from "@material-ui/core";
 import HorizontalLayout from "./HorizontalLayout";
-import VerticalLayout from "./VerticalLayout"
+import VerticalLayout from "./VerticalLayout";
 import { NavLink } from "react-router-dom";
 import * as R from "ramda";
 
@@ -25,18 +25,24 @@ const Navigation = ({
   const classes = useStyles(theme);
 
   const items = R.addIndex(R.map)((link, index) => {
-    return (
+    const className = `px-8 
+      ${direction !== "vertical" ? "border-r border-green-600" : ""}
+      py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial
+      hover:bg-${theme.hoverColor} text-${
+      theme.color
+    } text-center flex-wrap whitespace-no-wrap`;
+
+    return link.url ? (
+      <a href={link.url} key={`link-${index}`} className={className}>
+        {link.text}
+      </a>
+    ) : (
       <NavLink
         key={`link-${index}`}
         exact={link.isExact}
         activeClassName={`font-bold md:bg-green-800 md:font-normal`}
         to={link.path}
-        className={`px-8 ${
-          direction !== "vertical" ? "border-r border-green-600" : ""
-        } py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial
-         hover:bg-${theme.hoverColor} text-${
-          theme.color
-        } text-center flex-wrap whitespace-no-wrap`}>
+        className={className}>
         {link.text}
       </NavLink>
     );
@@ -55,7 +61,9 @@ const Navigation = ({
           </Toolbar>
         </AppBar>
       )}
-      {direction === "vertical" && <VerticalLayout items={items}></VerticalLayout>}
+      {direction === "vertical" && (
+        <VerticalLayout items={items}></VerticalLayout>
+      )}
     </React.Fragment>
   );
 };
