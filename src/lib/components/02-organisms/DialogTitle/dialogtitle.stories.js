@@ -5,11 +5,6 @@ import DialogTitle from "./index";
 
 storiesOf("Dialog Title", module)
   .addDecorator(withInfo)
-  .add("Example 1",
-    () =>
-      <DialogTitle
-        onClose={() => console.log('close')}
-      >
-        Hello World!
-      </DialogTitle>
-        );
+  .add("Example 1", () => (
+    <DialogTitle onClose={() => console.log("close")}>Hello World!</DialogTitle>
+  ));

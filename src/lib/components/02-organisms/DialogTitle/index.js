@@ -8,15 +8,16 @@ import PropTypes from "prop-types";
 
 const DialogTitle = withStyles(theme => ({
   root: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
     margin: 0,
-    padding: theme.spacing(2),
-    background: "#c7dcc3"
+    paddingLeft: theme.spacing(4),
+    paddingTop: theme.spacing(3),
+    paddingBottom: 0,
+    background: "#ffffff"
   },
   closeButton: {
     position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
+    right: theme.spacing(2),
+    top: theme.spacing(2),
     color: theme.palette.grey[500]
   }
 }))(props => {
