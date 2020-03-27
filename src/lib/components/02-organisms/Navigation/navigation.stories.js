@@ -14,7 +14,8 @@ storiesOf("Navigation", module).add("Basic layout", () => {
     { path: "/lukiokoulutus", text: "Lukiokoulutus" },
     { path: "/jarjestajat", text: "Ammatillinen koulutus" },
     { path: "/vapaa-sivistystyo", text: "Vapaa sivistystyö" },
-    { path: "/tilastot", text: "Tilastot" }
+    { path: "/tilastot", text: "Tilastot" },
+    { url: "http://github.com", text: "External to Github" }
   ];
   return (
     <Router history={createBrowserHistory()}>
