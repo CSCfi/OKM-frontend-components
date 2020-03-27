@@ -18,7 +18,6 @@ import CloseIcon from "@material-ui/icons/Close";
  *    type: type of alert info (default), warning, error, success
  *    handleLinkClick: click call back function (if a link)
  *    linkText: link text as string
- *    onChanges: callback used for closing (visibility)
  *    payload: Custom object defined by user
  * @returns {*}
  * @constructor
@@ -73,7 +72,7 @@ var AlertMessage = function AlertMessage(props) {
 
   return React.createElement("div", {
     className: "".concat(classes.root, " ").concat(isVisible ? "" : "hidden")
-  }, isVisible, React.createElement(Collapse, {
+  }, React.createElement(Collapse, {
     in: props.isVisible
   }, React.createElement(Alert, {
     id: props.id,

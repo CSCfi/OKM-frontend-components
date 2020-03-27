@@ -5,14 +5,17 @@ import ConfirmDialog from "./index";
 
 storiesOf("Confirm Dialog", module)
   .addDecorator(withInfo)
-  .add("Example 1",
-    () =>
-      <ConfirmDialog
-        content={"Haluatko poistua?"}
-        title={"Poistetaanko?"}
-        isConfirmDialogVisible={true}
-        handleCancel={() => console.log('cancel')}
-        handleOk={() => console.log('ok')}
-        yesMessage={"Kyllä"}
-        noMessage={"Ei"}
-      />);
+  .add("Example 1", () => (
+    <ConfirmDialog
+      content={
+        "Tähän kuvaava ohjeteksti varmistamaan, että muutokset on allekirjoitutettu ministerillä. Muutosta ei voi esittelijä kumota."
+      }
+      title={"Merkitäänkö asia päätetyksi?"}
+      isConfirmDialogVisible={true}
+      handleCancel={() => console.log("cancel")}
+      handleOk={() => console.log("ok")}
+      onClose={() => console.log("onClose clicked!")}
+      yesMessage={"Merkitse päätetyksi"}
+      noMessage={"Peruuta"}
+    />
+  ));

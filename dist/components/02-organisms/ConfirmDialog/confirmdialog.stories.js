@@ -4,16 +4,19 @@ import { withInfo } from "@storybook/addon-info";
 import ConfirmDialog from "./index";
 storiesOf("Confirm Dialog", module).addDecorator(withInfo).add("Example 1", function () {
   return React.createElement(ConfirmDialog, {
-    content: "Haluatko poistua?",
-    title: "Poistetaanko?",
+    content: "Tähän kuvaava ohjeteksti varmistamaan, että muutokset on allekirjoitutettu ministerillä. Muutosta ei voi esittelijä kumota.",
+    title: "Merkitäänkö asia päätetyksi?",
     isConfirmDialogVisible: true,
     handleCancel: function handleCancel() {
-      return console.log('cancel');
+      return console.log("cancel");
     },
     handleOk: function handleOk() {
-      return console.log('ok');
+      return console.log("ok");
     },
-    yesMessage: "Kyllä",
-    noMessage: "Ei"
+    onClose: function onClose() {
+      return console.log("onClose clicked!");
+    },
+    yesMessage: "Merkitse päätetyksi",
+    noMessage: "Peruuta"
   });
 });
