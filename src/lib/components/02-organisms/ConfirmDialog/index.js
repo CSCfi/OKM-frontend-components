@@ -34,7 +34,7 @@ const ConfirmDialog = props => {
       <DialogActions>
         <div className="flex pr-6 pb-4">
           <div className="mr-4">
-            <Button onClick={handleCancel} color="secondary" variant="outlined">
+            <Button onClick={handleCancel} color="primary" variant="outlined">
               {noMessage}
             </Button>
           </div>
