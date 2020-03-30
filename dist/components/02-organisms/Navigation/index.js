@@ -25,12 +25,17 @@ var Navigation = function Navigation(_ref) {
   } : _ref$theme;
   var classes = useStyles(theme);
   var items = R.addIndex(R.map)(function (link, index) {
-    return React.createElement(NavLink, {
+    var className = "px-8 \n      ".concat(direction !== "vertical" ? "border-r border-green-600" : "", "\n      py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial\n      hover:bg-").concat(theme.hoverColor, " text-").concat(theme.color, " text-center flex-wrap whitespace-no-wrap");
+    return link.url ? React.createElement("a", {
+      href: link.url,
+      key: "link-".concat(index),
+      className: className
+    }, link.text) : React.createElement(NavLink, {
       key: "link-".concat(index),
       exact: link.isExact,
       activeClassName: "font-bold md:bg-green-800 md:font-normal",
       to: link.path,
-      className: "px-8 ".concat(direction !== "vertical" ? "border-r border-green-600" : "", " py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial\n         hover:bg-").concat(theme.hoverColor, " text-").concat(theme.color, " text-center flex-wrap whitespace-no-wrap")
+      className: className
     }, link.text);
   }, links);
   return React.createElement(React.Fragment, null, (!direction || direction === "horizontal") && React.createElement(AppBar, {

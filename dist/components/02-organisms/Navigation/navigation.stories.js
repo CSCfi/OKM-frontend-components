@@ -20,6 +20,9 @@ storiesOf("Navigation", module).add("Basic layout", function () {
   }, {
     path: "/tilastot",
     text: "Tilastot"
+  }, {
+    url: "http://github.com",
+    text: "External to Github"
   }];
   return React.createElement(Router, {
     history: createBrowserHistory()
