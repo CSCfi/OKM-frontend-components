@@ -55,7 +55,7 @@ const categoryStyleMapping = {
 
 /**
  * With a layout strategy you can influence to paddings and margins
- * of a CategorizedList. Default setting sets use evenly spacing and 
+ * of a CategorizedList. Default setting sets use evenly spacing and
  * "groups" tries to separate category paths / threes from each other.
  */
 const layoutStrategies = [{ key: "default" }, { key: "groups" }];
@@ -119,7 +119,7 @@ const CategorizedList = React.memo(
 
     /**
      * Click of the SimpleButton is handled here.
-     * @param {object} - Object that includes some properties. 
+     * @param {object} - Object that includes some properties.
      * @param {object} changeProps - Changed properties with their forthcoming states.
      */
     const handleButtonClick = (payload, changeProps) => {
@@ -178,14 +178,15 @@ const CategorizedList = React.memo(
            */
           const isCategoryTitleVisible =
             props.showCategoryTitles && !!(category.code || category.title);
-          
+
           // Anchor identifies a change object.
           const anchor = `${props.anchor}.${category.anchor}`;
-          
+
           /**
            * R = Ramda library (https://ramdajs.com/docs/). Dot is the
            * default separator of an anchor chain.
-           **/ 
+           **/
+
           const splittedAnchor = R.split(".", anchor);
 
           /**
@@ -203,10 +204,7 @@ const CategorizedList = React.memo(
             props.changes
           );
 
-          /**
-           * Category related layout styles. Please read the code to understand
-           * it.
-           **/ 
+          // Category related layout styles.
           const { components, indentation, strategy, margins } =
             category.layout || {};
 
@@ -303,7 +301,7 @@ const CategorizedList = React.memo(
            * A single category can have multiple components. The title section
            * of the category will be rendered first and the components will be
            * looped through after it.
-           **/ 
+           **/
           return (
             <div
               key={i}
@@ -347,11 +345,8 @@ const CategorizedList = React.memo(
                     parentComponent
                   );
                   /**
-                   * The meaning of propsObj has been hard to understand among
-                   * the developers. The object contains values of the original
-                   * component and its change object. Please see the
-                   * getPropertiesObject function to understand the code. It's
-                   * only couple of lines long.
+                   * Override component properties with the change object properties
+                   * to display the state after changes.
                    */
                   const propsObj = getPropertiesObject(changeObj, component);
 
@@ -380,7 +375,7 @@ const CategorizedList = React.memo(
                    * the following list please define how the component's
                    * callback functions should be handled. And remember to
                    * import the component in the beginning of this file.
-                   **/ 
+                   **/
                   return (
                     <React.Fragment key={`item-${ii}`}>
                       {component.name === "CheckboxWithLabel" && (
@@ -901,16 +896,13 @@ const CategorizedList = React.memo(
                   );
                 })}
               </div>
-              {
-              /**
+              {/**
                * Important! If the current category has child categories
                * new instance of the CategorizedList component will be created.
                * The structure can therefore have multiple levels.
-               * To understand the code better, please read and debug it if
-               * needed. You can also read external documentation. Ask about it
-               * from the previous and current developers of this project.
-               * Have a nice day!
-               **/ 
+               * Please read the wiki dokument about the CategorizedList for
+               * more information.
+               **/
               category.categories && (
                 <CategorizedList
                   anchor={anchor}
