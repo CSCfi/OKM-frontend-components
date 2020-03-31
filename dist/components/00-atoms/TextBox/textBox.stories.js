@@ -8,19 +8,19 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
     console.info(payload, value);
   };
 
-  return React.createElement("div", null, React.createElement("p", null, "Open developer tool console to see callback values."), React.createElement(TextBox, {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Open developer tool console to see callback values."), /*#__PURE__*/React.createElement(TextBox, {
     payload: {
       testProp: 1
     },
     onChanges: onChanges
-  }), React.createElement("br", null), React.createElement(TextBox, {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(TextBox, {
     title: "Required",
     isRequired: true,
     payload: {
       testProp: 1
     },
     onChanges: onChanges
-  }), React.createElement("br", null), React.createElement("br", null), React.createElement(TextBox, {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(TextBox, {
     title: "read only",
     isReadOnly: true,
     value: "Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text ",
@@ -28,7 +28,7 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
     tooltip: {
       text: "This is info text"
     }
-  }), React.createElement(TextBox, {
+  }), /*#__PURE__*/React.createElement(TextBox, {
     title: "invalid",
     payload: {
       testProp: 1
@@ -38,7 +38,7 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Simple example", functi
     tooltip: {
       text: "This is info text"
     }
-  }), React.createElement("br", null), React.createElement(TextBox, {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(TextBox, {
     title: "invalid and required",
     isRequired: true,
     payload: {

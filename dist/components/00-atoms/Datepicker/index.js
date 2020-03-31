@@ -1,8 +1,7 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
-import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
+import _createSuper from "@babel/runtime/helpers/esm/createSuper";
 import _inherits from "@babel/runtime/helpers/esm/inherits";
 import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
@@ -62,15 +61,15 @@ var materialTheme = createMuiTheme({
   }
 });
 
-var LocalizedUtils =
-/*#__PURE__*/
-function (_DateFnsUtils) {
+var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
+
+  var _super = _createSuper(LocalizedUtils);
 
   function LocalizedUtils() {
     _classCallCheck(this, LocalizedUtils);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(LocalizedUtils).apply(this, arguments));
+    return _super.apply(this, arguments);
   }
 
   _createClass(LocalizedUtils, [{
@@ -123,15 +122,15 @@ var Datepicker = function Datepicker(props) {
       setSelectedDate(props.value);
     }
   }, [props.value, selectedDate]);
-  return React.createElement(ThemeProvider, {
+  return /*#__PURE__*/React.createElement(ThemeProvider, {
     theme: materialTheme
-  }, React.createElement(MuiPickersUtilsProvider, {
+  }, /*#__PURE__*/React.createElement(MuiPickersUtilsProvider, {
     utils: LocalizedUtils,
     locale: localeMap[locale],
     theme: materialTheme
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col"
-  }, React.createElement(DatePicker, {
+  }, /*#__PURE__*/React.createElement(DatePicker, {
     format: "d.M.yyyy" // Always is Finnish format
     ,
     "aria-label": props.ariaLabel,
@@ -175,7 +174,7 @@ var Datepicker = function Datepicker(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

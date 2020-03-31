@@ -26,11 +26,11 @@ var Navigation = function Navigation(_ref) {
   var classes = useStyles(theme);
   var items = R.addIndex(R.map)(function (link, index) {
     var className = "px-8 \n      ".concat(direction !== "vertical" ? "border-r border-green-600" : "", "\n      py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial\n      hover:bg-").concat(theme.hoverColor, " text-").concat(theme.color, " text-center flex-wrap whitespace-no-wrap");
-    return link.url ? React.createElement("a", {
+    return link.url ? /*#__PURE__*/React.createElement("a", {
       href: link.url,
       key: "link-".concat(index),
       className: className
-    }, link.text) : React.createElement(NavLink, {
+    }, link.text) : /*#__PURE__*/React.createElement(NavLink, {
       key: "link-".concat(index),
       exact: link.isExact,
       activeClassName: "font-bold md:bg-green-800 md:font-normal",
@@ -38,16 +38,16 @@ var Navigation = function Navigation(_ref) {
       className: className
     }, link.text);
   }, links);
-  return React.createElement(React.Fragment, null, (!direction || direction === "horizontal") && React.createElement(AppBar, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, (!direction || direction === "horizontal") && /*#__PURE__*/React.createElement(AppBar, {
     position: "static",
     classes: classes
-  }, React.createElement(Toolbar, {
+  }, /*#__PURE__*/React.createElement(Toolbar, {
     variant: "dense",
     className: "flex flex-wrap text-black border \n        border-gray-300 text-sm overflow-auto hide-scrollbar bg-".concat(theme.backgroundColor),
     disableGutters: true
-  }, React.createElement(HorizontalLayout, {
+  }, /*#__PURE__*/React.createElement(HorizontalLayout, {
     items: items
-  }))), direction === "vertical" && React.createElement(VerticalLayout, {
+  }))), direction === "vertical" && /*#__PURE__*/React.createElement(VerticalLayout, {
     items: items
   }));
 };

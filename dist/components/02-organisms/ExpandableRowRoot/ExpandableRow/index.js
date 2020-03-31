@@ -42,7 +42,7 @@ var ExpansionPanelSummary = withStyles({
   },
   expanded: {}
 })(function (props) {
-  return React.createElement(MuiExpansionPanelSummary, props);
+  return /*#__PURE__*/React.createElement(MuiExpansionPanelSummary, props);
 });
 ExpansionPanelSummary.muiName = "ExpansionPanelSummary";
 var ExpansionPanelDetails = withStyles(function (theme) {
@@ -58,19 +58,19 @@ var ExpansionPanelDetails = withStyles(function (theme) {
  */
 
 var ExpandableRow = function ExpandableRow(props) {
-  return React.createElement(ExpansionPanel, {
+  return /*#__PURE__*/React.createElement(ExpansionPanel, {
     defaultExpanded: props.shouldBeExpanded,
     onChange: props.onToggle
-  }, React.createElement(ExpansionPanelSummary, {
-    expandIcon: React.createElement(ExpandMoreIcon, null),
+  }, /*#__PURE__*/React.createElement(ExpansionPanelSummary, {
+    expandIcon: /*#__PURE__*/React.createElement(ExpandMoreIcon, null),
     id: "".concat(props.id, "-summary")
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
-  }, React.createElement(Slot, {
+  }, /*#__PURE__*/React.createElement(Slot, {
     slot: "title"
-  }, props.children)), React.createElement(Slot, {
+  }, props.children)), /*#__PURE__*/React.createElement(Slot, {
     slot: "info"
-  }, props.children)), React.createElement(ExpansionPanelDetails, null, React.createElement(Slot, {
+  }, props.children)), /*#__PURE__*/React.createElement(ExpansionPanelDetails, null, /*#__PURE__*/React.createElement(Slot, {
     slot: "content"
   }, props.children)));
 };
