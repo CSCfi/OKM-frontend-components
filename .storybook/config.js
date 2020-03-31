@@ -1,3 +1,6 @@
-import { configure } from '@storybook/react';
+import { addDecorator, configure } from "@storybook/react";
+import StylesDecorator from "./styles-decorator";
 
-configure(require.context('../src', true, /\.stories\.js$/), module);
+addDecorator(StylesDecorator);
+
+configure(require.context("../src", true, /\.stories\.js$/), module);

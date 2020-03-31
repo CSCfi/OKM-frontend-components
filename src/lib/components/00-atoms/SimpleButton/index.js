@@ -6,7 +6,8 @@ const defaultProps = {
   isReadOnly: false,
   payload: {},
   text: "[text is missing]",
-  variant: "contained"
+  variant: "contained",
+  color: "primary"
 };
 
 const SimpleButton = ({
@@ -14,7 +15,8 @@ const SimpleButton = ({
   onClick,
   payload = defaultProps.payload,
   text = defaultProps.text,
-  variant = defaultProps.variant
+  variant = defaultProps.variant,
+  color = defaultProps.color
 }) => {
   const handleClick = () => {
     onClick(payload);
@@ -23,7 +25,7 @@ const SimpleButton = ({
   return (
     <React.Fragment>
       {!isReadOnly ? (
-        <Button onClick={handleClick} variant={variant}>
+        <Button onClick={handleClick} variant={variant} color={color}>
           {text}
         </Button>
       ) : null}
@@ -36,6 +38,7 @@ SimpleButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   payload: PropTypes.object,
   variant: PropTypes.string,
+  color: PropTypes.string,
   text: PropTypes.string
 };
 

@@ -20,6 +20,7 @@ module.exports = {
       valkoinen: "#ffffff",
       linkkihover: "#294637",
       linkkivisited: "#2355b47",
+      bordervari: "#e2e8f0",
 
       transparent: "transparent",
 
@@ -29,7 +30,7 @@ module.exports = {
       gray: {
         100: "#fafafa", // #f7fafc
         200: "#e3e3e3", // #edf2f7
-        300: "#d8d8d8", // #e2e8f0 x
+        300: "#d1d1d1", // #e2e8f0 border
         400: "#cbcbcb", // #cbd5e0
         500: "#a0a0a0", // #a0aec0 x
         600: "#666666", // #718096
