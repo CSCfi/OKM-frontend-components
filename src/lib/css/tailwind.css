@@ -635,9 +635,9 @@ a:hover {
   color: #276749;
 }
 
-a:visited {
-  color: #22543d;
-}
+/* a:visited {
+  @apply text-green-700;
+} */
 
 .container {
   width: 100%;

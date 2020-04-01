@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import Navigation from ".";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import "../../../css/tailwind.css";
 
 storiesOf("Navigation", module).add("Basic layout", () => {
   const links = [

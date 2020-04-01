@@ -6,6 +6,7 @@ import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
 import { NavLink } from "react-router-dom";
 import * as R from "ramda";
+import "../../../css/tailwind.css";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,20 +18,17 @@ const Navigation = ({
   direction = "horizontal",
   links,
   theme = {
-    backgroundColor: "green-500",
+    backgroundColor: "vihrea",
     color: "white",
-    hoverColor: "green-400"
+    hoverColor: "tummmanvihrea"
   }
 }) => {
   const classes = useStyles(theme);
 
   const items = R.addIndex(R.map)((link, index) => {
-    const className = `px-8 
-      ${direction !== "vertical" ? "border-r border-green-600" : ""}
+    const className = `px-4 font-medium uppercase
       py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial
-      hover:bg-${theme.hoverColor} text-${
-      theme.color
-    } text-center flex-wrap whitespace-no-wrap`;
+      hover:bg-${theme.hoverColor} hover:text-${theme.color} visited:text-${theme.color} text-${theme.color} text-center flex-wrap whitespace-no-wrap`;
 
     return link.url ? (
       <a href={link.url} key={`link-${index}`} className={className}>
@@ -40,7 +38,7 @@ const Navigation = ({
       <NavLink
         key={`link-${index}`}
         exact={link.isExact}
-        activeClassName={`font-bold md:bg-green-800 md:font-normal`}
+        activeClassName={`font-bold md:bg-${theme.hoverColor} md:font-normal`}
         to={link.path}
         className={className}>
         {link.text}

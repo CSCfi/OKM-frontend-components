@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
+import { createStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 
 const defaultProps = {
   isReadOnly: false,
@@ -9,6 +11,10 @@ const defaultProps = {
   variant: "contained",
   color: "primary"
 };
+
+const styles = createStyles(theme => ({
+  root: {}
+}));
 
 const SimpleButton = ({
   isReadOnly = defaultProps.isReadOnly,
@@ -42,4 +48,4 @@ SimpleButton.propTypes = {
   text: PropTypes.string
 };
 
-export default SimpleButton;
+export default withStyles(styles)(SimpleButton);

@@ -12,7 +12,7 @@ module.exports = {
     colors: {
       // custom
       vihrea: "#4c7a61",
-      hover: "3b604c",
+      tummanvihrea: "#3b604c",
       mustanharmaa: "#333333",
       tummanharmaa: "#666666",
       harmaa: "#e3e3e3",
@@ -485,7 +485,7 @@ module.exports = {
     stroke: ["responsive"],
     tableLayout: ["responsive"],
     textAlign: ["responsive"],
-    textColor: ["responsive", "hover", "focus"],
+    textColor: ["responsive", "hover", "focus", "visited"],
     textDecoration: ["responsive", "hover", "focus"],
     textTransform: ["responsive"],
     userSelect: ["responsive"],
