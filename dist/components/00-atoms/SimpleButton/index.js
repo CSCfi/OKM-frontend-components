@@ -1,11 +1,29 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import { createStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
 var defaultProps = {
   isReadOnly: false,
   payload: {},
   text: "[text is missing]",
-  variant: "contained"
+  variant: "contained",
+  color: "primary",
+  size: "large"
 };
+var styles = createStyles(function (theme) {
+  return {
+    root: {
+      height: "3rem",
+      fontWeight: "600",
+      fontSize: "0.9375rem",
+      borderRadius: 0,
+      borderColor: "#d1d1d1",
+      "&:focus": {
+        outline: "0.2rem solid #d1d1d1"
+      }
+    }
+  };
+});
 
 var SimpleButton = function SimpleButton(_ref) {
   var _ref$isReadOnly = _ref.isReadOnly,
@@ -16,16 +34,28 @@ var SimpleButton = function SimpleButton(_ref) {
       _ref$text = _ref.text,
       text = _ref$text === void 0 ? defaultProps.text : _ref$text,
       _ref$variant = _ref.variant,
-      variant = _ref$variant === void 0 ? defaultProps.variant : _ref$variant;
+      variant = _ref$variant === void 0 ? defaultProps.variant : _ref$variant,
+      _ref$color = _ref.color,
+      color = _ref$color === void 0 ? defaultProps.color : _ref$color,
+      ariaLabel = _ref.ariaLabel,
+      _ref$size = _ref.size,
+      size = _ref$size === void 0 ? defaultProps.size : _ref$size,
+      classes = _ref.classes;
 
-  var handleClick = function handleClick() {
-    onClick(payload);
+  var handleClick = function handleClick(event) {
+    onClick(payload, {}, event);
   };
 
-  return React.createElement(React.Fragment, null, !isReadOnly ? React.createElement(Button, {
+  return React.createElement(React.Fragment, null, !isReadOnly && React.createElement(Button, {
+    size: size,
     onClick: handleClick,
-    variant: variant
-  }, text) : null);
+    variant: variant,
+    color: color,
+    disableElevation: true,
+    disableRipple: true,
+    "aria-label": ariaLabel,
+    className: classes.root
+  }, text));
 };
 
-export default SimpleButton;
+export default withStyles(styles)(SimpleButton);

@@ -20,7 +20,7 @@ const Navigation = ({
   theme = {
     backgroundColor: "vihrea",
     color: "white",
-    hoverColor: "tummmanvihrea"
+    hoverColor: "green-600"
   }
 }) => {
   const classes = useStyles(theme);

@@ -8,10 +8,7 @@ import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import { createStyles } from "@material-ui/styles";
-import green from "@material-ui/core/colors/green";
-import { createMuiTheme } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import fiLocale from "date-fns/locale/fi";
 import svLocale from "date-fns/locale/sv";
@@ -56,15 +53,8 @@ var styles = createStyles(function (theme) {
     }
   };
 });
-var materialTheme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-});
 
-var LocalizedUtils =
-/*#__PURE__*/
-function (_DateFnsUtils) {
+var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
 
   function LocalizedUtils() {
@@ -123,12 +113,9 @@ var Datepicker = function Datepicker(props) {
       setSelectedDate(props.value);
     }
   }, [props.value, selectedDate]);
-  return React.createElement(ThemeProvider, {
-    theme: materialTheme
-  }, React.createElement(MuiPickersUtilsProvider, {
+  return React.createElement(MuiPickersUtilsProvider, {
     utils: LocalizedUtils,
-    locale: localeMap[locale],
-    theme: materialTheme
+    locale: localeMap[locale]
   }, React.createElement("div", {
     className: "flex flex-col"
   }, React.createElement(DatePicker, {
@@ -183,7 +170,7 @@ var Datepicker = function Datepicker(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, isVisited && !selectedDate && props.requiredMessage))));
+  }, isVisited && !selectedDate && props.requiredMessage)));
 };
 
 Datepicker.defaultProps = {

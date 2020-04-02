@@ -49,6 +49,12 @@ var categoryStyleMapping = {
     large: 10
   }
 };
+/**
+ * With a layout strategy you can influence to paddings and margins
+ * of a CategorizedList. Default setting sets use evenly spacing and
+ * "groups" tries to separate category paths / threes from each other.
+ */
+
 var layoutStrategies = [{
   key: "default"
 }, {
@@ -60,6 +66,12 @@ var defaultComponentStyles = {
 };
 var defaultCategoryStyles = {
   indentation: categoryStyleMapping.indentations.large,
+
+  /**
+   * Default layout strategy is set here. You can change the strategy by
+   * giving the category a layout property with desired strategy.
+   * E.g. layout: { strategy: { key: "groups" }}
+   **/
   layoutStrategy: R.find(R.propEq("key", "default"), layoutStrategies),
   margins: {
     top: categoryStyleMapping.margins.extraSmall
@@ -67,9 +79,9 @@ var defaultCategoryStyles = {
 };
 /**
  * Returns a change object by the given anchor.
- *
- * @param {string} anchor
- * @param {array} changes
+ * @param {string} anchor - Identifies the change object that is being searched for.
+ * @param {array} changes - Array of change objects.
+ * @returns {object} - Change object.
  */
 
 var getChangeObjByAnchor = function getChangeObjByAnchor(anchor, changes) {
@@ -80,8 +92,8 @@ var getChangeObjByAnchor = function getChangeObjByAnchor(anchor, changes) {
 /**
  * Combines the properties of the component with the properties of the
  * change object.
- * @param {object} changeObj
- * @param {object} component
+ * @param {object} changeObj - Change object.
+ * @param {object} component - Node / component of a form.
  */
 
 
@@ -94,15 +106,43 @@ var getPropertiesObject = function getPropertiesObject() {
   };
   return Object.assign({}, R.prop("properties", component) || {}, R.prop("properties", changeObj) || {});
 };
+/**
+ * CategorizedList loops through the form structure and handles everything in it.
+ * It has a render function where it creates - if needed - more CategorizedLists.
+ * The end result is group of DOM elements. The group will be returned to the
+ * CategorizedListRoot component and it will pass it forward to the component
+ * that uses the CategorizedListRoot. When user makes changes on to the form the
+ * form structure will be gone through again and so the form will be updated.
+ */
+
 
 var CategorizedList = React.memo(function (props) {
   var onChangesUpdate = props.onChangesUpdate,
       removeChangeObject = props.removeChangeObject,
       showValidationErrors = props.showValidationErrors;
+  /**
+   * Click of the SimpleButton is handled here.
+   * @param {object} - Object that includes some properties.
+   * @param {object} changeProps - Changed properties with their forthcoming states.
+   */
 
   var handleButtonClick = function handleButtonClick(payload, changeProps) {
+    /**
+     * SimpleButton component is part of the payload. It's onClick method
+     * will be called. If you like to find the onClick method browse the
+     * current form structure.
+     **/
     payload.component.onClick(payload, changeProps);
   };
+  /**
+   * This is the most common handling function for the components
+   * in CategorizedList's scope. Please note that metadata of
+   * change objects will be attached to them in this function.
+   * The idea behind the code is to call onChangeUpdate callback
+   * function with a change object related to the component that
+   * user has interacted with.
+   */
+
 
   var handleChanges = useCallback(function (payload, changeProps) {
     return onChangesUpdate({
@@ -112,6 +152,10 @@ var CategorizedList = React.memo(function (props) {
       })
     });
   }, [onChangesUpdate]);
+  /**
+   * Rendering starts here.
+   */
+
   return React.createElement("div", {
     "data-anchor": props.anchor
   },
@@ -122,11 +166,29 @@ var CategorizedList = React.memo(function (props) {
     if (category.isVisible === false) {
       return null;
     }
+    /**
+     * Category can have a title. !props.showCategoryTitles means
+     * that the title won't be shown in UI. You can see the whole
+     * visibility rule under this code comment.
+     */
 
-    var isCategoryTitleVisible = props.showCategoryTitles && !!(category.code || category.title);
+
+    var isCategoryTitleVisible = props.showCategoryTitles && !!(category.code || category.title); // Anchor identifies a change object.
+
     var anchor = "".concat(props.anchor, ".").concat(category.anchor);
+    /**
+     * R = Ramda library (https://ramdajs.com/docs/). Dot is the
+     * default separator of an anchor chain.
+     **/
+
     var splittedAnchor = R.split(".", anchor);
-    var categoryChanges = R.filter(R.compose(R.equals(splittedAnchor), R.slice(0, splittedAnchor.length), R.split("."), R.prop("anchor")), props.changes); // Category related layout styles
+    /**
+     * props.changes includes all the changes of current form. The
+     * unrelevant ones will be filtered out and the relevant ones
+     * will be stored into categoryChanges variable.
+     */
+
+    var categoryChanges = R.filter(R.compose(R.equals(splittedAnchor), R.slice(0, splittedAnchor.length), R.split("."), R.prop("anchor")), props.changes); // Category related layout styles.
 
     var _ref = category.layout || {},
         components = _ref.components,
@@ -156,7 +218,7 @@ var CategorizedList = React.memo(function (props) {
           top: "pt-".concat(categoryLayout.margins.top)
         }
       }
-    }; // Component related layout styles
+    }; // Component related layout styles.
 
     var _ref2 = R.path(["layout", "components"], category) || {},
         justification = _ref2.justification;
@@ -179,6 +241,12 @@ var CategorizedList = React.memo(function (props) {
 
     var categoryTitleClasses = R.join(" ", ["py-".concat(topMarginInteger), i === 0 ? "" : "mt-".concat(2 * topMarginInteger)]);
     var categoryClasses = R.values(flattenObj(categoryStyles.classes));
+    /**
+     * A single category can have multiple components. The title section
+     * of the category will be rendered first and the components will be
+     * looped through after it.
+     **/
+
     return React.createElement("div", {
       key: i,
       className: R.join(" ", categoryClasses),
@@ -200,12 +268,27 @@ var CategorizedList = React.memo(function (props) {
       var parentComponent = props.parent && props.parent.category.components ? props.parent.category.components[0] : null;
       var parentChangeObj = parentComponent ? getChangeObjByAnchor("".concat(props.parent.anchor, ".").concat(parentComponent.anchor), props.changes) : {};
       var parentPropsObj = getPropertiesObject(parentChangeObj, parentComponent);
-      var propsObj = getPropertiesObject(changeObj, component);
+      /**
+       * Override component properties with the change object properties
+       * to display the state after changes.
+       */
+
+      var propsObj = getPropertiesObject(changeObj, component); // isAddition and isRemoved exist for styling purposes.
+
       var isAddition = !!changeObj.properties.isChecked;
       var isRemoved = R.has("isChecked")(changeObj.properties) && !changeObj.properties.isChecked;
       var labelStyles = Object.assign({}, isAddition ? (propsObj.labelStyles || {}).addition : {}, isRemoved ? (propsObj.labelStyles || {}).removal : {}, (propsObj.labelStyles || {}).custom || {});
       var styleClasses = component.styleClasses || [];
       var title = propsObj.title + (props.debug ? props.rootPath.concat([i, "components", ii]) : "");
+      /**
+       * Component is defined in a form structure. There can be
+       * different sort of components and their all need the
+       * proper parameters. If you must add more components on
+       * the following list please define how the component's
+       * callback functions should be handled. And remember to
+       * import the component in the beginning of this file.
+       **/
+
       return React.createElement(React.Fragment, {
         key: "item-".concat(ii)
       }, component.name === "CheckboxWithLabel" && React.createElement("div", {
@@ -571,7 +654,15 @@ var CategorizedList = React.memo(function (props) {
         requiredMessage: propsObj.requiredMessage,
         showValidationErrors: showValidationErrors
       })));
-    })), category.categories && React.createElement(CategorizedList, {
+    })),
+    /**
+    * Important! If the current category has child categories
+    * new instance of the CategorizedList component will be created.
+    * The structure can therefore have multiple levels.
+    * Please read the wiki dokument about the CategorizedList for
+    * more information.
+    **/
+    category.categories && React.createElement(CategorizedList, {
       anchor: anchor,
       categories: category.categories,
       changes: categoryChanges,

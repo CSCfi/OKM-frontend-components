@@ -7,9 +7,9 @@ storiesOf("SimpleButton", module).add("Normal", () => (
     <SimpleButton text="Text is here" />
   </div>
 ));
-storiesOf("SimpleButton", module).add("Outlined", () => (
+storiesOf("SimpleButton", module).add("Outlined, large", () => (
   <div className="flex flex-col w-56 p-4">
-    <SimpleButton text="Text is here" variant="outlined" />
+    <SimpleButton text="Text is here" variant="outlined" size="large" />
   </div>
 ));
 storiesOf("SimpleButton", module).add("Text button", () => (

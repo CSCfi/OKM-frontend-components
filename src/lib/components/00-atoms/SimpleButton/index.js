@@ -9,11 +9,21 @@ const defaultProps = {
   payload: {},
   text: "[text is missing]",
   variant: "contained",
-  color: "primary"
+  color: "primary",
+  size: "large"
 };
 
 const styles = createStyles(theme => ({
-  root: {}
+  root: {
+    height: "3rem",
+    fontWeight: "600",
+    fontSize: "0.9375rem",
+    borderRadius: 0,
+    borderColor: "#d1d1d1",
+    "&:focus": {
+      outline: "0.2rem solid #d1d1d1"
+    }
+  }
 }));
 
 const SimpleButton = ({
@@ -22,19 +32,30 @@ const SimpleButton = ({
   payload = defaultProps.payload,
   text = defaultProps.text,
   variant = defaultProps.variant,
-  color = defaultProps.color
+  color = defaultProps.color,
+  ariaLabel,
+  size = defaultProps.size,
+  classes
 }) => {
-  const handleClick = () => {
-    onClick(payload);
+  const handleClick = event => {
+    onClick(payload, {}, event);
   };
 
   return (
     <React.Fragment>
-      {!isReadOnly ? (
-        <Button onClick={handleClick} variant={variant} color={color}>
+      {!isReadOnly && (
+        <Button
+          size={size}
+          onClick={handleClick}
+          variant={variant}
+          color={color}
+          disableElevation
+          disableRipple
+          aria-label={ariaLabel}
+          className={classes.root}>
           {text}
         </Button>
-      ) : null}
+      )}
     </React.Fragment>
   );
 };
@@ -45,7 +66,8 @@ SimpleButton.propTypes = {
   payload: PropTypes.object,
   variant: PropTypes.string,
   color: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  ariaLabel: PropTypes.string
 };
 
 export default withStyles(styles)(SimpleButton);
