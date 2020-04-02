@@ -14,7 +14,7 @@ var props = [{
   onChange: jest.fn()
 }];
 it("renders the correct titles", function () {
-  var _render = render(React.createElement(StepperNavigation, {
+  var _render = render( /*#__PURE__*/React.createElement(StepperNavigation, {
     name: "example",
     stepProps: props
   })),
@@ -25,7 +25,7 @@ it("renders the correct titles", function () {
   expect(getByLabelText(props[2].title)).toBeInTheDocument();
 });
 it("checks if the callback method is called on click", function () {
-  var _render2 = render(React.createElement(StepperNavigation, {
+  var _render2 = render( /*#__PURE__*/React.createElement(StepperNavigation, {
     name: "example",
     stepProps: props
   })),

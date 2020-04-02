@@ -23,7 +23,7 @@ var TableRow = function TableRow(_ref) {
     }
   }
 
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     key: "key-".concat(Math.random()),
     role: "row",
     className: "hover:bg-gray-".concat(tableLevel + 1, "00 cursor-pointer flex"),

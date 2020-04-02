@@ -9,25 +9,25 @@ var theme = createMuiTheme({
   }
 });
 storiesOf("ExpandableRow", module).addDecorator(withInfo).add("is shrinked", function () {
-  return React.createElement(MuiThemeProvider, {
+  return /*#__PURE__*/React.createElement(MuiThemeProvider, {
     theme: theme
-  }, React.createElement(ExpandableRow, null, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(ExpandableRow, null, /*#__PURE__*/React.createElement("div", {
     "data-slot": "title"
-  }, "Title of an expandable row"), React.createElement("div", {
+  }, "Title of an expandable row"), /*#__PURE__*/React.createElement("div", {
     "data-slot": "info"
-  }, "Info section"), React.createElement("div", {
+  }, "Info section"), /*#__PURE__*/React.createElement("div", {
     "data-slot": "content"
   }, "There is some content here...")));
 }).add("is expanded", function () {
-  return React.createElement(MuiThemeProvider, {
+  return /*#__PURE__*/React.createElement(MuiThemeProvider, {
     theme: theme
-  }, React.createElement(ExpandableRow, {
+  }, /*#__PURE__*/React.createElement(ExpandableRow, {
     shouldBeExpanded: true
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     "data-slot": "title"
-  }, "Title"), React.createElement("div", {
+  }, "Title"), /*#__PURE__*/React.createElement("div", {
     "data-slot": "info"
-  }, "Info section"), React.createElement("div", {
+  }, "Info section"), /*#__PURE__*/React.createElement("div", {
     "data-slot": "content"
   }, "There is some content here...")));
 });

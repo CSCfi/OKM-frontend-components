@@ -15,7 +15,7 @@ var RowGroup = function RowGroup(_ref) {
       tableLevel = _ref$tableLevel === void 0 ? 0 : _ref$tableLevel;
   var allStyleClasses = R.concat(styleClasses, ["pl-".concat(4 * tableLevel)]);
   var classNames = R.join(" ", allStyleClasses);
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: classNames,
     key: "key-".concat(Math.random()),
     role: "rowgroup"

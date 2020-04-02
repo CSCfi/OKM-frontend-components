@@ -39,14 +39,14 @@ var CheckboxWithLabel = React.memo(function (props) {
     });
   };
 
-  return React.createElement(React.Fragment, null, !props.isReadOnly ? React.createElement(FormGroup, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !props.isReadOnly ? /*#__PURE__*/React.createElement(FormGroup, {
     row: true
-  }, React.createElement(FormControlLabel, {
+  }, /*#__PURE__*/React.createElement(FormControlLabel, {
     classes: {
       label: styles.label
     },
     disabled: props.isDisabled,
-    control: React.createElement(Checkbox, {
+    control: /*#__PURE__*/React.createElement(Checkbox, {
       checked: props.isChecked,
       indeterminate: props.isChecked && props.isIndeterminate,
       value: "1",
@@ -58,9 +58,9 @@ var CheckboxWithLabel = React.memo(function (props) {
       }
     }),
     label: props.children
-  })) : props.isChecked && React.createElement("div", {
+  })) : props.isChecked && /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row text-base mb-2"
-  }, React.createElement(Check, null), React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Check, null), /*#__PURE__*/React.createElement("span", {
     className: "my-auto"
   }, props.children)));
 }, function (prevState, currentState) {

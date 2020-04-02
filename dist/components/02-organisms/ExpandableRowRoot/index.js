@@ -63,40 +63,40 @@ var ExpandableRowRoot = function ExpandableRowRoot(_ref) {
     setIsToggleOpen(arguments.length <= 1 ? undefined : arguments[1]);
   };
 
-  return React.createElement(React.Fragment, null, categories && React.createElement(ExpandableRow, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, categories && /*#__PURE__*/React.createElement(ExpandableRow, {
     shouldBeExpanded: isExpanded,
     onToggle: onToggle,
     id: anchor
-  }, React.createElement("h4", {
+  }, /*#__PURE__*/React.createElement("h4", {
     "data-slot": "title",
     className: "opacity-75"
-  }, code && React.createElement("span", {
+  }, code && /*#__PURE__*/React.createElement("span", {
     className: "pr-6"
-  }, code), React.createElement("span", null, title)), React.createElement("div", {
+  }, code), /*#__PURE__*/React.createElement("span", null, title)), /*#__PURE__*/React.createElement("div", {
     "data-slot": "info"
-  }, changes.length > 0 && React.createElement("div", {
+  }, changes.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
-  }, !hideAmountOfChanges && React.createElement(NumberOfChanges, {
+  }, !hideAmountOfChanges && /*#__PURE__*/React.createElement(NumberOfChanges, {
     changes: changes,
     id: anchor
-  }), !disableReverting && React.createElement("span", {
+  }), !disableReverting && /*#__PURE__*/React.createElement("span", {
     className: "mx-6"
-  }, React.createElement(Tooltip, {
+  }, /*#__PURE__*/React.createElement(Tooltip, {
     title: messages.undo
-  }, React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(Button, {
     component: "span",
     color: "primary",
     className: classes.button,
-    endIcon: React.createElement(UndoIcon, null),
+    endIcon: /*#__PURE__*/React.createElement(UndoIcon, null),
     onClick: function onClick(e) {
       e.stopPropagation();
       return onChangesRemove(sectionId, anchor, index);
     },
     size: "small"
-  }, messages.undo))))), React.createElement("div", {
+  }, messages.undo))))), /*#__PURE__*/React.createElement("div", {
     "data-slot": "content",
     className: "w-full ".concat(!children ? "p-8" : "")
-  }, !children && (isExpanded || isToggledOpen) ? React.createElement(CategorizedListRoot, {
+  }, !children && (isExpanded || isToggledOpen) ? /*#__PURE__*/React.createElement(CategorizedListRoot, {
     anchor: anchor,
     categories: categories,
     changes: changes,
