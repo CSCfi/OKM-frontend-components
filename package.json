@@ -8,7 +8,7 @@
   "scripts": {
     "start": "npm-run-all --parallel watch:css watch:component-css storybook",
     "build-dist": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "build": "./build.sh",
+    "build": "npm-run-all build:css build:react build:component-css build-dist",
     "build:react": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
