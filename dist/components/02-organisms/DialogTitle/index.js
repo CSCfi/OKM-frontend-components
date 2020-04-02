@@ -24,15 +24,15 @@ var DialogTitle = withStyles(function (theme) {
   var children = props.children,
       classes = props.classes,
       onClose = props.onClose;
-  return /*#__PURE__*/React.createElement(MuiDialogTitle, {
+  return React.createElement(MuiDialogTitle, {
     disableTypography: true,
     className: classes.root
-  }, /*#__PURE__*/React.createElement(Typography, {
+  }, React.createElement(Typography, {
     variant: "h6"
-  }, children), onClose ? /*#__PURE__*/React.createElement(IconButton, {
+  }, children), onClose ? React.createElement(IconButton, {
     "aria-label": "Close",
     className: classes.closeButton,
     onClick: onClose
-  }, /*#__PURE__*/React.createElement(CloseIcon, null)) : null);
+  }, React.createElement(CloseIcon, null)) : null);
 });
 export default DialogTitle;

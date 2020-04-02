@@ -24,25 +24,25 @@ var ActionList = React.memo(function (props) {
   }, [props.payload, removalCallback]);
   var items = useMemo(function () {
     return R.addIndex(R.map)(function (item, index) {
-      return /*#__PURE__*/React.createElement(ListItem, {
+      return React.createElement(ListItem, {
         key: "action-list-item-".concat(index)
-      }, /*#__PURE__*/React.createElement(ListItemText, {
+      }, React.createElement(ListItemText, {
         primary: item.title,
         secondary: item.secondaryText ? item.secondaryText : null
-      }), item.availableActions && R.includes("remove", item.availableActions) ? /*#__PURE__*/React.createElement(ListItemSecondaryAction, null, /*#__PURE__*/React.createElement(IconButton, {
+      }), item.availableActions && R.includes("remove", item.availableActions) ? React.createElement(ListItemSecondaryAction, null, React.createElement(IconButton, {
         edge: "end",
         "aria-label": "delete",
         onClick: function onClick() {
           return handleRemoval(item);
         }
-      }, /*#__PURE__*/React.createElement(HighlightOffIcon, null))) : null);
+      }, React.createElement(HighlightOffIcon, null))) : null);
     }, props.items);
   }, [handleRemoval, props.items]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, props.title && /*#__PURE__*/React.createElement("h4", {
+  return React.createElement(React.Fragment, null, props.title && React.createElement("h4", {
     className: "pt-4"
-  }, props.title), props.info && /*#__PURE__*/React.createElement("p", {
+  }, props.title), props.info && React.createElement("p", {
     className: "pt-4"
-  }, props.info), /*#__PURE__*/React.createElement(List, {
+  }, props.info), React.createElement(List, {
     dense: true
   }, items));
 });

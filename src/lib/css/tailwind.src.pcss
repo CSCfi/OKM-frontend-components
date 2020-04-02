@@ -1,30 +1,52 @@
 @tailwind base;
 
-p {
-  @apply font-sans;
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), local("Roboto-Regular"),
+    url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2)
+      format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+html,
+body,
+textarea,
+p,
+h1,
+h2,
+h3,
+h4,
+a {
+  font-family: "Roboto";
+  @apply text-gray-800;
 }
 h1 {
   @apply text-2xl;
-  @apply font-semibold;
-  @apply font-sans;
+  @apply font-medium;
 }
 h2 {
   @apply text-xl;
-  @apply font-semibold;
-  @apply font-sans;
+  @apply font-medium;
 }
 h3 {
   @apply text-lg;
-  @apply font-semibold;
-  @apply font-sans;
+  @apply font-medium;
 }
 h4 {
   @apply text-base;
-  @apply font-semibold;
-  @apply font-sans;
+  @apply font-medium;
 }
 a {
-  @apply text-blue-600;
+  @apply text-green-500;
 }
+a:hover {
+  @apply text-green-800;
+}
+/* a:visited {
+  @apply text-green-700;
+} */
 @tailwind components;
 @tailwind utilities;

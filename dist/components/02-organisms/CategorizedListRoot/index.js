@@ -71,7 +71,7 @@ var CategorizedListRoot = React.memo(function (_ref) {
       changes: R.filter(R.compose(R.not, R.propEq("anchor", _anchor)), changes)
     });
   }, [anchor, changes, onUpdate]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null,
+  return React.createElement(React.Fragment, null,
   /**
   * If the first change object is not null (default) the CategorizedList
   * will be created.
@@ -81,7 +81,7 @@ var CategorizedListRoot = React.memo(function (_ref) {
      * This is the first instance of CategorizedList. The component
      * will create more instances on it's own.
      **/
-    return /*#__PURE__*/React.createElement(CategorizedList, {
+    return React.createElement(CategorizedList, {
       anchor: anchor,
       categories: categories,
       changes: changes,

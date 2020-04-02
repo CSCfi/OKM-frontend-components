@@ -34,14 +34,14 @@ var StatusTextRow = React.memo(function (_ref) {
   }, [layout]);
 
   if (!isHidden) {
-    return /*#__PURE__*/React.createElement("div", {
+    return React.createElement("div", {
       className: R.join(" ", classNames),
       style: labelStyles
-    }, /*#__PURE__*/React.createElement("div", {
+    }, React.createElement("div", {
       className: "flex"
-    }, statusText && /*#__PURE__*/React.createElement("div", {
+    }, statusText && React.createElement("div", {
       className: R.join(" ", statusTextStyleClasses)
-    }, statusText), children, !isReadOnly && isRequired && /*#__PURE__*/React.createElement("span", {
+    }, statusText), children, !isReadOnly && isRequired && React.createElement("span", {
       className: "pr-4"
     }, "*"), " "));
   }

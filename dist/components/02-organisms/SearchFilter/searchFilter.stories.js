@@ -7,7 +7,7 @@ storiesOf("SearchFilter", module).addDecorator(withInfo).add("Filter example", f
     console.info(value);
   };
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Open developer tool console to see callback values."), /*#__PURE__*/React.createElement(SearchFilter, {
+  return React.createElement("div", null, React.createElement("p", null, "Open developer tool console to see callback values."), React.createElement(SearchFilter, {
     onValueChanged: onValueChanged
   }));
 });

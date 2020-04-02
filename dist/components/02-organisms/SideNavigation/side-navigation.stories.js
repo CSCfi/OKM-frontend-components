@@ -15,16 +15,16 @@ storiesOf("SideNavigation", module).add("Basic layout", function () {
     });
   }
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex justify-center pt-24"
-  }, /*#__PURE__*/React.createElement(Button, {
+  }, React.createElement(Button, {
     variant: "contained",
     color: "primary",
     className: "float-right",
     onClick: function onClick() {
       toggleDrawer();
     }
-  }, "Toggle menu")), /*#__PURE__*/React.createElement(SideNavigation, {
+  }, "Toggle menu")), React.createElement(SideNavigation, {
     handleDrawerToggle: toggleDrawer,
     isVisible: isSideMenuVisible
   }, "Content of the menu."));

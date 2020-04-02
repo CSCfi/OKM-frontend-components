@@ -135,11 +135,11 @@ var TextBox = function TextBox(props) {
     }
   }, [props.value]); // If value is added the component won't work.
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, value !== null ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return React.createElement(React.Fragment, null, value !== null ? React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-row w-full"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, React.createElement("div", {
     className: "flex flex-col w-full"
-  }, props.title && /*#__PURE__*/React.createElement(InputLabel, {
+  }, props.title && React.createElement(InputLabel, {
     disabled: props.isDisabled || props.isReadOnly,
     htmlFor: "props.id",
     shrink: isFocused || value || props.placeholder ? true : false,
@@ -151,12 +151,12 @@ var TextBox = function TextBox(props) {
       disabled: classes.inputLabelReadonly
     },
     className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && (!value && props.showValidationErrors || isVisited) ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
-  }, /*#__PURE__*/React.createElement("span", {
+  }, React.createElement("span", {
     style: {
       padding: "0 0.3em",
       background: "white"
     }
-  }, props.title, !props.isReadOnly && props.isRequired && "*")), /*#__PURE__*/React.createElement(TextareaAutosize, {
+  }, props.title, !props.isReadOnly && props.isRequired && "*")), React.createElement(TextareaAutosize, {
     "aria-label": props.ariaLabel,
     disabled: props.isDisabled || props.isReadOnly,
     id: props.id,
@@ -179,19 +179,19 @@ var TextBox = function TextBox(props) {
       return setIsFocused(false);
     },
     label: props.label
-  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       paddingLeft: "0.5em",
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
+  }, !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
-  }, /*#__PURE__*/React.createElement(Tooltip, {
+  }, React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
     trigger: "click"
-  }, /*#__PURE__*/React.createElement(HelpIcon, {
+  }, React.createElement(HelpIcon, {
     classes: {
       colorPrimary: styles.tooltipBg
     },

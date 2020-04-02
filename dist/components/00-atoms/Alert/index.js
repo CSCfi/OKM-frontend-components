@@ -70,32 +70,32 @@ var AlertMessage = function AlertMessage(props) {
     return props.handleLinkClick();
   };
 
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     className: "".concat(classes.root, " ").concat(isVisible ? "" : "hidden")
-  }, /*#__PURE__*/React.createElement(Collapse, {
+  }, React.createElement(Collapse, {
     in: props.isVisible
-  }, /*#__PURE__*/React.createElement(Alert, {
+  }, React.createElement(Alert, {
     id: props.id,
     "aria-label": props.ariaLabel,
     severity: props.type,
     variant: "outlined",
-    action: /*#__PURE__*/React.createElement("div", {
+    action: React.createElement("div", {
       style: {
         display: "flex",
         justifyContent: "space-between",
         width: "100%"
       }
-    }, props.linkUrl && props.linkText && /*#__PURE__*/React.createElement(Link, {
+    }, props.linkUrl && props.linkText && React.createElement(Link, {
       href: props.linkUrl,
       style: {
         cursor: "pointer"
       }
-    }, props.linkText), !props.linkUrl && props.handleLinkClick && props.linkText && /*#__PURE__*/React.createElement(Link, {
+    }, props.linkText), !props.linkUrl && props.handleLinkClick && props.linkText && React.createElement(Link, {
       onClick: clickCallback,
       style: {
         cursor: "pointer"
       }
-    }, props.linkText), /*#__PURE__*/React.createElement(IconButton, {
+    }, props.linkText), React.createElement(IconButton, {
       style: {
         marginLeft: "1em"
       },
@@ -105,10 +105,10 @@ var AlertMessage = function AlertMessage(props) {
       onClick: function onClick() {
         return setVisible(false);
       }
-    }, /*#__PURE__*/React.createElement(CloseIcon, {
+    }, React.createElement(CloseIcon, {
       fontSize: "inherit"
     })))
-  }, props.title && /*#__PURE__*/React.createElement(AlertTitle, null, props.title), /*#__PURE__*/React.createElement("p", null, props.message && props.message))));
+  }, props.title && React.createElement(AlertTitle, null, props.title), React.createElement("p", null, props.message && props.message))));
 };
 
 AlertMessage.defaultProps = {

@@ -4,7 +4,7 @@ import Autocomplete from "./index";
 import { withInfo } from "@storybook/addon-info";
 import { heights } from "../../../css/autocomplete";
 storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", function () {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Autocomplete, {
+  return React.createElement("div", null, React.createElement("br", null), React.createElement(Autocomplete, {
     name: "example",
     options: [{
       label: "Aaaaaaaa",
@@ -21,7 +21,7 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
     },
     isRequired: true,
     title: "test"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Autocomplete, {
+  }), React.createElement("br", null), React.createElement(Autocomplete, {
     name: "filter example",
     options: [{
       label: "Aaaaaaaa",
@@ -39,7 +39,7 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
     }
   }));
 }).add("Short height", function () {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Autocomplete, {
+  return React.createElement("div", null, React.createElement("br", null), React.createElement(Autocomplete, {
     name: "example",
     options: [{
       label: "Aaaaaaaa",

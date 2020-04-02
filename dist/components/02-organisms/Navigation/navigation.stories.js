@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import Navigation from ".";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import "../../../css/tailwind.css";
 storiesOf("Navigation", module).add("Basic layout", function () {
   var links = [{
     path: "/esi-ja-perusopetus",
@@ -24,9 +25,9 @@ storiesOf("Navigation", module).add("Basic layout", function () {
     url: "http://github.com",
     text: "External to Github"
   }];
-  return /*#__PURE__*/React.createElement(Router, {
+  return React.createElement(Router, {
     history: createBrowserHistory()
-  }, /*#__PURE__*/React.createElement(Navigation, {
+  }, React.createElement(Navigation, {
     links: links
   }));
 });

@@ -73,25 +73,25 @@ var TableCell = function TableCell(_ref) {
       });
     }, properties.menu.actions) : [];
   }, [_onClick, properties, row]);
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     key: "key-".concat(Math.random()),
     role: isHeaderCell ? "columnheader" : "gridcell",
     className: "".concat(classNames, " ").concat(properties.table ? "w-full" : "flex", " ").concat(isHeaderCell ? "bg-green-".concat(tableLevel + 5, "00 text-white") : "p-2", " relative items-center ").concat(!isOnLastRow ? "border-b" : "")
-  }, properties.isSortable ? /*#__PURE__*/React.createElement(StyledButton, {
+  }, properties.isSortable ? React.createElement(StyledButton, {
     "aria-label": "Sort",
     onClick: function onClick() {
       sort();
     },
     title: properties.sortingTooltip
-  }, properties.text && /*#__PURE__*/React.createElement("span", {
+  }, properties.text && React.createElement("span", {
     className: properties.truncate ? "truncate" : ""
-  }, properties.text), orderOfBodyRows && columnIndex === orderOfBodyRows.columnIndex && /*#__PURE__*/React.createElement(React.Fragment, null, orderOfBodyRows.order === "ascending" ? /*#__PURE__*/React.createElement(ArrowUpwardIcon, {
+  }, properties.text), orderOfBodyRows && columnIndex === orderOfBodyRows.columnIndex && React.createElement(React.Fragment, null, orderOfBodyRows.order === "ascending" ? React.createElement(ArrowUpwardIcon, {
     fontSize: "small"
-  }) : /*#__PURE__*/React.createElement(ArrowDownwardIcon, {
+  }) : React.createElement(ArrowDownwardIcon, {
     fontSize: "small"
-  }))) : /*#__PURE__*/React.createElement(React.Fragment, null, (properties.text || properties.menu) && /*#__PURE__*/React.createElement("span", {
+  }))) : React.createElement(React.Fragment, null, (properties.text || properties.menu) && React.createElement("span", {
     className: "".concat(properties.truncate ? "truncate" : "", " py-4 px-2 ").concat(isHeaderCell ? "cursor-default" : "")
-  }, properties.text, properties.menu && /*#__PURE__*/React.createElement(SimpleMenu, {
+  }, properties.text, properties.menu && React.createElement(SimpleMenu, {
     actions: menuActions,
     id: properties.menu.id
   }))), children);

@@ -135,15 +135,15 @@ var Table = function Table(_ref) {
   var getRowsToRender = function getRowsToRender(part) {
     var rows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
     var jsx = R.addIndex(R.map)(function (row, iii) {
-      return /*#__PURE__*/React.createElement(React.Fragment, {
+      return React.createElement(React.Fragment, {
         key: iii
-      }, /*#__PURE__*/React.createElement(TableRow, {
+      }, React.createElement(TableRow, {
         key: "row-".concat(iii),
         row: row,
         onClick: onRowClick,
         tableLevel: level
       }, R.addIndex(R.map)(function (cell, iiii) {
-        return /*#__PURE__*/React.createElement(TableCell, {
+        return React.createElement(TableCell, {
           columnIndex: iiii,
           isHeaderCell: part.role === "thead",
           isOnLastRow: iii === rows.length - 1,
@@ -153,9 +153,7 @@ var Table = function Table(_ref) {
           properties: cell,
           row: row,
           tableLevel: level
-        }, cell.table &&
-        /*#__PURE__*/
-        // Nested table is created here.
+        }, cell.table && // Nested table is created here.
         React.createElement(Table, {
           level: level + 1,
           structure: cell.table
@@ -171,17 +169,17 @@ var Table = function Table(_ref) {
 
 
   var table = R.addIndex(R.map)(function (part, i) {
-    return /*#__PURE__*/React.createElement(React.Fragment, {
+    return React.createElement(React.Fragment, {
       key: i
     }, R.addIndex(R.map)(function (rowGroup, ii) {
-      return /*#__PURE__*/React.createElement(RowGroup, {
+      return React.createElement(RowGroup, {
         key: "rowGroup-".concat(ii),
         tableLevel: level
       }, getRowsToRender(part, rowGroup.rows));
     }, part.rowGroups || []));
   }, sortedStructure); // The table will is rendered.
 
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     role: "grid"
   }, table);
 };

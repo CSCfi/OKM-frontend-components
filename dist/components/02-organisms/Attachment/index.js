@@ -28,9 +28,9 @@ var FileInput = styled.div(_templateObject(), function (props) {
   return props.disabled ? "cursor: not-allowed;" : null;
 });
 var Attachment = React.memo(function (props) {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FileInput, null, /*#__PURE__*/React.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement(FileInput, null, React.createElement("div", {
     className: "flex flex-row uppercase"
-  }, /*#__PURE__*/React.createElement(FaPlus, null), " ", props.messages.attachmentAdd, "..."), /*#__PURE__*/React.createElement("input", {
+  }, React.createElement(FaPlus, null), " ", props.messages.attachmentAdd, "..."), React.createElement("input", {
     id: props.id,
     name: props.name,
     type: "file",

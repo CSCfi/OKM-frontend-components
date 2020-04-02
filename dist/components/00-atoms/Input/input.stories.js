@@ -9,18 +9,18 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     console.info(payload, value);
   };
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Normal"), /*#__PURE__*/React.createElement(Input, {
+  return React.createElement("div", null, React.createElement("p", null, "Normal"), React.createElement(Input, {
     payload: {
       testProp: 1
     },
     onChanges: onChanges
-  }), /*#__PURE__*/React.createElement("p", null, "Error"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Error"), React.createElement(Input, {
     payload: {
       testProp: 2
     },
     onChanges: onChanges,
     error: true
-  }), /*#__PURE__*/React.createElement("p", null, "Required and valid or not yet visited/validated"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Required and valid or not yet visited/validated"), React.createElement(Input, {
     payload: {
       testProp: 1
     },
@@ -31,7 +31,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     tooltip: {
       text: "This is info text"
     }
-  }), /*#__PURE__*/React.createElement("p", null, "Invalid"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Invalid"), React.createElement(Input, {
     payload: {
       testProp: 1
     },
@@ -41,7 +41,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     tooltip: {
       text: "This is info text"
     }
-  }), /*#__PURE__*/React.createElement("p", null, "Required and invalid"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Required and invalid"), React.createElement(Input, {
     payload: {
       testProp: 1
     },
@@ -49,13 +49,13 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: false,
     label: "Required"
-  }), /*#__PURE__*/React.createElement("p", null, "Wide"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Wide"), React.createElement(Input, {
     payload: {
       testProp: 2
     },
     onChanges: onChanges,
     width: "100%"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     label: "Readonly",
     payload: {
       testProp: 2
@@ -63,13 +63,13 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     onChanges: onChanges,
     isReadOnly: true,
     value: "readonly"
-  }), /*#__PURE__*/React.createElement("p", null, "Number"), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement("p", null, "Number"), React.createElement(Input, {
     payload: {
       testProp: 123
     },
     onChanges: onChanges,
     type: "number"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     payload: {
       testProp: 123
     },
@@ -77,7 +77,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     type: "number",
     isRequired: true,
     label: "Required"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     label: "Readonly",
     payload: {
       testProp: 123
@@ -90,7 +90,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     tooltip: {
       text: "This is info text"
     }
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     label: "Readonly empty",
     payload: {
       testProp: 123
@@ -116,9 +116,9 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     });
   };
 
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     className: "p-4"
-  }, /*#__PURE__*/React.createElement(Input, {
+  }, React.createElement(Input, {
     payload: {
       testProp: store.state.values[0]
     },
@@ -130,7 +130,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: true,
     label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     payload: {
       testProp: store.state.values[1]
     },
@@ -142,7 +142,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: true,
     label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     payload: {
       testProp: store.state.values[2]
     },
@@ -154,7 +154,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: true,
     label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     payload: {
       testProp: store.state.values[3]
     },
@@ -166,7 +166,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: true,
     label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
+  }), React.createElement(Input, {
     payload: {
       testProp: store.state.values[4]
     },

@@ -236,9 +236,9 @@ var Attachments = React.memo(function (props) {
   var LiiteList = function LiiteList() {
     if (attachments && attachments.length > 0) return attachments.map(function (liite) {
       if ((liite.tiedostoId || liite.uuid) && !liite.removed && (!props.placement || liite.paikka === props.placement)) {
-        return /*#__PURE__*/React.createElement(React.Fragment, {
+        return React.createElement(React.Fragment, {
           key: props.id + liite.tiedostoId ? liite.tiedostoId : liite.uuid
-        }, /*#__PURE__*/React.createElement(LiiteListItem, null, liite.new ? /*#__PURE__*/React.createElement(FaFile, null) : /*#__PURE__*/React.createElement(FaRegFile, null), /*#__PURE__*/React.createElement("input", {
+        }, React.createElement(LiiteListItem, null, liite.new ? React.createElement(FaFile, null) : React.createElement(FaRegFile, null), React.createElement("input", {
           onBlur: function onBlur(e) {
             setAttachmentName(e, liite.tiedostoId, liite.uuid);
           },
@@ -248,31 +248,31 @@ var Attachments = React.memo(function (props) {
               setAttachmentName(e, liite.tiedostoId, liite.uuid);
             }
           }
-        }), /*#__PURE__*/React.createElement("span", {
+        }), React.createElement("span", {
           className: "type"
-        }, liite.tyyppi), /*#__PURE__*/React.createElement("span", {
+        }, liite.tyyppi), React.createElement("span", {
           className: "size"
-        }, bytesToSize(liite.koko)), /*#__PURE__*/React.createElement("button", {
+        }, bytesToSize(liite.koko)), React.createElement("button", {
           title: props.messages.attachmentDownload,
           onClick: downloadFileFn(addLiiteUrl(liite)),
           className: "ml-2"
-        }, /*#__PURE__*/React.createElement(FaDownload, null)), /*#__PURE__*/React.createElement(Checkbox, {
+        }, React.createElement(FaDownload, null)), React.createElement(Checkbox, {
           title: liite.salainen ? props.messages.attachmentSecretUnselect : props.messages.attachmentSecretSelect
-        }, /*#__PURE__*/React.createElement("input", {
+        }, React.createElement("input", {
           type: "checkbox",
           checked: liite.salainen,
           onChange: function onChange(e) {
             return setAttachmentVisibility(e, liite.tiedostoId, liite.uuid);
           },
           id: liite.tiedostoId ? "c" + liite.tiedostoId : "c" + liite.uuid
-        }), /*#__PURE__*/React.createElement("label", {
+        }), React.createElement("label", {
           htmlFor: liite.tiedostoId ? "c" + liite.tiedostoId : "c" + liite.uuid
-        }, liite.salainen && /*#__PURE__*/React.createElement(FaLock, null))), /*#__PURE__*/React.createElement("button", {
+        }, liite.salainen && React.createElement(FaLock, null))), React.createElement("button", {
           title: props.messages.attachmentRemove,
           onClick: function onClick(e) {
             return removeAttachment(e, liite.tiedostoId, liite.uuid);
           }
-        }, /*#__PURE__*/React.createElement(FaTimes, null))));
+        }, React.createElement(FaTimes, null))));
       } else return null;
     });else return null;
   }; // Lists all attachments in read only state
@@ -281,53 +281,53 @@ var Attachments = React.memo(function (props) {
   var LiiteListReadOnly = function LiiteListReadOnly() {
     if (attachments && attachments.length > 0) return attachments.map(function (liite) {
       if ((liite.tiedostoId || liite.uuid) && !liite.removed && (!props.placement || liite.paikka === props.placement)) {
-        return /*#__PURE__*/React.createElement(React.Fragment, {
+        return React.createElement(React.Fragment, {
           key: props.id + liite.tiedostoId ? liite.tiedostoId : liite.uuid
-        }, /*#__PURE__*/React.createElement(LiiteListItem, null, liite.new ? /*#__PURE__*/React.createElement(FaFile, null) : /*#__PURE__*/React.createElement(FaRegFile, null), /*#__PURE__*/React.createElement("span", {
+        }, React.createElement(LiiteListItem, null, liite.new ? React.createElement(FaFile, null) : React.createElement(FaRegFile, null), React.createElement("span", {
           className: "w-full pl-2"
-        }, liite.nimi), /*#__PURE__*/React.createElement("span", {
+        }, liite.nimi), React.createElement("span", {
           className: "type"
-        }, liite.tyyppi), /*#__PURE__*/React.createElement("span", {
+        }, liite.tyyppi), React.createElement("span", {
           className: "size"
-        }, bytesToSize(liite.koko)), /*#__PURE__*/React.createElement("button", {
+        }, bytesToSize(liite.koko)), React.createElement("button", {
           title: props.messages.attachmentDownload,
           onClick: downloadFileFn(addLiiteUrl(liite)),
           className: "ml-2"
-        }, /*#__PURE__*/React.createElement(FaDownload, null)), /*#__PURE__*/React.createElement("span", {
+        }, React.createElement(FaDownload, null)), React.createElement("span", {
           title: liite.salainen ? props.messages.attachmentSecret : ""
-        }, liite.salainen && /*#__PURE__*/React.createElement(FaLock, null))));
+        }, liite.salainen && React.createElement(FaLock, null))));
       } else return null;
     });else {
-      return /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("i", null, props.messages.attachmentNone));
+      return React.createElement("p", null, React.createElement("i", null, props.messages.attachmentNone));
     }
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, !props.showListOnly && !props.isReadOnly && /*#__PURE__*/React.createElement(Attachment, {
+  return React.createElement(React.Fragment, null, !props.showListOnly && !props.isReadOnly && React.createElement(Attachment, {
     id: props.id,
     messages: props.messages,
     setAttachment: setAttachment,
     setAttachmentName: setAttachmentName
-  }), fileError && /*#__PURE__*/React.createElement(Error, null, props.messages.attachmentError), props.showValidationErrors && props.isRequired && props.requiredMessage && (!attachments || attachments && attachments.length === 0) && /*#__PURE__*/React.createElement(FormHelperText, {
+  }), fileError && React.createElement(Error, null, props.messages.attachmentError), props.showValidationErrors && props.isRequired && props.requiredMessage && (!attachments || attachments && attachments.length === 0) && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, /*#__PURE__*/React.createElement(Incomplete, {
+  }, React.createElement(Incomplete, {
     style: {
       fontSize: 24,
       color: COLORS.OIVA_ORANGE,
       marginRight: "0.2em"
     }
-  }), props.requiredMessage), !props.listHidden && !props.isReadOnly && /*#__PURE__*/React.createElement(LiiteList, null), !props.listHidden && props.isReadOnly && /*#__PURE__*/React.createElement(LiiteListReadOnly, null), /*#__PURE__*/React.createElement(Dialog, {
+  }), props.requiredMessage), !props.listHidden && !props.isReadOnly && React.createElement(LiiteList, null), !props.listHidden && props.isReadOnly && React.createElement(LiiteListReadOnly, null), React.createElement(Dialog, {
     open: isNameModalOpen,
     "aria-labelledby": "name-dialog",
     fullWidth: true,
     maxWidth: "sm"
-  }, /*#__PURE__*/React.createElement(DialogTitle, {
+  }, React.createElement(DialogTitle, {
     id: "name-dialog"
-  }, props.messages.attachmentName), /*#__PURE__*/React.createElement(DialogContent, null, /*#__PURE__*/React.createElement(Input, {
+  }, props.messages.attachmentName), React.createElement(DialogContent, null, React.createElement(Input, {
     defaultValue: selectedAttachment.nimi,
     autoFocus: true,
     onFocus: function onFocus(e) {
@@ -344,11 +344,11 @@ var Attachments = React.memo(function (props) {
         addAttachment(e);
       }
     }
-  }), /*#__PURE__*/React.createElement(Error, null, nameMissing && props.messages.attachmentErrorName)), /*#__PURE__*/React.createElement(DialogActions, null, /*#__PURE__*/React.createElement(Button, {
+  }), React.createElement(Error, null, nameMissing && props.messages.attachmentErrorName)), React.createElement(DialogActions, null, React.createElement(Button, {
     onClick: addAttachment,
     color: "primary",
     variant: "contained"
-  }, props.messages.ok), /*#__PURE__*/React.createElement(Button, {
+  }, props.messages.ok), React.createElement(Button, {
     onClick: cancelAttachment,
     color: "secondary",
     variant: "outlined"

@@ -5,7 +5,7 @@ it("renders the correct label", function () {
   var labelText = "Label text";
   var div = document.createElement("div");
 
-  var _render = render( /*#__PURE__*/React.createElement(CheckboxWithLabel, {
+  var _render = render(React.createElement(CheckboxWithLabel, {
     name: "test-checkbox",
     onChanges: jest.fn()
   }, labelText), div),
@@ -17,7 +17,7 @@ it("renders input as checked", function () {
   var labelText = "Label text";
   var div = document.createElement("div");
 
-  var _render2 = render( /*#__PURE__*/React.createElement(CheckboxWithLabel, {
+  var _render2 = render(React.createElement(CheckboxWithLabel, {
     name: "test-checkbox",
     isChecked: true,
     onChanges: jest.fn()
@@ -27,7 +27,7 @@ it("renders input as checked", function () {
   expect(container.querySelector('input[type="checkbox"]').checked).toBe(true);
 });
 it("handles the click", function () {
-  var _render3 = render( /*#__PURE__*/React.createElement(CheckboxWithLabel, {
+  var _render3 = render(React.createElement(CheckboxWithLabel, {
     name: "test-checkbox",
     isChecked: false,
     onChanges: jest.fn()
@@ -40,7 +40,7 @@ it("handles the click", function () {
 it("checks if the callback method is called on click", function () {
   var f = jest.fn();
 
-  var _render4 = render( /*#__PURE__*/React.createElement(CheckboxWithLabel, {
+  var _render4 = render(React.createElement(CheckboxWithLabel, {
     name: "test-checkbox",
     isChecked: false,
     onChanges: f

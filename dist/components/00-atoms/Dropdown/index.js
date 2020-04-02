@@ -45,7 +45,7 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Select, {
+  return React.createElement(React.Fragment, null, React.createElement(Select, {
     autosize: false,
     name: props.name,
     value: props.value,
@@ -71,7 +71,7 @@ var Dropdown = React.memo(function (props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

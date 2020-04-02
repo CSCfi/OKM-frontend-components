@@ -8,7 +8,7 @@ storiesOf("Difference", module).addDecorator(withInfo).add("Modifiable and not r
     console.info(result);
   }
 
-  return /*#__PURE__*/React.createElement(Difference, {
+  return React.createElement(Difference, {
     initialValue: story1.initialValue,
     value: story1.value,
     titles: story1.titles,
@@ -19,7 +19,7 @@ storiesOf("Difference", module).addDecorator(withInfo).add("Modifiable and not r
     console.info(result);
   }
 
-  return /*#__PURE__*/React.createElement(Difference, {
+  return React.createElement(Difference, {
     initialValue: 0,
     applyForValue: 0,
     titles: story1.titles,
@@ -27,7 +27,7 @@ storiesOf("Difference", module).addDecorator(withInfo).add("Modifiable and not r
     onChanges: onChanges
   });
 }).add("Read-only", function () {
-  return /*#__PURE__*/React.createElement(Difference, {
+  return React.createElement(Difference, {
     initialValue: 123,
     applyForValue: 4235,
     titles: story1.titles,

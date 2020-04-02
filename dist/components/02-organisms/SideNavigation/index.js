@@ -16,12 +16,12 @@ var SideNavigation = function SideNavigation(_ref) {
     };
   };
 
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     "data-testid": "side-navigation"
-  }, /*#__PURE__*/React.createElement(Drawer, {
+  }, React.createElement(Drawer, {
     open: isVisible,
     onClose: toggleDrawer(false)
-  }, /*#__PURE__*/React.createElement("div", {
+  }, React.createElement("div", {
     tabIndex: 0,
     role: "presentation",
     onClick: toggleDrawer(false),

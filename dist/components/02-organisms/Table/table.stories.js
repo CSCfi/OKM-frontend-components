@@ -17,27 +17,27 @@ import conditionalMenuInTableCell from "./storydata/conditionalMenuInTableCell";
  */
 
 storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", function () {
-  return /*#__PURE__*/React.createElement(Table, {
+  return React.createElement(Table, {
     structure: multidimensionalTable
   });
 }).add("Simple table", function () {
-  return /*#__PURE__*/React.createElement(Table, {
+  return React.createElement(Table, {
     structure: simpleTable
   });
 }).add("Conditional menu in table cell", function () {
-  return /*#__PURE__*/React.createElement(Table, {
+  return React.createElement(Table, {
     structure: conditionalMenuInTableCell
   });
 }).add("Table with filters", function () {
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return React.createElement(React.Fragment, null, React.createElement("div", {
     className: "flex flex-col lg:flex-row mb-4"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, React.createElement("div", {
     className: "lg:mr-4 h-13 w-full lg:w-1/4"
-  }, /*#__PURE__*/React.createElement(SearchFilter, {
+  }, React.createElement(SearchFilter, {
     callback: function callback() {}
-  })), /*#__PURE__*/React.createElement("div", {
+  })), React.createElement("div", {
     className: "mt-2 lg:mt-0 lg:mr-4 h-13"
-  }, /*#__PURE__*/React.createElement(Dropdown, {
+  }, React.createElement(Dropdown, {
     isTall: true,
     className: "w-20",
     options: [{
@@ -50,12 +50,12 @@ storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", 
       label: "Ccccccccccc",
       value: "Ccccccccccc"
     }]
-  })), /*#__PURE__*/React.createElement("div", {
+  })), React.createElement("div", {
     className: "mt-2 lg:ml-4 lg:mx-auto"
-  }, /*#__PURE__*/React.createElement(Pill, {
+  }, React.createElement(Pill, {
     label: "Something",
     onDelete: function onDelete() {}
-  }))), /*#__PURE__*/React.createElement(Table, {
+  }))), React.createElement(Table, {
     structure: conditionalMenuInTableCell
   }));
 });

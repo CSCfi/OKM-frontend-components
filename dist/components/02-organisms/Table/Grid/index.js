@@ -12,7 +12,7 @@ var Grid = function Grid(_ref) {
       _ref$styleClasses = _ref.styleClasses,
       styleClasses = _ref$styleClasses === void 0 ? [] : _ref$styleClasses;
   var classNames = R.join(" ", styleClasses);
-  return /*#__PURE__*/React.createElement("div", {
+  return React.createElement("div", {
     className: classNames,
     key: "key-".concat(Math.random()),
     role: "grid"
