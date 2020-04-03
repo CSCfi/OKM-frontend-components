@@ -45,6 +45,7 @@ const Dropdown = React.memo(props => {
         onChange={handleChanges}
         options={props.options}
         isDisabled={props.isDisabled}
+        isClearable={props.isClearable}
         placeholder={props.placeholder}
         className={`${props.isTall ? "h-full" : ""} 
         `}
@@ -79,6 +80,7 @@ const Dropdown = React.memo(props => {
 Dropdown.propTypes = {
   name: PropTypes.string,
   isDisabled: PropTypes.bool,
+  isClearable: PropTypes.bool,
   onChanges: PropTypes.func,
   options: PropTypes.array,
   placeholder: PropTypes.string,
