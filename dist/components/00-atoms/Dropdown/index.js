@@ -52,6 +52,7 @@ var Dropdown = React.memo(function (props) {
     onChange: handleChanges,
     options: props.options,
     isDisabled: props.isDisabled,
+    isClearable: props.isClearable,
     placeholder: props.placeholder,
     className: "".concat(props.isTall ? "h-full" : "", " \n        "),
     styles: selectCustomStyles,
