@@ -10,11 +10,13 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
   };
 
   return React.createElement("div", null, React.createElement("p", null, "Normal"), React.createElement(Input, {
+    value: "1",
     payload: {
       testProp: 1
     },
     onChanges: onChanges
   }), React.createElement("p", null, "Error"), React.createElement(Input, {
+    value: "1",
     payload: {
       testProp: 2
     },
@@ -24,6 +26,7 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     payload: {
       testProp: 1
     },
+    value: "test",
     onChanges: onChanges,
     isRequired: true,
     isValid: true,
@@ -49,12 +52,12 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
     isRequired: true,
     isValid: false,
     label: "Required"
-  }), React.createElement("p", null, "Wide"), React.createElement(Input, {
+  }), React.createElement("p", null, "Width given"), React.createElement(Input, {
     payload: {
       testProp: 2
     },
     onChanges: onChanges,
-    width: "100%"
+    width: "20rem"
   }), React.createElement(Input, {
     label: "Readonly",
     payload: {
@@ -68,7 +71,8 @@ storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function
       testProp: 123
     },
     onChanges: onChanges,
-    type: "number"
+    type: "number",
+    value: 123
   }), React.createElement(Input, {
     payload: {
       testProp: 123

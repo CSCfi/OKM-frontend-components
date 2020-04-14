@@ -45,7 +45,7 @@ const Input = props => {
   const [isVisited, setIsVisited] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const { classes } = props;
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState("");
   const [handle, setHandle] = useState(null);
 
   const updateValue = e => {
@@ -63,37 +63,35 @@ const Input = props => {
   };
 
   useEffect(() => {
-    if (props.value !== value || !value) {
-      setValue(props.value);
+    if (props.value !== value || value !== "") {
+      setValue(props.value || ""); // props.value might be undefined
     }
   }, [props.value]);
+
   return (
     <React.Fragment>
       <div className="flex items-center">
         <TextField
           id={props.id}
           aria-label={props.ariaLabel}
-          defaultValue={props.value}
+          value={value}
           label={props.label}
           disabled={props.isDisabled || props.isReadOnly}
           inputprops={{
             readOnly: props.isReadOnly
           }}
-          placeholder={
-            props.isDisabled || props.isReadOnly ? "" : props.placeholder
-          }
+          placeholder={props.placeholder}
           rows={props.rows}
           margin={props.isDense ? "dense" : ""}
           rowsMax={props.rowsMax}
           onChange={updateValue}
           required={props.isRequired && !props.isReadOnly}
           error={
-            props.error
+            !props.isReadOnly && props.error
               ? props.error
               : (props.isRequired && value && !props.isValid) ||
                 (!props.isRequired && !props.isValid)
           }
-          InputLabelProps={!value ? { shrink: false } : { shrink: true }}
           variant="outlined"
           style={
             props.fullWidth
@@ -109,14 +107,15 @@ const Input = props => {
           onBlur={() => setIsFocused(false)}
           className={`${props.isHidden ? "hidden" : ""} 
           ${
-            !value &&
+            !props.isReadOnly &&
+            value !== "" &&
             !isFocused &&
             props.isRequired &&
             (isVisited || props.showValidationErrors)
               ? classes.requiredVisited
               : classes.root
           } 
-          ${props.isReadOnly && !value && classes.readonlyNoValue}
+          ${props.isReadOnly && value !== "" && classes.readonlyNoValue}
         `}
         />
         {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
@@ -141,7 +140,7 @@ const Input = props => {
             marginBottom: "0.5em",
             color: COLORS.OIVA_ORANGE_TEXT
           }}>
-          {!value && props.requiredMessage}
+          {value !== "" && props.requiredMessage}
         </FormHelperText>
       )}
     </React.Fragment>
@@ -161,8 +160,8 @@ Input.defaultProps = {
   rows: 1,
   rowsMax: 1,
   error: false,
-  width: "20em",
-  fullWidth: false,
+  width: "20rem",
+  fullWidth: true,
   tooltip: {},
   type: "text",
   isVisited: false,

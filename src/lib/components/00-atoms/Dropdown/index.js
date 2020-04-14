@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import PropTypes from "prop-types";
 import { COLORS } from "../../../modules/styles";
-import { FormHelperText } from "@material-ui/core";
+import { FormHelperText, InputLabel } from "@material-ui/core";
 
 import "./dropdown.css";
 
@@ -38,7 +38,9 @@ const Dropdown = React.memo(props => {
 
   return (
     <React.Fragment>
+      {props.label && <InputLabel id="select-label">{props.label}</InputLabel>}
       <Select
+        aria-label={props.name}
         autosize={false}
         name={props.name}
         value={props.value}
@@ -90,7 +92,8 @@ Dropdown.propTypes = {
   width: PropTypes.string,
   isRequired: PropTypes.bool,
   requiredMessage: PropTypes.string,
-  showValidationErrors: PropTypes.bool
+  showValidationErrors: PropTypes.bool,
+  label: PropTypes.string
 };
 
 export default Dropdown;

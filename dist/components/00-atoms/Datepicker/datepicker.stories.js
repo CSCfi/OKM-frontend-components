@@ -64,12 +64,12 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     locale: "fi",
     isRequired: true,
     requiredMessage: "Pakollinen"
-  }), React.createElement("p", null, "Wide"), React.createElement(Datepicker, {
+  }), React.createElement("p", null, "Wide given"), React.createElement(Datepicker, {
     label: "Datepicker",
     value: today,
     onChanges: onChanges,
     messages: messages,
     locale: "fi",
-    fullWidth: true
+    width: "30rem"
   }));
 });

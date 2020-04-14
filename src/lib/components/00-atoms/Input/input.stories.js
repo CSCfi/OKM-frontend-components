@@ -13,12 +13,18 @@ storiesOf("Input", module)
     return (
       <div>
         <p>Normal</p>
-        <Input payload={{ testProp: 1 }} onChanges={onChanges} />
+        <Input value="1" payload={{ testProp: 1 }} onChanges={onChanges} />
         <p>Error</p>
-        <Input payload={{ testProp: 2 }} onChanges={onChanges} error={true} />
+        <Input
+          value="1"
+          payload={{ testProp: 2 }}
+          onChanges={onChanges}
+          error={true}
+        />
         <p>Required and valid or not yet visited/validated</p>
         <Input
           payload={{ testProp: 1 }}
+          value="test"
           onChanges={onChanges}
           isRequired
           isValid={true}
@@ -41,8 +47,12 @@ storiesOf("Input", module)
           isValid={false}
           label="Required"
         />
-        <p>Wide</p>
-        <Input payload={{ testProp: 2 }} onChanges={onChanges} width={"100%"} />
+        <p>Width given</p>
+        <Input
+          payload={{ testProp: 2 }}
+          onChanges={onChanges}
+          width={"20rem"}
+        />
         <Input
           label="Readonly"
           payload={{ testProp: 2 }}
@@ -55,6 +65,7 @@ storiesOf("Input", module)
           payload={{ testProp: 123 }}
           onChanges={onChanges}
           type={"number"}
+          value={123}
         />
         <Input
           payload={{ testProp: 123 }}

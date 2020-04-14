@@ -3,7 +3,7 @@ import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { COLORS } from "../../../modules/styles";
-import { FormHelperText } from "@material-ui/core";
+import { FormHelperText, InputLabel } from "@material-ui/core";
 import "./dropdown.css";
 var selectCustomStyles = {
   control: function control(provided) {
@@ -45,7 +45,10 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  return React.createElement(React.Fragment, null, React.createElement(Select, {
+  return React.createElement(React.Fragment, null, props.label && React.createElement(InputLabel, {
+    id: "select-label"
+  }, props.label), React.createElement(Select, {
+    "aria-label": props.name,
     autosize: false,
     name: props.name,
     value: props.value,
