@@ -76,9 +76,6 @@ const Datepicker = props => {
     }
   }, [props.value, selectedDate]);
 
-  console.log(props.width);
-  console.log(props.fullWidth);
-
   return (
     <MuiPickersUtilsProvider utils={LocalizedUtils} locale={localeMap[locale]}>
       <div
