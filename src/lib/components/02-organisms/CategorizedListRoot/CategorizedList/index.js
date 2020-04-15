@@ -568,7 +568,7 @@ const CategorizedList = React.memo(
                             }
                             const value = change
                               ? change.properties.value
-                              : propsObj.defaultValue;
+                              : propsObj.value;
                             return (
                               <div className={component.styleClasses}>
                                 <Input
@@ -591,11 +591,11 @@ const CategorizedList = React.memo(
                                   }}
                                   error={propsObj.error}
                                   fullWidth={propsObj.fullWidth}
+                                  width={propsObj.width}
                                   placeholder={propsObj.placeholder}
                                   tooltip={propsObj.tooltip}
                                   type={propsObj.type}
                                   value={value}
-                                  width={propsObj.width}
                                   showValidationErrors={showValidationErrors}
                                   requiredMessage={propsObj.requiredMessage}
                                 />
@@ -871,6 +871,7 @@ const CategorizedList = React.memo(
                             error={propsObj.error}
                             placeholder={propsObj.placeholder}
                             fullWidth={propsObj.fullWidth}
+                            width={propsObj.width}
                             minDate={propsObj.minDate}
                             maxDate={propsObj.maxDate}
                             disablePast={propsObj.disablePast}

@@ -54,9 +54,7 @@ var styles = createStyles(function (theme) {
   };
 });
 
-var LocalizedUtils =
-/*#__PURE__*/
-function (_DateFnsUtils) {
+var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
 
   function LocalizedUtils() {
@@ -119,23 +117,27 @@ var Datepicker = function Datepicker(props) {
     utils: LocalizedUtils,
     locale: localeMap[locale]
   }, React.createElement("div", {
-    className: "flex flex-col"
+    className: "flex-col",
+    style: !props.width && props.fullWidth ? {
+      display: "flex"
+    } : {}
   }, React.createElement(DatePicker, {
     format: "d.M.yyyy" // Always is Finnish format
     ,
     "aria-label": props.ariaLabel,
     label: props.label,
     disabled: props.isDisabled || props.isReadonly,
-    placeholder: props.placeholder,
+    placeholder: props.isDisabled || props.isReadOnly || props.label ? "" : props.placeholder,
     margin: "dense",
     onChange: handleDateChange,
     error: props.error,
     invalidLabel: props.invalidLabel,
     required: props.isRequired,
-    style: props.fullWidth ? {} : {
+    width: props.width,
+    style: props.width ? {
       width: props.width
-    },
-    fullWidth: props.fullWidth,
+    } : {},
+    fullWidth: props.width ? false : props.fullWidth,
     InputProps: {
       className: classes.input
     },
@@ -154,7 +156,7 @@ var Datepicker = function Datepicker(props) {
     maxDate: props.maxDate,
     disablePast: props.disablePast,
     disableFuture: props.disableFuture,
-    className: "".concat(props.isHidden ? "hidden" : "", " \n            ").concat((isVisited || props.showValidationErrors) && props.isRequired && !props.value && !isFocused ? classes.requiredVisited : classes.root, " \n            p-2\n        "),
+    className: "".concat(props.isHidden ? "hidden" : "", " \n            ").concat((isVisited || props.showValidationErrors) && props.isRequired && !props.value && !isFocused ? classes.requiredVisited : classes.root, " \n        "),
     onBlurCapture: function onBlurCapture() {
       return !selectedDate ? setIsVisited(true) : setIsVisited(false);
     },
@@ -177,15 +179,15 @@ var Datepicker = function Datepicker(props) {
 
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",
-  label: "",
+  label: null,
   delay: 300,
   id: "datepicker-".concat(Math.random()),
   isDisabled: false,
   isHidden: false,
   payload: {},
   error: false,
-  width: "12em",
-  fullWidth: false,
+  width: "",
+  fullWidth: true,
   clearable: true,
   showTodayButton: true,
   disablePast: false,

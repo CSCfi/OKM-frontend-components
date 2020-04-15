@@ -71,14 +71,14 @@ storiesOf("Datepicker", module)
           isRequired
           requiredMessage="Pakollinen"
         />
-        <p>Wide</p>
+        <p>Wide given</p>
         <Datepicker
           label="Datepicker"
           value={today}
           onChanges={onChanges}
           messages={messages}
           locale={"fi"}
-          fullWidth
+          width="30rem"
         />
       </div>
     );

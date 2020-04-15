@@ -52,7 +52,7 @@ var Input = function Input(props) {
 
   var classes = props.classes;
 
-  var _useState5 = useState(null),
+  var _useState5 = useState(""),
       _useState6 = _slicedToArray(_useState5, 2),
       value = _useState6[0],
       setValue = _useState6[1];
@@ -79,8 +79,8 @@ var Input = function Input(props) {
   };
 
   useEffect(function () {
-    if (props.value !== value || !value) {
-      setValue(props.value);
+    if (props.value !== value || value !== "") {
+      setValue(props.value || ""); // props.value might be undefined
     }
   }, [props.value]);
   return React.createElement(React.Fragment, null, React.createElement("div", {
@@ -88,24 +88,19 @@ var Input = function Input(props) {
   }, React.createElement(TextField, {
     id: props.id,
     "aria-label": props.ariaLabel,
-    defaultValue: props.value,
+    value: value,
     label: props.label,
     disabled: props.isDisabled || props.isReadOnly,
     inputprops: {
       readOnly: props.isReadOnly
     },
-    placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
+    placeholder: props.placeholder,
     rows: props.rows,
     margin: props.isDense ? "dense" : "",
     rowsMax: props.rowsMax,
     onChange: updateValue,
     required: props.isRequired && !props.isReadOnly,
-    error: props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
-    InputLabelProps: !value ? {
-      shrink: false
-    } : {
-      shrink: true
-    },
+    error: !props.isReadOnly && props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
     variant: "outlined",
     style: props.fullWidth ? {
       border: "none"
@@ -126,7 +121,7 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!value && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && !value && classes.readonlyNoValue, "\n        ")
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value !== "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
   }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {
@@ -145,7 +140,7 @@ var Input = function Input(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, !value && props.requiredMessage));
+  }, value !== "" && props.requiredMessage));
 };
 
 Input.defaultProps = {
@@ -161,8 +156,8 @@ Input.defaultProps = {
   rows: 1,
   rowsMax: 1,
   error: false,
-  width: "20em",
-  fullWidth: false,
+  width: "20rem",
+  fullWidth: true,
   tooltip: {},
   type: "text",
   isVisited: false,

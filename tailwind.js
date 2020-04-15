@@ -13,14 +13,15 @@ module.exports = {
       // custom
       vihrea: "#4c7a61",
       tummanvihrea: "#3b604c",
+      vaalenvihrea: "#c8dcc3",
       mustanharmaa: "#333333",
       tummanharmaa: "#666666",
       harmaa: "#e3e3e3",
       vaalenharmaa: "#fafafa",
       valkoinen: "#ffffff",
       linkkihover: "#294637",
-      linkkivisited: "#2355b47",
-      bordervari: "#e2e8f0",
+      linkkivisited: "#355b47",
+      bordervari: "#d1d1d1",
 
       transparent: "transparent",
 
@@ -28,15 +29,11 @@ module.exports = {
       white: "#fff",
 
       gray: {
-        100: "#fafafa", // #f7fafc
-        200: "#e3e3e3", // #edf2f7
-        300: "#d1d1d1", // #e2e8f0 border
-        400: "#cbcbcb", // #cbd5e0
-        500: "#a0a0a0", // #a0aec0 x
-        600: "#666666", // #718096
-        700: "#484848", // #4a5568 x
-        800: "#333333", // #2d3748
-        900: "#181818" // #1a202c x
+        100: "#fafafa", // vaalenharmaa
+        200: "#e3e3e3", // harmaa
+        300: "#d1d1d1", // border-väri
+        600: "#666666", // tummanharmaa
+        800: "#333333" // mustanharmaa
       },
       red: {
         100: "#fff5f5",
@@ -72,15 +69,12 @@ module.exports = {
         900: "#744210"
       },
       green: {
-        100: "#d2ffe8", //#f0fff4 x
-        200: "#b5fad3", //#c6f6d5 x
-        300: "#a7ecc5", //#9ae6b4
-        400: "#65A884", //#68d391
-        500: "#4C7A61", //#48bb78 main green
-        600: "#3B604C", //#38a169
-        700: "#355b47", //#2f855a
-        800: "#294637", //#276749
-        900: "#2355b47" //#22543d x
+        200: "#c8dcc3", // form header
+        400: "#65A884", // vaaleanvihreä
+        500: "#4C7A61", // main green
+        600: "#3B604C", // tummanvihreä
+        700: "#355b47", // tesktilinkki visited
+        800: "#294637" // tekstilinkki hover
       },
       teal: {
         100: "#e6fffa",

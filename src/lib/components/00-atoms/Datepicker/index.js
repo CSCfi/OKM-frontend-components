@@ -75,22 +75,30 @@ const Datepicker = props => {
       setSelectedDate(props.value);
     }
   }, [props.value, selectedDate]);
+
   return (
     <MuiPickersUtilsProvider utils={LocalizedUtils} locale={localeMap[locale]}>
-      <div className="flex flex-col">
+      <div
+        className="flex-col"
+        style={!props.width && props.fullWidth ? { display: "flex" } : {}}>
         <DatePicker
           format="d.M.yyyy" // Always is Finnish format
           aria-label={props.ariaLabel}
           label={props.label}
           disabled={props.isDisabled || props.isReadonly}
-          placeholder={props.placeholder}
+          placeholder={
+            props.isDisabled || props.isReadOnly || props.label
+              ? ""
+              : props.placeholder
+          }
           margin="dense"
           onChange={handleDateChange}
           error={props.error}
           invalidLabel={props.invalidLabel}
           required={props.isRequired}
-          style={props.fullWidth ? {} : { width: props.width }}
-          fullWidth={props.fullWidth}
+          width={props.width}
+          style={props.width ? { width: props.width } : {}}
+          fullWidth={props.width ? false : props.fullWidth}
           InputProps={{
             className: classes.input
           }}
@@ -118,7 +126,6 @@ const Datepicker = props => {
                 ? classes.requiredVisited
                 : classes.root
             } 
-            p-2
         `}
           onBlurCapture={() =>
             !selectedDate ? setIsVisited(true) : setIsVisited(false)
@@ -145,15 +152,15 @@ const Datepicker = props => {
 
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",
-  label: "",
+  label: null,
   delay: 300,
   id: `datepicker-${Math.random()}`,
   isDisabled: false,
   isHidden: false,
   payload: {},
   error: false,
-  width: "12em",
-  fullWidth: false,
+  width: "",
+  fullWidth: true,
   clearable: true,
   showTodayButton: true,
   disablePast: false,
