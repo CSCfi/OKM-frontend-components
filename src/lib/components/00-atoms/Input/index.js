@@ -115,7 +115,7 @@ const Input = props => {
               ? classes.requiredVisited
               : classes.root
           } 
-          ${props.isReadOnly && value !== "" && classes.readonlyNoValue}
+          ${props.isReadOnly && classes.readonlyNoValue}
         `}
         />
         {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
