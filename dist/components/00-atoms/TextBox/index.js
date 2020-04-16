@@ -179,7 +179,7 @@ var TextBox = function TextBox(props) {
       return setIsFocused(false);
     },
     label: props.label
-  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  }), !props.isReadOnly && props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       paddingLeft: "0.5em",

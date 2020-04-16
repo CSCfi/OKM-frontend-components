@@ -209,17 +209,19 @@ const TextBox = props => {
                 onBlur={() => setIsFocused(false)}
                 label={props.label}
               />
-              {props.showValidationErrors && props.requiredMessage && (
-                <FormHelperText
-                  id="component-message-text"
-                  style={{
-                    paddingLeft: "0.5em",
-                    marginBottom: "0.5em",
-                    color: COLORS.OIVA_ORANGE_TEXT
-                  }}>
-                  {!value && props.requiredMessage}
-                </FormHelperText>
-              )}
+              {!props.isReadOnly &&
+                props.showValidationErrors &&
+                props.requiredMessage && (
+                  <FormHelperText
+                    id="component-message-text"
+                    style={{
+                      paddingLeft: "0.5em",
+                      marginBottom: "0.5em",
+                      color: COLORS.OIVA_ORANGE_TEXT
+                    }}>
+                    {!value && props.requiredMessage}
+                  </FormHelperText>
+                )}
             </div>
             {!props.isReadOnly && !isEmpty(props.tooltip) && (
               <div className="ml-8 mr-1 mt-4">
