@@ -131,20 +131,18 @@ const Input = props => {
           </div>
         )}
       </div>
-      {!props.isReadOnly &&
-        props.showValidationErrors &&
-        props.requiredMessage && (
-          <FormHelperText
-            id="component-message-text"
-            style={{
-              marginTop: "0.1em",
-              paddingLeft: "1.2em",
-              marginBottom: "0.5em",
-              color: COLORS.OIVA_ORANGE_TEXT
-            }}>
-            {value !== "" && props.requiredMessage}
-          </FormHelperText>
-        )}
+      {props.showValidationErrors && props.requiredMessage && (
+        <FormHelperText
+          id="component-message-text"
+          style={{
+            marginTop: "0.1em",
+            paddingLeft: "1.2em",
+            marginBottom: "0.5em",
+            color: COLORS.OIVA_ORANGE_TEXT
+          }}>
+          {value !== "" && props.requiredMessage}
+        </FormHelperText>
+      )}
     </React.Fragment>
   );
 };

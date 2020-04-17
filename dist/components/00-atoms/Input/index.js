@@ -132,7 +132,7 @@ var Input = function Input(props) {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  })))), !props.isReadOnly && props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  })))), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
