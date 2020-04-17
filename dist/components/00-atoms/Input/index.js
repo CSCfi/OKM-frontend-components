@@ -121,7 +121,7 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value !== "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value === "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
   }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
     className: "ml-8"
   }, React.createElement(Tooltip, {

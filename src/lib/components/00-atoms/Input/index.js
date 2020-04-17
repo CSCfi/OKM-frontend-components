@@ -108,7 +108,7 @@ const Input = props => {
           className={`${props.isHidden ? "hidden" : ""} 
           ${
             !props.isReadOnly &&
-            value !== "" &&
+            value === "" &&
             !isFocused &&
             props.isRequired &&
             (isVisited || props.showValidationErrors)
