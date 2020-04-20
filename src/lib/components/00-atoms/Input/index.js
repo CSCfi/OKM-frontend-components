@@ -193,7 +193,8 @@ Input.propTypes = {
   isVisited: PropTypes.bool,
   isDense: PropTypes.bool,
   requiredMessage: PropTypes.string,
-  showValidationErrors: PropTypes.bool
+  showValidationErrors: PropTypes.bool,
+  value: PropTypes.string
 };
 
 export default withStyles(inputStyles)(Input);
