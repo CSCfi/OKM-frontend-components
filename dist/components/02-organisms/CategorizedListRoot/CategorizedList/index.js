@@ -414,7 +414,6 @@ var CategorizedList = React.memo(function (props) {
           isDisabled = R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChange.properties) || !parentChange.properties.isChecked);
         }
 
-        console.info("INPUT", fullAnchor, propsObj);
         return /*#__PURE__*/React.createElement("div", {
           className: component.styleClasses
         }, /*#__PURE__*/React.createElement(Input, {

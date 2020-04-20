@@ -79,14 +79,10 @@ var Input = function Input(props) {
   };
 
   useEffect(function () {
-    console.info(props.value);
-
     if (props.value !== value || value !== "") {
-      console.info(props.value);
       setValue(props.value || ""); // props.value might be undefined
     }
   }, [props.value]);
-  console.info(props.value);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
   }, /*#__PURE__*/React.createElement(TextField, {

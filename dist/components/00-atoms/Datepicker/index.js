@@ -114,7 +114,6 @@ var Datepicker = function Datepicker(props) {
       setSelectedDate(props.value);
     }
   }, [props.value, selectedDate]);
-  console.info(props.isRequired);
   return /*#__PURE__*/React.createElement(MuiPickersUtilsProvider, {
     utils: LocalizedUtils,
     locale: localeMap[locale]
