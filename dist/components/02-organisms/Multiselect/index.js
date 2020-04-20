@@ -114,7 +114,7 @@ var Multiselect = React.memo(function (props) {
 
   var renderGroup = function renderGroup(params) {
     var selected = selectedGroups ? selectedGroups.includes(params.key) : false;
-    return [React.createElement("div", {
+    return [/*#__PURE__*/React.createElement("div", {
       key: params.key,
       className: "pl-3 pr-4 py-2 w-full flex flex-row justify-between cursor-pointer hover:bg-gray-100 ".concat(selected && "bg-gray-200"),
       onClick: function onClick() {
@@ -124,17 +124,17 @@ var Multiselect = React.memo(function (props) {
           group: params.key
         }]), selected, params.key);
       }
-    }, React.createElement("span", null, params.key), selected && React.createElement(CheckIcon, null)), params.children];
+    }, /*#__PURE__*/React.createElement("span", null, params.key), selected && /*#__PURE__*/React.createElement(CheckIcon, null)), params.children];
   };
 
-  return React.createElement(React.Fragment, null, React.createElement(Autocomplete, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Autocomplete, {
     id: props.id,
     "aria-label": props.ariaLabel,
     autoComplete: true,
     autosize: props.autosize,
     multiple: props.isMulti,
     renderInput: function renderInput(params) {
-      return React.createElement(TextField, Object.assign({}, params, {
+      return /*#__PURE__*/React.createElement(TextField, Object.assign({}, params, {
         variant: "outlined",
         label: props.title,
         placeholder: props.placeholder,
@@ -147,9 +147,9 @@ var Multiselect = React.memo(function (props) {
     renderGroup: renderGroup,
     renderOption: function renderOption(option, _ref) {
       var selected = _ref.selected;
-      return React.createElement("div", {
+      return /*#__PURE__*/React.createElement("div", {
         className: "w-full flex flex-row justify-between"
-      }, React.createElement("span", null, option.label), React.createElement(CheckIcon, {
+      }, /*#__PURE__*/React.createElement("span", null, option.label), /*#__PURE__*/React.createElement(CheckIcon, {
         style: {
           visibility: selected ? "visible" : "hidden"
         }

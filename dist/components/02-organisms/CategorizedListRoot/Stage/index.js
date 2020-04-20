@@ -84,22 +84,22 @@ function Stage(props) {
   useEffect(function () {
     runTest();
   }, [changes, isPlaying, originalChanges, runTest]);
-  return React.createElement(React.Fragment, null, !!props.render ? props.render({
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !!props.render ? props.render({
     anchor: props.anchor,
     categories: props.categories,
     changes: changes,
     onUpdate: handleUpdate
-  }) : null, React.createElement("div", {
+  }) : null, /*#__PURE__*/React.createElement("div", {
     className: "p-16"
-  }, React.createElement("hr", null), React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", {
     className: "pt-8 pb-8"
-  }, "Test run simulates click events. Next click is marked with black background and red dashed border. By folowing the test you can ensure that the category structure above responses to clicks correctly."), React.createElement("div", {
+  }, "Test run simulates click events. Next click is marked with black background and red dashed border. By folowing the test you can ensure that the category structure above responses to clicks correctly."), /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
-  }, React.createElement("label", {
+  }, /*#__PURE__*/React.createElement("label", {
     className: "flex items-center mr-12"
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     className: "inline-block mr-4"
-  }, "Interval between clicks:"), React.createElement(FormControl, null, React.createElement(Select, {
+  }, "Interval between clicks:"), /*#__PURE__*/React.createElement(FormControl, null, /*#__PURE__*/React.createElement(Select, {
     labelId: "test-run-interval",
     value: interval,
     autoWidth: true,
@@ -111,13 +111,13 @@ function Stage(props) {
       });
     }
   }, intervalOptions.map(function (_interval) {
-    return React.createElement(MenuItem, {
+    return /*#__PURE__*/React.createElement(MenuItem, {
       key: _interval,
       value: _interval
     }, _interval / 1000, " s");
-  }), originalInterval && React.createElement(MenuItem, {
+  }), originalInterval && /*#__PURE__*/React.createElement(MenuItem, {
     value: originalInterval
-  }, "User defined = ", originalInterval / 1000, " s")))), React.createElement(Button, {
+  }, "User defined = ", originalInterval / 1000, " s")))), /*#__PURE__*/React.createElement(Button, {
     variant: "contained",
     color: "primary" // disabled={!isPlaying && !isNaN(timeoutHandle)}
     ,

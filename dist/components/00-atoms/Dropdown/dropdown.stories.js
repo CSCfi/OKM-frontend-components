@@ -2,12 +2,12 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import Dropdown from "./index";
 storiesOf("Dropdown", module).add("default, contained", function () {
-  return React.createElement("div", null, React.createElement(Dropdown, {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Dropdown, {
     text: "Text is here"
-  }), React.createElement("br", null), React.createElement(Dropdown, {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Dropdown, {
     text: "Text is here",
     isTall: true
-  }), React.createElement("br", null), React.createElement(Dropdown, {
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Dropdown, {
     text: "Text is here",
     label: "With label"
   }));

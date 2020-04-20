@@ -127,7 +127,7 @@ var selectedValues = [{
   group: "1"
 }];
 storiesOf("Multiselect", module).addDecorator(withInfo).add("Example 1", function () {
-  return React.createElement("div", null, React.createElement("br", null), React.createElement(Multiselect, {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Multiselect, {
     name: "example",
     options: top100Films,
     callback: function callback(payload, values) {
@@ -138,7 +138,7 @@ storiesOf("Multiselect", module).addDecorator(withInfo).add("Example 1", functio
     value: selectedValues
   }));
 }).add("Short height WIP", function () {
-  return React.createElement("div", null, React.createElement("br", null), React.createElement(Multiselect, {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Multiselect, {
     name: "example short WIP",
     options: [{
       label: "Aaaaaaaa",
