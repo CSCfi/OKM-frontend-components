@@ -25,9 +25,9 @@ storiesOf("Navigation", module).add("Basic layout", function () {
     url: "http://github.com",
     text: "External to Github"
   }];
-  return React.createElement(Router, {
+  return /*#__PURE__*/React.createElement(Router, {
     history: createBrowserHistory()
-  }, React.createElement(Navigation, {
+  }, /*#__PURE__*/React.createElement(Navigation, {
     links: links
   }));
 });

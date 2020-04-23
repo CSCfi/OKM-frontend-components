@@ -67,18 +67,18 @@ function SimpleMenu(_ref) {
     setAnchorEl(null);
   };
 
-  return React.createElement(React.Fragment, null, React.createElement(IconButton, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(IconButton, {
     "aria-controls": "simple-menu",
     "aria-haspopup": "true",
     onClick: handleClick
-  }, React.createElement(MoreVertIcon, null)), React.createElement(Menu, {
+  }, /*#__PURE__*/React.createElement(MoreVertIcon, null)), /*#__PURE__*/React.createElement(Menu, {
     id: id,
     anchorEl: anchorEl,
     keepMounted: true,
     open: Boolean(anchorEl),
     onClose: handleClose
   }, R.addIndex(R.map)(function (action, i) {
-    return React.createElement(MenuItem, {
+    return /*#__PURE__*/React.createElement(MenuItem, {
       key: "action-".concat(i),
       onClick: function onClick(e) {
         handleClose(e, action);

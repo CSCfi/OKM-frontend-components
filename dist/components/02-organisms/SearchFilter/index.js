@@ -39,15 +39,15 @@ var SearchFilter = function SearchFilter(props) {
     e.key === "Enter" && e.preventDefault();
   };
 
-  return React.createElement(Paper, {
+  return /*#__PURE__*/React.createElement(Paper, {
     component: "form",
     className: classes.root
-  }, React.createElement(InputBase, {
+  }, /*#__PURE__*/React.createElement(InputBase, {
     className: classes.input,
     placeholder: props.placeholder,
     onChange: handleChanges,
     onKeyPress: preventRefresh
-  }), React.createElement(SearchIcon, {
+  }), /*#__PURE__*/React.createElement(SearchIcon, {
     className: "ml-2"
   }));
 };

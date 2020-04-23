@@ -9,17 +9,17 @@ var Tooltip = function Tooltip(_ref) {
       hideArrow = _ref.hideArrow,
       props = _objectWithoutProperties(_ref, ["children", "tooltip", "hideArrow"]);
 
-  return React.createElement(TooltipTrigger, Object.assign({}, props, {
+  return /*#__PURE__*/React.createElement(TooltipTrigger, Object.assign({}, props, {
     tooltip: function tooltip(_ref2) {
       var arrowRef = _ref2.arrowRef,
           tooltipRef = _ref2.tooltipRef,
           getArrowProps = _ref2.getArrowProps,
           getTooltipProps = _ref2.getTooltipProps,
           placement = _ref2.placement;
-      return React.createElement("div", getTooltipProps({
+      return /*#__PURE__*/React.createElement("div", getTooltipProps({
         ref: tooltipRef,
         className: "tooltip-container max-w-xxs"
-      }), !hideArrow && React.createElement("div", getArrowProps({
+      }), !hideArrow && /*#__PURE__*/React.createElement("div", getArrowProps({
         ref: arrowRef,
         className: "tooltip-arrow",
         "data-placement": placement
@@ -28,7 +28,7 @@ var Tooltip = function Tooltip(_ref) {
   }), function (_ref3) {
     var getTriggerProps = _ref3.getTriggerProps,
         triggerRef = _ref3.triggerRef;
-    return React.createElement("span", getTriggerProps({
+    return /*#__PURE__*/React.createElement("span", getTriggerProps({
       ref: triggerRef,
       className: "trigger"
     }), children);
