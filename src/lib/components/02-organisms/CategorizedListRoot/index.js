@@ -97,7 +97,8 @@ const CategorizedListRoot = React.memo(
               /**
                * This is the first instance of CategorizedList. The component
                * will create more instances on it's own.
-               **/ 
+               **/
+
               return (
                 <CategorizedList
                   anchor={anchor}
@@ -116,8 +117,14 @@ const CategorizedListRoot = React.memo(
       </React.Fragment>
     );
   },
-  (prevState, nextState) => {
-    return R.equals(prevState, nextState);
+  (prevProps, nextProps) => {
+    const isSameOld =
+      R.equals(prevProps.categories, nextProps.categories) &&
+      R.equals(prevProps.changes, nextProps.changes);
+    if (!isSameOld) {
+      console.info("Päivitetään CategorizedListRoot ", nextProps.anchor);
+    }
+    return isSameOld;
   }
 );
 

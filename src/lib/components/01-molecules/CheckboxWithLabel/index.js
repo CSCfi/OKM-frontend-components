@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -6,6 +6,7 @@ import green from "@material-ui/core/colors/green";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import * as R from "ramda";
+import { isEqual } from "lodash";
 import Check from "@material-ui/icons/CheckBoxOutlined";
 /**
  * @module Components/01-molecules
@@ -21,7 +22,16 @@ import Check from "@material-ui/icons/CheckBoxOutlined";
  * )
  */
 const CheckboxWithLabel = React.memo(
-  props => {
+  ({
+    children,
+    isChecked,
+    isDisabled,
+    isIndeterminate,
+    isReadOnly,
+    labelStyles,
+    onChanges,
+    payload
+  }) => {
     const styles = makeStyles({
       root: {
         color: green[600],
@@ -29,44 +39,44 @@ const CheckboxWithLabel = React.memo(
           color: green[500]
         }
       },
-      label: props.labelStyles,
+      label: labelStyles,
       checked: {} // This object must be empty for checked color to work.
     })();
 
-    const handleChanges = () => {
-      props.onChanges(props.payload, { isChecked: !props.isChecked });
-    };
+    const handleChanges = useCallback(() => {
+      onChanges(payload, { isChecked: !isChecked });
+    }, [isChecked, onChanges, payload]);
 
     return (
       <React.Fragment>
-        {!props.isReadOnly ? (
+        {!isReadOnly ? (
           <FormGroup row>
             <FormControlLabel
               classes={{
                 label: styles.label
               }}
-              disabled={props.isDisabled}
+              disabled={isDisabled}
               control={
                 <Checkbox
-                  checked={props.isChecked}
-                  indeterminate={props.isChecked && props.isIndeterminate}
+                  checked={isChecked}
+                  indeterminate={isChecked && isIndeterminate}
                   value="1"
                   onChange={handleChanges}
-                  readOnly={props.isReadOnly}
+                  readOnly={isReadOnly}
                   classes={{
                     checked: styles.checked,
                     root: styles.root
                   }}
                 />
               }
-              label={props.children}
+              label={children}
             />
           </FormGroup>
         ) : (
-          props.isChecked && (
+          isChecked && (
             <div className="flex flex-row text-base mb-2">
               <Check />
-              <span className="my-auto">{props.children}</span>
+              <span className="my-auto">{children}</span>
             </div>
           )
         )}
@@ -75,7 +85,8 @@ const CheckboxWithLabel = React.memo(
   },
   (prevState, currentState) => {
     return (
-      R.equals(prevState.payload, currentState.payload) &&
+      JSON.stringify(prevState.payload) ===
+        JSON.stringify(currentState.payload) &&
       R.equals(prevState.isChecked, currentState.isChecked) &&
       R.equals(prevState.isIndeterminate, currentState.isIndeterminate) &&
       R.equals(prevState.isDisabled, currentState.isDisabled)

@@ -8,6 +8,7 @@ import { AppBar, Toolbar, useMediaQuery, Typography, IconButton, Button } from "
 import { makeStyles } from "@material-ui/core/styles";
 import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
+import { equals } from "ramda";
 var MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
   TABLET: "only screen and (min-width: 768px) and (max-width: 1023px)",
@@ -49,41 +50,41 @@ var Header = React.memo(function (_ref) {
       template = _ref$template === void 0 ? "A" : _ref$template;
   var classes = useStyles();
   var typographyClasses = useStylesForTypography();
-  var items = [React.createElement(NavLink, {
+  var items = [/*#__PURE__*/React.createElement(NavLink, {
     to: logo.path,
     exact: true,
     className: "inline-block no-underline text-gray-800"
-  }, React.createElement(Typography, {
+  }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6",
     classes: typographyClasses
-  }, logo.text)), React.createElement(NavLink, {
+  }, logo.text)), /*#__PURE__*/React.createElement(NavLink, {
     to: shortDescription.path,
     exact: true,
     className: "inline-block no-underline text-gray-800"
-  }, shortDescription.text), React.createElement(NavLink, {
+  }, shortDescription.text), /*#__PURE__*/React.createElement(NavLink, {
     to: authenticationLink.path,
     exact: false,
     className: "inline-block no-underline text-gray-800 hover:underline"
-  }, React.createElement("span", null, authenticationLink.text[0], " "), authenticationLink.text[1] && React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", null, authenticationLink.text[0], " "), authenticationLink.text[1] && /*#__PURE__*/React.createElement("span", {
     className: "font-bold"
-  }, authenticationLink.text[1])), organisation.path ? React.createElement(NavLink, {
+  }, authenticationLink.text[1])), organisation.path ? /*#__PURE__*/React.createElement(NavLink, {
     className: "link-to-own-organisation",
     to: organisation.path,
     exact: false
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     className: "text-gray-600"
-  }, organisation.text)) : React.createElement("span", {
+  }, organisation.text)) : /*#__PURE__*/React.createElement("span", {
     className: "text-gray-800"
   }, organisation.text)];
   var breakpointTabletMin = useMediaQuery(MEDIA_QUERIES.TABLET_MIN);
-  return React.createElement(React.Fragment, null, !breakpointTabletMin && React.createElement(React.Fragment, null, template === "C" && React.createElement(VerticalLayout, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !breakpointTabletMin && /*#__PURE__*/React.createElement(React.Fragment, null, template === "C" && /*#__PURE__*/React.createElement(VerticalLayout, {
     items: items
-  }, React.createElement(ToggleButtonGroup, {
+  }, /*#__PURE__*/React.createElement(ToggleButtonGroup, {
     size: "small",
     onChange: onLocaleChange,
     value: locale,
     exclusive: true
-  }, React.createElement(ToggleButton, {
+  }, /*#__PURE__*/React.createElement(ToggleButton, {
     key: 1,
     value: "fi",
     className: "whitespace-no-wrap",
@@ -92,7 +93,7 @@ var Header = React.memo(function (_ref) {
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
     }
-  }, inFinnish), React.createElement(ToggleButton, {
+  }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
     key: 2,
     value: "sv",
     className: "whitespace-no-wrap",
@@ -101,42 +102,42 @@ var Header = React.memo(function (_ref) {
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
     }
-  }, inSwedish))), template !== "C" && React.createElement("div", {
+  }, inSwedish))), template !== "C" && /*#__PURE__*/React.createElement("div", {
     className: "fixed w-full z-50 ".concat(classes.root, " ")
-  }, React.createElement(AppBar, {
+  }, /*#__PURE__*/React.createElement(AppBar, {
     elevation: 0,
     position: "static"
-  }, React.createElement(Toolbar, {
+  }, /*#__PURE__*/React.createElement(Toolbar, {
     className: "bg-green-500"
-  }, React.createElement(IconButton, {
+  }, /*#__PURE__*/React.createElement(IconButton, {
     edge: "start",
     className: classes.menuButton,
     color: "inherit",
     "aria-label": "menu",
     onClick: onMenuClick
-  }, React.createElement(MenuIcon, null)), React.createElement(NavLink, {
+  }, /*#__PURE__*/React.createElement(MenuIcon, null)), /*#__PURE__*/React.createElement(NavLink, {
     to: logo.path,
     exact: true,
     className: "inline-block no-underline text-white flex-grow"
-  }, React.createElement(Typography, {
+  }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6",
     className: classes.title
-  }, logo.text)), !isAuthenticated && React.createElement(Button, {
+  }, logo.text)), !isAuthenticated && /*#__PURE__*/React.createElement(Button, {
     color: "inherit",
     onClick: onLoginButtonClick
-  }, logIn))))), breakpointTabletMin && React.createElement(AppBar, {
+  }, logIn))))), breakpointTabletMin && /*#__PURE__*/React.createElement(AppBar, {
     elevation: 0,
     position: "static"
-  }, React.createElement(Toolbar, {
+  }, /*#__PURE__*/React.createElement(Toolbar, {
     className: "bg-white px-4 border border-gray-300"
-  }, (template === "A" || !template) && React.createElement(HorizontalLayout, {
+  }, (template === "A" || !template) && /*#__PURE__*/React.createElement(HorizontalLayout, {
     items: items
-  }, React.createElement(ToggleButtonGroup, {
+  }, /*#__PURE__*/React.createElement(ToggleButtonGroup, {
     size: "small",
     onChange: onLocaleChange,
     value: locale,
     exclusive: true
-  }, React.createElement(ToggleButton, {
+  }, /*#__PURE__*/React.createElement(ToggleButton, {
     key: 1,
     value: "fi",
     className: "whitespace-no-wrap",
@@ -145,7 +146,7 @@ var Header = React.memo(function (_ref) {
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
     }
-  }, inFinnish), React.createElement(ToggleButton, {
+  }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
     key: 2,
     value: "sv",
     className: "whitespace-no-wrap",
@@ -155,5 +156,8 @@ var Header = React.memo(function (_ref) {
       sizeSmall: css["locale-button"]
     }
   }, inSwedish))))));
+}, function (currentProps, nextProps) {
+  var isSameOld = equals("" + currentProps.onLocaleChange, "" + nextProps.onLocaleChange) && equals(currentProps.organisation, nextProps.organisation) && equals(currentProps.locale, nextProps.locale);
+  return isSameOld;
 });
 export default Header;

@@ -41,7 +41,7 @@ const inputStyles = {
   }
 };
 
-const Input = props => {
+const Input = React.memo(props => {
   const [isVisited, setIsVisited] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const { classes } = props;
@@ -145,7 +145,7 @@ const Input = props => {
       )}
     </React.Fragment>
   );
-};
+});
 
 Input.defaultProps = {
   ariaLabel: "Text area",

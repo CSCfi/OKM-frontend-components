@@ -7,9 +7,9 @@ import SideNavigation from "../SideNavigation";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 storiesOf("Header", module).add("Basic layout", function () {
-  return React.createElement(Router, {
+  return /*#__PURE__*/React.createElement(Router, {
     history: createBrowserHistory()
-  }, React.createElement(Header, {
+  }, /*#__PURE__*/React.createElement(Header, {
     inFinnish: "Suomeksi",
     inSwedish: "P\xE5 svenska",
     isLoggedIn: false,
@@ -71,9 +71,9 @@ storiesOf("Header", module).add("Basic layout", function () {
     path: "/tilastot",
     text: "Tilastot"
   }];
-  return React.createElement(React.Fragment, null, React.createElement(Router, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Router, {
     history: createBrowserHistory()
-  }, React.createElement(Header, {
+  }, /*#__PURE__*/React.createElement(Header, {
     inFinnish: "Suomeksi",
     inSwedish: "P\xE5 svenska",
     isLoggedIn: false,
@@ -116,9 +116,9 @@ storiesOf("Header", module).add("Basic layout", function () {
       text: "Opetushallinnon ohjaus- ja säätelypalvelu",
       path: "/"
     }
-  }), React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "hidden md:block"
-  }, React.createElement(Navigation, {
+  }, /*#__PURE__*/React.createElement(Navigation, {
     links: links
   }))));
 }).add("Header and Navigation and SideNavigation", function () {
@@ -144,9 +144,9 @@ storiesOf("Header", module).add("Basic layout", function () {
     path: "/tilastot",
     text: "Tilastot"
   }];
-  return React.createElement(React.Fragment, null, React.createElement(Router, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Router, {
     history: createBrowserHistory()
-  }, React.createElement(Header, {
+  }, /*#__PURE__*/React.createElement(Header, {
     inFinnish: "Suomeksi",
     inSwedish: "P\xE5 svenska",
     isLoggedIn: false,
@@ -187,18 +187,18 @@ storiesOf("Header", module).add("Basic layout", function () {
       text: "Opetushallinnon ohjaus- ja säätelypalvelu",
       path: "/"
     }
-  }), React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "hidden md:block"
-  }, React.createElement(Navigation, {
+  }, /*#__PURE__*/React.createElement(Navigation, {
     links: links
-  })), React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "block md:hidden"
-  }, React.createElement(SideNavigation, {
+  }, /*#__PURE__*/React.createElement(SideNavigation, {
     isVisible: isSideMenuVisible,
     handleDrawerToggle: function handleDrawerToggle(isVisible) {
       setSideMenuVisibility(isVisible);
     }
-  }, React.createElement(Header, {
+  }, /*#__PURE__*/React.createElement(Header, {
     inFinnish: "Suomeksi",
     inSwedish: "P\xE5 svenska",
     isLoggedIn: false,
@@ -242,9 +242,9 @@ storiesOf("Header", module).add("Basic layout", function () {
       path: "/"
     },
     template: "C"
-  }), React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: "px-4"
-  }, React.createElement(Navigation, {
+  }, /*#__PURE__*/React.createElement(Navigation, {
     direction: "vertical",
     links: links,
     theme: {
@@ -254,9 +254,9 @@ storiesOf("Header", module).add("Basic layout", function () {
     }
   }))))));
 }).add("Header without organisation link", function () {
-  return React.createElement(Router, {
+  return /*#__PURE__*/React.createElement(Router, {
     history: createBrowserHistory()
-  }, React.createElement(Header, {
+  }, /*#__PURE__*/React.createElement(Header, {
     inFinnish: "Suomeksi",
     inSwedish: "P\xE5 svenska",
     isLoggedIn: false,

@@ -16,6 +16,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
+import { equals } from "ramda";
 
 const MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
@@ -205,6 +206,13 @@ const Header = React.memo(
         )}
       </React.Fragment>
     );
+  },
+  (currentProps, nextProps) => {
+    const isSameOld =
+      equals("" + currentProps.onLocaleChange, "" + nextProps.onLocaleChange) &&
+      equals(currentProps.organisation, nextProps.organisation) &&
+      equals(currentProps.locale, nextProps.locale);
+    return isSameOld;
   }
 );
 

@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AlertMessage = props => {
+const AlertMessage = React.memo(props => {
   const classes = useStyles();
   const [isVisible, setVisible] = useState(true);
 
@@ -103,7 +103,7 @@ const AlertMessage = props => {
       </Collapse>
     </div>
   );
-};
+});
 
 AlertMessage.defaultProps = {
   id: "Alert",

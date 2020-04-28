@@ -1,9 +1,8 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
-import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _inherits from "@babel/runtime/helpers/esm/inherits";
+import _createSuper from "@babel/runtime/helpers/esm/createSuper";
 import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
@@ -15,6 +14,7 @@ import svLocale from "date-fns/locale/sv";
 import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
 import { COLORS } from "../../../modules/styles";
+import { equals } from "ramda";
 var styles = createStyles(function (theme) {
   return {
     root: {
@@ -57,10 +57,12 @@ var styles = createStyles(function (theme) {
 var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   _inherits(LocalizedUtils, _DateFnsUtils);
 
+  var _super = _createSuper(LocalizedUtils);
+
   function LocalizedUtils() {
     _classCallCheck(this, LocalizedUtils);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(LocalizedUtils).apply(this, arguments));
+    return _super.apply(this, arguments);
   }
 
   _createClass(LocalizedUtils, [{
@@ -75,7 +77,7 @@ var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   return LocalizedUtils;
 }(DateFnsUtils);
 
-var Datepicker = function Datepicker(props) {
+var Datepicker = React.memo(function (props) {
   var classes = props.classes,
       messages = props.messages,
       locale = props.locale;
@@ -113,15 +115,15 @@ var Datepicker = function Datepicker(props) {
       setSelectedDate(props.value);
     }
   }, [props.value, selectedDate]);
-  return React.createElement(MuiPickersUtilsProvider, {
+  return /*#__PURE__*/React.createElement(MuiPickersUtilsProvider, {
     utils: LocalizedUtils,
     locale: localeMap[locale]
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "flex-col",
     style: !props.width && props.fullWidth ? {
       display: "flex"
     } : {}
-  }, React.createElement(DatePicker, {
+  }, /*#__PURE__*/React.createElement(DatePicker, {
     format: "d.M.yyyy" // Always is Finnish format
     ,
     "aria-label": props.ariaLabel,
@@ -166,7 +168,7 @@ var Datepicker = function Datepicker(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",
@@ -175,8 +177,11 @@ var Datepicker = function Datepicker(props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !selectedDate && props.requiredMessage)));
-};
-
+}, function (cp, np) {
+  // cp = current props, np = next props
+  console.info(cp, np);
+  return equals(cp.payload, np.payload);
+});
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",
   label: null,

@@ -21,9 +21,9 @@ storiesOf("Action list", module).addDecorator(withInfo).add("with removal action
     console.info("Going to remove item: ", item);
   };
 
-  return React.createElement(MuiThemeProvider, {
+  return /*#__PURE__*/React.createElement(MuiThemeProvider, {
     theme: theme
-  }, React.createElement(ActionList, {
+  }, /*#__PURE__*/React.createElement(ActionList, {
     items: items,
     removalCallback: removeItem
   }));

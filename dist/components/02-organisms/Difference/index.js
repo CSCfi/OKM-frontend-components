@@ -79,13 +79,13 @@ var Difference = function Difference(_ref) {
   var initialAreaTitle = titles[0];
   var inputAreaTitle = required ? titles[1] + "*" : titles[1];
   var changeAreaTitle = titles[2];
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex"
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "flex-1 flex-col"
-  }, React.createElement(Typography, null, initialAreaTitle), initialValue), React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Typography, null, initialAreaTitle), initialValue), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 flex-col"
-  }, React.createElement(Typography, null, inputAreaTitle), !readonly && React.createElement(Input, {
+  }, /*#__PURE__*/React.createElement(Typography, null, inputAreaTitle), !readonly && /*#__PURE__*/React.createElement(Input, {
     type: "number",
     inputProps: {
       min: "0"
@@ -95,9 +95,9 @@ var Difference = function Difference(_ref) {
     value: value,
     width: "12em",
     isRequired: isRequired
-  }), readonly && applyForValue), React.createElement("div", {
+  }), readonly && applyForValue), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 flex-col"
-  }, React.createElement(Typography, null, changeAreaTitle), (value ? value : applyForValue) - initialValue)));
+  }, /*#__PURE__*/React.createElement(Typography, null, changeAreaTitle), (value ? value : applyForValue) - initialValue)));
 };
 
 export default Difference;

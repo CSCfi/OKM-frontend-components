@@ -6,6 +6,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Check from "@material-ui/icons/CheckBoxOutlined";
+import { equals } from "ramda";
 var RadioButtonWithLabel = React.memo(function (props) {
   var styles = makeStyles({
     label: props.labelStyles
@@ -19,7 +20,7 @@ var RadioButtonWithLabel = React.memo(function (props) {
     },
     checked: {}
   })(function (props) {
-    return React.createElement(Radio, Object.assign({
+    return /*#__PURE__*/React.createElement(Radio, Object.assign({
       color: "default"
     }, props));
   });
@@ -30,14 +31,14 @@ var RadioButtonWithLabel = React.memo(function (props) {
     });
   };
 
-  return React.createElement(React.Fragment, null, !props.isReadOnly ? React.createElement(FormGroup, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !props.isReadOnly ? /*#__PURE__*/React.createElement(FormGroup, {
     row: true
-  }, React.createElement(FormControlLabel, {
+  }, /*#__PURE__*/React.createElement(FormControlLabel, {
     classes: {
       label: styles.label
     },
     disabled: props.isDisabled,
-    control: React.createElement(GreenRadio, {
+    control: /*#__PURE__*/React.createElement(GreenRadio, {
       id: props.payload.anchor,
       "data-anchor": props.payload.anchor,
       checked: props.isChecked,
@@ -45,10 +46,13 @@ var RadioButtonWithLabel = React.memo(function (props) {
       onChange: handleChanges
     }),
     label: props.children
-  })) : props.isChecked && React.createElement("div", {
+  })) : props.isChecked && /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row text-base mb-2"
-  }, React.createElement(Check, null), React.createElement("span", {
+  }, /*#__PURE__*/React.createElement(Check, null), /*#__PURE__*/React.createElement("span", {
     className: "my-auto"
   }, props.children)));
+}, function (prevProps, nextProps) {
+  var isSameFunction = "" + prevProps.onChanges === "" + nextProps.onChanges;
+  return isSameFunction && equals(prevProps.isChecked, nextProps.isChecked);
 });
 export default RadioButtonWithLabel;
