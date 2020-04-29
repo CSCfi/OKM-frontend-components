@@ -14,6 +14,7 @@ import svLocale from "date-fns/locale/sv";
 import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
 import { COLORS } from "../../../modules/styles";
+import { equals } from "ramda";
 var styles = createStyles(function (theme) {
   return {
     root: {
@@ -76,7 +77,7 @@ var LocalizedUtils = /*#__PURE__*/function (_DateFnsUtils) {
   return LocalizedUtils;
 }(DateFnsUtils);
 
-var Datepicker = function Datepicker(props) {
+var Datepicker = React.memo(function (props) {
   var classes = props.classes,
       messages = props.messages,
       locale = props.locale;
@@ -176,8 +177,11 @@ var Datepicker = function Datepicker(props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !selectedDate && props.requiredMessage)));
-};
-
+}, function (cp, np) {
+  // cp = current props, np = next props
+  console.info(cp, np);
+  return equals(cp.payload, np.payload);
+});
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",
   label: null,

@@ -6,6 +6,7 @@ import chroma from "chroma-js";
 import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import InputLabel from "@material-ui/core/InputLabel";
+import { equals } from "ramda";
 /**
  * Autocomplete wraps a Select
  * Sends value to callback.
@@ -210,6 +211,8 @@ var Autocomplete = React.memo(function (props) {
     width: props.width,
     required: props.isRequired
   }));
+}, function (cp, np) {
+  return equals(cp.isValid, np.isValid) && equals(cp.options, np.options) && equals(cp.payload, np.payload) && equals(cp.value, np.value) && equals(cp.height, np.height) && equals(cp.width, np.width);
 });
 Autocomplete.defaultProps = {
   isMulti: true,

@@ -1,9 +1,10 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
+import { equals } from "ramda";
 import "./dropdown.css";
 var selectCustomStyles = {
   control: function control(provided) {
@@ -36,7 +37,6 @@ var Dropdown = React.memo(function (props) {
 
   var _useState3 = useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      isFocused = _useState4[0],
       setIsFocused = _useState4[1];
 
   var handleChanges = function handleChanges(selectedOption) {
@@ -84,5 +84,8 @@ var Dropdown = React.memo(function (props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !props.value && props.requiredMessage));
+}, function (prevProps, nextProps) {
+  var isSameFunction = "" + prevProps.onChanges === "" + nextProps.onChanges;
+  return isSameFunction && equals(prevProps.isDisabled, nextProps.isDisabled) && equals(prevProps.value, nextProps.value) && equals(prevProps.isRequired, nextProps.isRequired);
 });
 export default Dropdown;

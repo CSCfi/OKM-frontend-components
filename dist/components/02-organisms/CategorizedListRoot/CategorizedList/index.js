@@ -16,7 +16,7 @@ import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
 import * as R from "ramda";
-import _ from "lodash";
+import { isEqual, map } from "lodash";
 /** @namespace components */
 
 /**
@@ -162,7 +162,7 @@ var CategorizedList = React.memo(function (props) {
   /**
   * Categories will be looped here.
   */
-  _.map(props.categories, function (category, i) {
+  map(props.categories, function (category, i) {
     if (category.isVisible === false) {
       return null;
     }
@@ -260,7 +260,7 @@ var CategorizedList = React.memo(function (props) {
       className: "pr-4"
     }, "*"))), /*#__PURE__*/React.createElement("div", {
       className: R.join(" ", componentContainerClasses)
-    }, _.map(category.components, function (component, ii) {
+    }, map(category.components, function (component, ii) {
       var fullAnchor = "".concat(anchor, ".").concat(component.anchor);
       var fullPath = props.rootPath.concat([i, "components", ii]);
       var idSuffix = "".concat(i, "-").concat(ii);
@@ -688,7 +688,9 @@ var CategorizedList = React.memo(function (props) {
     }));
   }).filter(Boolean));
 }, function (prevState, nextState) {
-  return R.equals(prevState.categories, nextState.categories) && R.equals(prevState.changes, nextState.changes);
+  var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
+  var areChangesSame = R.equals(prevState.changes, nextState.changes);
+  return areCategoriesSame && areChangesSame;
 });
 CategorizedList.defaultProps = {
   level: 0

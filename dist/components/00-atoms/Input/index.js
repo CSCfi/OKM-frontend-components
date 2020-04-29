@@ -38,8 +38,7 @@ var inputStyles = {
     }
   }
 };
-
-var Input = function Input(props) {
+var Input = React.memo(function (props) {
   var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       isVisited = _useState2[0],
@@ -141,8 +140,7 @@ var Input = function Input(props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, value !== "" && props.requiredMessage));
-};
-
+});
 Input.defaultProps = {
   ariaLabel: "Text area",
   delay: 300,

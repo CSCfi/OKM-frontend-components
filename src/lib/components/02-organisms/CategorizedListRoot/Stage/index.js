@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button, Select, MenuItem, FormControl } from "@material-ui/core";
 
 /**
@@ -15,7 +15,7 @@ function getRandomInt(min, max) {
 const intervalOptions = [500, 1000, 2000, 3000, 4000, 5000, 10000];
 let timeoutHandle = null;
 
-function Stage(props) {
+const Stage = React.memo(props => {
   let originalInterval = props.interval;
 
   const [interval, setInterval] = useState(originalInterval || 3000);
@@ -130,7 +130,7 @@ function Stage(props) {
       </div>
     </React.Fragment>
   );
-}
+});
 
 Stage.propTypes = {};
 

@@ -93,7 +93,13 @@ var CategorizedListRoot = React.memo(function (_ref) {
       showValidationErrors: showValidationErrors
     });
   }() : null);
-}, function (prevState, nextState) {
-  return R.equals(prevState, nextState);
+}, function (prevProps, nextProps) {
+  var isSameOld = R.equals(prevProps.categories, nextProps.categories) && R.equals(prevProps.changes, nextProps.changes);
+
+  if (!isSameOld) {
+    console.info("Päivitetään CategorizedListRoot ", nextProps.anchor);
+  }
+
+  return isSameOld;
 });
 export default CategorizedListRoot;

@@ -7,57 +7,65 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Check from "@material-ui/icons/CheckBoxOutlined";
+import { equals } from "ramda";
 
-const RadioButtonWithLabel = React.memo(props => {
-  const styles = makeStyles({
-    label: props.labelStyles
-  })();
-  const GreenRadio = withStyles({
-    root: {
-      color: green[400],
-      "&$checked": {
-        color: green[600]
-      }
-    },
-    checked: {}
-  })(props => <Radio color="default" {...props} />);
+const RadioButtonWithLabel = React.memo(
+  props => {
+    const styles = makeStyles({
+      label: props.labelStyles
+    })();
+    const GreenRadio = withStyles({
+      root: {
+        color: green[400],
+        "&$checked": {
+          color: green[600]
+        }
+      },
+      checked: {}
+    })(props => <Radio color="default" {...props} />);
 
-  const handleChanges = () => {
-    props.onChanges(props.payload, { isChecked: !props.isChecked });
-  };
+    const handleChanges = () => {
+      props.onChanges(props.payload, { isChecked: !props.isChecked });
+    };
 
-  return (
-    <React.Fragment>
-      {!props.isReadOnly ? (
-        <FormGroup row>
-          <FormControlLabel
-            classes={{
-              label: styles.label
-            }}
-            disabled={props.isDisabled}
-            control={
-              <GreenRadio
-                id={props.payload.anchor}
-                data-anchor={props.payload.anchor}
-                checked={props.isChecked}
-                value={props.value}
-                onChange={handleChanges}
-              />
-            }
-            label={props.children}
-          />
-        </FormGroup>
-      ) : (
-        props.isChecked && (
-          <div className="flex flex-row text-base mb-2">
-            <Check />
-            <span className="my-auto">{props.children}</span>
-          </div>
-        )
-      )}
-    </React.Fragment>
-  );
-});
+    return (
+      <React.Fragment>
+        {!props.isReadOnly ? (
+          <FormGroup row>
+            <FormControlLabel
+              classes={{
+                label: styles.label
+              }}
+              disabled={props.isDisabled}
+              control={
+                <GreenRadio
+                  id={props.payload.anchor}
+                  data-anchor={props.payload.anchor}
+                  checked={props.isChecked}
+                  value={props.value}
+                  onChange={handleChanges}
+                />
+              }
+              label={props.children}
+            />
+          </FormGroup>
+        ) : (
+          props.isChecked && (
+            <div className="flex flex-row text-base mb-2">
+              <Check />
+              <span className="my-auto">{props.children}</span>
+            </div>
+          )
+        )}
+      </React.Fragment>
+    );
+  },
+  (prevProps, nextProps) => {
+    const isSameFunction =
+      "" + prevProps.onChanges === "" + nextProps.onChanges;
+    return isSameFunction && equals(prevProps.isChecked, nextProps.isChecked);
+  }
+);
 
 RadioButtonWithLabel.propTypes = {
   isChecked: PropTypes.bool,

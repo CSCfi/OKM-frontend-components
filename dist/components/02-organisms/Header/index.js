@@ -8,6 +8,7 @@ import { AppBar, Toolbar, useMediaQuery, Typography, IconButton, Button } from "
 import { makeStyles } from "@material-ui/core/styles";
 import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
+import { equals } from "ramda";
 var MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
   TABLET: "only screen and (min-width: 768px) and (max-width: 1023px)",
@@ -155,5 +156,8 @@ var Header = React.memo(function (_ref) {
       sizeSmall: css["locale-button"]
     }
   }, inSwedish))))));
+}, function (currentProps, nextProps) {
+  var isSameOld = equals("" + currentProps.onLocaleChange, "" + nextProps.onLocaleChange) && equals(currentProps.organisation, nextProps.organisation) && equals(currentProps.locale, nextProps.locale);
+  return isSameOld;
 });
 export default Header;
