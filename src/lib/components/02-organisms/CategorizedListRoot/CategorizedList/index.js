@@ -16,7 +16,7 @@ import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
 import * as R from "ramda";
-import _ from "lodash";
+import { isEqual, map } from "lodash";
 
 /** @namespace components */
 
@@ -167,7 +167,7 @@ const CategorizedList = React.memo(
         {/**
          * Categories will be looped here.
          */
-        _.map(props.categories, (category, i) => {
+        map(props.categories, (category, i) => {
           if (category.isVisible === false) {
             return null;
           }
@@ -322,7 +322,7 @@ const CategorizedList = React.memo(
                 </div>
               )}
               <div className={R.join(" ", componentContainerClasses)}>
-                {_.map(category.components, (component, ii) => {
+                {map(category.components, (component, ii) => {
                   const fullAnchor = `${anchor}.${component.anchor}`;
                   const fullPath = props.rootPath.concat([i, "components", ii]);
                   const idSuffix = `${i}-${ii}`;
@@ -541,10 +541,6 @@ const CategorizedList = React.memo(
                         : null}
                       {component.name === "Input"
                         ? (category => {
-                            const change = getChangeObjByAnchor(
-                              fullAnchor,
-                              props.changes
-                            );
                             let parentComponent = null;
                             let isDisabled = false;
                             if (
@@ -566,9 +562,6 @@ const CategorizedList = React.memo(
                                   R.isEmpty(parentChange.properties)) ||
                                   !parentChange.properties.isChecked);
                             }
-                            const value = change
-                              ? change.properties.value
-                              : propsObj.value;
                             return (
                               <div className={component.styleClasses}>
                                 <Input
@@ -595,7 +588,7 @@ const CategorizedList = React.memo(
                                   placeholder={propsObj.placeholder}
                                   tooltip={propsObj.tooltip}
                                   type={propsObj.type}
-                                  value={value}
+                                  value={propsObj.value}
                                   showValidationErrors={showValidationErrors}
                                   requiredMessage={propsObj.requiredMessage}
                                 />
@@ -866,6 +859,7 @@ const CategorizedList = React.memo(
                             value={propsObj.value}
                             isDisabled={propsObj.isDisabled}
                             isHidden={propsObj.isHidden}
+                            isRequired={propsObj.isRequired}
                             clearable={propsObj.clearable}
                             showTodayButton={propsObj.showTodayButton}
                             error={propsObj.error}
@@ -937,10 +931,11 @@ const CategorizedList = React.memo(
     );
   },
   (prevState, nextState) => {
-    return (
-      R.equals(prevState.categories, nextState.categories) &&
-      R.equals(prevState.changes, nextState.changes)
-    );
+    const areCategoriesSame =
+      JSON.stringify(prevState.categories) ===
+      JSON.stringify(nextState.categories);
+    const areChangesSame = R.equals(prevState.changes, nextState.changes);
+    return areCategoriesSame && areChangesSame;
   }
 );
 
@@ -953,7 +948,6 @@ CategorizedList.propTypes = {
   categories: PropTypes.array,
   changes: PropTypes.array,
   debug: PropTypes.bool,
-  onChanges: PropTypes.func,
   parentCategory: PropTypes.object,
   path: PropTypes.array,
   removeChangeObject: PropTypes.func.isRequired,

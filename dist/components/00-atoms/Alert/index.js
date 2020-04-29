@@ -56,8 +56,7 @@ var useStyles = makeStyles(function (theme) {
     }
   };
 });
-
-var AlertMessage = function AlertMessage(props) {
+var AlertMessage = React.memo(function (props) {
   var classes = useStyles();
 
   var _useState = useState(true),
@@ -109,7 +108,7 @@ var AlertMessage = function AlertMessage(props) {
       fontSize: "inherit"
     })))
   }, props.title && /*#__PURE__*/React.createElement(AlertTitle, null, props.title), /*#__PURE__*/React.createElement("p", null, props.message && props.message))));
-};
+});
 
 AlertMessage.defaultProps = {
   id: "Alert",

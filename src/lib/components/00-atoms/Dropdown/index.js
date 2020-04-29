@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Select from "@material-ui/core/Select";
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from "prop-types";
 import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
+import { equals } from "ramda";
 
 import "./dropdown.css";
 
@@ -90,16 +91,17 @@ const selectCustomStyles = {
   }
 };
 
-const Dropdown = React.memo(props => {
-  const [isVisited, setIsVisited] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
+const Dropdown = React.memo(
+  props => {
+    const [isVisited, setIsVisited] = useState(false);
+    const [, setIsFocused] = useState(false);
 
-  const handleChanges = selectedOption => {
-    props.onChanges(props.payload, { selectedOption: selectedOption.target });
-  };
+    const handleChanges = selectedOption => {
+      props.onChanges(props.payload, { selectedOption: selectedOption.target });
+    };
 
-  return (
-    <React.Fragment>
+    return (
+      <React.Fragment>
       <FormControl
         variant="outlined"
         disabled={props.isDisabled}
@@ -126,21 +128,32 @@ const Dropdown = React.memo(props => {
           {props.options.map((item,i) => <MenuItem key={i} value={item.value}>{item.label}</MenuItem>)}
         </Select>
       </FormControl>
-      {props.showValidationErrors && props.requiredMessage && (
-        <FormHelperText
-          id="component-message-text"
-          style={{
-            marginTop: "0.1em",
-            paddingLeft: "1.2em",
-            marginBottom: "0.5em",
-            color: COLORS.OIVA_ORANGE_TEXT
-          }}>
-          {isVisited && !props.value && props.requiredMessage}
-        </FormHelperText>
-      )}
-    </React.Fragment>
-  );
-});
+        {props.showValidationErrors && props.requiredMessage && (
+          <FormHelperText
+            id="component-message-text"
+            style={{
+              marginTop: "0.1em",
+              paddingLeft: "1.2em",
+              marginBottom: "0.5em",
+              color: COLORS.OIVA_ORANGE_TEXT
+            }}>
+            {isVisited && !props.value && props.requiredMessage}
+          </FormHelperText>
+        )}
+      </React.Fragment>
+    );
+  },
+  (prevProps, nextProps) => {
+    const isSameFunction =
+      "" + prevProps.onChanges === "" + nextProps.onChanges;
+    return (
+      isSameFunction &&
+      equals(prevProps.isDisabled, nextProps.isDisabled) &&
+      equals(prevProps.value, nextProps.value) &&
+      equals(prevProps.isRequired, nextProps.isRequired)
+    );
+  }
+);
 
 Dropdown.propTypes = {
   isDisabled: PropTypes.bool,

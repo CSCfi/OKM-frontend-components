@@ -1,5 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button, Select, MenuItem, FormControl } from "@material-ui/core";
 /**
  * Get a random integer between `min` and `max`.
@@ -15,8 +15,7 @@ function getRandomInt(min, max) {
 
 var intervalOptions = [500, 1000, 2000, 3000, 4000, 5000, 10000];
 var timeoutHandle = null;
-
-function Stage(props) {
+var Stage = React.memo(function (props) {
   var originalInterval = props.interval;
 
   var _useState = useState(originalInterval || 3000),
@@ -127,6 +126,5 @@ function Stage(props) {
       });
     }
   }, isPlaying ? "Stop test run" : "Start test run"))));
-}
-
+});
 export default Stage;

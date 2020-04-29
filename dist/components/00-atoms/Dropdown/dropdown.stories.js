@@ -2,12 +2,12 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import Dropdown from "./index";
 import { withState } from "@dump247/storybook-state";
-var options = [{
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Dropdown, {
   value: "1",
-  label: "один"
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Dropdown, {
 }, {
   value: "2",
-  label: "два"
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Dropdown, {
 }, {
   value: "3",
   label: "три"

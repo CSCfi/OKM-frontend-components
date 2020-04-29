@@ -38,8 +38,7 @@ var inputStyles = {
     }
   }
 };
-
-var Input = function Input(props) {
+var Input = React.memo(function (props) {
   var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       isVisited = _useState2[0],
@@ -121,7 +120,7 @@ var Input = function Input(props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value !== "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value === "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
   }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8"
   }, /*#__PURE__*/React.createElement(Tooltip, {
@@ -141,8 +140,7 @@ var Input = function Input(props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, value !== "" && props.requiredMessage));
-};
-
+});
 Input.defaultProps = {
   ariaLabel: "Text area",
   delay: 300,

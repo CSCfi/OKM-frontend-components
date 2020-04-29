@@ -1,10 +1,11 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Select from "@material-ui/core/Select";
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '@material-ui/core/MenuItem';
 import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
+import { equals } from "ramda";
 import "./dropdown.css";
 import { withStyles } from "@material-ui/core";
 var selectCustomStyles = {
@@ -94,7 +95,6 @@ var Dropdown = React.memo(function (props) {
 
   var _useState3 = useState(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      isFocused = _useState4[0],
       setIsFocused = _useState4[1];
 
   var handleChanges = function handleChanges(selectedOption) {
@@ -103,7 +103,7 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FormControl, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, props.label && /*#__PURE__*/React.createElement(InputLabel, {
     variant: "outlined",
     disabled: props.isDisabled,
     fullWidth: props.fullWidth,
@@ -129,7 +129,7 @@ var Dropdown = React.memo(function (props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }, /*#__PURE__*/React.createElement(MenuItem, {
+  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     value: ""
   }, props.emptyMessage || ''), props.options.map(function (item, i) {
     return /*#__PURE__*/React.createElement(MenuItem, {
@@ -145,5 +145,8 @@ var Dropdown = React.memo(function (props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !props.value && props.requiredMessage));
+}, function (prevProps, nextProps) {
+  var isSameFunction = "" + prevProps.onChanges === "" + nextProps.onChanges;
+  return isSameFunction && equals(prevProps.isDisabled, nextProps.isDisabled) && equals(prevProps.value, nextProps.value) && equals(prevProps.isRequired, nextProps.isRequired);
 });
 export default withStyles(selectCustomStyles)(Dropdown);

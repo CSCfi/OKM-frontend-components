@@ -15,7 +15,9 @@ import { inputStory } from "./storydata/inputStory";
 import { datepickerStory } from "./storydata/datepickerStory";
 import { alertStory } from "./storydata/alertStory";
 import { multiselectStory } from "./storydata/multiselectStory";
+import { oneCheckboxStory } from "./storydata/oneCheckboxStory";
 import Stage from "./Stage";
+
 storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and plain - Checkboxes only", function () {
   return /*#__PURE__*/React.createElement(Stage, {
     anchor: "long-and-plain",

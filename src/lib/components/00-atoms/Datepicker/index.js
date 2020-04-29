@@ -10,6 +10,7 @@ import svLocale from "date-fns/locale/sv";
 import enLocale from "date-fns/locale/en-GB";
 import format from "date-fns/format";
 import { COLORS } from "../../../modules/styles";
+import { equals } from "ramda";
 
 const styles = createStyles(theme => ({
   root: {
@@ -54,33 +55,35 @@ class LocalizedUtils extends DateFnsUtils {
   }
 }
 
-const Datepicker = props => {
-  const { classes, messages, locale } = props;
-  const [selectedDate, setSelectedDate] = useState(props.value);
-  const [isVisited, setIsVisited] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const localeMap = {
-    en: enLocale,
-    fi: fiLocale,
-    sv: svLocale
-  };
+const Datepicker = React.memo(
+  props => {
+    const { classes, messages, locale } = props;
+    const [selectedDate, setSelectedDate] = useState(props.value);
+    const [isVisited, setIsVisited] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+    const localeMap = {
+      en: enLocale,
+      fi: fiLocale,
+      sv: svLocale
+    };
 
-  const handleDateChange = date => {
-    props.onChanges(props.payload, { value: date });
-    setSelectedDate(date);
-  };
+    const handleDateChange = date => {
+      props.onChanges(props.payload, { value: date });
+      setSelectedDate(date);
+    };
 
-  useEffect(() => {
-    if (props.value !== selectedDate || !selectedDate) {
-      setSelectedDate(props.value);
-    }
-  }, [props.value, selectedDate]);
+    useEffect(() => {
+      if (props.value !== selectedDate || !selectedDate) {
+        setSelectedDate(props.value);
+      }
+    }, [props.value, selectedDate]);
 
   return (
     <MuiPickersUtilsProvider utils={LocalizedUtils} locale={localeMap[locale]}>
       <div
         className="flex-col"
         style={!props.width && props.fullWidth ? { display: "flex" } : {}}>
+        {/* https://material-ui-pickers.dev/api/DatePicker */}
         <DatePicker
           format="d.M.yyyy" // Always is Finnish format
           aria-label={props.ariaLabel}
@@ -127,28 +130,33 @@ const Datepicker = props => {
                 : classes.root
             } 
         `}
-          onBlurCapture={() =>
-            !selectedDate ? setIsVisited(true) : setIsVisited(false)
-          }
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-        />
-        {props.showValidationErrors && props.requiredMessage && (
-          <FormHelperText
-            id="component-message-text"
-            style={{
-              marginTop: "0.1em",
-              paddingLeft: "1.2em",
-              marginBottom: "0.5em",
-              color: COLORS.OIVA_ORANGE_TEXT
-            }}>
-            {isVisited && !selectedDate && props.requiredMessage}
-          </FormHelperText>
-        )}
-      </div>
-    </MuiPickersUtilsProvider>
-  );
-};
+            onBlurCapture={() =>
+              !selectedDate ? setIsVisited(true) : setIsVisited(false)
+            }
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          />
+          {props.showValidationErrors && props.requiredMessage && (
+            <FormHelperText
+              id="component-message-text"
+              style={{
+                marginTop: "0.1em",
+                paddingLeft: "1.2em",
+                marginBottom: "0.5em",
+                color: COLORS.OIVA_ORANGE_TEXT
+              }}>
+              {isVisited && !selectedDate && props.requiredMessage}
+            </FormHelperText>
+          )}
+        </div>
+      </MuiPickersUtilsProvider>
+    );
+  },
+  (cp, np) => {
+    // cp = current props, np = next props
+    return equals(cp.payload, np.payload);
+  }
+);
 
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",
