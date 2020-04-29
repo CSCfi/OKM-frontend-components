@@ -16,25 +16,25 @@ var ConfirmDialog = function ConfirmDialog(props) {
       content = props.content,
       yesMessage = props.yesMessage,
       noMessage = props.noMessage;
-  return React.createElement(Dialog, {
+  return /*#__PURE__*/React.createElement(Dialog, {
     open: isConfirmDialogVisible,
     fullWidth: true,
     "aria-labelledby": "confirm-dialog",
     maxWidth: "sm"
-  }, React.createElement(DialogTitle, {
+  }, /*#__PURE__*/React.createElement(DialogTitle, {
     id: "confirm-dialog",
     onClose: onClose
-  }, title), React.createElement(DialogContent, null, React.createElement("div", {
+  }, title), /*#__PURE__*/React.createElement(DialogContent, null, /*#__PURE__*/React.createElement("div", {
     className: "p-2"
-  }, content)), React.createElement(DialogActions, null, React.createElement("div", {
+  }, content)), /*#__PURE__*/React.createElement(DialogActions, null, /*#__PURE__*/React.createElement("div", {
     className: "flex pr-6 pb-4"
-  }, React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "mr-4"
-  }, React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement(Button, {
     onClick: handleCancel,
     color: "primary",
     variant: "outlined"
-  }, noMessage)), React.createElement(Button, {
+  }, noMessage)), /*#__PURE__*/React.createElement(Button, {
     onClick: handleOk,
     color: "primary",
     variant: "contained"

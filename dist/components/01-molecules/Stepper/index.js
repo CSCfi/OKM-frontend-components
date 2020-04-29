@@ -93,26 +93,26 @@ function StepIcons(props) {
       completed = props.completed,
       error = props.error,
       icon = props.icon;
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: clsx(classes.root, (_clsx = {}, _defineProperty(_clsx, classes.active, active), _defineProperty(_clsx, classes.error, error), _defineProperty(_clsx, classes.completed, completed), _clsx))
-  }, error ? React.createElement(Incomplete, {
+  }, error ? /*#__PURE__*/React.createElement(Incomplete, {
     style: {
       fontSize: 30
     },
     className: classes.error
-  }) : completed ? React.createElement(Completed, {
+  }) : completed ? /*#__PURE__*/React.createElement(Completed, {
     className: classes.completed
-  }) : React.createElement("div", {
+  }) : /*#__PURE__*/React.createElement("div", {
     style: {
       marginRight: "1.8em",
       marginBottom: "1.8em"
     }
-  }, React.createElement(Normal, {
+  }, /*#__PURE__*/React.createElement(Normal, {
     style: {
       position: "absolute",
       fontSize: 30
     }
-  }), React.createElement("span", {
+  }), /*#__PURE__*/React.createElement("span", {
     style: {
       position: "absolute",
       marginLeft: "0.55em",
@@ -125,9 +125,9 @@ function StepIcons(props) {
 
 var StepperNavigation = React.memo(function (props) {
   var classes = useStyles();
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: classes.root
-  }, React.createElement(Stepper, {
+  }, /*#__PURE__*/React.createElement(Stepper, {
     nonLinear: true,
     activeStep: props.activeStep,
     orientation: window.innerWidth >= 768 ? "horizontal" : "vertical",
@@ -147,15 +147,15 @@ var StepperNavigation = React.memo(function (props) {
       labelProps.completed = true;
     }
 
-    return React.createElement(Step, {
+    return /*#__PURE__*/React.createElement(Step, {
       key: item.title
-    }, React.createElement(StepButton, {
+    }, /*#__PURE__*/React.createElement(StepButton, {
       onClick: function onClick() {
         return props.handleStepChange(index + 1);
       },
       disabled: index === props.activeStep,
       completed: item.isCompleted
-    }, React.createElement(StepLabel, Object.assign({
+    }, /*#__PURE__*/React.createElement(StepLabel, Object.assign({
       style: {
         marginBottom: "0.1em"
       },

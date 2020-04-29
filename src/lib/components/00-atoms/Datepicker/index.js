@@ -81,6 +81,7 @@ const Datepicker = props => {
       <div
         className="flex-col"
         style={!props.width && props.fullWidth ? { display: "flex" } : {}}>
+        {/* https://material-ui-pickers.dev/api/DatePicker */}
         <DatePicker
           format="d.M.yyyy" // Always is Finnish format
           aria-label={props.ariaLabel}

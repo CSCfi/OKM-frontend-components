@@ -1,4 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
+import _createForOfIteratorHelper from "@babel/runtime/helpers/esm/createForOfIteratorHelper";
 import moment from "moment";
 import * as R from "ramda";
 /**
@@ -55,12 +56,12 @@ export var findAnchoredElementFromCategoryHierarchy = function findAnchoredEleme
   if (!rootObject || !anchor || R.isEmpty(rootObject)) return undefined;
   var anchorParts = anchor.split(".");
   var currentElement = rootObject;
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+
+  var _iterator = _createForOfIteratorHelper(anchorParts),
+      _step;
 
   try {
-    for (var _iterator = anchorParts[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var anchorPart = _step.value;
       currentElement = findAnchoredCategoryOrComponentFromElement(anchorPart, currentElement);
 
@@ -69,18 +70,9 @@ export var findAnchoredElementFromCategoryHierarchy = function findAnchoredEleme
       }
     }
   } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
+    _iterator.e(err);
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
+    _iterator.f();
   }
 
   return currentElement;

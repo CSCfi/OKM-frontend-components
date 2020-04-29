@@ -16,11 +16,11 @@ import { COLORS } from "../../../modules/styles";
  */
 
 var NumberOfChanges = function NumberOfChanges(props) {
-  return React.createElement(React.Fragment, null, props.changes && props.changes.length ? React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, props.changes && props.changes.length ? /*#__PURE__*/React.createElement("div", {
     id: props.id
-  }, React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
     className: "pr-1"
-  }, "Muutokset:"), React.createElement("span", {
+  }, "Muutokset:"), /*#__PURE__*/React.createElement("span", {
     id: "".concat(props.id, ".number-of-changes"),
     color: COLORS.OIVA_PURPLE
   }, props.changes.length)) : null);

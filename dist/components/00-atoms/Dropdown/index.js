@@ -45,9 +45,9 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  return React.createElement(React.Fragment, null, props.label && React.createElement(InputLabel, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, props.label && /*#__PURE__*/React.createElement(InputLabel, {
     id: "select-label"
-  }, props.label), React.createElement(Select, {
+  }, props.label), /*#__PURE__*/React.createElement(Select, {
     "aria-label": props.name,
     autosize: false,
     name: props.name,
@@ -75,7 +75,7 @@ var Dropdown = React.memo(function (props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

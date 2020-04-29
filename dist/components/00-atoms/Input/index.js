@@ -83,9 +83,9 @@ var Input = function Input(props) {
       setValue(props.value || ""); // props.value might be undefined
     }
   }, [props.value]);
-  return React.createElement(React.Fragment, null, React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
-  }, React.createElement(TextField, {
+  }, /*#__PURE__*/React.createElement(TextField, {
     id: props.id,
     "aria-label": props.ariaLabel,
     value: value,
@@ -122,17 +122,17 @@ var Input = function Input(props) {
       return setIsFocused(false);
     },
     className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value === "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
-  }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && React.createElement("div", {
+  }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8"
-  }, React.createElement(Tooltip, {
+  }, /*#__PURE__*/React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
     trigger: "click"
-  }, React.createElement(HelpIcon, {
+  }, /*#__PURE__*/React.createElement(HelpIcon, {
     classes: {
       colorPrimary: styles.tooltipBg
     },
     color: "primary"
-  })))), props.showValidationErrors && props.requiredMessage && React.createElement(FormHelperText, {
+  })))), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

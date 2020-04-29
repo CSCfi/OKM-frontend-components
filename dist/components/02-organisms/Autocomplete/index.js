@@ -146,19 +146,19 @@ var Autocomplete = React.memo(function (props) {
   };
 
   var DropdownIndicator = function DropdownIndicator(props) {
-    return React.createElement(components.DropdownIndicator, props, React.createElement(SearchIcon, null));
+    return /*#__PURE__*/React.createElement(components.DropdownIndicator, props, /*#__PURE__*/React.createElement(SearchIcon, null));
   };
 
   var onInputChange = function onInputChange(value) {
     value.length >= props.minChars ? setIsOptionsShown(true) : setIsOptionsShown(false);
   };
 
-  return React.createElement(React.Fragment, null, props.title && React.createElement(InputLabel, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, props.title && /*#__PURE__*/React.createElement(InputLabel, {
     required: props.isRequired,
     style: {
       marginBottom: "0.2em"
     }
-  }, props.title), props.isSearch ? React.createElement(Select, {
+  }, props.title), props.isSearch ? /*#__PURE__*/React.createElement(Select, {
     autosize: props.autosize,
     name: props.name,
     isMulti: props.isMulti,
@@ -186,7 +186,7 @@ var Autocomplete = React.memo(function (props) {
     menuIsOpen: isOptionsShown,
     width: props.width,
     required: props.isRequired
-  }) : React.createElement(Select, {
+  }) : /*#__PURE__*/React.createElement(Select, {
     autosize: props.autosize,
     name: props.name,
     isMulti: props.isMulti,

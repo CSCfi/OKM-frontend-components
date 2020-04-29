@@ -46,7 +46,7 @@ var SimpleButton = function SimpleButton(_ref) {
     onClick(payload, {}, event);
   };
 
-  return React.createElement(React.Fragment, null, !isReadOnly && React.createElement(Button, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !isReadOnly && /*#__PURE__*/React.createElement(Button, {
     size: size,
     onClick: handleClick,
     variant: variant,

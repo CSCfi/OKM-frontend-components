@@ -156,7 +156,7 @@ var CategorizedList = React.memo(function (props) {
    * Rendering starts here.
    */
 
-  return React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     "data-anchor": props.anchor
   },
   /**
@@ -247,18 +247,18 @@ var CategorizedList = React.memo(function (props) {
      * looped through after it.
      **/
 
-    return React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", {
       key: i,
       className: R.join(" ", categoryClasses),
       "data-level": props.level,
       id: anchor
-    }, isCategoryTitleVisible && React.createElement("div", {
+    }, isCategoryTitleVisible && /*#__PURE__*/React.createElement("div", {
       className: categoryTitleClasses
-    }, React.createElement("h4", null, category.code && React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("h4", null, category.code && /*#__PURE__*/React.createElement("span", {
       className: "mr-4"
-    }, category.code), React.createElement("span", null, category.title), !category.isReadOnly && category.isRequired && React.createElement("span", {
+    }, category.code), /*#__PURE__*/React.createElement("span", null, category.title), !category.isReadOnly && category.isRequired && /*#__PURE__*/React.createElement("span", {
       className: "pr-4"
-    }, "*"))), React.createElement("div", {
+    }, "*"))), /*#__PURE__*/React.createElement("div", {
       className: R.join(" ", componentContainerClasses)
     }, _.map(category.components, function (component, ii) {
       var fullAnchor = "".concat(anchor, ".").concat(component.anchor);
@@ -289,11 +289,11 @@ var CategorizedList = React.memo(function (props) {
        * import the component in the beginning of this file.
        **/
 
-      return React.createElement(React.Fragment, {
+      return /*#__PURE__*/React.createElement(React.Fragment, {
         key: "item-".concat(ii)
-      }, component.name === "CheckboxWithLabel" && React.createElement("div", {
+      }, component.name === "CheckboxWithLabel" && /*#__PURE__*/React.createElement("div", {
         className: component.styleClasses
-      }, React.createElement(CheckboxWithLabel, {
+      }, /*#__PURE__*/React.createElement(CheckboxWithLabel, {
         id: "checkbox-with-label-".concat(idSuffix),
         name: component.name,
         isChecked: propsObj.isChecked,
@@ -311,15 +311,15 @@ var CategorizedList = React.memo(function (props) {
           siblings: props.categories
         },
         labelStyles: labelStyles
-      }, React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", {
         className: "flex"
-      }, React.createElement("span", {
+      }, /*#__PURE__*/React.createElement("span", {
         className: "leading-none"
-      }, propsObj.code), React.createElement("p", {
+      }, propsObj.code), /*#__PURE__*/React.createElement("p", {
         className: "ml-4 leading-none"
-      }, title)))), component.name === "RadioButtonWithLabel" && React.createElement("div", {
+      }, title)))), component.name === "RadioButtonWithLabel" && /*#__PURE__*/React.createElement("div", {
         className: "flex-2"
-      }, React.createElement(RadioButtonWithLabel, {
+      }, /*#__PURE__*/React.createElement(RadioButtonWithLabel, {
         id: "radio-button-with-label-".concat(idSuffix),
         name: propsObj.name,
         isChecked: propsObj.isChecked,
@@ -337,11 +337,11 @@ var CategorizedList = React.memo(function (props) {
         labelStyles: labelStyles,
         value: propsObj.value,
         className: "flex-row"
-      }, React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", {
         className: "flex"
-      }, React.createElement("span", {
+      }, /*#__PURE__*/React.createElement("span", {
         className: "leading-none"
-      }, propsObj.code), React.createElement("p", {
+      }, propsObj.code), /*#__PURE__*/React.createElement("p", {
         className: "ml-4 leading-none"
       }, title)))), component.name === "Dropdown" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};
@@ -349,9 +349,9 @@ var CategorizedList = React.memo(function (props) {
         var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: "px-2 mb-1"
-        }, React.createElement(Dropdown, {
+        }, /*#__PURE__*/React.createElement(Dropdown, {
           id: "dropdown-".concat(idSuffix),
           onChanges: handleChanges,
           options: propsObj.options,
@@ -379,7 +379,7 @@ var CategorizedList = React.memo(function (props) {
           removeChangeObject("".concat(anchor, ".").concat(component.anchor));
         }
 
-        return React.createElement(TextBox, {
+        return /*#__PURE__*/React.createElement(TextBox, {
           id: fullAnchor,
           isDisabled: isDisabled,
           isErroneous: propsObj.isErroneous,
@@ -405,7 +405,6 @@ var CategorizedList = React.memo(function (props) {
           requiredMessage: propsObj.requiredMessage
         });
       }() : null, component.name === "Input" ? function (category) {
-        var change = getChangeObjByAnchor(fullAnchor, props.changes);
         var parentComponent = null;
         var isDisabled = false;
 
@@ -415,10 +414,9 @@ var CategorizedList = React.memo(function (props) {
           isDisabled = R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChange.properties) || !parentChange.properties.isChecked);
         }
 
-        var value = change ? change.properties.value : propsObj.value;
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: component.styleClasses
-        }, React.createElement(Input, {
+        }, /*#__PURE__*/React.createElement(Input, {
           id: fullAnchor,
           isDisabled: isDisabled,
           isHidden: isDisabled,
@@ -442,7 +440,7 @@ var CategorizedList = React.memo(function (props) {
           placeholder: propsObj.placeholder,
           tooltip: propsObj.tooltip,
           type: propsObj.type,
-          value: value,
+          value: propsObj.value,
           showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         }));
@@ -453,9 +451,9 @@ var CategorizedList = React.memo(function (props) {
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
         var attachments = propsObj.attachments || [];
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: component.styleClasses
-        }, React.createElement(Attachments, {
+        }, /*#__PURE__*/React.createElement(Attachments, {
           id: fullAnchor,
           isDisabled: isDisabled,
           onUpdate: handleChanges,
@@ -477,12 +475,12 @@ var CategorizedList = React.memo(function (props) {
           showValidationErrors: showValidationErrors
         }));
       }(category) : null, component.name === "StatusTextRow" ? function (category) {
-        var codeMarkup = propsObj.code ? React.createElement("span", {
+        var codeMarkup = propsObj.code ? /*#__PURE__*/React.createElement("span", {
           className: "pr-4"
         }, propsObj.code) : null;
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: "flex-2"
-        }, React.createElement(StatusTextRow, {
+        }, /*#__PURE__*/React.createElement(StatusTextRow, {
           labelStyles: labelStyles,
           styleClasses: styleClasses,
           layout: component.layout,
@@ -492,17 +490,17 @@ var CategorizedList = React.memo(function (props) {
           isReadOnly: propsObj.isReadOnly,
           isRequired: propsObj.isRequired,
           isValid: propsObj.isValid
-        }, React.createElement("div", {
+        }, /*#__PURE__*/React.createElement("div", {
           className: "flex"
-        }, React.createElement("div", {
+        }, /*#__PURE__*/React.createElement("div", {
           className: "flex-1"
-        }, codeMarkup, React.createElement("span", null, title), !propsObj.isReadOnly && propsObj.isRequired && React.createElement("span", {
+        }, codeMarkup, /*#__PURE__*/React.createElement("span", null, title), !propsObj.isReadOnly && propsObj.isRequired && /*#__PURE__*/React.createElement("span", {
           className: "pr-4"
         }, "*"), " "))));
       }(category) : null, component.name === "Alert" ? function () {
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: "flex-1 mb-2 ".concat(component.styleClasses)
-        }, React.createElement(AlertMessage, {
+        }, /*#__PURE__*/React.createElement(AlertMessage, {
           id: fullAnchor,
           ariaLabel: propsObj.ariaLabel,
           type: propsObj.type,
@@ -530,9 +528,9 @@ var CategorizedList = React.memo(function (props) {
         var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: "flex-1 ".concat(component.styleClasses)
-        }, React.createElement(Multiselect, {
+        }, /*#__PURE__*/React.createElement(Multiselect, {
           ariaLabel: propsObj.ariaLabel,
           callback: handleChanges,
           id: "multiselect-".concat(idSuffix),
@@ -564,9 +562,9 @@ var CategorizedList = React.memo(function (props) {
         var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
-        return React.createElement("div", {
+        return /*#__PURE__*/React.createElement("div", {
           className: "flex-1 ".concat(component.styleClasses)
-        }, React.createElement(Autocomplete, {
+        }, /*#__PURE__*/React.createElement(Autocomplete, {
           callback: handleChanges,
           id: "autocomplete-".concat(idSuffix),
           isMulti: propsObj.isMulti,
@@ -589,9 +587,9 @@ var CategorizedList = React.memo(function (props) {
           height: heights.SHORT,
           title: propsObj.title
         }));
-      }(category) : null, component.name === "Difference" && React.createElement("div", {
+      }(category) : null, component.name === "Difference" && /*#__PURE__*/React.createElement("div", {
         className: "flex-2"
-      }, React.createElement(Difference, {
+      }, /*#__PURE__*/React.createElement(Difference, {
         applyForValue: propsObj.applyForValue,
         initialValue: propsObj.initialValue,
         onChanges: handleChanges,
@@ -605,9 +603,9 @@ var CategorizedList = React.memo(function (props) {
           siblings: props.categories
         },
         titles: propsObj.titles
-      })), component.name === "SimpleButton" && React.createElement("div", {
+      })), component.name === "SimpleButton" && /*#__PURE__*/React.createElement("div", {
         className: "".concat(component.styleClasses, " flex-2")
-      }, React.createElement(SimpleButton, {
+      }, /*#__PURE__*/React.createElement(SimpleButton, {
         isReadOnly: propsObj.isReadOnly,
         text: propsObj.text,
         variant: propsObj.variant,
@@ -621,15 +619,16 @@ var CategorizedList = React.memo(function (props) {
           rootPath: props.rootPath,
           siblings: props.categories
         }
-      })), component.name === "Datepicker" && React.createElement("div", {
+      })), component.name === "Datepicker" && /*#__PURE__*/React.createElement("div", {
         className: "".concat(component.styleClasses, " flex-2")
-      }, React.createElement(Datepicker, {
+      }, /*#__PURE__*/React.createElement(Datepicker, {
         label: propsObj.label,
         variant: propsObj.variant,
         onChanges: handleChanges,
         value: propsObj.value,
         isDisabled: propsObj.isDisabled,
         isHidden: propsObj.isHidden,
+        isRequired: propsObj.isRequired,
         clearable: propsObj.clearable,
         showTodayButton: propsObj.showTodayButton,
         error: propsObj.error,
@@ -663,7 +662,7 @@ var CategorizedList = React.memo(function (props) {
     * Please read the wiki dokument about the CategorizedList for
     * more information.
     **/
-    category.categories && React.createElement(CategorizedList, {
+    category.categories && /*#__PURE__*/React.createElement(CategorizedList, {
       anchor: anchor,
       categories: category.categories,
       changes: categoryChanges,

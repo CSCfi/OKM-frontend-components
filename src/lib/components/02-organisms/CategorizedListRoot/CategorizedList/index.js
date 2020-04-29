@@ -541,10 +541,6 @@ const CategorizedList = React.memo(
                         : null}
                       {component.name === "Input"
                         ? (category => {
-                            const change = getChangeObjByAnchor(
-                              fullAnchor,
-                              props.changes
-                            );
                             let parentComponent = null;
                             let isDisabled = false;
                             if (
@@ -566,9 +562,6 @@ const CategorizedList = React.memo(
                                   R.isEmpty(parentChange.properties)) ||
                                   !parentChange.properties.isChecked);
                             }
-                            const value = change
-                              ? change.properties.value
-                              : propsObj.value;
                             return (
                               <div className={component.styleClasses}>
                                 <Input
@@ -595,7 +588,7 @@ const CategorizedList = React.memo(
                                   placeholder={propsObj.placeholder}
                                   tooltip={propsObj.tooltip}
                                   type={propsObj.type}
-                                  value={value}
+                                  value={propsObj.value}
                                   showValidationErrors={showValidationErrors}
                                   requiredMessage={propsObj.requiredMessage}
                                 />
@@ -866,6 +859,7 @@ const CategorizedList = React.memo(
                             value={propsObj.value}
                             isDisabled={propsObj.isDisabled}
                             isHidden={propsObj.isHidden}
+                            isRequired={propsObj.isRequired}
                             clearable={propsObj.clearable}
                             showTodayButton={propsObj.showTodayButton}
                             error={propsObj.error}
