@@ -27,7 +27,7 @@ Add components under src/lib/components, following the known (assumed) structure
 
 Commit your changes in src/ directory.
 
-Build by running `npm run build`. Run `npm install`, commit package.json, package-lock.json and dist/ directory. Increment library version. Try to adhere to semantic versioning. After the work makes it to master, make release as "v0.3.7" or whatever matches your version in github project.
+Build by running `SKIP_PREFLIGHT_CHECK=true npm run build`. Run `npm install`, commit package.json, package-lock.json and dist/ directory. Increment library version. Try to adhere to semantic versioning. After the work makes it to master, make release as "v0.3.7" or whatever matches your version in github project. The SKIP_PREFLIGHT_CHECK parameter is needed because of ongoing problem https://github.com/storybookjs/storybook/issues/6505 which doesn't get resolved.
 
 ## How to import component from oiva:
 
