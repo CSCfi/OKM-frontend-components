@@ -103,7 +103,7 @@ var Dropdown = React.memo(function (props) {
     });
   };
 
-  return /*#__PURE__*/React.createElement(React.Fragment, null, props.label && /*#__PURE__*/React.createElement(InputLabel, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FormControl, {
     variant: "outlined",
     disabled: props.isDisabled,
     fullWidth: props.fullWidth,
@@ -129,7 +129,7 @@ var Dropdown = React.memo(function (props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     }
-  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
+  }, /*#__PURE__*/React.createElement(MenuItem, {
     value: ""
   }, props.emptyMessage || ''), props.options.map(function (item, i) {
     return /*#__PURE__*/React.createElement(MenuItem, {

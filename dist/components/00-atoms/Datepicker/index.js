@@ -179,7 +179,6 @@ var Datepicker = React.memo(function (props) {
   }, isVisited && !selectedDate && props.requiredMessage)));
 }, function (cp, np) {
   // cp = current props, np = next props
-  console.info(cp, np);
   return equals(cp.payload, np.payload);
 });
 Datepicker.defaultProps = {

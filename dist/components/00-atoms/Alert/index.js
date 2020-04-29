@@ -109,7 +109,6 @@ var AlertMessage = React.memo(function (props) {
     })))
   }, props.title && /*#__PURE__*/React.createElement(AlertTitle, null, props.title), /*#__PURE__*/React.createElement("p", null, props.message && props.message))));
 });
-
 AlertMessage.defaultProps = {
   id: "Alert",
   type: "info",
