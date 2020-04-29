@@ -45,17 +45,18 @@ var CheckboxWithLabel = React.memo(function (_ref) {
     onChanges(payload, {
       isChecked: !isChecked
     });
-  }, [isChecked, onChanges, payload]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, !isReadOnly ? /*#__PURE__*/React.createElement(FormGroup, {
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, !props.isReadOnly ? /*#__PURE__*/React.createElement(FormGroup, {
     row: true
   }, /*#__PURE__*/React.createElement(FormControlLabel, {
     classes: {
       label: styles.label
     },
-    disabled: isDisabled,
+    disabled: props.isDisabled,
     control: /*#__PURE__*/React.createElement(Checkbox, {
-      checked: isChecked,
-      indeterminate: isChecked && isIndeterminate,
+      checked: props.isChecked,
+      indeterminate: props.isChecked && props.isIndeterminate,
       value: "1",
       onChange: handleChanges,
       readOnly: isReadOnly,
@@ -64,8 +65,8 @@ var CheckboxWithLabel = React.memo(function (_ref) {
         root: styles.root
       }
     }),
-    label: children
-  })) : isChecked && /*#__PURE__*/React.createElement("div", {
+    label: props.children
+  })) : props.isChecked && /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row text-base mb-2"
   }, /*#__PURE__*/React.createElement(Check, null), /*#__PURE__*/React.createElement("span", {
     className: "my-auto"

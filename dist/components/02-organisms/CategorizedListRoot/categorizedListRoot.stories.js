@@ -17,18 +17,8 @@ import { alertStory } from "./storydata/alertStory";
 import { multiselectStory } from "./storydata/multiselectStory";
 import { oneCheckboxStory } from "./storydata/oneCheckboxStory";
 import Stage from "./Stage";
-storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("One checkbox story", function () {
-  return /*#__PURE__*/React.createElement(Stage, {
-    anchor: "one-checkbox",
-    categories: oneCheckboxStory.categories,
-    changes: oneCheckboxStory.changes,
-    render: function render(props) {
-      return /*#__PURE__*/React.createElement(CategorizedListRoot, Object.assign({
-        showCategoryTitles: true
-      }, props));
-    }
-  });
-}).add("Long and plain - Checkboxes only", function () {
+
+storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("Long and plain - Checkboxes only", function () {
   return /*#__PURE__*/React.createElement(Stage, {
     anchor: "long-and-plain",
     categories: longAndPlainStory.categories,

@@ -405,7 +405,6 @@ var CategorizedList = React.memo(function (props) {
           requiredMessage: propsObj.requiredMessage
         });
       }() : null, component.name === "Input" ? function (category) {
-        var change = getChangeObjByAnchor(fullAnchor, props.changes);
         var parentComponent = null;
         var isDisabled = false;
 
@@ -415,7 +414,6 @@ var CategorizedList = React.memo(function (props) {
           isDisabled = R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChange.properties) || !parentChange.properties.isChecked);
         }
 
-        var value = change ? change.properties.value : propsObj.value;
         return /*#__PURE__*/React.createElement("div", {
           className: component.styleClasses
         }, /*#__PURE__*/React.createElement(Input, {
@@ -442,7 +440,7 @@ var CategorizedList = React.memo(function (props) {
           placeholder: propsObj.placeholder,
           tooltip: propsObj.tooltip,
           type: propsObj.type,
-          value: value,
+          value: propsObj.value,
           showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         }));
@@ -630,6 +628,7 @@ var CategorizedList = React.memo(function (props) {
         value: propsObj.value,
         isDisabled: propsObj.isDisabled,
         isHidden: propsObj.isHidden,
+        isRequired: propsObj.isRequired,
         clearable: propsObj.clearable,
         showTodayButton: propsObj.showTodayButton,
         error: propsObj.error,

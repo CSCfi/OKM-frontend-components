@@ -78,50 +78,49 @@ const Datepicker = React.memo(
       }
     }, [props.value, selectedDate]);
 
-    return (
-      <MuiPickersUtilsProvider
-        utils={LocalizedUtils}
-        locale={localeMap[locale]}>
-        <div
-          className="flex-col"
-          style={!props.width && props.fullWidth ? { display: "flex" } : {}}>
-          <DatePicker
-            format="d.M.yyyy" // Always is Finnish format
-            aria-label={props.ariaLabel}
-            label={props.label}
-            disabled={props.isDisabled || props.isReadonly}
-            placeholder={
-              props.isDisabled || props.isReadOnly || props.label
-                ? ""
-                : props.placeholder
-            }
-            margin="dense"
-            onChange={handleDateChange}
-            error={props.error}
-            invalidLabel={props.invalidLabel}
-            required={props.isRequired}
-            width={props.width}
-            style={props.width ? { width: props.width } : {}}
-            fullWidth={props.width ? false : props.fullWidth}
-            InputProps={{
-              className: classes.input
-            }}
-            value={selectedDate || null}
-            inputVariant="outlined"
-            showTodayButton={props.showTodayButton}
-            okLabel={messages.ok}
-            clearLabel={messages.clear}
-            cancelLabel={messages.cancel}
-            todayLabel={messages.today}
-            clearable={props.clearable}
-            maxDateMessage={messages.datemax}
-            minDateMessage={messages.datemin}
-            invalidDateMessage={messages.dateinvalid}
-            minDate={props.minDate}
-            maxDate={props.maxDate}
-            disablePast={props.disablePast}
-            disableFuture={props.disableFuture}
-            className={`${props.isHidden ? "hidden" : ""} 
+  return (
+    <MuiPickersUtilsProvider utils={LocalizedUtils} locale={localeMap[locale]}>
+      <div
+        className="flex-col"
+        style={!props.width && props.fullWidth ? { display: "flex" } : {}}>
+        {/* https://material-ui-pickers.dev/api/DatePicker */}
+        <DatePicker
+          format="d.M.yyyy" // Always is Finnish format
+          aria-label={props.ariaLabel}
+          label={props.label}
+          disabled={props.isDisabled || props.isReadonly}
+          placeholder={
+            props.isDisabled || props.isReadOnly || props.label
+              ? ""
+              : props.placeholder
+          }
+          margin="dense"
+          onChange={handleDateChange}
+          error={props.error}
+          invalidLabel={props.invalidLabel}
+          required={props.isRequired}
+          width={props.width}
+          style={props.width ? { width: props.width } : {}}
+          fullWidth={props.width ? false : props.fullWidth}
+          InputProps={{
+            className: classes.input
+          }}
+          value={selectedDate || null}
+          inputVariant="outlined"
+          showTodayButton={props.showTodayButton}
+          okLabel={messages.ok}
+          clearLabel={messages.clear}
+          cancelLabel={messages.cancel}
+          todayLabel={messages.today}
+          clearable={props.clearable}
+          maxDateMessage={messages.datemax}
+          minDateMessage={messages.datemin}
+          invalidDateMessage={messages.dateinvalid}
+          minDate={props.minDate}
+          maxDate={props.maxDate}
+          disablePast={props.disablePast}
+          disableFuture={props.disableFuture}
+          className={`${props.isHidden ? "hidden" : ""} 
             ${
               (isVisited || props.showValidationErrors) &&
               props.isRequired &&
