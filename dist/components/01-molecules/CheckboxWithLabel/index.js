@@ -71,7 +71,8 @@ var CheckboxWithLabel = React.memo(function (_ref) {
     className: "my-auto"
   }, children)));
 }, function (prevState, currentState) {
-  return JSON.stringify(prevState.payload) === JSON.stringify(currentState.payload) && R.equals(prevState.isChecked, currentState.isChecked) && R.equals(prevState.isIndeterminate, currentState.isIndeterminate) && R.equals(prevState.isDisabled, currentState.isDisabled);
+  var isSameOld = R.equals(prevState.isChecked, currentState.isChecked) && R.equals(prevState.isIndeterminate, currentState.isIndeterminate) && R.equals(prevState.isDisabled, currentState.isDisabled);
+  return isSameOld;
 });
 CheckboxWithLabel.defaultProps = {
   isChecked: false,
