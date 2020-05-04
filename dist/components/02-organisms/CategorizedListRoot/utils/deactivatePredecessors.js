@@ -17,7 +17,7 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
    */
   var parentNode = findParent(node, reducedStructure, ["CheckboxWithLabel", "RadioButtonWithLabel"]); // If parentNode exists and its type is either checkbox or radio button...
 
-  if (parentNode) {
+  if (parentNode && parentNode.formId === node.formId) {
     var parentChangeObj = getChangeObjByAnchor(parentNode.fullAnchor, changeObjects);
 
     if (!parentChangeObj && !node.properties.isIndeterminate) {

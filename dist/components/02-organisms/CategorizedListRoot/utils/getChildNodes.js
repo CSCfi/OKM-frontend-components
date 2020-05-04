@@ -17,7 +17,7 @@ export function getChildNodes(node, reducedStructure) {
     return (// Only direct child nodes will be returned.
       item.anchorParts.length - 1 === node.anchorParts.length && and( // Item must be a descendant of the checked node.
       compose(startsWith(fullAnchorInit), prop("fullAnchor"))(item), // Item's name must be one of the given name options.
-      includes(item.name, names))
+      includes(item.name, names)) && node.formId === item.formId
     );
   }, reducedStructure);
   return childNodes;
