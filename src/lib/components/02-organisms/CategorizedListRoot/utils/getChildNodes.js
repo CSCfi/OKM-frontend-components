@@ -34,7 +34,8 @@ export function getChildNodes(
         compose(startsWith(fullAnchorInit), prop("fullAnchor"))(item),
         // Item's name must be one of the given name options.
         includes(item.name, names)
-      )
+      ) &&
+      node.formId === item.formId
     );
   }, reducedStructure);
   return childNodes;
