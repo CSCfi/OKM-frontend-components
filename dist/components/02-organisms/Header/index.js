@@ -61,13 +61,13 @@ var Header = React.memo(function (_ref) {
     to: shortDescription.path,
     exact: true,
     className: "inline-block no-underline text-gray-800"
-  }, shortDescription.text), /*#__PURE__*/React.createElement(NavLink, {
+  }, shortDescription.text), !!authenticationLink ? /*#__PURE__*/React.createElement(NavLink, {
     to: authenticationLink.path,
     exact: false,
     className: "inline-block no-underline text-gray-800 hover:underline"
   }, /*#__PURE__*/React.createElement("span", null, authenticationLink.text[0], " "), authenticationLink.text[1] && /*#__PURE__*/React.createElement("span", {
     className: "font-bold"
-  }, authenticationLink.text[1])), organisation.path ? /*#__PURE__*/React.createElement(NavLink, {
+  }, authenticationLink.text[1])) : /*#__PURE__*/React.createElement(React.Fragment, null), organisation.path ? /*#__PURE__*/React.createElement(NavLink, {
     className: "link-to-own-organisation",
     to: organisation.path,
     exact: false
@@ -122,10 +122,10 @@ var Header = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6",
     className: classes.title
-  }, logo.text)), !isAuthenticated && /*#__PURE__*/React.createElement(Button, {
+  }, logo.text)), !isAuthenticated && !!authenticationLink ? /*#__PURE__*/React.createElement(Button, {
     color: "inherit",
     onClick: onLoginButtonClick
-  }, logIn))))), breakpointTabletMin && /*#__PURE__*/React.createElement(AppBar, {
+  }, logIn) : /*#__PURE__*/React.createElement(React.Fragment, null))))), breakpointTabletMin && /*#__PURE__*/React.createElement(AppBar, {
     elevation: 0,
     position: "static"
   }, /*#__PURE__*/React.createElement(Toolbar, {
