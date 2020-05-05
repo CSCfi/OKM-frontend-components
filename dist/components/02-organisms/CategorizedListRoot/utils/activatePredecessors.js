@@ -23,7 +23,7 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
    */
   var parentNode = findParent(node, reducedStructure, ["CheckboxWithLabel", "RadioButtonWithLabel"]); // If parentNode exists and its type is either checkbox or radio button...
 
-  if (parentNode) {
+  if (parentNode && parentNode.formId === node.formId) {
     /**
      * To be able to define the isIndeterminate property we have to find out
      * the node's siblings and count how many of them is checked.

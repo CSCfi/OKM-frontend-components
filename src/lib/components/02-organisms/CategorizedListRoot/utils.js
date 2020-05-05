@@ -41,6 +41,7 @@ export const findCategoryAnchor = (
         {
           ...component,
           anchorParts: R.split(".", fullAnchor),
+          formId: category.formId,
           fullAnchor,
           level,
           columnIndex: index,
@@ -93,34 +94,6 @@ export const getChangeObjIndexByAnchor = (anchor, changes) => {
 export const getChangeObjByAnchor = (anchor, changes) => {
   return R.find(R.propEq("anchor", anchor), changes);
 };
-
-// export const checkLeafNode = (node, reducedStructure, changes) => {
-//   const changeObj = getChangeObjByAnchor(node.fullAnchor, changes);
-//   if (changeObj && !changeObj.properties.isChecked) {
-//     changes = R.filter(R.compose(R.not, R.propEq("anchor")(node.fullAnchor)))(
-//       changes
-//     );
-//   } else if (!changeObj && !node.properties.isChecked) {
-//     const childNodes = getChildCheckboxNodes(node, reducedStructure);
-//     const areAllChildNodesChecked = R.find(childNode => {
-//       return isNodeChecked(childNode, changes);
-//     }, childNodes);
-//     console.info(areAllChildNodesChecked);
-//     changes = R.append(
-//       {
-//         anchor: node.fullAnchor,
-//         properties: {
-//           metadata: node.properties.forChangeObject,
-//           isChecked: true,
-//           isIndeterminate: !areAllChildNodesChecked
-//         }
-//       },
-//       changes
-//     );
-//   }
-//   console.info(changes);
-//   return changes;
-// };
 
 const getPropertiesObject = (changeObj = {}, requestedChanges) => {
   return Object.assign({}, changeObj.properties || {}, requestedChanges);

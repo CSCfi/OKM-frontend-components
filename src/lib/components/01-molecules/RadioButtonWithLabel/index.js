@@ -61,9 +61,7 @@ const RadioButtonWithLabel = React.memo(
     );
   },
   (prevProps, nextProps) => {
-    const isSameFunction =
-      "" + prevProps.onChanges === "" + nextProps.onChanges;
-    return isSameFunction && equals(prevProps.isChecked, nextProps.isChecked);
+    return equals(prevProps.isChecked, nextProps.isChecked);
   }
 );
 

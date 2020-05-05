@@ -21,7 +21,7 @@ export function deactivatePredecessors(node, reducedStructure, changeObjects) {
   ]);
 
   // If parentNode exists and its type is either checkbox or radio button...
-  if (parentNode) {
+  if (parentNode && parentNode.formId === node.formId) {
     const parentChangeObj = getChangeObjByAnchor(
       parentNode.fullAnchor,
       changeObjects
