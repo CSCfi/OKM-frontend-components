@@ -378,18 +378,28 @@ const CategoryFilter = React.memo(
                 values.value
               );
               if (itemsToRemove.length) {
-                const maakuntaChangeObjects = filter(
-                  changeObj =>
-                    changeObj.properties.metadata.koodiarvo !==
-                    itemsToRemove[0].value,
-                  cos[itemsToRemove[0].maakuntaKey]
+                const isKunta = !!find(
+                  propEq("kuntaKoodiarvo", itemsToRemove[0].value),
+                  kuntaMaakuntaMapping
                 );
-                updateChangeObjects(
-                  {
-                    changes: maakuntaChangeObjects
-                  },
-                  itemsToRemove[0].maakuntaKey
-                );
+                if (isKunta) {
+                  const maakuntaChangeObjects = filter(
+                    changeObj =>
+                      changeObj.properties.metadata.koodiarvo !==
+                      itemsToRemove[0].value,
+                    cos[itemsToRemove[0].maakuntaKey]
+                  );
+                  updateChangeObjects(
+                    {
+                      changes: maakuntaChangeObjects
+                    },
+                    itemsToRemove[0].maakuntaKey
+                  );
+                } else {
+                  // Maakunnan poisto
+                  const nextCos = dissoc(itemsToRemove[0].maakuntaKey, cos);
+                  setCos(nextCos);
+                }
                 setMaakuntaId(last(values.value).maakuntaKey);
               } else {
                 const latestSelection = last(values.value);
