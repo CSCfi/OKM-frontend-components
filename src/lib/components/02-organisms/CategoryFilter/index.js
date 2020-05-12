@@ -55,6 +55,38 @@ const mapping = {
   "21": "FI-01"
 };
 
+function HexToRgb(hexstr) {
+  var a = [];
+  hexstr = hexstr.replace(/[^0-9a-f]+/gi, "");
+  if (hexstr.length == 3) {
+    a = hexstr.split("");
+  } else if (hexstr.length == 6) {
+    a = hexstr.match(/(\w{2})/g);
+  } else {
+    throw "invalid input, hex string must be in the format #FFFFFF or #FFF";
+  }
+  return a.map(function(x) {
+    return parseInt(x, 16);
+  });
+}
+
+function IntToHex(i) {
+  var hex = i.toString(16);
+  if (hex.length == 1) hex = "0" + hex;
+  return hex;
+}
+
+function Mix(colorA, colorB, weight) {
+  var a = HexToRgb(colorA);
+  var b = HexToRgb(colorB);
+
+  var c0 = Math.round((a[0] + Math.abs(a[0] - b[0]) * weight) % 255);
+  var c1 = Math.round((a[1] + Math.abs(a[1] - b[1]) * weight) % 255);
+  var c2 = Math.round((a[2] + Math.abs(a[2] - b[2]) * weight) % 255);
+
+  return "#" + IntToHex(c0) + IntToHex(c1) + IntToHex(c2);
+}
+
 const CategoryFilter = React.memo(
   ({
     anchor = "no-anchor-defined",
@@ -71,6 +103,7 @@ const CategoryFilter = React.memo(
     const kartta = useRef(null);
     const activePolygon = useRef(null);
     const previousSelection = useRef([]);
+    const polygonTemplate = useRef(null);
 
     const maakuntaCategories = useMemo(() => {
       const result = find(propEq("formId", maakuntaId), categories);
@@ -86,13 +119,13 @@ const CategoryFilter = React.memo(
       }, categories);
     }, [categories]);
 
-    // const reducedStructure = useMemo(() => getReducedStructure(categories), [
-    //   categories
-    // ]);
+    function getKunnatVareissa() {
+      return polygonSeries.current.data;
+    }
 
-    const [filteredChangeObjects, setFilteredChangeObjects] = useState(
-      changeObjects
-    );
+    useEffect(() => {
+      onChanges(cos);
+    }, [cos, onChanges]);
 
     useEffect(() => {
       kartta.current = am4core.create("finland_map", am4maps.MapChart);
@@ -102,9 +135,6 @@ const CategoryFilter = React.memo(
 
       kartta.current.geodataNames = am4geodata_lang_FI;
       // kartta.current.responsive.enabled = true;
-      kartta.current.interactions.keydown = e => {
-        console.info(e);
-      };
 
       // Create map polygon series
       polygonSeries.current = kartta.current.series.push(
@@ -114,15 +144,6 @@ const CategoryFilter = React.memo(
       // Make map load polygon (like country names) data from GeoJSON
       polygonSeries.current.useGeodata = true;
 
-      // Add heat rule
-      polygonSeries.current.heatRules.push({
-        property: "fill",
-        target: polygonSeries.current.mapPolygons.template,
-        min: am4core.color("#E7E7B9"),
-        max: am4core.color("#109F52")
-        // logarithmic: true
-      });
-
       // Add expectancy data
       polygonSeries.current.events.on("beforedatavalidated", function(ev) {
         var source = ev.target.data;
@@ -131,21 +152,25 @@ const CategoryFilter = React.memo(
         }
       });
 
-      // Configure series
-      var polygonTemplate = polygonSeries.current.mapPolygons.template;
-      polygonTemplate.tooltipText = "{name}";
-      polygonTemplate.fill = am4core.color("#dadada");
-      // polygonTemplate.stroke = am4core.color("#dddddd");
+      polygonSeries.current.data = {
+        something: "Useless",
+        maybe: {
+          here: {
+            values: getKunnatVareissa()
+          }
+        }
+      };
 
-      // Create hover state and set alternative fill color
-      var hs = polygonTemplate.states.create("hover");
-      hs.properties.fill = am4core.color("#dbe1db");
+      // Configure series
+      polygonTemplate.current = polygonSeries.current.mapPolygons.template;
+      polygonTemplate.current.tooltipText = "{name}";
+      polygonTemplate.current.fill = am4core.color("#dadada");
 
       // Create active state
-      const activeState = polygonTemplate.states.create("active");
+      const activeState = polygonTemplate.current.states.create("active");
       activeState.properties.stroke = am4core.color("#367B25");
 
-      polygonTemplate.events.on("hit", function(e) {
+      polygonTemplate.current.events.on("hit", function(e) {
         activePolygon.current = e.target;
         setMaakuntaId(e.target.dataItem.dataContext.id);
       });
@@ -176,11 +201,17 @@ const CategoryFilter = React.memo(
     }, categories);
 
     useEffect(() => {
-      // console.info(cos[maakuntaId], kuntiaPerMaakunta);
+      activePolygon.current = polygonSeries.current.getPolygonById(maakuntaId);
+
       let polygonSerie = find(
         propEq("id", maakuntaId),
         polygonSeries.current.data
       );
+
+      if (polygonSerie) {
+        polygonSerie.fill = am4core.color("#ff0000");
+      }
+
       const valittujaKuntia = Math.max(
         filter(changeObj => {
           return changeObj.properties.isChecked;
@@ -192,33 +223,28 @@ const CategoryFilter = React.memo(
         find(propEq("id", maakuntaId), kuntiaPerMaakunta) || {}
       ).amount;
 
-      if (kuntiaYhteensa) {
-        if (valittujaKuntia > 0) {
-          polygonSerie = assoc(
-            "value",
-            valittujaKuntia / kuntiaYhteensa,
-            polygonSerie
-          );
-        } else {
-          polygonSerie = dissoc("value", polygonSerie);
-        }
+      const percentage = valittujaKuntia / kuntiaYhteensa;
 
-        const kunnatVareissa = map(kunta => {
-          return kunta.id === polygonSerie.id ? polygonSerie : kunta;
-        }, polygonSeries.current.data);
-        if (polygonSeries.current.data.length) {
-          polygonSeries.current.data = {
-            something: "Useless",
-            maybe: {
-              here: {
-                values: kunnatVareissa
-              }
-            }
-          };
-        }
+      if (kuntiaYhteensa) {
+        polygonSerie = assoc(
+          "value",
+          valittujaKuntia / kuntiaYhteensa,
+          polygonSerie
+        );
+      } else {
+        polygonSerie = dissoc("value", polygonSerie);
       }
 
       if (activePolygon.current) {
+        let fillColor = "#dadada";
+        if (percentage > 0 && percentage < 1) {
+          fillColor = Mix("#109F52", "#BCE4CF", 1 - percentage);
+        } else if (percentage === 1) {
+          fillColor = "#109F52";
+        }
+
+        activePolygon.current.fill = am4core.color(fillColor);
+
         labelSeries.current.disposeChildren();
         const label = labelSeries.current.mapImages.create();
         label.latitude = activePolygon.current.visualLatitude;
@@ -302,7 +328,8 @@ const CategoryFilter = React.memo(
               return {
                 label: maakuntaChangeObj.properties.metadata.title,
                 value: maakuntaChangeObj.properties.metadata.koodiarvo,
-                maakuntaKey: maakuntaChangeObj.properties.metadata.maakuntaKey
+                maakuntaKey: maakuntaChangeObj.properties.metadata.maakuntaKey,
+                isKunta: false
               };
             } else {
               return map(changeObj => {
@@ -310,7 +337,8 @@ const CategoryFilter = React.memo(
                   return {
                     label: changeObj.properties.metadata.title,
                     value: changeObj.properties.metadata.koodiarvo,
-                    maakuntaKey: changeObj.properties.metadata.maakuntaKey
+                    maakuntaKey: changeObj.properties.metadata.maakuntaKey,
+                    isKunta: true
                   };
                 }
                 return null;
@@ -322,6 +350,7 @@ const CategoryFilter = React.memo(
       const locationsCombined = uniq(
         concat(kunnat || [], shouldBeSelected || [])
       );
+      previousSelection.current = locationsCombined;
       if (!equals(selectedLocations, locationsCombined)) {
         setSelectedLocations(locationsCombined);
       }
@@ -332,25 +361,47 @@ const CategoryFilter = React.memo(
     const locale = "FI";
 
     const locations = useMemo(() => {
-      return map(location => {
-        let maakuntaKey = "";
-        const metadata = find(propEq("kieli", locale), location.metadata);
-        const kuntaMapping = find(
-          propEq("kuntaKoodiarvo", location.koodiArvo),
-          kuntaMaakuntaMapping
-        );
-        if (kuntaMapping) {
-          maakuntaKey = kuntaMapping.maakuntaKey;
-        } else {
-          maakuntaKey = mapping[location.koodiArvo];
-        }
-        return {
-          label: metadata.nimi,
-          value: location.koodiArvo,
-          maakuntaKey
-        };
-      }, concat(kunnat, maakunnat));
-    }, []);
+      function getValittavissaOlevat(options, isKunta, selectedLocations) {
+        return map(location => {
+          let okToList = true;
+          let maakuntaKey = "";
+          let kuntaMapping = null;
+          const metadata = find(propEq("kieli", locale), location.metadata);
+          if (isKunta) {
+            kuntaMapping = find(
+              propEq("kuntaKoodiarvo", location.koodiArvo),
+              kuntaMaakuntaMapping
+            );
+            if (kuntaMapping) {
+              maakuntaKey = kuntaMapping.maakuntaKey;
+              const maakunta = find(
+                l => l.maakuntaKey === maakuntaKey && l.isKunta === false,
+                selectedLocations
+              );
+              const isMaakuntaSelected = !!maakunta;
+              okToList = !isMaakuntaSelected;
+            }
+          } else {
+            maakuntaKey = mapping[location.koodiArvo];
+          }
+          return okToList
+            ? {
+                label: metadata.nimi,
+                value: location.koodiArvo,
+                maakuntaKey,
+                isKunta
+              }
+            : null;
+        }, options).filter(Boolean);
+      }
+
+      const valittavissaOlevat = {
+        kunnat: getValittavissaOlevat(kunnat, true, selectedLocations),
+        maakunnat: getValittavissaOlevat(maakunnat, false, selectedLocations)
+      };
+
+      return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
+    }, [selectedLocations]);
 
     return (
       <React.Fragment>
@@ -366,22 +417,30 @@ const CategoryFilter = React.memo(
              * be removed.
              */
             if (!values.value) {
+              setMaakuntaId(prevSel[0].maakuntaKey);
               setCos({});
             } else {
               const cmp = (x, y) => {
                 return x.value === y.value;
               };
-              console.info(values.value);
               const itemsToRemove = differenceWith(
                 cmp,
                 prevSel || [],
                 values.value
               );
               if (itemsToRemove.length) {
+                setMaakuntaId(itemsToRemove[0].maakuntaKey);
                 const isKunta = !!find(
                   propEq("kuntaKoodiarvo", itemsToRemove[0].value),
                   kuntaMaakuntaMapping
                 );
+
+                const currentMaakuntaPolygon = polygonSeries.current.getPolygonById(
+                  itemsToRemove[0].maakuntaKey
+                );
+
+                setMaakuntaId(currentMaakuntaPolygon.dataItem.dataContext.id);
+
                 if (isKunta) {
                   const maakuntaChangeObjects = filter(
                     changeObj =>
@@ -400,10 +459,10 @@ const CategoryFilter = React.memo(
                   const nextCos = dissoc(itemsToRemove[0].maakuntaKey, cos);
                   setCos(nextCos);
                 }
-                setMaakuntaId(last(values.value).maakuntaKey);
               } else {
                 const latestSelection = last(values.value);
-                // cos[latestSelection.maakuntaKey] = [];
+                let changeObjectsWithCurrentMaakuntaKey =
+                  cos[latestSelection.maakuntaKey];
                 const isKunta = !!find(
                   propEq("kuntaKoodiarvo", latestSelection.value),
                   kuntaMaakuntaMapping
@@ -448,6 +507,7 @@ const CategoryFilter = React.memo(
                     }
                   };
                 } else {
+                  changeObjectsWithCurrentMaakuntaKey = [];
                   changeObj = {
                     anchor: `erilliset-maakunnat.${latestSelection.maakuntaKey}.A`,
                     properties: {
@@ -480,7 +540,7 @@ const CategoryFilter = React.memo(
                 const changeObjects = uniq(
                   flatten([
                     [changeObj, maakuntaChangeObj].filter(Boolean),
-                    cos[latestSelection.maakuntaKey] || [],
+                    changeObjectsWithCurrentMaakuntaKey || [],
                     kunnatChangeObjects
                   ])
                 );

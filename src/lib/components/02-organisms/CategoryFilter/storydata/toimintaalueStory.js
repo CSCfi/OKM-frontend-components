@@ -13,6 +13,7 @@ export const toimintaalueStory = {
             code: "21",
             forChangeObject: {
               koodiarvo: "21",
+              maakuntaKey: "FI-01",
               title: "Ahvenanmaa"
             },
             isChecked: false,
@@ -501,7 +502,8 @@ export const toimintaalueStory = {
             code: "09",
             forChangeObject: {
               koodiarvo: "09",
-              title: "Etelä-Karjala"
+              maakuntaKey: "FI-02",
+              title: "Etelä-Karjala",
             },
             isChecked: false,
             labelStyles: {
@@ -933,6 +935,7 @@ export const toimintaalueStory = {
             code: "14",
             forChangeObject: {
               koodiarvo: "14",
+              maakuntaKey: "FI-03",
               title: "Etelä-Pohjanmaa"
             },
             isChecked: false,
@@ -1729,6 +1732,7 @@ export const toimintaalueStory = {
             code: "10",
             forChangeObject: {
               koodiarvo: "10",
+              maakuntaKey: "FI-04",
               title: "Etelä-Savo"
             },
             isChecked: false,
@@ -2469,6 +2473,7 @@ export const toimintaalueStory = {
             code: "18",
             forChangeObject: {
               koodiarvo: "18",
+              maakuntaKey: "FI-05",
               title: "Kainuu"
             },
             isChecked: false,
@@ -2761,6 +2766,7 @@ export const toimintaalueStory = {
             code: "05",
             forChangeObject: {
               koodiarvo: "05",
+              maakuntaKey: "FI-06",
               title: "Kanta-Häme"
             },
             isChecked: false,
@@ -3249,6 +3255,7 @@ export const toimintaalueStory = {
             code: "16",
             forChangeObject: {
               koodiarvo: "16",
+              maakuntaKey: "FI-07",
               title: "Keski-Pohjanmaa"
             },
             isChecked: false,
@@ -3597,6 +3604,7 @@ export const toimintaalueStory = {
             code: "13",
             forChangeObject: {
               koodiarvo: "13",
+              maakuntaKey: "FI-08",
               title: "Keski-Suomi"
             },
             isChecked: false,
@@ -4477,6 +4485,7 @@ export const toimintaalueStory = {
             code: "08",
             forChangeObject: {
               koodiarvo: "08",
+              maakuntaKey: "FI-09",
               title: "Kymenlaakso"
             },
             isChecked: false,
@@ -4881,6 +4890,7 @@ export const toimintaalueStory = {
             code: "19",
             forChangeObject: {
               koodiarvo: "19",
+              maakuntaKey: "FI-10",
               title: "Lappi"
             },
             isChecked: false,
@@ -5537,6 +5547,7 @@ export const toimintaalueStory = {
             code: "06",
             forChangeObject: {
               koodiarvo: "06",
+              maakuntaKey: "FI-11",
               title: "Pirkanmaa"
             },
             isChecked: false,
@@ -6669,6 +6680,7 @@ export const toimintaalueStory = {
             code: "15",
             forChangeObject: {
               koodiarvo: "15",
+              maakuntaKey: "FI-12",
               title: "Pohjanmaa"
             },
             isChecked: false,
@@ -7269,6 +7281,7 @@ export const toimintaalueStory = {
             code: "12",
             forChangeObject: {
               koodiarvo: "12",
+              maakuntaKey: "FI-13",
               title: "Pohjois-Karjala"
             },
             isChecked: false,
@@ -7841,6 +7854,7 @@ export const toimintaalueStory = {
             code: "17",
             forChangeObject: {
               koodiarvo: "17",
+              maakuntaKey: "FI-14",
               title: "Pohjois-Pohjanmaa"
             },
             isChecked: false,
@@ -9141,6 +9155,7 @@ export const toimintaalueStory = {
             code: "11",
             forChangeObject: {
               koodiarvo: "11",
+              maakuntaKey: "FI-15",
               title: "Pohjois-Savo"
             },
             isChecked: false,
@@ -9881,6 +9896,7 @@ export const toimintaalueStory = {
             code: "07",
             forChangeObject: {
               koodiarvo: "07",
+              maakuntaKey: "FI-16",
               title: "Päijät-Häme"
             },
             isChecked: false,
@@ -10313,6 +10329,7 @@ export const toimintaalueStory = {
             code: "04",
             forChangeObject: {
               koodiarvo: "04",
+              maakuntaKey: "FI-17",
               title: "Satakunta"
             },
             isChecked: false,
@@ -11137,6 +11154,7 @@ export const toimintaalueStory = {
             code: "01",
             forChangeObject: {
               koodiarvo: "01",
+              maakuntaKey: "FI-18",
               title: "Uusimaa"
             },
             isChecked: false,
@@ -12297,6 +12315,7 @@ export const toimintaalueStory = {
             code: "02",
             forChangeObject: {
               koodiarvo: "02",
+              maakuntaKey: "FI-19",
               title: "Varsinais-Suomi"
             },
             isChecked: false,

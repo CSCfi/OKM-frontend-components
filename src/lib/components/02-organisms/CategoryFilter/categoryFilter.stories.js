@@ -12,8 +12,9 @@ storiesOf("CategoryFilter", module)
       categories={toimintaalueStory.categories}
       changeObjects={toimintaalueStory.changes}
       showCategoryTitles={false}
-      onChanges={payload => {
-        console.info(payload);
+      onChanges={changeObjectsByMaakunta => {
+        console.info(changeObjectsByMaakunta);
+        return changeObjectsByMaakunta;
       }}
     />
   ));
