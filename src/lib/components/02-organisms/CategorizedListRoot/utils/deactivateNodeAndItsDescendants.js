@@ -21,10 +21,12 @@ export function deactivateNodeAndItsDescendants(
     return changeObjects;
   }
 
-  const childNodes = getChildNodes(node, reducedStructure, [
-    "CheckboxWithLabel",
-    "RadioButtonWithLabel"
-  ]);
+  const childNodes = node.hasDescendants
+    ? getChildNodes(node, reducedStructure, [
+        "CheckboxWithLabel",
+        "RadioButtonWithLabel"
+      ])
+    : [];
 
   // We are not ready yet. Every checkbox child node must be checked.
   if (childNodes.length) {

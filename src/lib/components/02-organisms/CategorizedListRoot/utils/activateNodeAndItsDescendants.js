@@ -1,8 +1,20 @@
-import { append, flatten, map, uniq } from "ramda";
+import { append, map } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
 import { uncheckSiblings } from "./uncheckSiblings";
 import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
+
+function Checker() {
+  return {
+    run: (node, reducedStructure, changeObjects) => {
+      return activateNodeAndItsDescendants(
+        node,
+        reducedStructure,
+        changeObjects
+      );
+    }
+  };
+}
 
 /**
  * Function activates the target node and updates the situation of
@@ -17,30 +29,24 @@ export function activateNodeAndItsDescendants(
   reducedStructure,
   changeObjects
 ) {
-  const childNodes = getChildNodes(node, reducedStructure, [
-    "CheckboxWithLabel"
-  ]);
+  const childNodes = node.hasDescendants
+    ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel"])
+    : [];
 
   // We are not ready yet. Every checkbox child node must be checked.
   if (childNodes.length) {
-    changeObjects = uniq(
-      flatten(
-        map(childNode => {
-          return activateNodeAndItsDescendants(
-            childNode,
-            reducedStructure,
-            changeObjects
-          );
-        }, childNodes)
-      )
-    );
+    changeObjects = map(childNode => {
+      const result = new Checker().run(
+        childNode,
+        reducedStructure,
+        changeObjects
+      );
+      return result;
+    }, childNodes);
   }
 
   // The first thing is to find out the change object of the target node.
-  const changeObj = getChangeObjByAnchor(
-    node.fullAnchor,
-    changeObjects
-  );
+  const changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
 
   if (changeObj) {
     if (
@@ -89,11 +95,7 @@ export function activateNodeAndItsDescendants(
 
   // If the target node is a radio button its siblings must be unchecked.
   if (node.name === "RadioButtonWithLabel") {
-    changeObjects = uncheckSiblings(
-      node,
-      reducedStructure,
-      changeObjects
-    );
+    changeObjects = uncheckSiblings(node, reducedStructure, changeObjects);
   }
 
   return changeObjects;
