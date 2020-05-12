@@ -101,7 +101,7 @@ var CategoryFilter = React.memo(function (_ref) {
       console.warn("No changes!");
     }
 
-    return onChanges(_objectSpread({}, payload, {
+    return onChanges(_objectSpread(_objectSpread({}, payload), {}, {
       changes: changeObjectsAfterFiltering
     }));
   }, [anchor, filteredChangeObjects, onChanges, reducedStructure]);

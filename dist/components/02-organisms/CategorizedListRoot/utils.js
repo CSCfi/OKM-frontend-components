@@ -35,10 +35,11 @@ export var findCategoryAnchor = function findCategoryAnchor(category, anchor) {
     R.addIndex(R.forEach)(function (component, index) {
       path = R.append(index, path);
       var fullAnchor = R.join(".", [anchor, component.anchor]);
-      structure = R.append(_objectSpread({}, component, {
+      structure = R.append(_objectSpread(_objectSpread({}, component), {}, {
         anchorParts: R.split(".", fullAnchor),
         formId: category.formId,
         fullAnchor: fullAnchor,
+        hasDescendants: category.categories && category.categories.length > 0,
         level: level,
         columnIndex: index,
         path: path
@@ -151,7 +152,9 @@ export var handleNodeMain = function handleNodeMain(nodeWithRequestedChanges, ro
      * two things:
      * 1) Activate the node and its descendants.
      */
-    changeObjects = activateNodeAndItsDescendants(node, reducedStructure, changeObjects); // 2) Activate the node's predecessors.
+    var a = new Date().getTime();
+    changeObjects = R.uniq(R.flatten(activateNodeAndItsDescendants(node, reducedStructure, changeObjects)));
+    console.info("Mihin aika menee: ".concat((new Date().getTime() - a) / 1000, " s")); // 2) Activate the node's predecessors.
 
     changeObjects = activatePredecessors(node, reducedStructure, changeObjects);
   } else if (requestedChanges.isChecked === false) {

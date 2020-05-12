@@ -84,11 +84,12 @@ const CheckboxWithLabel = React.memo(
     );
   },
   (prevState, currentState) => {
-    const isSameOld =
-      R.equals(prevState.isChecked, currentState.isChecked) &&
-      R.equals(prevState.isIndeterminate, currentState.isIndeterminate) &&
-      R.equals(prevState.isDisabled, currentState.isDisabled);
-    return isSameOld;
+    // const isSameOld =
+    //   R.equals(prevState.isChecked, currentState.isChecked) &&
+    //   R.equals(prevState.isIndeterminate, currentState.isIndeterminate) &&
+    //   R.equals(prevState.isDisabled, currentState.isDisabled);
+    // return isSameOld;
+    return false;
   }
 );
 

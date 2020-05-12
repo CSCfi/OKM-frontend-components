@@ -108,6 +108,8 @@ var AlertMessage = React.memo(function (props) {
       fontSize: "inherit"
     })))
   }, props.title && /*#__PURE__*/React.createElement(AlertTitle, null, props.title), /*#__PURE__*/React.createElement("p", null, props.message && props.message))));
+}, function (pp, cp) {
+  return pp.payload === cp.payload;
 });
 AlertMessage.defaultProps = {
   id: "Alert",

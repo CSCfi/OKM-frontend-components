@@ -36,7 +36,8 @@ var CategorizedListRoot = React.memo(function (_ref) {
    */
 
   var reducedStructure = useMemo(function () {
-    return getReducedStructure(categories);
+    var result = getReducedStructure(categories);
+    return result;
   }, [categories]);
   /**
    * Function will be called when something changes on the form. The only
@@ -45,10 +46,13 @@ var CategorizedListRoot = React.memo(function (_ref) {
    */
 
   var onChangesUpdate = useCallback(function (changeObj) {
-    // Target node is the component affected by the change.
+    var start = new Date().getTime(); // Target node is the component affected by the change.
+
     var targetNode = getTargetNode(changeObj, reducedStructure); // The array of change objects will be updated.
 
     var nextChanges = handleNodeMain(targetNode, anchor, reducedStructure, changesRef.current);
+    var end = new Date().getTime();
+    console.info("Muutosten määrittämiseen kuluva aika: ", "".concat((end - start) / 1000, " s"));
     /**
      * The updated array will be sent using the onUpdate callback function.
      * The anchor parameter is the root anchor of the current form. It can
@@ -93,13 +97,9 @@ var CategorizedListRoot = React.memo(function (_ref) {
       showValidationErrors: showValidationErrors
     });
   }() : null);
-}, function (prevProps, nextProps) {
-  var isSameOld = R.equals(prevProps.categories, nextProps.categories) && R.equals(prevProps.changes, nextProps.changes);
-
-  if (!isSameOld) {
-    console.info("Päivitetään CategorizedListRoot ", nextProps.anchor);
-  }
-
-  return isSameOld;
+}, function (prevState, nextState) {
+  var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
+  var areChangesSame = R.equals(prevState.changes, nextState.changes);
+  return areCategoriesSame && areChangesSame;
 });
 export default CategorizedListRoot;

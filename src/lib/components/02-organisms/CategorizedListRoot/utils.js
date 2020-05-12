@@ -43,6 +43,7 @@ export const findCategoryAnchor = (
           anchorParts: R.split(".", fullAnchor),
           formId: category.formId,
           fullAnchor,
+          hasDescendants: category.categories && category.categories.length > 0,
           level,
           columnIndex: index,
           path
@@ -185,11 +186,13 @@ export const handleNodeMain = (
      * two things:
      * 1) Activate the node and its descendants.
      */
-    changeObjects = activateNodeAndItsDescendants(
-      node,
-      reducedStructure,
-      changeObjects
+    const a = new Date().getTime();
+    changeObjects = R.uniq(
+      R.flatten(
+        activateNodeAndItsDescendants(node, reducedStructure, changeObjects)
+      )
     );
+    console.info(`Mihin aika menee: ${(new Date().getTime() - a) / 1000} s`);
     // 2) Activate the node's predecessors.
     changeObjects = activatePredecessors(node, reducedStructure, changeObjects);
   } else if (requestedChanges.isChecked === false) {
