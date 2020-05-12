@@ -89,7 +89,7 @@ function Mix(colorA, colorB, weight) {
 
 const CategoryFilter = React.memo(
   ({
-    anchor = "no-anchor-defined",
+    anchor: baseAnchor = "no-anchor-defined",
     categories = [],
     changeObjects,
     onChanges
@@ -294,8 +294,8 @@ const CategoryFilter = React.memo(
           cos[location.maakuntaKey].length - 1 ===
             category.categories[0].components.length;
         const anchor = isKunta
-          ? `erilliset-maakunnat.${location.maakuntaKey}.kunnat.${location.value}`
-          : `erilliset-maakunnat.${location.maakuntaKey}.${location.value}`;
+          ? `${baseAnchor}.${location.maakuntaKey}.kunnat.${location.value}`
+          : `${baseAnchor}.${location.maakuntaKey}.${location.value}`;
         const changeObj = find(
           propEq("anchor", anchor),
           cos[location.maakuntaKey] || []
@@ -310,7 +310,7 @@ const CategoryFilter = React.memo(
         values(
           map(arr => {
             const maakuntaKey = getAnchorPart(arr[0].anchor, 1);
-            const maakuntaAnchor = `erilliset-maakunnat.${maakuntaKey}.A`;
+            const maakuntaAnchor = `${baseAnchor}.${maakuntaKey}.A`;
             const maakuntaChangeObj = find(
               propEq("anchor", maakuntaAnchor),
               arr
@@ -476,7 +476,7 @@ const CategoryFilter = React.memo(
                 );
                 if (isKunta) {
                   const anchor = isKunta
-                    ? `erilliset-maakunnat.${latestSelection.maakuntaKey}.kunnat.${latestSelection.value}`
+                    ? `${baseAnchor}.${latestSelection.maakuntaKey}.kunnat.${latestSelection.value}`
                     : "";
                   changeObj = {
                     anchor,
@@ -491,7 +491,7 @@ const CategoryFilter = React.memo(
                   };
                   // If the selected item is kunta we have to activate its maakunta too.
                   maakuntaChangeObj = {
-                    anchor: `erilliset-maakunnat.${latestSelection.maakuntaKey}.A`,
+                    anchor: `${baseAnchor}.${latestSelection.maakuntaKey}.A`,
                     properties: {
                       isChecked: true,
                       isIndeterminate: true,
@@ -509,7 +509,7 @@ const CategoryFilter = React.memo(
                 } else {
                   changeObjectsWithCurrentMaakuntaKey = [];
                   changeObj = {
-                    anchor: `erilliset-maakunnat.${latestSelection.maakuntaKey}.A`,
+                    anchor: `${baseAnchor}.${latestSelection.maakuntaKey}.A`,
                     properties: {
                       isChecked: true,
                       isIndeterminate: false,
@@ -523,7 +523,7 @@ const CategoryFilter = React.memo(
                   if (maakuntaKuntineen) {
                     kunnatChangeObjects = map(kunta => {
                       return {
-                        anchor: `erilliset-maakunnat.${latestSelection.maakuntaKey}.kunnat.${kunta.anchor}`,
+                        anchor: `${baseAnchor}.${latestSelection.maakuntaKey}.kunnat.${kunta.anchor}`,
                         properties: {
                           isChecked: true,
                           metadata: {
@@ -557,17 +557,17 @@ const CategoryFilter = React.memo(
           }}
           value={selectedLocations}
         />
-        <div className="bg-white border overflow-auto p-4">
+        <div className="bg-white border overflow-auto px-2">
           <div className="mt-12 p-4 flex">
             <div
               id="finland_map"
               ref={kartta}
               className="flex-1"
               style={{ height: "700px" }}></div>
-            <div className="flex-1">
+            <div className="flex-2">
               {maakuntaCategories.length > 0 ? (
                 <CategorizedListRoot
-                  anchor={anchor}
+                  anchor={baseAnchor}
                   categories={maakuntaCategories}
                   changes={maakuntaChanges}
                   onUpdate={updateChangeObjects}></CategorizedListRoot>
