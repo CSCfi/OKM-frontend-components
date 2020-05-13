@@ -8,9 +8,9 @@ storiesOf("CategoryFilter", module)
   .addDecorator(withInfo)
   .add("Toiminta-alueen käyttötapaus", () => (
     <CategoryFilter
-      anchor={"erilliset-maakunnat"}
+      anchor={"maakuntakunnat"}
       categories={toimintaalueStory.categories}
-      changeObjects={toimintaalueStory.changes}
+      changeObjectsByMaakunta={toimintaalueStory.changes}
       showCategoryTitles={false}
       onChanges={changeObjectsByMaakunta => {
         console.info(changeObjectsByMaakunta);

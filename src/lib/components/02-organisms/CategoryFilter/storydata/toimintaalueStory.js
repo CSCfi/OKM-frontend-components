@@ -1,5 +1,114 @@
 export const toimintaalueStory = {
-  changes: [],
+  changes: {
+    "FI-10": [
+      {
+        anchor: "maakuntakunnat.FI-10.kunnat.583",
+        properties: {
+          metadata: {
+            koodiarvo: "583",
+            title: "Pelkosenniemi",
+            maakuntaKey: "FI-10"
+          },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-10.A",
+        properties: {
+          isChecked: true,
+          isIndeterminate: true,
+          metadata: { koodiarvo: "19", maakuntaKey: "FI-10", title: "Lappi" }
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-10.kunnat.698",
+        properties: {
+          metadata: {
+            koodiarvo: "698",
+            title: "Rovaniemi",
+            maakuntaKey: "FI-10"
+          },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-10.kunnat.851",
+        properties: {
+          metadata: { koodiarvo: "851", title: "Tornio", maakuntaKey: "FI-10" },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-10.kunnat.976",
+        properties: {
+          metadata: {
+            koodiarvo: "976",
+            title: "Ylitornio",
+            maakuntaKey: "FI-10"
+          },
+          isChecked: true
+        }
+      }
+    ],
+    "FI-04": [
+      {
+        anchor: "maakuntakunnat.FI-04.kunnat.588",
+        properties: {
+          metadata: {
+            koodiarvo: "588",
+            title: "Pertunmaa",
+            maakuntaKey: "FI-04"
+          },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-04.A",
+        properties: {
+          isChecked: true,
+          isIndeterminate: true,
+          metadata: {
+            koodiarvo: "10",
+            maakuntaKey: "FI-04",
+            title: "Etelä-Savo"
+          }
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-04.kunnat.618",
+        properties: {
+          metadata: {
+            koodiarvo: "618",
+            title: "Punkaharju",
+            maakuntaKey: "FI-04"
+          },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-04.kunnat.740",
+        properties: {
+          metadata: {
+            koodiarvo: "740",
+            title: "Savonlinna",
+            maakuntaKey: "FI-04"
+          },
+          isChecked: true
+        }
+      },
+      {
+        anchor: "maakuntakunnat.FI-04.kunnat.681",
+        properties: {
+          metadata: {
+            koodiarvo: "681",
+            title: "Rantasalmi",
+            maakuntaKey: "FI-04"
+          },
+          isChecked: true
+        }
+      }
+    ]
+  },
 
   categories: [
     {
@@ -42,7 +151,7 @@ export const toimintaalueStory = {
             {
               anchor: "035",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "035",
                 forChangeObject: {
@@ -70,7 +179,7 @@ export const toimintaalueStory = {
             {
               anchor: "043",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "043",
                 forChangeObject: {
@@ -98,7 +207,7 @@ export const toimintaalueStory = {
             {
               anchor: "060",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "060",
                 forChangeObject: {
@@ -126,7 +235,7 @@ export const toimintaalueStory = {
             {
               anchor: "062",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "062",
                 forChangeObject: {
@@ -154,7 +263,7 @@ export const toimintaalueStory = {
             {
               anchor: "065",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "065",
                 forChangeObject: {
@@ -182,7 +291,7 @@ export const toimintaalueStory = {
             {
               anchor: "076",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "076",
                 forChangeObject: {
@@ -210,7 +319,7 @@ export const toimintaalueStory = {
             {
               anchor: "170",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "170",
                 forChangeObject: {
@@ -238,7 +347,7 @@ export const toimintaalueStory = {
             {
               anchor: "295",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "295",
                 forChangeObject: {
@@ -266,7 +375,7 @@ export const toimintaalueStory = {
             {
               anchor: "318",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "318",
                 forChangeObject: {
@@ -294,7 +403,7 @@ export const toimintaalueStory = {
             {
               anchor: "417",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "417",
                 forChangeObject: {
@@ -322,7 +431,7 @@ export const toimintaalueStory = {
             {
               anchor: "438",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "438",
                 forChangeObject: {
@@ -350,7 +459,7 @@ export const toimintaalueStory = {
             {
               anchor: "478",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "478",
                 forChangeObject: {
@@ -378,7 +487,7 @@ export const toimintaalueStory = {
             {
               anchor: "736",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "736",
                 forChangeObject: {
@@ -406,7 +515,7 @@ export const toimintaalueStory = {
             {
               anchor: "766",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "766",
                 forChangeObject: {
@@ -434,7 +543,7 @@ export const toimintaalueStory = {
             {
               anchor: "771",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "771",
                 forChangeObject: {
@@ -462,7 +571,7 @@ export const toimintaalueStory = {
             {
               anchor: "941",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "941",
                 forChangeObject: {
@@ -503,7 +612,7 @@ export const toimintaalueStory = {
             forChangeObject: {
               koodiarvo: "09",
               maakuntaKey: "FI-02",
-              title: "Etelä-Karjala",
+              title: "Etelä-Karjala"
             },
             isChecked: false,
             labelStyles: {
@@ -531,7 +640,7 @@ export const toimintaalueStory = {
             {
               anchor: "153",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "153",
                 forChangeObject: {
@@ -559,7 +668,7 @@ export const toimintaalueStory = {
             {
               anchor: "173",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "173",
                 forChangeObject: {
@@ -587,7 +696,7 @@ export const toimintaalueStory = {
             {
               anchor: "405",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "405",
                 forChangeObject: {
@@ -615,7 +724,7 @@ export const toimintaalueStory = {
             {
               anchor: "416",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "416",
                 forChangeObject: {
@@ -643,7 +752,7 @@ export const toimintaalueStory = {
             {
               anchor: "441",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "441",
                 forChangeObject: {
@@ -671,7 +780,7 @@ export const toimintaalueStory = {
             {
               anchor: "580",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "580",
                 forChangeObject: {
@@ -699,7 +808,7 @@ export const toimintaalueStory = {
             {
               anchor: "689",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "689",
                 forChangeObject: {
@@ -727,7 +836,7 @@ export const toimintaalueStory = {
             {
               anchor: "700",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "700",
                 forChangeObject: {
@@ -755,7 +864,7 @@ export const toimintaalueStory = {
             {
               anchor: "728",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "728",
                 forChangeObject: {
@@ -783,7 +892,7 @@ export const toimintaalueStory = {
             {
               anchor: "739",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "739",
                 forChangeObject: {
@@ -811,7 +920,7 @@ export const toimintaalueStory = {
             {
               anchor: "775",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "775",
                 forChangeObject: {
@@ -839,7 +948,7 @@ export const toimintaalueStory = {
             {
               anchor: "831",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "831",
                 forChangeObject: {
@@ -867,7 +976,7 @@ export const toimintaalueStory = {
             {
               anchor: "891",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "891",
                 forChangeObject: {
@@ -895,7 +1004,7 @@ export const toimintaalueStory = {
             {
               anchor: "978",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "978",
                 forChangeObject: {
@@ -964,7 +1073,7 @@ export const toimintaalueStory = {
             {
               anchor: "004",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "004",
                 forChangeObject: {
@@ -992,7 +1101,7 @@ export const toimintaalueStory = {
             {
               anchor: "005",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "005",
                 forChangeObject: {
@@ -1020,7 +1129,7 @@ export const toimintaalueStory = {
             {
               anchor: "010",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "010",
                 forChangeObject: {
@@ -1048,7 +1157,7 @@ export const toimintaalueStory = {
             {
               anchor: "052",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "052",
                 forChangeObject: {
@@ -1076,7 +1185,7 @@ export const toimintaalueStory = {
             {
               anchor: "145",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "145",
                 forChangeObject: {
@@ -1104,7 +1213,7 @@ export const toimintaalueStory = {
             {
               anchor: "151",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "151",
                 forChangeObject: {
@@ -1132,7 +1241,7 @@ export const toimintaalueStory = {
             {
               anchor: "164",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "164",
                 forChangeObject: {
@@ -1160,7 +1269,7 @@ export const toimintaalueStory = {
             {
               anchor: "175",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "175",
                 forChangeObject: {
@@ -1188,7 +1297,7 @@ export const toimintaalueStory = {
             {
               anchor: "218",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "218",
                 forChangeObject: {
@@ -1216,7 +1325,7 @@ export const toimintaalueStory = {
             {
               anchor: "232",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "232",
                 forChangeObject: {
@@ -1244,7 +1353,7 @@ export const toimintaalueStory = {
             {
               anchor: "233",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "233",
                 forChangeObject: {
@@ -1272,7 +1381,7 @@ export const toimintaalueStory = {
             {
               anchor: "281",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "281",
                 forChangeObject: {
@@ -1300,7 +1409,7 @@ export const toimintaalueStory = {
             {
               anchor: "300",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "300",
                 forChangeObject: {
@@ -1328,7 +1437,7 @@ export const toimintaalueStory = {
             {
               anchor: "301",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "301",
                 forChangeObject: {
@@ -1356,7 +1465,7 @@ export const toimintaalueStory = {
             {
               anchor: "403",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "403",
                 forChangeObject: {
@@ -1384,7 +1493,7 @@ export const toimintaalueStory = {
             {
               anchor: "408",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "408",
                 forChangeObject: {
@@ -1412,7 +1521,7 @@ export const toimintaalueStory = {
             {
               anchor: "414",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "414",
                 forChangeObject: {
@@ -1440,7 +1549,7 @@ export const toimintaalueStory = {
             {
               anchor: "544",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "544",
                 forChangeObject: {
@@ -1468,7 +1577,7 @@ export const toimintaalueStory = {
             {
               anchor: "589",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "589",
                 forChangeObject: {
@@ -1496,7 +1605,7 @@ export const toimintaalueStory = {
             {
               anchor: "743",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "743",
                 forChangeObject: {
@@ -1524,7 +1633,7 @@ export const toimintaalueStory = {
             {
               anchor: "759",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "759",
                 forChangeObject: {
@@ -1552,7 +1661,7 @@ export const toimintaalueStory = {
             {
               anchor: "846",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "846",
                 forChangeObject: {
@@ -1580,7 +1689,7 @@ export const toimintaalueStory = {
             {
               anchor: "863",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "863",
                 forChangeObject: {
@@ -1608,7 +1717,7 @@ export const toimintaalueStory = {
             {
               anchor: "934",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "934",
                 forChangeObject: {
@@ -1636,7 +1745,7 @@ export const toimintaalueStory = {
             {
               anchor: "971",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "971",
                 forChangeObject: {
@@ -1664,7 +1773,7 @@ export const toimintaalueStory = {
             {
               anchor: "975",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "975",
                 forChangeObject: {
@@ -1692,7 +1801,7 @@ export const toimintaalueStory = {
             {
               anchor: "989",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "989",
                 forChangeObject: {
@@ -1761,7 +1870,7 @@ export const toimintaalueStory = {
             {
               anchor: "014",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "014",
                 forChangeObject: {
@@ -1789,7 +1898,7 @@ export const toimintaalueStory = {
             {
               anchor: "046",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "046",
                 forChangeObject: {
@@ -1817,7 +1926,7 @@ export const toimintaalueStory = {
             {
               anchor: "085",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "085",
                 forChangeObject: {
@@ -1845,7 +1954,7 @@ export const toimintaalueStory = {
             {
               anchor: "090",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "090",
                 forChangeObject: {
@@ -1873,7 +1982,7 @@ export const toimintaalueStory = {
             {
               anchor: "097",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "097",
                 forChangeObject: {
@@ -1901,7 +2010,7 @@ export const toimintaalueStory = {
             {
               anchor: "171",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "171",
                 forChangeObject: {
@@ -1929,7 +2038,7 @@ export const toimintaalueStory = {
             {
               anchor: "178",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "178",
                 forChangeObject: {
@@ -1957,7 +2066,7 @@ export const toimintaalueStory = {
             {
               anchor: "184",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "184",
                 forChangeObject: {
@@ -1985,7 +2094,7 @@ export const toimintaalueStory = {
             {
               anchor: "213",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "213",
                 forChangeObject: {
@@ -2013,7 +2122,7 @@ export const toimintaalueStory = {
             {
               anchor: "246",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "246",
                 forChangeObject: {
@@ -2041,7 +2150,7 @@ export const toimintaalueStory = {
             {
               anchor: "491",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "491",
                 forChangeObject: {
@@ -2069,7 +2178,7 @@ export const toimintaalueStory = {
             {
               anchor: "492",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "492",
                 forChangeObject: {
@@ -2097,7 +2206,7 @@ export const toimintaalueStory = {
             {
               anchor: "507",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "507",
                 forChangeObject: {
@@ -2125,7 +2234,7 @@ export const toimintaalueStory = {
             {
               anchor: "588",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "588",
                 forChangeObject: {
@@ -2153,7 +2262,7 @@ export const toimintaalueStory = {
             {
               anchor: "593",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "593",
                 forChangeObject: {
@@ -2181,7 +2290,7 @@ export const toimintaalueStory = {
             {
               anchor: "594",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "594",
                 forChangeObject: {
@@ -2209,7 +2318,7 @@ export const toimintaalueStory = {
             {
               anchor: "640",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "640",
                 forChangeObject: {
@@ -2237,7 +2346,7 @@ export const toimintaalueStory = {
             {
               anchor: "618",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "618",
                 forChangeObject: {
@@ -2265,7 +2374,7 @@ export const toimintaalueStory = {
             {
               anchor: "623",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "623",
                 forChangeObject: {
@@ -2293,7 +2402,7 @@ export const toimintaalueStory = {
             {
               anchor: "681",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "681",
                 forChangeObject: {
@@ -2321,7 +2430,7 @@ export const toimintaalueStory = {
             {
               anchor: "696",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "696",
                 forChangeObject: {
@@ -2349,7 +2458,7 @@ export const toimintaalueStory = {
             {
               anchor: "740",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "740",
                 forChangeObject: {
@@ -2377,7 +2486,7 @@ export const toimintaalueStory = {
             {
               anchor: "741",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "741",
                 forChangeObject: {
@@ -2405,7 +2514,7 @@ export const toimintaalueStory = {
             {
               anchor: "768",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "768",
                 forChangeObject: {
@@ -2433,7 +2542,7 @@ export const toimintaalueStory = {
             {
               anchor: "937",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "937",
                 forChangeObject: {
@@ -2502,7 +2611,7 @@ export const toimintaalueStory = {
             {
               anchor: "105",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "105",
                 forChangeObject: {
@@ -2530,7 +2639,7 @@ export const toimintaalueStory = {
             {
               anchor: "205",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "205",
                 forChangeObject: {
@@ -2558,7 +2667,7 @@ export const toimintaalueStory = {
             {
               anchor: "290",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "290",
                 forChangeObject: {
@@ -2586,7 +2695,7 @@ export const toimintaalueStory = {
             {
               anchor: "578",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "578",
                 forChangeObject: {
@@ -2614,7 +2723,7 @@ export const toimintaalueStory = {
             {
               anchor: "620",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "620",
                 forChangeObject: {
@@ -2642,7 +2751,7 @@ export const toimintaalueStory = {
             {
               anchor: "697",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "697",
                 forChangeObject: {
@@ -2670,7 +2779,7 @@ export const toimintaalueStory = {
             {
               anchor: "765",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "765",
                 forChangeObject: {
@@ -2698,7 +2807,7 @@ export const toimintaalueStory = {
             {
               anchor: "777",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "777",
                 forChangeObject: {
@@ -2726,7 +2835,7 @@ export const toimintaalueStory = {
             {
               anchor: "940",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "940",
                 forChangeObject: {
@@ -2795,7 +2904,7 @@ export const toimintaalueStory = {
             {
               anchor: "061",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "061",
                 forChangeObject: {
@@ -2823,7 +2932,7 @@ export const toimintaalueStory = {
             {
               anchor: "082",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "082",
                 forChangeObject: {
@@ -2851,7 +2960,7 @@ export const toimintaalueStory = {
             {
               anchor: "083",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "083",
                 forChangeObject: {
@@ -2879,7 +2988,7 @@ export const toimintaalueStory = {
             {
               anchor: "086",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "086",
                 forChangeObject: {
@@ -2907,7 +3016,7 @@ export const toimintaalueStory = {
             {
               anchor: "103",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "103",
                 forChangeObject: {
@@ -2935,7 +3044,7 @@ export const toimintaalueStory = {
             {
               anchor: "109",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "109",
                 forChangeObject: {
@@ -2963,7 +3072,7 @@ export const toimintaalueStory = {
             {
               anchor: "165",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "165",
                 forChangeObject: {
@@ -2991,7 +3100,7 @@ export const toimintaalueStory = {
             {
               anchor: "169",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "169",
                 forChangeObject: {
@@ -3019,7 +3128,7 @@ export const toimintaalueStory = {
             {
               anchor: "210",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "210",
                 forChangeObject: {
@@ -3047,7 +3156,7 @@ export const toimintaalueStory = {
             {
               anchor: "401",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "401",
                 forChangeObject: {
@@ -3075,7 +3184,7 @@ export const toimintaalueStory = {
             {
               anchor: "433",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "433",
                 forChangeObject: {
@@ -3103,7 +3212,7 @@ export const toimintaalueStory = {
             {
               anchor: "692",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "692",
                 forChangeObject: {
@@ -3131,7 +3240,7 @@ export const toimintaalueStory = {
             {
               anchor: "694",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "694",
                 forChangeObject: {
@@ -3159,7 +3268,7 @@ export const toimintaalueStory = {
             {
               anchor: "834",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "834",
                 forChangeObject: {
@@ -3187,7 +3296,7 @@ export const toimintaalueStory = {
             {
               anchor: "855",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "855",
                 forChangeObject: {
@@ -3215,7 +3324,7 @@ export const toimintaalueStory = {
             {
               anchor: "981",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "981",
                 forChangeObject: {
@@ -3284,7 +3393,7 @@ export const toimintaalueStory = {
             {
               anchor: "074",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "074",
                 forChangeObject: {
@@ -3312,7 +3421,7 @@ export const toimintaalueStory = {
             {
               anchor: "217",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "217",
                 forChangeObject: {
@@ -3340,7 +3449,7 @@ export const toimintaalueStory = {
             {
               anchor: "236",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "236",
                 forChangeObject: {
@@ -3368,7 +3477,7 @@ export const toimintaalueStory = {
             {
               anchor: "272",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "272",
                 forChangeObject: {
@@ -3396,7 +3505,7 @@ export const toimintaalueStory = {
             {
               anchor: "315",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "315",
                 forChangeObject: {
@@ -3424,7 +3533,7 @@ export const toimintaalueStory = {
             {
               anchor: "421",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "421",
                 forChangeObject: {
@@ -3452,7 +3561,7 @@ export const toimintaalueStory = {
             {
               anchor: "429",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "429",
                 forChangeObject: {
@@ -3480,7 +3589,7 @@ export const toimintaalueStory = {
             {
               anchor: "584",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "584",
                 forChangeObject: {
@@ -3508,7 +3617,7 @@ export const toimintaalueStory = {
             {
               anchor: "849",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "849",
                 forChangeObject: {
@@ -3536,7 +3645,7 @@ export const toimintaalueStory = {
             {
               anchor: "885",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "885",
                 forChangeObject: {
@@ -3564,7 +3673,7 @@ export const toimintaalueStory = {
             {
               anchor: "924",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "924",
                 forChangeObject: {
@@ -3633,7 +3742,7 @@ export const toimintaalueStory = {
             {
               anchor: "077",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "077",
                 forChangeObject: {
@@ -3661,7 +3770,7 @@ export const toimintaalueStory = {
             {
               anchor: "172",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "172",
                 forChangeObject: {
@@ -3689,7 +3798,7 @@ export const toimintaalueStory = {
             {
               anchor: "179",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "179",
                 forChangeObject: {
@@ -3717,7 +3826,7 @@ export const toimintaalueStory = {
             {
               anchor: "180",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "180",
                 forChangeObject: {
@@ -3745,7 +3854,7 @@ export const toimintaalueStory = {
             {
               anchor: "182",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "182",
                 forChangeObject: {
@@ -3773,7 +3882,7 @@ export const toimintaalueStory = {
             {
               anchor: "183",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "183",
                 forChangeObject: {
@@ -3801,7 +3910,7 @@ export const toimintaalueStory = {
             {
               anchor: "216",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "216",
                 forChangeObject: {
@@ -3829,7 +3938,7 @@ export const toimintaalueStory = {
             {
               anchor: "226",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "226",
                 forChangeObject: {
@@ -3857,7 +3966,7 @@ export const toimintaalueStory = {
             {
               anchor: "249",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "249",
                 forChangeObject: {
@@ -3885,7 +3994,7 @@ export const toimintaalueStory = {
             {
               anchor: "256",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "256",
                 forChangeObject: {
@@ -3913,7 +4022,7 @@ export const toimintaalueStory = {
             {
               anchor: "265",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "265",
                 forChangeObject: {
@@ -3941,7 +4050,7 @@ export const toimintaalueStory = {
             {
               anchor: "275",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "275",
                 forChangeObject: {
@@ -3969,7 +4078,7 @@ export const toimintaalueStory = {
             {
               anchor: "277",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "277",
                 forChangeObject: {
@@ -3997,7 +4106,7 @@ export const toimintaalueStory = {
             {
               anchor: "291",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "291",
                 forChangeObject: {
@@ -4025,7 +4134,7 @@ export const toimintaalueStory = {
             {
               anchor: "312",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "312",
                 forChangeObject: {
@@ -4053,7 +4162,7 @@ export const toimintaalueStory = {
             {
               anchor: "410",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "410",
                 forChangeObject: {
@@ -4081,7 +4190,7 @@ export const toimintaalueStory = {
             {
               anchor: "415",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "415",
                 forChangeObject: {
@@ -4109,7 +4218,7 @@ export const toimintaalueStory = {
             {
               anchor: "435",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "435",
                 forChangeObject: {
@@ -4137,7 +4246,7 @@ export const toimintaalueStory = {
             {
               anchor: "495",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "495",
                 forChangeObject: {
@@ -4165,7 +4274,7 @@ export const toimintaalueStory = {
             {
               anchor: "500",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "500",
                 forChangeObject: {
@@ -4193,7 +4302,7 @@ export const toimintaalueStory = {
             {
               anchor: "592",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "592",
                 forChangeObject: {
@@ -4221,7 +4330,7 @@ export const toimintaalueStory = {
             {
               anchor: "601",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "601",
                 forChangeObject: {
@@ -4249,7 +4358,7 @@ export const toimintaalueStory = {
             {
               anchor: "633",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "633",
                 forChangeObject: {
@@ -4277,7 +4386,7 @@ export const toimintaalueStory = {
             {
               anchor: "729",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "729",
                 forChangeObject: {
@@ -4305,7 +4414,7 @@ export const toimintaalueStory = {
             {
               anchor: "770",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "770",
                 forChangeObject: {
@@ -4333,7 +4442,7 @@ export const toimintaalueStory = {
             {
               anchor: "774",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "774",
                 forChangeObject: {
@@ -4361,7 +4470,7 @@ export const toimintaalueStory = {
             {
               anchor: "850",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "850",
                 forChangeObject: {
@@ -4389,7 +4498,7 @@ export const toimintaalueStory = {
             {
               anchor: "892",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "892",
                 forChangeObject: {
@@ -4417,7 +4526,7 @@ export const toimintaalueStory = {
             {
               anchor: "931",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "931",
                 forChangeObject: {
@@ -4445,7 +4554,7 @@ export const toimintaalueStory = {
             {
               anchor: "992",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "992",
                 forChangeObject: {
@@ -4514,7 +4623,7 @@ export const toimintaalueStory = {
             {
               anchor: "754",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "754",
                 forChangeObject: {
@@ -4542,7 +4651,7 @@ export const toimintaalueStory = {
             {
               anchor: "044",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "044",
                 forChangeObject: {
@@ -4570,7 +4679,7 @@ export const toimintaalueStory = {
             {
               anchor: "075",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "075",
                 forChangeObject: {
@@ -4598,7 +4707,7 @@ export const toimintaalueStory = {
             {
               anchor: "142",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "142",
                 forChangeObject: {
@@ -4626,7 +4735,7 @@ export const toimintaalueStory = {
             {
               anchor: "163",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "163",
                 forChangeObject: {
@@ -4654,7 +4763,7 @@ export const toimintaalueStory = {
             {
               anchor: "285",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "285",
                 forChangeObject: {
@@ -4682,7 +4791,7 @@ export const toimintaalueStory = {
             {
               anchor: "286",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "286",
                 forChangeObject: {
@@ -4710,7 +4819,7 @@ export const toimintaalueStory = {
             {
               anchor: "306",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "306",
                 forChangeObject: {
@@ -4738,7 +4847,7 @@ export const toimintaalueStory = {
             {
               anchor: "489",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "489",
                 forChangeObject: {
@@ -4766,7 +4875,7 @@ export const toimintaalueStory = {
             {
               anchor: "624",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "624",
                 forChangeObject: {
@@ -4794,7 +4903,7 @@ export const toimintaalueStory = {
             {
               anchor: "909",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "909",
                 forChangeObject: {
@@ -4822,7 +4931,7 @@ export const toimintaalueStory = {
             {
               anchor: "917",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "917",
                 forChangeObject: {
@@ -4850,7 +4959,7 @@ export const toimintaalueStory = {
             {
               anchor: "935",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "935",
                 forChangeObject: {
@@ -4919,7 +5028,7 @@ export const toimintaalueStory = {
             {
               anchor: "047",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "047",
                 forChangeObject: {
@@ -4947,7 +5056,7 @@ export const toimintaalueStory = {
             {
               anchor: "148",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "148",
                 forChangeObject: {
@@ -4975,7 +5084,7 @@ export const toimintaalueStory = {
             {
               anchor: "240",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "240",
                 forChangeObject: {
@@ -5003,7 +5112,7 @@ export const toimintaalueStory = {
             {
               anchor: "320",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "320",
                 forChangeObject: {
@@ -5031,7 +5140,7 @@ export const toimintaalueStory = {
             {
               anchor: "241",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "241",
                 forChangeObject: {
@@ -5059,7 +5168,7 @@ export const toimintaalueStory = {
             {
               anchor: "261",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "261",
                 forChangeObject: {
@@ -5087,7 +5196,7 @@ export const toimintaalueStory = {
             {
               anchor: "273",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "273",
                 forChangeObject: {
@@ -5115,7 +5224,7 @@ export const toimintaalueStory = {
             {
               anchor: "498",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "498",
                 forChangeObject: {
@@ -5143,7 +5252,7 @@ export const toimintaalueStory = {
             {
               anchor: "583",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "583",
                 forChangeObject: {
@@ -5171,7 +5280,7 @@ export const toimintaalueStory = {
             {
               anchor: "854",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "854",
                 forChangeObject: {
@@ -5199,7 +5308,7 @@ export const toimintaalueStory = {
             {
               anchor: "614",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "614",
                 forChangeObject: {
@@ -5227,7 +5336,7 @@ export const toimintaalueStory = {
             {
               anchor: "683",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "683",
                 forChangeObject: {
@@ -5255,7 +5364,7 @@ export const toimintaalueStory = {
             {
               anchor: "698",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "698",
                 forChangeObject: {
@@ -5283,7 +5392,7 @@ export const toimintaalueStory = {
             {
               anchor: "699",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "699",
                 forChangeObject: {
@@ -5311,7 +5420,7 @@ export const toimintaalueStory = {
             {
               anchor: "732",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "732",
                 forChangeObject: {
@@ -5339,7 +5448,7 @@ export const toimintaalueStory = {
             {
               anchor: "742",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "742",
                 forChangeObject: {
@@ -5367,7 +5476,7 @@ export const toimintaalueStory = {
             {
               anchor: "751",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "751",
                 forChangeObject: {
@@ -5395,7 +5504,7 @@ export const toimintaalueStory = {
             {
               anchor: "758",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "758",
                 forChangeObject: {
@@ -5423,7 +5532,7 @@ export const toimintaalueStory = {
             {
               anchor: "845",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "845",
                 forChangeObject: {
@@ -5451,7 +5560,7 @@ export const toimintaalueStory = {
             {
               anchor: "851",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "851",
                 forChangeObject: {
@@ -5479,7 +5588,7 @@ export const toimintaalueStory = {
             {
               anchor: "890",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "890",
                 forChangeObject: {
@@ -5507,7 +5616,7 @@ export const toimintaalueStory = {
             {
               anchor: "976",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "976",
                 forChangeObject: {
@@ -5576,7 +5685,7 @@ export const toimintaalueStory = {
             {
               anchor: "020",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "020",
                 forChangeObject: {
@@ -5604,7 +5713,7 @@ export const toimintaalueStory = {
             {
               anchor: "108",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "108",
                 forChangeObject: {
@@ -5632,7 +5741,7 @@ export const toimintaalueStory = {
             {
               anchor: "143",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "143",
                 forChangeObject: {
@@ -5660,7 +5769,7 @@ export const toimintaalueStory = {
             {
               anchor: "177",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "177",
                 forChangeObject: {
@@ -5688,7 +5797,7 @@ export const toimintaalueStory = {
             {
               anchor: "211",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "211",
                 forChangeObject: {
@@ -5716,7 +5825,7 @@ export const toimintaalueStory = {
             {
               anchor: "250",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "250",
                 forChangeObject: {
@@ -5744,7 +5853,7 @@ export const toimintaalueStory = {
             {
               anchor: "289",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "289",
                 forChangeObject: {
@@ -5772,7 +5881,7 @@ export const toimintaalueStory = {
             {
               anchor: "299",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "299",
                 forChangeObject: {
@@ -5800,7 +5909,7 @@ export const toimintaalueStory = {
             {
               anchor: "303",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "303",
                 forChangeObject: {
@@ -5828,7 +5937,7 @@ export const toimintaalueStory = {
             {
               anchor: "310",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "310",
                 forChangeObject: {
@@ -5856,7 +5965,7 @@ export const toimintaalueStory = {
             {
               anchor: "418",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "418",
                 forChangeObject: {
@@ -5884,7 +5993,7 @@ export const toimintaalueStory = {
             {
               anchor: "439",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "439",
                 forChangeObject: {
@@ -5912,7 +6021,7 @@ export const toimintaalueStory = {
             {
               anchor: "443",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "443",
                 forChangeObject: {
@@ -5940,7 +6049,7 @@ export const toimintaalueStory = {
             {
               anchor: "493",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "493",
                 forChangeObject: {
@@ -5968,7 +6077,7 @@ export const toimintaalueStory = {
             {
               anchor: "506",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "506",
                 forChangeObject: {
@@ -5996,7 +6105,7 @@ export const toimintaalueStory = {
             {
               anchor: "508",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "508",
                 forChangeObject: {
@@ -6024,7 +6133,7 @@ export const toimintaalueStory = {
             {
               anchor: "536",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "536",
                 forChangeObject: {
@@ -6052,7 +6161,7 @@ export const toimintaalueStory = {
             {
               anchor: "562",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "562",
                 forChangeObject: {
@@ -6080,7 +6189,7 @@ export const toimintaalueStory = {
             {
               anchor: "581",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "581",
                 forChangeObject: {
@@ -6108,7 +6217,7 @@ export const toimintaalueStory = {
             {
               anchor: "604",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "604",
                 forChangeObject: {
@@ -6136,7 +6245,7 @@ export const toimintaalueStory = {
             {
               anchor: "994",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "994",
                 forChangeObject: {
@@ -6164,7 +6273,7 @@ export const toimintaalueStory = {
             {
               anchor: "619",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "619",
                 forChangeObject: {
@@ -6192,7 +6301,7 @@ export const toimintaalueStory = {
             {
               anchor: "635",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "635",
                 forChangeObject: {
@@ -6220,7 +6329,7 @@ export const toimintaalueStory = {
             {
               anchor: "702",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "702",
                 forChangeObject: {
@@ -6248,7 +6357,7 @@ export const toimintaalueStory = {
             {
               anchor: "730",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "730",
                 forChangeObject: {
@@ -6276,7 +6385,7 @@ export const toimintaalueStory = {
             {
               anchor: "790",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "790",
                 forChangeObject: {
@@ -6304,7 +6413,7 @@ export const toimintaalueStory = {
             {
               anchor: "772",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "772",
                 forChangeObject: {
@@ -6332,7 +6441,7 @@ export const toimintaalueStory = {
             {
               anchor: "837",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "837",
                 forChangeObject: {
@@ -6360,7 +6469,7 @@ export const toimintaalueStory = {
             {
               anchor: "864",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "864",
                 forChangeObject: {
@@ -6388,7 +6497,7 @@ export const toimintaalueStory = {
             {
               anchor: "887",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "887",
                 forChangeObject: {
@@ -6416,7 +6525,7 @@ export const toimintaalueStory = {
             {
               anchor: "908",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "908",
                 forChangeObject: {
@@ -6444,7 +6553,7 @@ export const toimintaalueStory = {
             {
               anchor: "912",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "912",
                 forChangeObject: {
@@ -6472,7 +6581,7 @@ export const toimintaalueStory = {
             {
               anchor: "922",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "922",
                 forChangeObject: {
@@ -6500,7 +6609,7 @@ export const toimintaalueStory = {
             {
               anchor: "928",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "928",
                 forChangeObject: {
@@ -6528,7 +6637,7 @@ export const toimintaalueStory = {
             {
               anchor: "932",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "932",
                 forChangeObject: {
@@ -6556,7 +6665,7 @@ export const toimintaalueStory = {
             {
               anchor: "933",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "933",
                 forChangeObject: {
@@ -6584,7 +6693,7 @@ export const toimintaalueStory = {
             {
               anchor: "936",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "936",
                 forChangeObject: {
@@ -6612,7 +6721,7 @@ export const toimintaalueStory = {
             {
               anchor: "980",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "980",
                 forChangeObject: {
@@ -6640,7 +6749,7 @@ export const toimintaalueStory = {
             {
               anchor: "988",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "988",
                 forChangeObject: {
@@ -6709,7 +6818,7 @@ export const toimintaalueStory = {
             {
               anchor: "152",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "152",
                 forChangeObject: {
@@ -6737,7 +6846,7 @@ export const toimintaalueStory = {
             {
               anchor: "231",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "231",
                 forChangeObject: {
@@ -6765,7 +6874,7 @@ export const toimintaalueStory = {
             {
               anchor: "280",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "280",
                 forChangeObject: {
@@ -6793,7 +6902,7 @@ export const toimintaalueStory = {
             {
               anchor: "287",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "287",
                 forChangeObject: {
@@ -6821,7 +6930,7 @@ export const toimintaalueStory = {
             {
               anchor: "288",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "288",
                 forChangeObject: {
@@ -6849,7 +6958,7 @@ export const toimintaalueStory = {
             {
               anchor: "399",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "399",
                 forChangeObject: {
@@ -6877,7 +6986,7 @@ export const toimintaalueStory = {
             {
               anchor: "440",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "440",
                 forChangeObject: {
@@ -6905,7 +7014,7 @@ export const toimintaalueStory = {
             {
               anchor: "475",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "475",
                 forChangeObject: {
@@ -6933,7 +7042,7 @@ export const toimintaalueStory = {
             {
               anchor: "479",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "479",
                 forChangeObject: {
@@ -6961,7 +7070,7 @@ export const toimintaalueStory = {
             {
               anchor: "499",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "499",
                 forChangeObject: {
@@ -6989,7 +7098,7 @@ export const toimintaalueStory = {
             {
               anchor: "545",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "545",
                 forChangeObject: {
@@ -7017,7 +7126,7 @@ export const toimintaalueStory = {
             {
               anchor: "559",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "559",
                 forChangeObject: {
@@ -7045,7 +7154,7 @@ export const toimintaalueStory = {
             {
               anchor: "599",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "599",
                 forChangeObject: {
@@ -7073,7 +7182,7 @@ export const toimintaalueStory = {
             {
               anchor: "598",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "598",
                 forChangeObject: {
@@ -7101,7 +7210,7 @@ export const toimintaalueStory = {
             {
               anchor: "893",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "893",
                 forChangeObject: {
@@ -7129,7 +7238,7 @@ export const toimintaalueStory = {
             {
               anchor: "905",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "905",
                 forChangeObject: {
@@ -7157,7 +7266,7 @@ export const toimintaalueStory = {
             {
               anchor: "942",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "942",
                 forChangeObject: {
@@ -7185,7 +7294,7 @@ export const toimintaalueStory = {
             {
               anchor: "946",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "946",
                 forChangeObject: {
@@ -7213,7 +7322,7 @@ export const toimintaalueStory = {
             {
               anchor: "944",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "944",
                 forChangeObject: {
@@ -7241,7 +7350,7 @@ export const toimintaalueStory = {
             {
               anchor: "945",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "945",
                 forChangeObject: {
@@ -7310,7 +7419,7 @@ export const toimintaalueStory = {
             {
               anchor: "045",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "045",
                 forChangeObject: {
@@ -7338,7 +7447,7 @@ export const toimintaalueStory = {
             {
               anchor: "146",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "146",
                 forChangeObject: {
@@ -7366,7 +7475,7 @@ export const toimintaalueStory = {
             {
               anchor: "167",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "167",
                 forChangeObject: {
@@ -7394,7 +7503,7 @@ export const toimintaalueStory = {
             {
               anchor: "176",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "176",
                 forChangeObject: {
@@ -7422,7 +7531,7 @@ export const toimintaalueStory = {
             {
               anchor: "248",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "248",
                 forChangeObject: {
@@ -7450,7 +7559,7 @@ export const toimintaalueStory = {
             {
               anchor: "251",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "251",
                 forChangeObject: {
@@ -7478,7 +7587,7 @@ export const toimintaalueStory = {
             {
               anchor: "260",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "260",
                 forChangeObject: {
@@ -7506,7 +7615,7 @@ export const toimintaalueStory = {
             {
               anchor: "276",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "276",
                 forChangeObject: {
@@ -7534,7 +7643,7 @@ export const toimintaalueStory = {
             {
               anchor: "422",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "422",
                 forChangeObject: {
@@ -7562,7 +7671,7 @@ export const toimintaalueStory = {
             {
               anchor: "426",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "426",
                 forChangeObject: {
@@ -7590,7 +7699,7 @@ export const toimintaalueStory = {
             {
               anchor: "541",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "541",
                 forChangeObject: {
@@ -7618,7 +7727,7 @@ export const toimintaalueStory = {
             {
               anchor: "309",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "309",
                 forChangeObject: {
@@ -7646,7 +7755,7 @@ export const toimintaalueStory = {
             {
               anchor: "607",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "607",
                 forChangeObject: {
@@ -7674,7 +7783,7 @@ export const toimintaalueStory = {
             {
               anchor: "632",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "632",
                 forChangeObject: {
@@ -7702,7 +7811,7 @@ export const toimintaalueStory = {
             {
               anchor: "707",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "707",
                 forChangeObject: {
@@ -7730,7 +7839,7 @@ export const toimintaalueStory = {
             {
               anchor: "848",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "848",
                 forChangeObject: {
@@ -7758,7 +7867,7 @@ export const toimintaalueStory = {
             {
               anchor: "856",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "856",
                 forChangeObject: {
@@ -7786,7 +7895,7 @@ export const toimintaalueStory = {
             {
               anchor: "911",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "911",
                 forChangeObject: {
@@ -7814,7 +7923,7 @@ export const toimintaalueStory = {
             {
               anchor: "943",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "943",
                 forChangeObject: {
@@ -7883,7 +7992,7 @@ export const toimintaalueStory = {
             {
               anchor: "009",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "009",
                 forChangeObject: {
@@ -7911,7 +8020,7 @@ export const toimintaalueStory = {
             {
               anchor: "069",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "069",
                 forChangeObject: {
@@ -7939,7 +8048,7 @@ export const toimintaalueStory = {
             {
               anchor: "071",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "071",
                 forChangeObject: {
@@ -7967,7 +8076,7 @@ export const toimintaalueStory = {
             {
               anchor: "072",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "072",
                 forChangeObject: {
@@ -7995,7 +8104,7 @@ export const toimintaalueStory = {
             {
               anchor: "084",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "084",
                 forChangeObject: {
@@ -8023,7 +8132,7 @@ export const toimintaalueStory = {
             {
               anchor: "095",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "095",
                 forChangeObject: {
@@ -8051,7 +8160,7 @@ export const toimintaalueStory = {
             {
               anchor: "139",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "139",
                 forChangeObject: {
@@ -8079,7 +8188,7 @@ export const toimintaalueStory = {
             {
               anchor: "208",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "208",
                 forChangeObject: {
@@ -8107,7 +8216,7 @@ export const toimintaalueStory = {
             {
               anchor: "244",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "244",
                 forChangeObject: {
@@ -8135,7 +8244,7 @@ export const toimintaalueStory = {
             {
               anchor: "247",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "247",
                 forChangeObject: {
@@ -8163,7 +8272,7 @@ export const toimintaalueStory = {
             {
               anchor: "255",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "255",
                 forChangeObject: {
@@ -8191,7 +8300,7 @@ export const toimintaalueStory = {
             {
               anchor: "292",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "292",
                 forChangeObject: {
@@ -8219,7 +8328,7 @@ export const toimintaalueStory = {
             {
               anchor: "305",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "305",
                 forChangeObject: {
@@ -8247,7 +8356,7 @@ export const toimintaalueStory = {
             {
               anchor: "317",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "317",
                 forChangeObject: {
@@ -8275,7 +8384,7 @@ export const toimintaalueStory = {
             {
               anchor: "425",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "425",
                 forChangeObject: {
@@ -8303,7 +8412,7 @@ export const toimintaalueStory = {
             {
               anchor: "436",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "436",
                 forChangeObject: {
@@ -8331,7 +8440,7 @@ export const toimintaalueStory = {
             {
               anchor: "483",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "483",
                 forChangeObject: {
@@ -8359,7 +8468,7 @@ export const toimintaalueStory = {
             {
               anchor: "494",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "494",
                 forChangeObject: {
@@ -8387,7 +8496,7 @@ export const toimintaalueStory = {
             {
               anchor: "535",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "535",
                 forChangeObject: {
@@ -8415,7 +8524,7 @@ export const toimintaalueStory = {
             {
               anchor: "563",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "563",
                 forChangeObject: {
@@ -8443,7 +8552,7 @@ export const toimintaalueStory = {
             {
               anchor: "564",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "564",
                 forChangeObject: {
@@ -8471,7 +8580,7 @@ export const toimintaalueStory = {
             {
               anchor: "567",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "567",
                 forChangeObject: {
@@ -8499,7 +8608,7 @@ export const toimintaalueStory = {
             {
               anchor: "582",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "582",
                 forChangeObject: {
@@ -8527,7 +8636,7 @@ export const toimintaalueStory = {
             {
               anchor: "603",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "603",
                 forChangeObject: {
@@ -8555,7 +8664,7 @@ export const toimintaalueStory = {
             {
               anchor: "615",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "615",
                 forChangeObject: {
@@ -8583,7 +8692,7 @@ export const toimintaalueStory = {
             {
               anchor: "617",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "617",
                 forChangeObject: {
@@ -8611,7 +8720,7 @@ export const toimintaalueStory = {
             {
               anchor: "625",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "625",
                 forChangeObject: {
@@ -8639,7 +8748,7 @@ export const toimintaalueStory = {
             {
               anchor: "626",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "626",
                 forChangeObject: {
@@ -8667,7 +8776,7 @@ export const toimintaalueStory = {
             {
               anchor: "630",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "630",
                 forChangeObject: {
@@ -8695,7 +8804,7 @@ export const toimintaalueStory = {
             {
               anchor: "678",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "678",
                 forChangeObject: {
@@ -8723,7 +8832,7 @@ export const toimintaalueStory = {
             {
               anchor: "682",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "682",
                 forChangeObject: {
@@ -8751,7 +8860,7 @@ export const toimintaalueStory = {
             {
               anchor: "691",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "691",
                 forChangeObject: {
@@ -8779,7 +8888,7 @@ export const toimintaalueStory = {
             {
               anchor: "708",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "708",
                 forChangeObject: {
@@ -8807,7 +8916,7 @@ export const toimintaalueStory = {
             {
               anchor: "746",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "746",
                 forChangeObject: {
@@ -8835,7 +8944,7 @@ export const toimintaalueStory = {
             {
               anchor: "748",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "748",
                 forChangeObject: {
@@ -8863,7 +8972,7 @@ export const toimintaalueStory = {
             {
               anchor: "791",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "791",
                 forChangeObject: {
@@ -8891,7 +9000,7 @@ export const toimintaalueStory = {
             {
               anchor: "832",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "832",
                 forChangeObject: {
@@ -8919,7 +9028,7 @@ export const toimintaalueStory = {
             {
               anchor: "841",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "841",
                 forChangeObject: {
@@ -8947,7 +9056,7 @@ export const toimintaalueStory = {
             {
               anchor: "859",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "859",
                 forChangeObject: {
@@ -8975,7 +9084,7 @@ export const toimintaalueStory = {
             {
               anchor: "889",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "889",
                 forChangeObject: {
@@ -9003,7 +9112,7 @@ export const toimintaalueStory = {
             {
               anchor: "785",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "785",
                 forChangeObject: {
@@ -9031,7 +9140,7 @@ export const toimintaalueStory = {
             {
               anchor: "926",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "926",
                 forChangeObject: {
@@ -9059,7 +9168,7 @@ export const toimintaalueStory = {
             {
               anchor: "972",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "972",
                 forChangeObject: {
@@ -9087,7 +9196,7 @@ export const toimintaalueStory = {
             {
               anchor: "973",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "973",
                 forChangeObject: {
@@ -9115,7 +9224,7 @@ export const toimintaalueStory = {
             {
               anchor: "977",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "977",
                 forChangeObject: {
@@ -9184,7 +9293,7 @@ export const toimintaalueStory = {
             {
               anchor: "140",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "140",
                 forChangeObject: {
@@ -9212,7 +9321,7 @@ export const toimintaalueStory = {
             {
               anchor: "174",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "174",
                 forChangeObject: {
@@ -9240,7 +9349,7 @@ export const toimintaalueStory = {
             {
               anchor: "204",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "204",
                 forChangeObject: {
@@ -9268,7 +9377,7 @@ export const toimintaalueStory = {
             {
               anchor: "212",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "212",
                 forChangeObject: {
@@ -9296,7 +9405,7 @@ export const toimintaalueStory = {
             {
               anchor: "227",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "227",
                 forChangeObject: {
@@ -9324,7 +9433,7 @@ export const toimintaalueStory = {
             {
               anchor: "239",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "239",
                 forChangeObject: {
@@ -9352,7 +9461,7 @@ export const toimintaalueStory = {
             {
               anchor: "263",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "263",
                 forChangeObject: {
@@ -9380,7 +9489,7 @@ export const toimintaalueStory = {
             {
               anchor: "297",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "297",
                 forChangeObject: {
@@ -9408,7 +9517,7 @@ export const toimintaalueStory = {
             {
               anchor: "402",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "402",
                 forChangeObject: {
@@ -9436,7 +9545,7 @@ export const toimintaalueStory = {
             {
               anchor: "420",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "420",
                 forChangeObject: {
@@ -9464,7 +9573,7 @@ export const toimintaalueStory = {
             {
               anchor: "476",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "476",
                 forChangeObject: {
@@ -9492,7 +9601,7 @@ export const toimintaalueStory = {
             {
               anchor: "534",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "534",
                 forChangeObject: {
@@ -9520,7 +9629,7 @@ export const toimintaalueStory = {
             {
               anchor: "595",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "595",
                 forChangeObject: {
@@ -9548,7 +9657,7 @@ export const toimintaalueStory = {
             {
               anchor: "686",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "686",
                 forChangeObject: {
@@ -9576,7 +9685,7 @@ export const toimintaalueStory = {
             {
               anchor: "687",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "687",
                 forChangeObject: {
@@ -9604,7 +9713,7 @@ export const toimintaalueStory = {
             {
               anchor: "749",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "749",
                 forChangeObject: {
@@ -9632,7 +9741,7 @@ export const toimintaalueStory = {
             {
               anchor: "762",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "762",
                 forChangeObject: {
@@ -9660,7 +9769,7 @@ export const toimintaalueStory = {
             {
               anchor: "778",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "778",
                 forChangeObject: {
@@ -9688,7 +9797,7 @@ export const toimintaalueStory = {
             {
               anchor: "844",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "844",
                 forChangeObject: {
@@ -9716,7 +9825,7 @@ export const toimintaalueStory = {
             {
               anchor: "857",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "857",
                 forChangeObject: {
@@ -9744,7 +9853,7 @@ export const toimintaalueStory = {
             {
               anchor: "915",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "915",
                 forChangeObject: {
@@ -9772,7 +9881,7 @@ export const toimintaalueStory = {
             {
               anchor: "916",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "916",
                 forChangeObject: {
@@ -9800,7 +9909,7 @@ export const toimintaalueStory = {
             {
               anchor: "919",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "919",
                 forChangeObject: {
@@ -9828,7 +9937,7 @@ export const toimintaalueStory = {
             {
               anchor: "921",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "921",
                 forChangeObject: {
@@ -9856,7 +9965,7 @@ export const toimintaalueStory = {
             {
               anchor: "925",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "925",
                 forChangeObject: {
@@ -9925,7 +10034,7 @@ export const toimintaalueStory = {
             {
               anchor: "015",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "015",
                 forChangeObject: {
@@ -9953,7 +10062,7 @@ export const toimintaalueStory = {
             {
               anchor: "016",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "016",
                 forChangeObject: {
@@ -9981,7 +10090,7 @@ export const toimintaalueStory = {
             {
               anchor: "081",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "081",
                 forChangeObject: {
@@ -10009,7 +10118,7 @@ export const toimintaalueStory = {
             {
               anchor: "111",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "111",
                 forChangeObject: {
@@ -10037,7 +10146,7 @@ export const toimintaalueStory = {
             {
               anchor: "088",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "088",
                 forChangeObject: {
@@ -10065,7 +10174,7 @@ export const toimintaalueStory = {
             {
               anchor: "089",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "089",
                 forChangeObject: {
@@ -10093,7 +10202,7 @@ export const toimintaalueStory = {
             {
               anchor: "098",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "098",
                 forChangeObject: {
@@ -10121,7 +10230,7 @@ export const toimintaalueStory = {
             {
               anchor: "283",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "283",
                 forChangeObject: {
@@ -10149,7 +10258,7 @@ export const toimintaalueStory = {
             {
               anchor: "316",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "316",
                 forChangeObject: {
@@ -10177,7 +10286,7 @@ export const toimintaalueStory = {
             {
               anchor: "398",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "398",
                 forChangeObject: {
@@ -10205,7 +10314,7 @@ export const toimintaalueStory = {
             {
               anchor: "532",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "532",
                 forChangeObject: {
@@ -10233,7 +10342,7 @@ export const toimintaalueStory = {
             {
               anchor: "560",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "560",
                 forChangeObject: {
@@ -10261,7 +10370,7 @@ export const toimintaalueStory = {
             {
               anchor: "576",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "576",
                 forChangeObject: {
@@ -10289,7 +10398,7 @@ export const toimintaalueStory = {
             {
               anchor: "781",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "781",
                 forChangeObject: {
@@ -10358,7 +10467,7 @@ export const toimintaalueStory = {
             {
               anchor: "001",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "001",
                 forChangeObject: {
@@ -10386,7 +10495,7 @@ export const toimintaalueStory = {
             {
               anchor: "050",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "050",
                 forChangeObject: {
@@ -10414,7 +10523,7 @@ export const toimintaalueStory = {
             {
               anchor: "051",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "051",
                 forChangeObject: {
@@ -10442,7 +10551,7 @@ export const toimintaalueStory = {
             {
               anchor: "079",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "079",
                 forChangeObject: {
@@ -10470,7 +10579,7 @@ export const toimintaalueStory = {
             {
               anchor: "099",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "099",
                 forChangeObject: {
@@ -10498,7 +10607,7 @@ export const toimintaalueStory = {
             {
               anchor: "102",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "102",
                 forChangeObject: {
@@ -10526,7 +10635,7 @@ export const toimintaalueStory = {
             {
               anchor: "181",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "181",
                 forChangeObject: {
@@ -10554,7 +10663,7 @@ export const toimintaalueStory = {
             {
               anchor: "214",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "214",
                 forChangeObject: {
@@ -10582,7 +10691,7 @@ export const toimintaalueStory = {
             {
               anchor: "230",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "230",
                 forChangeObject: {
@@ -10610,7 +10719,7 @@ export const toimintaalueStory = {
             {
               anchor: "254",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "254",
                 forChangeObject: {
@@ -10638,7 +10747,7 @@ export const toimintaalueStory = {
             {
               anchor: "262",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "262",
                 forChangeObject: {
@@ -10666,7 +10775,7 @@ export const toimintaalueStory = {
             {
               anchor: "266",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "266",
                 forChangeObject: {
@@ -10694,7 +10803,7 @@ export const toimintaalueStory = {
             {
               anchor: "271",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "271",
                 forChangeObject: {
@@ -10722,7 +10831,7 @@ export const toimintaalueStory = {
             {
               anchor: "293",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "293",
                 forChangeObject: {
@@ -10750,7 +10859,7 @@ export const toimintaalueStory = {
             {
               anchor: "319",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "319",
                 forChangeObject: {
@@ -10778,7 +10887,7 @@ export const toimintaalueStory = {
             {
               anchor: "406",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "406",
                 forChangeObject: {
@@ -10806,7 +10915,7 @@ export const toimintaalueStory = {
             {
               anchor: "413",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "413",
                 forChangeObject: {
@@ -10834,7 +10943,7 @@ export const toimintaalueStory = {
             {
               anchor: "442",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "442",
                 forChangeObject: {
@@ -10862,7 +10971,7 @@ export const toimintaalueStory = {
             {
               anchor: "484",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "484",
                 forChangeObject: {
@@ -10890,7 +10999,7 @@ export const toimintaalueStory = {
             {
               anchor: "531",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "531",
                 forChangeObject: {
@@ -10918,7 +11027,7 @@ export const toimintaalueStory = {
             {
               anchor: "537",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "537",
                 forChangeObject: {
@@ -10946,7 +11055,7 @@ export const toimintaalueStory = {
             {
               anchor: "608",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "608",
                 forChangeObject: {
@@ -10974,7 +11083,7 @@ export const toimintaalueStory = {
             {
               anchor: "609",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "609",
                 forChangeObject: {
@@ -11002,7 +11111,7 @@ export const toimintaalueStory = {
             {
               anchor: "684",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "684",
                 forChangeObject: {
@@ -11030,7 +11139,7 @@ export const toimintaalueStory = {
             {
               anchor: "747",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "747",
                 forChangeObject: {
@@ -11058,7 +11167,7 @@ export const toimintaalueStory = {
             {
               anchor: "783",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "783",
                 forChangeObject: {
@@ -11086,7 +11195,7 @@ export const toimintaalueStory = {
             {
               anchor: "886",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "886",
                 forChangeObject: {
@@ -11114,7 +11223,7 @@ export const toimintaalueStory = {
             {
               anchor: "913",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "913",
                 forChangeObject: {
@@ -11183,7 +11292,7 @@ export const toimintaalueStory = {
             {
               anchor: "018",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "018",
                 forChangeObject: {
@@ -11211,7 +11320,7 @@ export const toimintaalueStory = {
             {
               anchor: "049",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "049",
                 forChangeObject: {
@@ -11239,7 +11348,7 @@ export const toimintaalueStory = {
             {
               anchor: "078",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "078",
                 forChangeObject: {
@@ -11267,7 +11376,7 @@ export const toimintaalueStory = {
             {
               anchor: "091",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "091",
                 forChangeObject: {
@@ -11295,7 +11404,7 @@ export const toimintaalueStory = {
             {
               anchor: "106",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "106",
                 forChangeObject: {
@@ -11323,7 +11432,7 @@ export const toimintaalueStory = {
             {
               anchor: "149",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "149",
                 forChangeObject: {
@@ -11351,7 +11460,7 @@ export const toimintaalueStory = {
             {
               anchor: "186",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "186",
                 forChangeObject: {
@@ -11379,7 +11488,7 @@ export const toimintaalueStory = {
             {
               anchor: "220",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "220",
                 forChangeObject: {
@@ -11407,7 +11516,7 @@ export const toimintaalueStory = {
             {
               anchor: "223",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "223",
                 forChangeObject: {
@@ -11435,7 +11544,7 @@ export const toimintaalueStory = {
             {
               anchor: "224",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "224",
                 forChangeObject: {
@@ -11463,7 +11572,7 @@ export const toimintaalueStory = {
             {
               anchor: "235",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "235",
                 forChangeObject: {
@@ -11491,7 +11600,7 @@ export const toimintaalueStory = {
             {
               anchor: "245",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "245",
                 forChangeObject: {
@@ -11519,7 +11628,7 @@ export const toimintaalueStory = {
             {
               anchor: "257",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "257",
                 forChangeObject: {
@@ -11547,7 +11656,7 @@ export const toimintaalueStory = {
             {
               anchor: "407",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "407",
                 forChangeObject: {
@@ -11575,7 +11684,7 @@ export const toimintaalueStory = {
             {
               anchor: "424",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "424",
                 forChangeObject: {
@@ -11603,7 +11712,7 @@ export const toimintaalueStory = {
             {
               anchor: "427",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "427",
                 forChangeObject: {
@@ -11631,7 +11740,7 @@ export const toimintaalueStory = {
             {
               anchor: "444",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "444",
                 forChangeObject: {
@@ -11659,7 +11768,7 @@ export const toimintaalueStory = {
             {
               anchor: "428",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "428",
                 forChangeObject: {
@@ -11687,7 +11796,7 @@ export const toimintaalueStory = {
             {
               anchor: "434",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "434",
                 forChangeObject: {
@@ -11715,7 +11824,7 @@ export const toimintaalueStory = {
             {
               anchor: "504",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "504",
                 forChangeObject: {
@@ -11743,7 +11852,7 @@ export const toimintaalueStory = {
             {
               anchor: "505",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "505",
                 forChangeObject: {
@@ -11771,7 +11880,7 @@ export const toimintaalueStory = {
             {
               anchor: "540",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "540",
                 forChangeObject: {
@@ -11799,7 +11908,7 @@ export const toimintaalueStory = {
             {
               anchor: "543",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "543",
                 forChangeObject: {
@@ -11827,7 +11936,7 @@ export const toimintaalueStory = {
             {
               anchor: "585",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "585",
                 forChangeObject: {
@@ -11855,7 +11964,7 @@ export const toimintaalueStory = {
             {
               anchor: "606",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "606",
                 forChangeObject: {
@@ -11883,7 +11992,7 @@ export const toimintaalueStory = {
             {
               anchor: "611",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "611",
                 forChangeObject: {
@@ -11911,7 +12020,7 @@ export const toimintaalueStory = {
             {
               anchor: "638",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "638",
                 forChangeObject: {
@@ -11939,7 +12048,7 @@ export const toimintaalueStory = {
             {
               anchor: "612",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "612",
                 forChangeObject: {
@@ -11967,7 +12076,7 @@ export const toimintaalueStory = {
             {
               anchor: "613",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "613",
                 forChangeObject: {
@@ -11995,7 +12104,7 @@ export const toimintaalueStory = {
             {
               anchor: "616",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "616",
                 forChangeObject: {
@@ -12023,7 +12132,7 @@ export const toimintaalueStory = {
             {
               anchor: "710",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "710",
                 forChangeObject: {
@@ -12051,7 +12160,7 @@ export const toimintaalueStory = {
             {
               anchor: "701",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "701",
                 forChangeObject: {
@@ -12079,7 +12188,7 @@ export const toimintaalueStory = {
             {
               anchor: "737",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "737",
                 forChangeObject: {
@@ -12107,7 +12216,7 @@ export const toimintaalueStory = {
             {
               anchor: "753",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "753",
                 forChangeObject: {
@@ -12135,7 +12244,7 @@ export const toimintaalueStory = {
             {
               anchor: "755",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "755",
                 forChangeObject: {
@@ -12163,7 +12272,7 @@ export const toimintaalueStory = {
             {
               anchor: "835",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "835",
                 forChangeObject: {
@@ -12191,7 +12300,7 @@ export const toimintaalueStory = {
             {
               anchor: "858",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "858",
                 forChangeObject: {
@@ -12219,7 +12328,7 @@ export const toimintaalueStory = {
             {
               anchor: "200",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "200",
                 forChangeObject: {
@@ -12247,7 +12356,7 @@ export const toimintaalueStory = {
             {
               anchor: "092",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "092",
                 forChangeObject: {
@@ -12275,7 +12384,7 @@ export const toimintaalueStory = {
             {
               anchor: "927",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "927",
                 forChangeObject: {
@@ -12344,7 +12453,7 @@ export const toimintaalueStory = {
             {
               anchor: "006",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "006",
                 forChangeObject: {
@@ -12372,7 +12481,7 @@ export const toimintaalueStory = {
             {
               anchor: "017",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "017",
                 forChangeObject: {
@@ -12400,7 +12509,7 @@ export const toimintaalueStory = {
             {
               anchor: "019",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "019",
                 forChangeObject: {
@@ -12428,7 +12537,7 @@ export const toimintaalueStory = {
             {
               anchor: "040",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "040",
                 forChangeObject: {
@@ -12456,7 +12565,7 @@ export const toimintaalueStory = {
             {
               anchor: "073",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "073",
                 forChangeObject: {
@@ -12484,7 +12593,7 @@ export const toimintaalueStory = {
             {
               anchor: "101",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "101",
                 forChangeObject: {
@@ -12512,7 +12621,7 @@ export const toimintaalueStory = {
             {
               anchor: "150",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "150",
                 forChangeObject: {
@@ -12540,7 +12649,7 @@ export const toimintaalueStory = {
             {
               anchor: "202",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "202",
                 forChangeObject: {
@@ -12568,7 +12677,7 @@ export const toimintaalueStory = {
             {
               anchor: "219",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "219",
                 forChangeObject: {
@@ -12596,7 +12705,7 @@ export const toimintaalueStory = {
             {
               anchor: "243",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "243",
                 forChangeObject: {
@@ -12624,7 +12733,7 @@ export const toimintaalueStory = {
             {
               anchor: "322",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "322",
                 forChangeObject: {
@@ -12652,7 +12761,7 @@ export const toimintaalueStory = {
             {
               anchor: "252",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "252",
                 forChangeObject: {
@@ -12680,7 +12789,7 @@ export const toimintaalueStory = {
             {
               anchor: "259",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "259",
                 forChangeObject: {
@@ -12708,7 +12817,7 @@ export const toimintaalueStory = {
             {
               anchor: "279",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "279",
                 forChangeObject: {
@@ -12736,7 +12845,7 @@ export const toimintaalueStory = {
             {
               anchor: "284",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "284",
                 forChangeObject: {
@@ -12764,7 +12873,7 @@ export const toimintaalueStory = {
             {
               anchor: "304",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "304",
                 forChangeObject: {
@@ -12792,7 +12901,7 @@ export const toimintaalueStory = {
             {
               anchor: "308",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "308",
                 forChangeObject: {
@@ -12820,7 +12929,7 @@ export const toimintaalueStory = {
             {
               anchor: "400",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "400",
                 forChangeObject: {
@@ -12848,7 +12957,7 @@ export const toimintaalueStory = {
             {
               anchor: "419",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "419",
                 forChangeObject: {
@@ -12876,7 +12985,7 @@ export const toimintaalueStory = {
             {
               anchor: "423",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "423",
                 forChangeObject: {
@@ -12904,7 +13013,7 @@ export const toimintaalueStory = {
             {
               anchor: "430",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "430",
                 forChangeObject: {
@@ -12932,7 +13041,7 @@ export const toimintaalueStory = {
             {
               anchor: "431",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "431",
                 forChangeObject: {
@@ -12960,7 +13069,7 @@ export const toimintaalueStory = {
             {
               anchor: "480",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "480",
                 forChangeObject: {
@@ -12988,7 +13097,7 @@ export const toimintaalueStory = {
             {
               anchor: "481",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "481",
                 forChangeObject: {
@@ -13016,7 +13125,7 @@ export const toimintaalueStory = {
             {
               anchor: "482",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "482",
                 forChangeObject: {
@@ -13044,7 +13153,7 @@ export const toimintaalueStory = {
             {
               anchor: "485",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "485",
                 forChangeObject: {
@@ -13072,7 +13181,7 @@ export const toimintaalueStory = {
             {
               anchor: "490",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "490",
                 forChangeObject: {
@@ -13100,7 +13209,7 @@ export const toimintaalueStory = {
             {
               anchor: "501",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "501",
                 forChangeObject: {
@@ -13128,7 +13237,7 @@ export const toimintaalueStory = {
             {
               anchor: "503",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "503",
                 forChangeObject: {
@@ -13156,7 +13265,7 @@ export const toimintaalueStory = {
             {
               anchor: "529",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "529",
                 forChangeObject: {
@@ -13184,7 +13293,7 @@ export const toimintaalueStory = {
             {
               anchor: "533",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "533",
                 forChangeObject: {
@@ -13212,7 +13321,7 @@ export const toimintaalueStory = {
             {
               anchor: "538",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "538",
                 forChangeObject: {
@@ -13240,7 +13349,7 @@ export const toimintaalueStory = {
             {
               anchor: "561",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "561",
                 forChangeObject: {
@@ -13268,7 +13377,7 @@ export const toimintaalueStory = {
             {
               anchor: "577",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "577",
                 forChangeObject: {
@@ -13296,7 +13405,7 @@ export const toimintaalueStory = {
             {
               anchor: "573",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "573",
                 forChangeObject: {
@@ -13324,7 +13433,7 @@ export const toimintaalueStory = {
             {
               anchor: "445",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "445",
                 forChangeObject: {
@@ -13352,7 +13461,7 @@ export const toimintaalueStory = {
             {
               anchor: "586",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "586",
                 forChangeObject: {
@@ -13380,7 +13489,7 @@ export const toimintaalueStory = {
             {
               anchor: "587",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "587",
                 forChangeObject: {
@@ -13408,7 +13517,7 @@ export const toimintaalueStory = {
             {
               anchor: "602",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "602",
                 forChangeObject: {
@@ -13436,7 +13545,7 @@ export const toimintaalueStory = {
             {
               anchor: "631",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "631",
                 forChangeObject: {
@@ -13464,7 +13573,7 @@ export const toimintaalueStory = {
             {
               anchor: "636",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "636",
                 forChangeObject: {
@@ -13492,7 +13601,7 @@ export const toimintaalueStory = {
             {
               anchor: "680",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "680",
                 forChangeObject: {
@@ -13520,7 +13629,7 @@ export const toimintaalueStory = {
             {
               anchor: "704",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "704",
                 forChangeObject: {
@@ -13548,7 +13657,7 @@ export const toimintaalueStory = {
             {
               anchor: "705",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "705",
                 forChangeObject: {
@@ -13576,7 +13685,7 @@ export const toimintaalueStory = {
             {
               anchor: "734",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "734",
                 forChangeObject: {
@@ -13604,7 +13713,7 @@ export const toimintaalueStory = {
             {
               anchor: "738",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "738",
                 forChangeObject: {
@@ -13632,7 +13741,7 @@ export const toimintaalueStory = {
             {
               anchor: "761",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "761",
                 forChangeObject: {
@@ -13660,7 +13769,7 @@ export const toimintaalueStory = {
             {
               anchor: "776",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "776",
                 forChangeObject: {
@@ -13688,7 +13797,7 @@ export const toimintaalueStory = {
             {
               anchor: "784",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "784",
                 forChangeObject: {
@@ -13716,7 +13825,7 @@ export const toimintaalueStory = {
             {
               anchor: "833",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "833",
                 forChangeObject: {
@@ -13744,7 +13853,7 @@ export const toimintaalueStory = {
             {
               anchor: "838",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "838",
                 forChangeObject: {
@@ -13772,7 +13881,7 @@ export const toimintaalueStory = {
             {
               anchor: "853",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "853",
                 forChangeObject: {
@@ -13800,7 +13909,7 @@ export const toimintaalueStory = {
             {
               anchor: "895",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "895",
                 forChangeObject: {
@@ -13828,7 +13937,7 @@ export const toimintaalueStory = {
             {
               anchor: "906",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "906",
                 forChangeObject: {
@@ -13856,7 +13965,7 @@ export const toimintaalueStory = {
             {
               anchor: "918",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "918",
                 forChangeObject: {
@@ -13884,7 +13993,7 @@ export const toimintaalueStory = {
             {
               anchor: "920",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "920",
                 forChangeObject: {
@@ -13912,7 +14021,7 @@ export const toimintaalueStory = {
             {
               anchor: "923",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "923",
                 forChangeObject: {
@@ -13940,7 +14049,7 @@ export const toimintaalueStory = {
             {
               anchor: "979",
               name: "CheckboxWithLabel",
-              styleClasses: ["w-1/4"],
+              styleClasses: ["w-1/2"],
               properties: {
                 code: "979",
                 forChangeObject: {

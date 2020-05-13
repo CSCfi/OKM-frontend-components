@@ -91,7 +91,7 @@ const CategoryFilter = React.memo(
   ({
     anchor: baseAnchor = "no-anchor-defined",
     categories = [],
-    changeObjects,
+    changeObjectsByMaakunta,
     onChanges
   }) => {
     const [maakuntaId, setMaakuntaId] = useState("");
@@ -109,6 +109,10 @@ const CategoryFilter = React.memo(
       const result = find(propEq("formId", maakuntaId), categories);
       return [result].filter(Boolean);
     }, [categories, maakuntaId]);
+
+    useEffect(() => {
+      setCos(changeObjectsByMaakunta);
+    }, [changeObjectsByMaakunta]);
 
     const ids = useMemo(() => {
       return map(category => {
@@ -280,6 +284,7 @@ const CategoryFilter = React.memo(
 
     useEffect(() => {
       const shouldBeSelected = filter(location => {
+        setMaakuntaId(location.maakuntaKey);
         const isKunta = !!find(
           propEq("kuntaKoodiarvo", location.value),
           kuntaMaakuntaMapping
@@ -354,7 +359,7 @@ const CategoryFilter = React.memo(
       if (!equals(selectedLocations, locationsCombined)) {
         setSelectedLocations(locationsCombined);
       }
-    }, [categories, cos, selectedLocations]);
+    }, [baseAnchor, categories, cos, selectedLocations]);
 
     const maakuntaChanges = cos[maakuntaId] || [];
 
@@ -583,7 +588,7 @@ const CategoryFilter = React.memo(
 CategoryFilter.propTypes = {
   anchor: PropTypes.string,
   categories: PropTypes.array,
-  changeObjects: PropTypes.array,
+  changeObjectsByMaakunta: PropTypes.object,
   onChanges: PropTypes.func
 };
 
