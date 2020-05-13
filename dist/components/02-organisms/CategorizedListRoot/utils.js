@@ -152,9 +152,7 @@ export var handleNodeMain = function handleNodeMain(nodeWithRequestedChanges, ro
      * two things:
      * 1) Activate the node and its descendants.
      */
-    var a = new Date().getTime();
-    changeObjects = R.uniq(R.flatten(activateNodeAndItsDescendants(node, reducedStructure, changeObjects)));
-    console.info("Mihin aika menee: ".concat((new Date().getTime() - a) / 1000, " s")); // 2) Activate the node's predecessors.
+    changeObjects = R.uniq(R.flatten(activateNodeAndItsDescendants(node, reducedStructure, changeObjects))); // 2) Activate the node's predecessors.
 
     changeObjects = activatePredecessors(node, reducedStructure, changeObjects);
   } else if (requestedChanges.isChecked === false) {

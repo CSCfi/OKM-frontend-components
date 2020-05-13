@@ -886,7 +886,7 @@ const CategorizedList = React.memo(
                           <CategoryFilter
                             anchor={propsObj.anchor}
                             categories={propsObj.categories}
-                            changeObjects={propsObj.changeObjects}
+                            changeObjectsByMaakunta={propsObj.changeObjectsByMaakunta}
                             showCategoryTitles={propsObj.showCategoryTitles}
                             onChanges={propsObj.onChanges}
                             payload={{

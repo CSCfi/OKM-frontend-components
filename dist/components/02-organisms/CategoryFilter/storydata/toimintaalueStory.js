@@ -1,5 +1,110 @@
 export var toimintaalueStory = {
-  changes: [],
+  changes: {
+    "FI-10": [{
+      anchor: "maakuntakunnat.FI-10.kunnat.583",
+      properties: {
+        metadata: {
+          koodiarvo: "583",
+          title: "Pelkosenniemi",
+          maakuntaKey: "FI-10"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-10.A",
+      properties: {
+        isChecked: true,
+        isIndeterminate: true,
+        metadata: {
+          koodiarvo: "19",
+          maakuntaKey: "FI-10",
+          title: "Lappi"
+        }
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-10.kunnat.698",
+      properties: {
+        metadata: {
+          koodiarvo: "698",
+          title: "Rovaniemi",
+          maakuntaKey: "FI-10"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-10.kunnat.851",
+      properties: {
+        metadata: {
+          koodiarvo: "851",
+          title: "Tornio",
+          maakuntaKey: "FI-10"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-10.kunnat.976",
+      properties: {
+        metadata: {
+          koodiarvo: "976",
+          title: "Ylitornio",
+          maakuntaKey: "FI-10"
+        },
+        isChecked: true
+      }
+    }],
+    "FI-04": [{
+      anchor: "maakuntakunnat.FI-04.kunnat.588",
+      properties: {
+        metadata: {
+          koodiarvo: "588",
+          title: "Pertunmaa",
+          maakuntaKey: "FI-04"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-04.A",
+      properties: {
+        isChecked: true,
+        isIndeterminate: true,
+        metadata: {
+          koodiarvo: "10",
+          maakuntaKey: "FI-04",
+          title: "Etelä-Savo"
+        }
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-04.kunnat.618",
+      properties: {
+        metadata: {
+          koodiarvo: "618",
+          title: "Punkaharju",
+          maakuntaKey: "FI-04"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-04.kunnat.740",
+      properties: {
+        metadata: {
+          koodiarvo: "740",
+          title: "Savonlinna",
+          maakuntaKey: "FI-04"
+        },
+        isChecked: true
+      }
+    }, {
+      anchor: "maakuntakunnat.FI-04.kunnat.681",
+      properties: {
+        metadata: {
+          koodiarvo: "681",
+          title: "Rantasalmi",
+          maakuntaKey: "FI-04"
+        },
+        isChecked: true
+      }
+    }]
+  },
   categories: [{
     anchor: "FI-01",
     formId: "FI-01",

@@ -152,7 +152,6 @@ var CategorizedList = React.memo(function (props) {
         metadata: R.path(["component", "properties", "forChangeObject"], payload)
       })
     };
-    console.info(changeObj);
     return onChangesUpdate(changeObj);
   }, [onChangesUpdate]);
   /**
@@ -654,7 +653,7 @@ var CategorizedList = React.memo(function (props) {
       }, /*#__PURE__*/React.createElement(CategoryFilter, {
         anchor: propsObj.anchor,
         categories: propsObj.categories,
-        changeObjects: propsObj.changeObjects,
+        changeObjectsByMaakunta: propsObj.changeObjectsByMaakunta,
         showCategoryTitles: propsObj.showCategoryTitles,
         onChanges: propsObj.onChanges,
         payload: {

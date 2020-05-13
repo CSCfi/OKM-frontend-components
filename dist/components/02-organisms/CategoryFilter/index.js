@@ -2,7 +2,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import CategorizedListRoot from "../CategorizedListRoot";
 import Autocomplete from "../Autocomplete";
-import { assoc, equals, filter, find, includes, map, propEq, dissoc, concat, flatten, values, uniq, last, differenceWith } from "ramda";
+import { assoc, equals, filter, find, includes, map, propEq, dissoc, concat, flatten, values, uniq, last, differenceWith, mapObjIndexed } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
@@ -11,6 +11,7 @@ import { getAnchorPart } from "../../../utils/common";
 import kunnat from "./storydata/kunnat";
 import maakunnat from "./storydata/maakunnat";
 import kuntaMaakuntaMapping from "./storydata/kuntaMaakuntaMapping";
+import { Maakunta } from "./maakunta";
 var mapping = {
   "01": "FI-18",
   "02": "FI-19",
@@ -32,80 +33,39 @@ var mapping = {
   "19": "FI-10",
   "21": "FI-01"
 };
-
-function HexToRgb(hexstr) {
-  var a = [];
-  hexstr = hexstr.replace(/[^0-9a-f]+/gi, "");
-
-  if (hexstr.length == 3) {
-    a = hexstr.split("");
-  } else if (hexstr.length == 6) {
-    a = hexstr.match(/(\w{2})/g);
-  } else {
-    throw "invalid input, hex string must be in the format #FFFFFF or #FFF";
-  }
-
-  return a.map(function (x) {
-    return parseInt(x, 16);
-  });
-}
-
-function IntToHex(i) {
-  var hex = i.toString(16);
-  if (hex.length == 1) hex = "0" + hex;
-  return hex;
-}
-
-function Mix(colorA, colorB, weight) {
-  var a = HexToRgb(colorA);
-  var b = HexToRgb(colorB);
-  var c0 = Math.round((a[0] + Math.abs(a[0] - b[0]) * weight) % 255);
-  var c1 = Math.round((a[1] + Math.abs(a[1] - b[1]) * weight) % 255);
-  var c2 = Math.round((a[2] + Math.abs(a[2] - b[2]) * weight) % 255);
-  return "#" + IntToHex(c0) + IntToHex(c1) + IntToHex(c2);
-}
-
 var CategoryFilter = React.memo(function (_ref) {
   var _ref$anchor = _ref.anchor,
       baseAnchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
       _ref$categories = _ref.categories,
       categories = _ref$categories === void 0 ? [] : _ref$categories,
-      changeObjects = _ref.changeObjects,
+      _ref$changeObjectsByM = _ref.changeObjectsByMaakunta,
+      changeObjectsByMaakunta = _ref$changeObjectsByM === void 0 ? {} : _ref$changeObjectsByM,
       onChanges = _ref.onChanges;
-
-  var _useState = useState(""),
-      _useState2 = _slicedToArray(_useState, 2),
-      maakuntaId = _useState2[0],
-      setMaakuntaId = _useState2[1];
-
-  var _useState3 = useState([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cos = _useState4[0],
-      setCos = _useState4[1];
-
-  var labelSeries = useRef(null);
+  console.info("Muutosopbjektit: ", changeObjectsByMaakunta);
   var polygonSeries = useRef(null);
   var kartta = useRef(null);
   var activePolygon = useRef(null);
   var previousSelection = useRef([]);
   var polygonTemplate = useRef(null);
+  var maakuntaInstances = useRef([]);
+
+  var _useState = useState(),
+      _useState2 = _slicedToArray(_useState, 2),
+      maakuntaId = _useState2[0],
+      setMaakuntaId = _useState2[1];
+
+  var _useState3 = useState(changeObjectsByMaakunta),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cos = _useState4[0],
+      setCos = _useState4[1];
+
+  var maakuntaChanges = useMemo(function () {
+    return maakuntaId && cos[maakuntaId] ? cos[maakuntaId] : [];
+  }, [cos, maakuntaId]);
   var maakuntaCategories = useMemo(function () {
     var result = find(propEq("formId", maakuntaId), categories);
     return [result].filter(Boolean);
   }, [categories, maakuntaId]);
-  var ids = useMemo(function () {
-    return map(function (category) {
-      return {
-        id: category.formId,
-        title: category.components[0].properties.title
-      };
-    }, categories);
-  }, [categories]);
-
-  function getKunnatVareissa() {
-    return polygonSeries.current.data;
-  }
-
   useEffect(function () {
     onChanges(cos);
   }, [cos, onChanges]);
@@ -115,8 +75,9 @@ var CategoryFilter = React.memo(function (_ref) {
 
     kartta.current.projection = new am4maps.projections.Miller();
     kartta.current.geodataNames = am4geodata_lang_FI; // kartta.current.responsive.enabled = true;
+  }, []);
+  useEffect(function () {
     // Create map polygon series
-
     polygonSeries.current = kartta.current.series.push(new am4maps.MapPolygonSeries()); // Make map load polygon (like country names) data from GeoJSON
 
     polygonSeries.current.useGeodata = true; // Add expectancy data
@@ -128,14 +89,14 @@ var CategoryFilter = React.memo(function (_ref) {
         ev.target.data = source.maybe.here.values;
       }
     });
-    polygonSeries.current.data = {
-      something: "Useless",
-      maybe: {
-        here: {
-          values: getKunnatVareissa()
-        }
-      }
-    }; // Configure series
+    polygonSeries.current.events.on("inited", function (ev) {
+      maakuntaInstances.current = mapObjIndexed(function (changeObjects, id) {
+        console.info("Muutosobjektit maakunnittain: ", changeObjectsByMaakunta);
+        var maakuntaInstance = new Maakunta(id, kartta.current, find(propEq("anchor", id), categories), polygonSeries.current);
+        maakuntaInstance.colorize(changeObjects);
+        return maakuntaInstance;
+      }, changeObjectsByMaakunta);
+    }); // Configure series
 
     polygonTemplate.current = polygonSeries.current.mapPolygons.template;
     polygonTemplate.current.tooltipText = "{name}";
@@ -144,65 +105,31 @@ var CategoryFilter = React.memo(function (_ref) {
     var activeState = polygonTemplate.current.states.create("active");
     activeState.properties.stroke = am4core.color("#367B25");
     polygonTemplate.current.events.on("hit", function (e) {
+      console.info(maakuntaInstances.current); // maakuntaInstances.current["FI-10"].colorize(0.5);
+
       activePolygon.current = e.target;
       setMaakuntaId(e.target.dataItem.dataContext.id);
-    }); // Configure label series
-
-    labelSeries.current = kartta.current.series.push(new am4maps.MapImageSeries());
-    var labelTemplate = labelSeries.current.mapImages.template.createChild(am4core.Label);
-    labelTemplate.horizontalCenter = "middle";
-    labelTemplate.verticalCenter = "middle";
-    labelTemplate.fontSize = 16;
-    labelTemplate.interactionsEnabled = false;
-    labelTemplate.nonScaling = true;
+    });
     return function cancel() {
       kartta.current.dispose();
     };
-  }, [ids]);
-  var kuntiaPerMaakunta = map(function (category) {
-    return {
-      id: category.anchor,
-      amount: category.categories[0].components.length
-    };
-  }, categories);
+  }, [categories, changeObjectsByMaakunta]);
+  /**
+   * Updates the color and percentage of selected maakunta.
+   */
+
   useEffect(function () {
-    activePolygon.current = polygonSeries.current.getPolygonById(maakuntaId);
-    var polygonSerie = find(propEq("id", maakuntaId), polygonSeries.current.data);
+    if (maakuntaId) {
+      var maakuntaInstance = maakuntaInstances.current[maakuntaId];
 
-    if (polygonSerie) {
-      polygonSerie.fill = am4core.color("#ff0000");
-    }
-
-    var valittujaKuntia = Math.max(filter(function (changeObj) {
-      return changeObj.properties.isChecked;
-    }, cos[maakuntaId] || []).length - 1, // Maakunta excluded
-    0);
-    var kuntiaYhteensa = (find(propEq("id", maakuntaId), kuntiaPerMaakunta) || {}).amount;
-    var percentage = valittujaKuntia / kuntiaYhteensa;
-
-    if (kuntiaYhteensa) {
-      polygonSerie = assoc("value", valittujaKuntia / kuntiaYhteensa, polygonSerie);
-    } else {
-      polygonSerie = dissoc("value", polygonSerie);
-    }
-
-    if (activePolygon.current) {
-      var fillColor = "#dadada";
-
-      if (percentage > 0 && percentage < 1) {
-        fillColor = Mix("#109F52", "#BCE4CF", 1 - percentage);
-      } else if (percentage === 1) {
-        fillColor = "#109F52";
+      if (!maakuntaInstance) {
+        maakuntaInstance = new Maakunta(maakuntaId, kartta.current, find(propEq("anchor", maakuntaId), categories), polygonSeries.current);
+        maakuntaInstances.current[maakuntaId] = maakuntaInstance;
       }
 
-      activePolygon.current.fill = am4core.color(fillColor);
-      labelSeries.current.disposeChildren();
-      var label = labelSeries.current.mapImages.create();
-      label.latitude = activePolygon.current.visualLatitude;
-      label.longitude = activePolygon.current.visualLongitude;
-      label.children.getIndex(0).text = "".concat(Math.round(valittujaKuntia / kuntiaYhteensa * 100), " %");
+      maakuntaInstance.colorize(maakuntaChanges);
     }
-  }, [cos, ids, maakuntaId, kuntiaPerMaakunta]);
+  }, [categories, maakuntaId, maakuntaChanges]);
   var updateChangeObjects = useCallback(function (payload, _maakuntaId) {
     var nextChangeObjects = [];
     var nextMaakuntaChanges = payload.changes.length === 1 ? [] : uniq(payload.changes);
@@ -267,8 +194,7 @@ var CategoryFilter = React.memo(function (_ref) {
     if (!equals(selectedLocations, locationsCombined)) {
       setSelectedLocations(locationsCombined);
     }
-  }, [categories, cos, selectedLocations]);
-  var maakuntaChanges = cos[maakuntaId] || [];
+  }, [baseAnchor, categories, cos, selectedLocations]);
   var locale = "FI";
   var locations = useMemo(function () {
     function getValittavissaOlevat(options, isKunta, selectedLocations) {
@@ -332,9 +258,10 @@ var CategoryFilter = React.memo(function (_ref) {
 
         if (itemsToRemove.length) {
           setMaakuntaId(itemsToRemove[0].maakuntaKey);
-          var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaMaakuntaMapping);
-          var currentMaakuntaPolygon = polygonSeries.current.getPolygonById(itemsToRemove[0].maakuntaKey);
-          setMaakuntaId(currentMaakuntaPolygon.dataItem.dataContext.id);
+          var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaMaakuntaMapping); // const currentMaakuntaPolygon = polygonSeries.current.getPolygonById(
+          //   itemsToRemove[0].maakuntaKey
+          // );
+          // setMaakuntaId(currentMaakuntaPolygon.dataItem.dataContext.id);
 
           if (isKunta) {
             var maakuntaChangeObjects = filter(function (changeObj) {
@@ -417,10 +344,9 @@ var CategoryFilter = React.memo(function (_ref) {
             }
           }
 
-          var _changeObjects = uniq(flatten([[changeObj, maakuntaChangeObj].filter(Boolean), changeObjectsWithCurrentMaakuntaKey || [], kunnatChangeObjects]));
-
+          var changeObjects = uniq(flatten([[changeObj, maakuntaChangeObj].filter(Boolean), changeObjectsWithCurrentMaakuntaKey || [], kunnatChangeObjects]));
           updateChangeObjects({
-            changes: _changeObjects
+            changes: changeObjects
           }, latestSelection.maakuntaKey);
           setMaakuntaId(latestSelection.maakuntaKey);
         }

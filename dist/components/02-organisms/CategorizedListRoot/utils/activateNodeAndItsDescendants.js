@@ -1,4 +1,4 @@
-import { append, flatten, map, uniq } from "ramda";
+import { append, map } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
 import { uncheckSiblings } from "./uncheckSiblings";
@@ -22,29 +22,17 @@ function Checker() {
 
 
 export function activateNodeAndItsDescendants(node, reducedStructure, changeObjects) {
-  // console.info("Number of change objects: ", changeObjects.length);
-  // const a = new Date().getTime();
-  var childNodes = node.hasDescendants ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]) : []; // console.info(`Muutoksen lisääminen: ${(new Date().getTime() - a) / 1000} s`);
-  // We are not ready yet. Every checkbox child node must be checked.
+  var childNodes = node.hasDescendants ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]) : []; // We are not ready yet. Every checkbox child node must be checked.
 
   if (childNodes.length) {
     changeObjects = map(function (childNode) {
-      // const a = new Date().getTime();
-      var result = new Checker().run(childNode, reducedStructure, changeObjects); // const result = activateNodeAndItsDescendants(
-      //   childNode,
-      //   reducedStructure,
-      //   changeObjects
-      // );
-      // console.info(
-      //   `Rekursio vie ajan: ${(new Date().getTime() - a) / 1000} s`
-      // );
-
+      var result = new Checker().run(childNode, reducedStructure, changeObjects);
       return result;
     }, childNodes);
   } // The first thing is to find out the change object of the target node.
 
 
-  var changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects); // console.info(changeObj);
+  var changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
 
   if (changeObj) {
     if (node.properties.isChecked === true && !node.properties.isIndeterminate) {
@@ -73,7 +61,6 @@ export function activateNodeAndItsDescendants(node, reducedStructure, changeObje
      * The metadata given on the form will also be included to the change
      * object.
      */
-    var a = new Date().getTime();
     changeObjects = append({
       anchor: node.fullAnchor,
       properties: {
@@ -81,14 +68,12 @@ export function activateNodeAndItsDescendants(node, reducedStructure, changeObje
         isChecked: true
       }
     }, changeObjects);
-    console.info("Change objects array updated: ".concat((new Date().getTime() - a) / 1000, " s"));
   } // If the target node is a radio button its siblings must be unchecked.
 
 
   if (node.name === "RadioButtonWithLabel") {
     changeObjects = uncheckSiblings(node, reducedStructure, changeObjects);
-  } // console.warn("Poistutaan funktiosta activateNodeAndItsDescendants");
-
+  }
 
   return changeObjects;
 }

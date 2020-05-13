@@ -12,7 +12,6 @@ import { getChangeObjIndexByAnchor } from "../utils";
 
 export function updateChangeObjectsArray(node, properties, changeObjects) {
   // Finding the location of existing change object...
-  var a = new Date().getTime();
   var changeObjIndex = getChangeObjIndexByAnchor(node.fullAnchor, changeObjects);
 
   if (changeObjIndex > -1) {
@@ -38,6 +37,5 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
     }, changeObjects);
   }
 
-  console.info("updateChangeObjectsArray: ".concat((new Date().getTime() - a) / 1000, " s"));
   return changeObjects;
 }

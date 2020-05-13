@@ -5,9 +5,9 @@ import { withInfo } from "@storybook/addon-info";
 import { toimintaalueStory } from "./storydata/toimintaalueStory";
 storiesOf("CategoryFilter", module).addDecorator(withInfo).add("Toiminta-alueen käyttötapaus", function () {
   return /*#__PURE__*/React.createElement(CategoryFilter, {
-    anchor: "erilliset-maakunnat",
+    anchor: "maakuntakunnat",
     categories: toimintaalueStory.categories,
-    changeObjects: toimintaalueStory.changes,
+    changeObjectsByMaakunta: toimintaalueStory.changes,
     showCategoryTitles: false,
     onChanges: function onChanges(changeObjectsByMaakunta) {
       console.info(changeObjectsByMaakunta);
