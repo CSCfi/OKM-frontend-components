@@ -10,7 +10,6 @@ storiesOf("Difference", module).addDecorator(withInfo).add("Modifiable and not r
 
   return /*#__PURE__*/React.createElement(Difference, {
     initialValue: story1.initialValue,
-    value: story1.value,
     titles: story1.titles,
     onChanges: onChanges
   });

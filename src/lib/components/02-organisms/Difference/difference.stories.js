@@ -13,7 +13,6 @@ storiesOf("Difference", module)
     return (
       <Difference
         initialValue={story1.initialValue}
-        value={story1.value}
         titles={story1.titles}
         onChanges={onChanges}
       />
