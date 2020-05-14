@@ -118,7 +118,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-01",
           title: "Ahvenanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -149,7 +149,7 @@ export var toimintaalueStory = {
             title: "Brändö",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -176,7 +176,7 @@ export var toimintaalueStory = {
             title: "Eckerö",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -203,7 +203,7 @@ export var toimintaalueStory = {
             title: "Finström",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -230,7 +230,7 @@ export var toimintaalueStory = {
             title: "Föglö",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -257,7 +257,7 @@ export var toimintaalueStory = {
             title: "Geta",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -284,7 +284,7 @@ export var toimintaalueStory = {
             title: "Hammarland",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -311,7 +311,7 @@ export var toimintaalueStory = {
             title: "Jomala",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -338,7 +338,7 @@ export var toimintaalueStory = {
             title: "Kumlinge",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -365,7 +365,7 @@ export var toimintaalueStory = {
             title: "Kökar",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -392,7 +392,7 @@ export var toimintaalueStory = {
             title: "Lemland",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -419,7 +419,7 @@ export var toimintaalueStory = {
             title: "Lumparland",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -446,7 +446,7 @@ export var toimintaalueStory = {
             title: "Maarianhamina",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -473,7 +473,7 @@ export var toimintaalueStory = {
             title: "Saltvik",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -500,7 +500,7 @@ export var toimintaalueStory = {
             title: "Sottunga",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -527,7 +527,7 @@ export var toimintaalueStory = {
             title: "Sund",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -554,7 +554,7 @@ export var toimintaalueStory = {
             title: "Vårdö",
             maakuntaKey: "FI-01"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -585,7 +585,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-02",
           title: "Etelä-Karjala"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -616,7 +616,7 @@ export var toimintaalueStory = {
             title: "Imatra",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -643,7 +643,7 @@ export var toimintaalueStory = {
             title: "Joutseno",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -670,7 +670,7 @@ export var toimintaalueStory = {
             title: "Lappeenranta",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -697,7 +697,7 @@ export var toimintaalueStory = {
             title: "Lemi",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -724,7 +724,7 @@ export var toimintaalueStory = {
             title: "Luumäki",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -751,7 +751,7 @@ export var toimintaalueStory = {
             title: "Parikkala",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -778,7 +778,7 @@ export var toimintaalueStory = {
             title: "Rautjärvi",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -805,7 +805,7 @@ export var toimintaalueStory = {
             title: "Ruokolahti",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -832,7 +832,7 @@ export var toimintaalueStory = {
             title: "Saari",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -859,7 +859,7 @@ export var toimintaalueStory = {
             title: "Savitaipale",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -886,7 +886,7 @@ export var toimintaalueStory = {
             title: "Suomenniemi",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -913,7 +913,7 @@ export var toimintaalueStory = {
             title: "Taipalsaari",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -940,7 +940,7 @@ export var toimintaalueStory = {
             title: "Uukuniemi",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -967,7 +967,7 @@ export var toimintaalueStory = {
             title: "Ylämaa",
             maakuntaKey: "FI-02"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -998,7 +998,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-03",
           title: "Etelä-Pohjanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -1029,7 +1029,7 @@ export var toimintaalueStory = {
             title: "Alahärmä",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1056,7 +1056,7 @@ export var toimintaalueStory = {
             title: "Alajärvi",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1083,7 +1083,7 @@ export var toimintaalueStory = {
             title: "Alavus",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1110,7 +1110,7 @@ export var toimintaalueStory = {
             title: "Evijärvi",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1137,7 +1137,7 @@ export var toimintaalueStory = {
             title: "Ilmajoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1164,7 +1164,7 @@ export var toimintaalueStory = {
             title: "Isojoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1191,7 +1191,7 @@ export var toimintaalueStory = {
             title: "Jalasjärvi",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1218,7 +1218,7 @@ export var toimintaalueStory = {
             title: "Jurva",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1245,7 +1245,7 @@ export var toimintaalueStory = {
             title: "Karijoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1272,7 +1272,7 @@ export var toimintaalueStory = {
             title: "Kauhajoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1299,7 +1299,7 @@ export var toimintaalueStory = {
             title: "Kauhava",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1326,7 +1326,7 @@ export var toimintaalueStory = {
             title: "Kortesjärvi",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1353,7 +1353,7 @@ export var toimintaalueStory = {
             title: "Kuortane",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1380,7 +1380,7 @@ export var toimintaalueStory = {
             title: "Kurikka",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1407,7 +1407,7 @@ export var toimintaalueStory = {
             title: "Lappajärvi",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1434,7 +1434,7 @@ export var toimintaalueStory = {
             title: "Lapua",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1461,7 +1461,7 @@ export var toimintaalueStory = {
             title: "Lehtimäki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1488,7 +1488,7 @@ export var toimintaalueStory = {
             title: "Nurmo",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1515,7 +1515,7 @@ export var toimintaalueStory = {
             title: "Peräseinäjoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1542,7 +1542,7 @@ export var toimintaalueStory = {
             title: "Seinäjoki",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1569,7 +1569,7 @@ export var toimintaalueStory = {
             title: "Soini",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1596,7 +1596,7 @@ export var toimintaalueStory = {
             title: "Teuva",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1623,7 +1623,7 @@ export var toimintaalueStory = {
             title: "Töysä",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1650,7 +1650,7 @@ export var toimintaalueStory = {
             title: "Vimpeli",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1677,7 +1677,7 @@ export var toimintaalueStory = {
             title: "Ylihärmä",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1704,7 +1704,7 @@ export var toimintaalueStory = {
             title: "Ylistaro",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1731,7 +1731,7 @@ export var toimintaalueStory = {
             title: "Ähtäri",
             maakuntaKey: "FI-03"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1762,7 +1762,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-04",
           title: "Etelä-Savo"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -1793,7 +1793,7 @@ export var toimintaalueStory = {
             title: "Anttola",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1820,7 +1820,7 @@ export var toimintaalueStory = {
             title: "Enonkoski",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1847,7 +1847,7 @@ export var toimintaalueStory = {
             title: "Haukivuori",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1874,7 +1874,7 @@ export var toimintaalueStory = {
             title: "Heinävesi",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1901,7 +1901,7 @@ export var toimintaalueStory = {
             title: "Hirvensalmi",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1928,7 +1928,7 @@ export var toimintaalueStory = {
             title: "Joroinen",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1955,7 +1955,7 @@ export var toimintaalueStory = {
             title: "Juva",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -1982,7 +1982,7 @@ export var toimintaalueStory = {
             title: "Jäppilä",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2009,7 +2009,7 @@ export var toimintaalueStory = {
             title: "Kangasniemi",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2036,7 +2036,7 @@ export var toimintaalueStory = {
             title: "Kerimäki",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2063,7 +2063,7 @@ export var toimintaalueStory = {
             title: "Mikkeli",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2090,7 +2090,7 @@ export var toimintaalueStory = {
             title: "Mikkeli mlk",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2117,7 +2117,7 @@ export var toimintaalueStory = {
             title: "Mäntyharju",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2144,7 +2144,7 @@ export var toimintaalueStory = {
             title: "Pertunmaa",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2171,7 +2171,7 @@ export var toimintaalueStory = {
             title: "Pieksämäki",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2198,7 +2198,7 @@ export var toimintaalueStory = {
             title: "Pieksämäki mlk",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2225,7 +2225,7 @@ export var toimintaalueStory = {
             title: "Pieksänmaa",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2252,7 +2252,7 @@ export var toimintaalueStory = {
             title: "Punkaharju",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2279,7 +2279,7 @@ export var toimintaalueStory = {
             title: "Puumala",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2306,7 +2306,7 @@ export var toimintaalueStory = {
             title: "Rantasalmi",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2333,7 +2333,7 @@ export var toimintaalueStory = {
             title: "Ristiina",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2360,7 +2360,7 @@ export var toimintaalueStory = {
             title: "Savonlinna",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2387,7 +2387,7 @@ export var toimintaalueStory = {
             title: "Savonranta",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2414,7 +2414,7 @@ export var toimintaalueStory = {
             title: "Sulkava",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2441,7 +2441,7 @@ export var toimintaalueStory = {
             title: "Virtasalmi",
             maakuntaKey: "FI-04"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2472,7 +2472,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-05",
           title: "Kainuu"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2503,7 +2503,7 @@ export var toimintaalueStory = {
             title: "Hyrynsalmi",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2530,7 +2530,7 @@ export var toimintaalueStory = {
             title: "Kajaani",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2557,7 +2557,7 @@ export var toimintaalueStory = {
             title: "Kuhmo",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2584,7 +2584,7 @@ export var toimintaalueStory = {
             title: "Paltamo",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2611,7 +2611,7 @@ export var toimintaalueStory = {
             title: "Puolanka",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2638,7 +2638,7 @@ export var toimintaalueStory = {
             title: "Ristijärvi",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2665,7 +2665,7 @@ export var toimintaalueStory = {
             title: "Sotkamo",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2692,7 +2692,7 @@ export var toimintaalueStory = {
             title: "Suomussalmi",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2719,7 +2719,7 @@ export var toimintaalueStory = {
             title: "Vuolijoki",
             maakuntaKey: "FI-05"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2750,7 +2750,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-06",
           title: "Kanta-Häme"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2781,7 +2781,7 @@ export var toimintaalueStory = {
             title: "Forssa",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2808,7 +2808,7 @@ export var toimintaalueStory = {
             title: "Hattula",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2835,7 +2835,7 @@ export var toimintaalueStory = {
             title: "Hauho",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2862,7 +2862,7 @@ export var toimintaalueStory = {
             title: "Hausjärvi",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2889,7 +2889,7 @@ export var toimintaalueStory = {
             title: "Humppila",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2916,7 +2916,7 @@ export var toimintaalueStory = {
             title: "Hämeenlinna",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2943,7 +2943,7 @@ export var toimintaalueStory = {
             title: "Janakkala",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2970,7 +2970,7 @@ export var toimintaalueStory = {
             title: "Jokioinen",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -2997,7 +2997,7 @@ export var toimintaalueStory = {
             title: "Kalvola",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3024,7 +3024,7 @@ export var toimintaalueStory = {
             title: "Lammi",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3051,7 +3051,7 @@ export var toimintaalueStory = {
             title: "Loppi",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3078,7 +3078,7 @@ export var toimintaalueStory = {
             title: "Renko",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3105,7 +3105,7 @@ export var toimintaalueStory = {
             title: "Riihimäki",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3132,7 +3132,7 @@ export var toimintaalueStory = {
             title: "Tammela",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3159,7 +3159,7 @@ export var toimintaalueStory = {
             title: "Tuulos",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3186,7 +3186,7 @@ export var toimintaalueStory = {
             title: "Ypäjä",
             maakuntaKey: "FI-06"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3217,7 +3217,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-07",
           title: "Keski-Pohjanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3248,7 +3248,7 @@ export var toimintaalueStory = {
             title: "Halsua",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3275,7 +3275,7 @@ export var toimintaalueStory = {
             title: "Kannus",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3302,7 +3302,7 @@ export var toimintaalueStory = {
             title: "Kaustinen",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3329,7 +3329,7 @@ export var toimintaalueStory = {
             title: "Kokkola",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3356,7 +3356,7 @@ export var toimintaalueStory = {
             title: "Kälviä",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3383,7 +3383,7 @@ export var toimintaalueStory = {
             title: "Lestijärvi",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3410,7 +3410,7 @@ export var toimintaalueStory = {
             title: "Lohtaja",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3437,7 +3437,7 @@ export var toimintaalueStory = {
             title: "Perho",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3464,7 +3464,7 @@ export var toimintaalueStory = {
             title: "Toholampi",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3491,7 +3491,7 @@ export var toimintaalueStory = {
             title: "Ullava",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3518,7 +3518,7 @@ export var toimintaalueStory = {
             title: "Veteli",
             maakuntaKey: "FI-07"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3549,7 +3549,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-08",
           title: "Keski-Suomi"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3580,7 +3580,7 @@ export var toimintaalueStory = {
             title: "Hankasalmi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3607,7 +3607,7 @@ export var toimintaalueStory = {
             title: "Joutsa",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3634,7 +3634,7 @@ export var toimintaalueStory = {
             title: "Jyväskylä",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3661,7 +3661,7 @@ export var toimintaalueStory = {
             title: "Jyväskylä mlk",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3688,7 +3688,7 @@ export var toimintaalueStory = {
             title: "Jämsä",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3715,7 +3715,7 @@ export var toimintaalueStory = {
             title: "Jämsänkoski",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3742,7 +3742,7 @@ export var toimintaalueStory = {
             title: "Kannonkoski",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3769,7 +3769,7 @@ export var toimintaalueStory = {
             title: "Karstula",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3796,7 +3796,7 @@ export var toimintaalueStory = {
             title: "Keuruu",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3823,7 +3823,7 @@ export var toimintaalueStory = {
             title: "Kinnula",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3850,7 +3850,7 @@ export var toimintaalueStory = {
             title: "Kivijärvi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3877,7 +3877,7 @@ export var toimintaalueStory = {
             title: "Konnevesi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3904,7 +3904,7 @@ export var toimintaalueStory = {
             title: "Korpilahti",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3931,7 +3931,7 @@ export var toimintaalueStory = {
             title: "Kuhmoinen",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3958,7 +3958,7 @@ export var toimintaalueStory = {
             title: "Kyyjärvi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -3985,7 +3985,7 @@ export var toimintaalueStory = {
             title: "Laukaa",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4012,7 +4012,7 @@ export var toimintaalueStory = {
             title: "Leivonmäki",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4039,7 +4039,7 @@ export var toimintaalueStory = {
             title: "Luhanka",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4066,7 +4066,7 @@ export var toimintaalueStory = {
             title: "Multia",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4093,7 +4093,7 @@ export var toimintaalueStory = {
             title: "Muurame",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4120,7 +4120,7 @@ export var toimintaalueStory = {
             title: "Petäjävesi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4147,7 +4147,7 @@ export var toimintaalueStory = {
             title: "Pihtipudas",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4174,7 +4174,7 @@ export var toimintaalueStory = {
             title: "Pylkönmäki",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4201,7 +4201,7 @@ export var toimintaalueStory = {
             title: "Saarijärvi",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4228,7 +4228,7 @@ export var toimintaalueStory = {
             title: "Sumiainen",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4255,7 +4255,7 @@ export var toimintaalueStory = {
             title: "Suolahti",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4282,7 +4282,7 @@ export var toimintaalueStory = {
             title: "Toivakka",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4309,7 +4309,7 @@ export var toimintaalueStory = {
             title: "Uurainen",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4336,7 +4336,7 @@ export var toimintaalueStory = {
             title: "Viitasaari",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4363,7 +4363,7 @@ export var toimintaalueStory = {
             title: "Äänekoski",
             maakuntaKey: "FI-08"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4394,7 +4394,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-09",
           title: "Kymenlaakso"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4425,7 +4425,7 @@ export var toimintaalueStory = {
             title: "Anjalankoski",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4452,7 +4452,7 @@ export var toimintaalueStory = {
             title: "Elimäki",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4479,7 +4479,7 @@ export var toimintaalueStory = {
             title: "Hamina",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4506,7 +4506,7 @@ export var toimintaalueStory = {
             title: "Iitti",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4533,7 +4533,7 @@ export var toimintaalueStory = {
             title: "Jaala",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4560,7 +4560,7 @@ export var toimintaalueStory = {
             title: "Kotka",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4587,7 +4587,7 @@ export var toimintaalueStory = {
             title: "Kouvola",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4614,7 +4614,7 @@ export var toimintaalueStory = {
             title: "Kuusankoski",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4641,7 +4641,7 @@ export var toimintaalueStory = {
             title: "Miehikkälä",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4668,7 +4668,7 @@ export var toimintaalueStory = {
             title: "Pyhtää",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4695,7 +4695,7 @@ export var toimintaalueStory = {
             title: "Valkeala",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4722,7 +4722,7 @@ export var toimintaalueStory = {
             title: "Vehkalahti",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4749,7 +4749,7 @@ export var toimintaalueStory = {
             title: "Virolahti",
             maakuntaKey: "FI-09"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4780,7 +4780,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-10",
           title: "Lappi"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4811,7 +4811,7 @@ export var toimintaalueStory = {
             title: "Enontekiö",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4838,7 +4838,7 @@ export var toimintaalueStory = {
             title: "Inari",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4865,7 +4865,7 @@ export var toimintaalueStory = {
             title: "Kemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4892,7 +4892,7 @@ export var toimintaalueStory = {
             title: "Kemijärvi",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4919,7 +4919,7 @@ export var toimintaalueStory = {
             title: "Keminmaa",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4946,7 +4946,7 @@ export var toimintaalueStory = {
             title: "Kittilä",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4973,7 +4973,7 @@ export var toimintaalueStory = {
             title: "Kolari",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5000,7 +5000,7 @@ export var toimintaalueStory = {
             title: "Muonio",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5027,7 +5027,7 @@ export var toimintaalueStory = {
             title: "Pelkosenniemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5054,7 +5054,7 @@ export var toimintaalueStory = {
             title: "Pello",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5081,7 +5081,7 @@ export var toimintaalueStory = {
             title: "Posio",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5108,7 +5108,7 @@ export var toimintaalueStory = {
             title: "Ranua",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5135,7 +5135,7 @@ export var toimintaalueStory = {
             title: "Rovaniemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5162,7 +5162,7 @@ export var toimintaalueStory = {
             title: "Rovaniemi mlk",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5189,7 +5189,7 @@ export var toimintaalueStory = {
             title: "Salla",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5216,7 +5216,7 @@ export var toimintaalueStory = {
             title: "Savukoski",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5243,7 +5243,7 @@ export var toimintaalueStory = {
             title: "Simo",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5270,7 +5270,7 @@ export var toimintaalueStory = {
             title: "Sodankylä",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5297,7 +5297,7 @@ export var toimintaalueStory = {
             title: "Tervola",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5324,7 +5324,7 @@ export var toimintaalueStory = {
             title: "Tornio",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5351,7 +5351,7 @@ export var toimintaalueStory = {
             title: "Utsjoki",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5378,7 +5378,7 @@ export var toimintaalueStory = {
             title: "Ylitornio",
             maakuntaKey: "FI-10"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5409,7 +5409,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-11",
           title: "Pirkanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -5440,7 +5440,7 @@ export var toimintaalueStory = {
             title: "Akaa",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5467,7 +5467,7 @@ export var toimintaalueStory = {
             title: "Hämeenkyrö",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5494,7 +5494,7 @@ export var toimintaalueStory = {
             title: "Ikaalinen",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5521,7 +5521,7 @@ export var toimintaalueStory = {
             title: "Juupajoki",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5548,7 +5548,7 @@ export var toimintaalueStory = {
             title: "Kangasala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5575,7 +5575,7 @@ export var toimintaalueStory = {
             title: "Kihniö",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5602,7 +5602,7 @@ export var toimintaalueStory = {
             title: "Kuhmalahti",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5629,7 +5629,7 @@ export var toimintaalueStory = {
             title: "Kuorevesi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5656,7 +5656,7 @@ export var toimintaalueStory = {
             title: "Kuru",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5683,7 +5683,7 @@ export var toimintaalueStory = {
             title: "Kylmäkoski",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5710,7 +5710,7 @@ export var toimintaalueStory = {
             title: "Lempäälä",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5737,7 +5737,7 @@ export var toimintaalueStory = {
             title: "Luopioinen",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5764,7 +5764,7 @@ export var toimintaalueStory = {
             title: "Längelmäki",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5791,7 +5791,7 @@ export var toimintaalueStory = {
             title: "Mouhijärvi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5818,7 +5818,7 @@ export var toimintaalueStory = {
             title: "Mänttä",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5845,7 +5845,7 @@ export var toimintaalueStory = {
             title: "Mänttä-Vilppula",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5872,7 +5872,7 @@ export var toimintaalueStory = {
             title: "Nokia",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5899,7 +5899,7 @@ export var toimintaalueStory = {
             title: "Orivesi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5926,7 +5926,7 @@ export var toimintaalueStory = {
             title: "Parkano",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5953,7 +5953,7 @@ export var toimintaalueStory = {
             title: "Pirkkala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5980,7 +5980,7 @@ export var toimintaalueStory = {
             title: "Pirkkala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6007,7 +6007,7 @@ export var toimintaalueStory = {
             title: "Punkalaidun",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6034,7 +6034,7 @@ export var toimintaalueStory = {
             title: "Pälkäne",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6061,7 +6061,7 @@ export var toimintaalueStory = {
             title: "Ruovesi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6088,7 +6088,7 @@ export var toimintaalueStory = {
             title: "Sahalahti",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6115,7 +6115,7 @@ export var toimintaalueStory = {
             title: "Sastamala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6142,7 +6142,7 @@ export var toimintaalueStory = {
             title: "Suodenniemi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6169,7 +6169,7 @@ export var toimintaalueStory = {
             title: "Tampere",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6196,7 +6196,7 @@ export var toimintaalueStory = {
             title: "Toijala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6223,7 +6223,7 @@ export var toimintaalueStory = {
             title: "Urjala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6250,7 +6250,7 @@ export var toimintaalueStory = {
             title: "Valkeakoski",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6277,7 +6277,7 @@ export var toimintaalueStory = {
             title: "Vammala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6304,7 +6304,7 @@ export var toimintaalueStory = {
             title: "Vesilahti",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6331,7 +6331,7 @@ export var toimintaalueStory = {
             title: "Viiala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6358,7 +6358,7 @@ export var toimintaalueStory = {
             title: "Viljakkala",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6385,7 +6385,7 @@ export var toimintaalueStory = {
             title: "Vilppula",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6412,7 +6412,7 @@ export var toimintaalueStory = {
             title: "Virrat",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6439,7 +6439,7 @@ export var toimintaalueStory = {
             title: "Ylöjärvi",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6466,7 +6466,7 @@ export var toimintaalueStory = {
             title: "Äetsä",
             maakuntaKey: "FI-11"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6497,7 +6497,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-12",
           title: "Pohjanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -6528,7 +6528,7 @@ export var toimintaalueStory = {
             title: "Isokyrö",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6555,7 +6555,7 @@ export var toimintaalueStory = {
             title: "Kaskinen",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6582,7 +6582,7 @@ export var toimintaalueStory = {
             title: "Korsnäs",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6609,7 +6609,7 @@ export var toimintaalueStory = {
             title: "Kristiinankaupunki",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6636,7 +6636,7 @@ export var toimintaalueStory = {
             title: "Kruunupyy",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6663,7 +6663,7 @@ export var toimintaalueStory = {
             title: "Laihia",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6690,7 +6690,7 @@ export var toimintaalueStory = {
             title: "Luoto",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6717,7 +6717,7 @@ export var toimintaalueStory = {
             title: "Maalahti",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6744,7 +6744,7 @@ export var toimintaalueStory = {
             title: "Maksamaa",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6771,7 +6771,7 @@ export var toimintaalueStory = {
             title: "Mustasaari",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6798,7 +6798,7 @@ export var toimintaalueStory = {
             title: "Närpiö",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6825,7 +6825,7 @@ export var toimintaalueStory = {
             title: "Oravainen",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6852,7 +6852,7 @@ export var toimintaalueStory = {
             title: "Pedersöre",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6879,7 +6879,7 @@ export var toimintaalueStory = {
             title: "Pietarsaari",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6906,7 +6906,7 @@ export var toimintaalueStory = {
             title: "Uusikaarlepyy",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6933,7 +6933,7 @@ export var toimintaalueStory = {
             title: "Vaasa",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6960,7 +6960,7 @@ export var toimintaalueStory = {
             title: "Vähäkyrö",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -6987,7 +6987,7 @@ export var toimintaalueStory = {
             title: "Vöyri",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7014,7 +7014,7 @@ export var toimintaalueStory = {
             title: "Vöyri",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7041,7 +7041,7 @@ export var toimintaalueStory = {
             title: "Vöyri-Maksmaa",
             maakuntaKey: "FI-12"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7072,7 +7072,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-13",
           title: "Pohjois-Karjala"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -7103,7 +7103,7 @@ export var toimintaalueStory = {
             title: "Eno",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7130,7 +7130,7 @@ export var toimintaalueStory = {
             title: "Ilomantsi",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7157,7 +7157,7 @@ export var toimintaalueStory = {
             title: "Joensuu",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7184,7 +7184,7 @@ export var toimintaalueStory = {
             title: "Juuka",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7211,7 +7211,7 @@ export var toimintaalueStory = {
             title: "Kesälahti",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7238,7 +7238,7 @@ export var toimintaalueStory = {
             title: "Kiihtelysvaara",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7265,7 +7265,7 @@ export var toimintaalueStory = {
             title: "Kitee",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7292,7 +7292,7 @@ export var toimintaalueStory = {
             title: "Kontiolahti",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7319,7 +7319,7 @@ export var toimintaalueStory = {
             title: "Lieksa",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7346,7 +7346,7 @@ export var toimintaalueStory = {
             title: "Liperi",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7373,7 +7373,7 @@ export var toimintaalueStory = {
             title: "Nurmes",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7400,7 +7400,7 @@ export var toimintaalueStory = {
             title: "Outokumpu",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7427,7 +7427,7 @@ export var toimintaalueStory = {
             title: "Polvijärvi",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7454,7 +7454,7 @@ export var toimintaalueStory = {
             title: "Pyhäselkä",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7481,7 +7481,7 @@ export var toimintaalueStory = {
             title: "Rääkkylä",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7508,7 +7508,7 @@ export var toimintaalueStory = {
             title: "Tohmajärvi",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7535,7 +7535,7 @@ export var toimintaalueStory = {
             title: "Tuupovaara",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7562,7 +7562,7 @@ export var toimintaalueStory = {
             title: "Valtimo",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7589,7 +7589,7 @@ export var toimintaalueStory = {
             title: "Värtsilä",
             maakuntaKey: "FI-13"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7620,7 +7620,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-14",
           title: "Pohjois-Pohjanmaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -7651,7 +7651,7 @@ export var toimintaalueStory = {
             title: "Alavieska",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7678,7 +7678,7 @@ export var toimintaalueStory = {
             title: "Haapajärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7705,7 +7705,7 @@ export var toimintaalueStory = {
             title: "Haapavesi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7732,7 +7732,7 @@ export var toimintaalueStory = {
             title: "Hailuoto",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7759,7 +7759,7 @@ export var toimintaalueStory = {
             title: "Haukipudas",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7786,7 +7786,7 @@ export var toimintaalueStory = {
             title: "Himanka",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7813,7 +7813,7 @@ export var toimintaalueStory = {
             title: "Ii",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7840,7 +7840,7 @@ export var toimintaalueStory = {
             title: "Kalajoki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7867,7 +7867,7 @@ export var toimintaalueStory = {
             title: "Kempele",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7894,7 +7894,7 @@ export var toimintaalueStory = {
             title: "Kestilä",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7921,7 +7921,7 @@ export var toimintaalueStory = {
             title: "Kiiminki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7948,7 +7948,7 @@ export var toimintaalueStory = {
             title: "Kuivaniemi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -7975,7 +7975,7 @@ export var toimintaalueStory = {
             title: "Kuusamo",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8002,7 +8002,7 @@ export var toimintaalueStory = {
             title: "Kärsämäki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8029,7 +8029,7 @@ export var toimintaalueStory = {
             title: "Liminka",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8056,7 +8056,7 @@ export var toimintaalueStory = {
             title: "Lumijoki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8083,7 +8083,7 @@ export var toimintaalueStory = {
             title: "Merijärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8110,7 +8110,7 @@ export var toimintaalueStory = {
             title: "Muhos",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8137,7 +8137,7 @@ export var toimintaalueStory = {
             title: "Nivala",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8164,7 +8164,7 @@ export var toimintaalueStory = {
             title: "Oulainen",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8191,7 +8191,7 @@ export var toimintaalueStory = {
             title: "Oulu",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8218,7 +8218,7 @@ export var toimintaalueStory = {
             title: "Oulunsalo",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8245,7 +8245,7 @@ export var toimintaalueStory = {
             title: "Pattijoki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8272,7 +8272,7 @@ export var toimintaalueStory = {
             title: "Piippola",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8299,7 +8299,7 @@ export var toimintaalueStory = {
             title: "Pudasjärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8326,7 +8326,7 @@ export var toimintaalueStory = {
             title: "Pulkkila",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8353,7 +8353,7 @@ export var toimintaalueStory = {
             title: "Pyhäjoki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8380,7 +8380,7 @@ export var toimintaalueStory = {
             title: "Pyhäjärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8407,7 +8407,7 @@ export var toimintaalueStory = {
             title: "Pyhäntä",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8434,7 +8434,7 @@ export var toimintaalueStory = {
             title: "Raahe",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8461,7 +8461,7 @@ export var toimintaalueStory = {
             title: "Rantsila",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8488,7 +8488,7 @@ export var toimintaalueStory = {
             title: "Reisjärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8515,7 +8515,7 @@ export var toimintaalueStory = {
             title: "Ruukki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8542,7 +8542,7 @@ export var toimintaalueStory = {
             title: "Sievi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8569,7 +8569,7 @@ export var toimintaalueStory = {
             title: "Siikajoki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8596,7 +8596,7 @@ export var toimintaalueStory = {
             title: "Siikalatva",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8623,7 +8623,7 @@ export var toimintaalueStory = {
             title: "Taivalkoski",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8650,7 +8650,7 @@ export var toimintaalueStory = {
             title: "Temmes",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8677,7 +8677,7 @@ export var toimintaalueStory = {
             title: "Tyrnävä",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8704,7 +8704,7 @@ export var toimintaalueStory = {
             title: "Utajärvi",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8731,7 +8731,7 @@ export var toimintaalueStory = {
             title: "Vaala",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8758,7 +8758,7 @@ export var toimintaalueStory = {
             title: "Vihanti",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8785,7 +8785,7 @@ export var toimintaalueStory = {
             title: "Yli-Ii",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8812,7 +8812,7 @@ export var toimintaalueStory = {
             title: "Ylikiiminki",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8839,7 +8839,7 @@ export var toimintaalueStory = {
             title: "Ylivieska",
             maakuntaKey: "FI-14"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8870,7 +8870,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-15",
           title: "Pohjois-Savo"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -8901,7 +8901,7 @@ export var toimintaalueStory = {
             title: "Iisalmi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8928,7 +8928,7 @@ export var toimintaalueStory = {
             title: "Juankoski",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8955,7 +8955,7 @@ export var toimintaalueStory = {
             title: "Kaavi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -8982,7 +8982,7 @@ export var toimintaalueStory = {
             title: "Kangaslampi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9009,7 +9009,7 @@ export var toimintaalueStory = {
             title: "Karttula",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9036,7 +9036,7 @@ export var toimintaalueStory = {
             title: "Keitele",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9063,7 +9063,7 @@ export var toimintaalueStory = {
             title: "Kiuruvesi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9090,7 +9090,7 @@ export var toimintaalueStory = {
             title: "Kuopio",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9117,7 +9117,7 @@ export var toimintaalueStory = {
             title: "Lapinlahti",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9144,7 +9144,7 @@ export var toimintaalueStory = {
             title: "Leppävirta",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9171,7 +9171,7 @@ export var toimintaalueStory = {
             title: "Maaninka",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9198,7 +9198,7 @@ export var toimintaalueStory = {
             title: "Nilsiä",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9225,7 +9225,7 @@ export var toimintaalueStory = {
             title: "Pielavesi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9252,7 +9252,7 @@ export var toimintaalueStory = {
             title: "Rautalampi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9279,7 +9279,7 @@ export var toimintaalueStory = {
             title: "Rautavaara",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9306,7 +9306,7 @@ export var toimintaalueStory = {
             title: "Siilinjärvi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9333,7 +9333,7 @@ export var toimintaalueStory = {
             title: "Sonkajärvi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9360,7 +9360,7 @@ export var toimintaalueStory = {
             title: "Suonenjoki",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9387,7 +9387,7 @@ export var toimintaalueStory = {
             title: "Tervo",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9414,7 +9414,7 @@ export var toimintaalueStory = {
             title: "Tuusniemi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9441,7 +9441,7 @@ export var toimintaalueStory = {
             title: "Varkaus",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9468,7 +9468,7 @@ export var toimintaalueStory = {
             title: "Varpaisjärvi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9495,7 +9495,7 @@ export var toimintaalueStory = {
             title: "Vehmersalmi",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9522,7 +9522,7 @@ export var toimintaalueStory = {
             title: "Vesanto",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9549,7 +9549,7 @@ export var toimintaalueStory = {
             title: "Vieremä",
             maakuntaKey: "FI-15"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9580,7 +9580,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-16",
           title: "Päijät-Häme"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -9611,7 +9611,7 @@ export var toimintaalueStory = {
             title: "Artjärvi",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9638,7 +9638,7 @@ export var toimintaalueStory = {
             title: "Asikkala",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9665,7 +9665,7 @@ export var toimintaalueStory = {
             title: "Hartola",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9692,7 +9692,7 @@ export var toimintaalueStory = {
             title: "Heinola",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9719,7 +9719,7 @@ export var toimintaalueStory = {
             title: "Heinola",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9746,7 +9746,7 @@ export var toimintaalueStory = {
             title: "Heinola mlk",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9773,7 +9773,7 @@ export var toimintaalueStory = {
             title: "Hollola",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9800,7 +9800,7 @@ export var toimintaalueStory = {
             title: "Hämeenkoski",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9827,7 +9827,7 @@ export var toimintaalueStory = {
             title: "Kärkölä",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9854,7 +9854,7 @@ export var toimintaalueStory = {
             title: "Lahti",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9881,7 +9881,7 @@ export var toimintaalueStory = {
             title: "Nastola",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9908,7 +9908,7 @@ export var toimintaalueStory = {
             title: "Orimattila",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9935,7 +9935,7 @@ export var toimintaalueStory = {
             title: "Padasjoki",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9962,7 +9962,7 @@ export var toimintaalueStory = {
             title: "Sysmä",
             maakuntaKey: "FI-16"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -9993,7 +9993,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-17",
           title: "Satakunta"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -10024,7 +10024,7 @@ export var toimintaalueStory = {
             title: "Ahlainen",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10051,7 +10051,7 @@ export var toimintaalueStory = {
             title: "Eura",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10078,7 +10078,7 @@ export var toimintaalueStory = {
             title: "Eurajoki",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10105,7 +10105,7 @@ export var toimintaalueStory = {
             title: "Harjavalta",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10132,7 +10132,7 @@ export var toimintaalueStory = {
             title: "Honkajoki",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10159,7 +10159,7 @@ export var toimintaalueStory = {
             title: "Huittinen",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10186,7 +10186,7 @@ export var toimintaalueStory = {
             title: "Jämijärvi",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10213,7 +10213,7 @@ export var toimintaalueStory = {
             title: "Kankaanpää",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10240,7 +10240,7 @@ export var toimintaalueStory = {
             title: "Karvia",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10267,7 +10267,7 @@ export var toimintaalueStory = {
             title: "Kiikoinen",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10294,7 +10294,7 @@ export var toimintaalueStory = {
             title: "Kiukainen",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10321,7 +10321,7 @@ export var toimintaalueStory = {
             title: "Kodisjoki",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10348,7 +10348,7 @@ export var toimintaalueStory = {
             title: "Kokemäki",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10375,7 +10375,7 @@ export var toimintaalueStory = {
             title: "Kullaa",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10402,7 +10402,7 @@ export var toimintaalueStory = {
             title: "Köyliö",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10429,7 +10429,7 @@ export var toimintaalueStory = {
             title: "Lappi",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10456,7 +10456,7 @@ export var toimintaalueStory = {
             title: "Lavia",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10483,7 +10483,7 @@ export var toimintaalueStory = {
             title: "Luvia",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10510,7 +10510,7 @@ export var toimintaalueStory = {
             title: "Merikarvia",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10537,7 +10537,7 @@ export var toimintaalueStory = {
             title: "Nakkila",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10564,7 +10564,7 @@ export var toimintaalueStory = {
             title: "Noormarkku",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10591,7 +10591,7 @@ export var toimintaalueStory = {
             title: "Pomarkku",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10618,7 +10618,7 @@ export var toimintaalueStory = {
             title: "Pori",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10645,7 +10645,7 @@ export var toimintaalueStory = {
             title: "Rauma",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10672,7 +10672,7 @@ export var toimintaalueStory = {
             title: "Siikainen",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10699,7 +10699,7 @@ export var toimintaalueStory = {
             title: "Säkylä",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10726,7 +10726,7 @@ export var toimintaalueStory = {
             title: "Ulvila",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10753,7 +10753,7 @@ export var toimintaalueStory = {
             title: "Vampula",
             maakuntaKey: "FI-17"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10784,7 +10784,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-18",
           title: "Uusimaa"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -10815,7 +10815,7 @@ export var toimintaalueStory = {
             title: "Askola",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10842,7 +10842,7 @@ export var toimintaalueStory = {
             title: "Espoo",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10869,7 +10869,7 @@ export var toimintaalueStory = {
             title: "Hanko",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10896,7 +10896,7 @@ export var toimintaalueStory = {
             title: "Helsinki",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10923,7 +10923,7 @@ export var toimintaalueStory = {
             title: "Hyvinkää",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10950,7 +10950,7 @@ export var toimintaalueStory = {
             title: "Inkoo",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -10977,7 +10977,7 @@ export var toimintaalueStory = {
             title: "Järvenpää",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11004,7 +11004,7 @@ export var toimintaalueStory = {
             title: "Karjaa",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11031,7 +11031,7 @@ export var toimintaalueStory = {
             title: "Karjalohja",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11058,7 +11058,7 @@ export var toimintaalueStory = {
             title: "Karkkila",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11085,7 +11085,7 @@ export var toimintaalueStory = {
             title: "Kauniainen",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11112,7 +11112,7 @@ export var toimintaalueStory = {
             title: "Kerava",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11139,7 +11139,7 @@ export var toimintaalueStory = {
             title: "Kirkkonummi",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11166,7 +11166,7 @@ export var toimintaalueStory = {
             title: "Lapinjärvi",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11193,7 +11193,7 @@ export var toimintaalueStory = {
             title: "Liljendal",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11220,7 +11220,7 @@ export var toimintaalueStory = {
             title: "Lohja",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11247,7 +11247,7 @@ export var toimintaalueStory = {
             title: "Lohja",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11274,7 +11274,7 @@ export var toimintaalueStory = {
             title: "Lohjan kunta",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11301,7 +11301,7 @@ export var toimintaalueStory = {
             title: "Loviisa",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11328,7 +11328,7 @@ export var toimintaalueStory = {
             title: "Myrskylä",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11355,7 +11355,7 @@ export var toimintaalueStory = {
             title: "Mäntsälä",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11382,7 +11382,7 @@ export var toimintaalueStory = {
             title: "Nummi-Pusula",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11409,7 +11409,7 @@ export var toimintaalueStory = {
             title: "Nurmijärvi",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11436,7 +11436,7 @@ export var toimintaalueStory = {
             title: "Pernaja",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11463,7 +11463,7 @@ export var toimintaalueStory = {
             title: "Pohja",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11490,7 +11490,7 @@ export var toimintaalueStory = {
             title: "Pornainen",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11517,7 +11517,7 @@ export var toimintaalueStory = {
             title: "Porvoo",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11544,7 +11544,7 @@ export var toimintaalueStory = {
             title: "Porvoo",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11571,7 +11571,7 @@ export var toimintaalueStory = {
             title: "Porvoo mlk",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11598,7 +11598,7 @@ export var toimintaalueStory = {
             title: "Pukkila",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11625,7 +11625,7 @@ export var toimintaalueStory = {
             title: "Raasepori",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11652,7 +11652,7 @@ export var toimintaalueStory = {
             title: "Ruotsinpyhtää",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11679,7 +11679,7 @@ export var toimintaalueStory = {
             title: "Sammatti",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11706,7 +11706,7 @@ export var toimintaalueStory = {
             title: "Sipoo",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11733,7 +11733,7 @@ export var toimintaalueStory = {
             title: "Siuntio",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11760,7 +11760,7 @@ export var toimintaalueStory = {
             title: "Tammisaari",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11787,7 +11787,7 @@ export var toimintaalueStory = {
             title: "Tuusula",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11814,7 +11814,7 @@ export var toimintaalueStory = {
             title: "Ulkomaa",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11841,7 +11841,7 @@ export var toimintaalueStory = {
             title: "Vantaa",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11868,7 +11868,7 @@ export var toimintaalueStory = {
             title: "Vihti",
             maakuntaKey: "FI-18"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11899,7 +11899,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-19",
           title: "Varsinais-Suomi"
         },
-        isChecked: false,
+        isChecked: true,
         labelStyles: {
           addition: {
             color: "purple"
@@ -11930,7 +11930,7 @@ export var toimintaalueStory = {
             title: "Alastaro",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11957,7 +11957,7 @@ export var toimintaalueStory = {
             title: "Askainen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -11984,7 +11984,7 @@ export var toimintaalueStory = {
             title: "Aura",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12011,7 +12011,7 @@ export var toimintaalueStory = {
             title: "Dragsfjärd",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12038,7 +12038,7 @@ export var toimintaalueStory = {
             title: "Halikko",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12065,7 +12065,7 @@ export var toimintaalueStory = {
             title: "Houtskari",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12092,7 +12092,7 @@ export var toimintaalueStory = {
             title: "Iniö",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12119,7 +12119,7 @@ export var toimintaalueStory = {
             title: "Kaarina",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12146,7 +12146,7 @@ export var toimintaalueStory = {
             title: "Karinainen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12173,7 +12173,7 @@ export var toimintaalueStory = {
             title: "Kemiö",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12200,7 +12200,7 @@ export var toimintaalueStory = {
             title: "Kemiönsaari",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12227,7 +12227,7 @@ export var toimintaalueStory = {
             title: "Kiikala",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12254,7 +12254,7 @@ export var toimintaalueStory = {
             title: "Kisko",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12281,7 +12281,7 @@ export var toimintaalueStory = {
             title: "Korppoo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12308,7 +12308,7 @@ export var toimintaalueStory = {
             title: "Koski Tl",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12335,7 +12335,7 @@ export var toimintaalueStory = {
             title: "Kustavi",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12362,7 +12362,7 @@ export var toimintaalueStory = {
             title: "Kuusjoki",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12389,7 +12389,7 @@ export var toimintaalueStory = {
             title: "Laitila",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12416,7 +12416,7 @@ export var toimintaalueStory = {
             title: "Lemu",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12443,7 +12443,7 @@ export var toimintaalueStory = {
             title: "Lieto",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12470,7 +12470,7 @@ export var toimintaalueStory = {
             title: "Loimaa",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12497,7 +12497,7 @@ export var toimintaalueStory = {
             title: "Loimaan kunta",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12524,7 +12524,7 @@ export var toimintaalueStory = {
             title: "Marttila",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12551,7 +12551,7 @@ export var toimintaalueStory = {
             title: "Masku",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12578,7 +12578,7 @@ export var toimintaalueStory = {
             title: "Mellilä",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12605,7 +12605,7 @@ export var toimintaalueStory = {
             title: "Merimasku",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12632,7 +12632,7 @@ export var toimintaalueStory = {
             title: "Mietoinen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12659,7 +12659,7 @@ export var toimintaalueStory = {
             title: "Muurla",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12686,7 +12686,7 @@ export var toimintaalueStory = {
             title: "Mynämäki",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12713,7 +12713,7 @@ export var toimintaalueStory = {
             title: "Naantali",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12740,7 +12740,7 @@ export var toimintaalueStory = {
             title: "Nauvo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12767,7 +12767,7 @@ export var toimintaalueStory = {
             title: "Nousiainen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12794,7 +12794,7 @@ export var toimintaalueStory = {
             title: "Oripää",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12821,7 +12821,7 @@ export var toimintaalueStory = {
             title: "Paimio",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12848,7 +12848,7 @@ export var toimintaalueStory = {
             title: "Parainen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12875,7 +12875,7 @@ export var toimintaalueStory = {
             title: "Parainen",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12902,7 +12902,7 @@ export var toimintaalueStory = {
             title: "Perniö",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12929,7 +12929,7 @@ export var toimintaalueStory = {
             title: "Pertteli",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12956,7 +12956,7 @@ export var toimintaalueStory = {
             title: "Piikkiö",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -12983,7 +12983,7 @@ export var toimintaalueStory = {
             title: "Pyhäranta",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13010,7 +13010,7 @@ export var toimintaalueStory = {
             title: "Pöytyä",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13037,7 +13037,7 @@ export var toimintaalueStory = {
             title: "Raisio",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13064,7 +13064,7 @@ export var toimintaalueStory = {
             title: "Rusko",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13091,7 +13091,7 @@ export var toimintaalueStory = {
             title: "Rymättylä",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13118,7 +13118,7 @@ export var toimintaalueStory = {
             title: "Salo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13145,7 +13145,7 @@ export var toimintaalueStory = {
             title: "Sauvo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13172,7 +13172,7 @@ export var toimintaalueStory = {
             title: "Somero",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13199,7 +13199,7 @@ export var toimintaalueStory = {
             title: "Suomusjärvi",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13226,7 +13226,7 @@ export var toimintaalueStory = {
             title: "Särkisalo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13253,7 +13253,7 @@ export var toimintaalueStory = {
             title: "Taivassalo",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13280,7 +13280,7 @@ export var toimintaalueStory = {
             title: "Tarvasjoki",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13307,7 +13307,7 @@ export var toimintaalueStory = {
             title: "Turku",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13334,7 +13334,7 @@ export var toimintaalueStory = {
             title: "Uusikaupunki",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13361,7 +13361,7 @@ export var toimintaalueStory = {
             title: "Vahto",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13388,7 +13388,7 @@ export var toimintaalueStory = {
             title: "Vehmaa",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13415,7 +13415,7 @@ export var toimintaalueStory = {
             title: "Velkua",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13442,7 +13442,7 @@ export var toimintaalueStory = {
             title: "Västanfjärd",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"
@@ -13469,7 +13469,7 @@ export var toimintaalueStory = {
             title: "Yläne",
             maakuntaKey: "FI-19"
           },
-          isChecked: false,
+          isChecked: true,
           labelStyles: {
             addition: {
               color: "purple"

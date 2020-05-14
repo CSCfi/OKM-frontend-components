@@ -476,7 +476,7 @@ const Modify = React.memo(
           }}
           value={selectedLocations}
         />
-        <div className="bg-white border overflow-auto px-2">
+        <div className="bg-white border overflow-auto p-2">
           <div className="mt-12 p-4 flex">
             <div
               id="finland_map"
@@ -493,10 +493,18 @@ const Modify = React.memo(
               ) : null}
             </div>
           </div>
-          <div>
-            <SimpleButton
-              onClick={() => onClose(cos)}
-              text={"Sulje muokkaustila"}></SimpleButton>
+          <div className="flex justify-end">
+            <div className="mr-4">
+              <SimpleButton
+                variant={"outlined"}
+                onClick={() => onClose(changeObjectsByMaakunta)}
+                text={"Peruuta"}></SimpleButton>
+            </div>
+            <div>
+              <SimpleButton
+                onClick={() => onClose(cos)}
+                text={"Hyväksy"}></SimpleButton>
+            </div>
           </div>
         </div>
       </React.Fragment>

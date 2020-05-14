@@ -10,7 +10,8 @@ storiesOf("CategoryFilter", module)
     <CategoryFilter
       anchor={"maakuntakunnat"}
       categories={toimintaalueStory.categories}
-      changeObjectsByMaakunta={toimintaalueStory.changes}
+      // changeObjectsByMaakunta={toimintaalueStory.changes}
+      changeObjectsByMaakunta={{}}
       showCategoryTitles={false}
       onChanges={changeObjectsByMaakunta => {
         console.info(changeObjectsByMaakunta);
