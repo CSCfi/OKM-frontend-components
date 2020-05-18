@@ -885,8 +885,14 @@ const CategorizedList = React.memo(
                         <div className={`${component.styleClasses} flex-2`}>
                           <CategoryFilter
                             anchor={propsObj.anchor}
-                            categories={propsObj.categories}
-                            changeObjectsByMaakunta={propsObj.changeObjectsByMaakunta}
+                            changeObjectsByProvince={
+                              propsObj.changeObjectsByProvince
+                            }
+                            municipalities={propsObj.municipalities}
+                            provinces={propsObj.provinces}
+                            provincesWithoutMunicipalities={
+                              propsObj.provincesWithoutMunicipalities
+                            }
                             showCategoryTitles={propsObj.showCategoryTitles}
                             onChanges={propsObj.onChanges}
                             payload={{
