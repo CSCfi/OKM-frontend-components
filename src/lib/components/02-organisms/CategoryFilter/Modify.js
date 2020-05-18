@@ -31,8 +31,6 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
-import kunnat from "./storydata/kunnat";
-import maakunnat from "./storydata/maakunnat";
 import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
 import { Province } from "./province";
 import SimpleButton from "../../00-atoms/SimpleButton";
@@ -67,7 +65,9 @@ const Modify = React.memo(
     anchor: baseAnchor = "no-anchor-defined",
     categories = [],
     changeObjectsByProvince = {},
+    municipalities = [],
     provinceInstances = {},
+    provincesWithoutMunicipalities = [],
     onChanges,
     onClose
   }) => {
@@ -102,9 +102,7 @@ const Modify = React.memo(
 
       kartta.current.geodataNames = am4geodata_lang_FI;
       // kartta.current.responsive.enabled = true;
-    }, []);
 
-    useEffect(() => {
       // Create map polygon series
       polygonSeries.current = kartta.current.series.push(
         new am4maps.MapPolygonSeries()
@@ -139,8 +137,11 @@ const Modify = React.memo(
       activeState.properties.stroke = am4core.color("#367B25");
 
       polygonTemplate.current.events.on("hit", function(e) {
-        activePolygon.current = e.target;
-        setProvinceId(e.target.dataItem.dataContext.id);
+        if (e.target.dataItem.dataContext.id !== "FI-01") {
+          activePolygon.current = e.target;
+          // FI-01 = Ahvenanmaa
+          setProvinceId(e.target.dataItem.dataContext.id);
+        }
       });
 
       return function cancel() {
@@ -311,12 +312,19 @@ const Modify = React.memo(
       }
 
       const valittavissaOlevat = {
-        kunnat: getValittavissaOlevat(kunnat, true, selectedLocations),
-        maakunnat: getValittavissaOlevat(maakunnat, false)
+        kunnat: getValittavissaOlevat(municipalities, true, selectedLocations),
+        maakunnat: getValittavissaOlevat(provincesWithoutMunicipalities, false)
       };
 
       return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
-    }, [baseAnchor, cos, provinceInstances, selectedLocations]);
+    }, [
+      baseAnchor,
+      cos,
+      municipalities,
+      provinceInstances,
+      provincesWithoutMunicipalities,
+      selectedLocations
+    ]);
 
     return (
       <React.Fragment>
@@ -567,7 +575,8 @@ const Modify = React.memo(
                 /**
                  * Province and its municipalities have to be active.
                  * Let's remove irrelevant change objects first.
-                 **/ 
+                 **/
+
                 _changeObjects = filter(changeObj => {
                   const isRelatedToCurrentProvince = includes(
                     `.${provinceId}.`,
@@ -598,9 +607,9 @@ const Modify = React.memo(
             <div
               id="finland_map"
               ref={kartta}
-              className="flex-1"
+              className="w-2/5"
               style={{ height: "700px" }}></div>
-            <div className="flex-2">
+            <div className="w-3/5">
               {provinceCategories.length > 0 ? (
                 <CategorizedListRoot
                   anchor={baseAnchor}
@@ -633,7 +642,9 @@ Modify.propTypes = {
   anchor: PropTypes.string,
   categories: PropTypes.array,
   changeObjectsByProvince: PropTypes.object,
+  municipalities: PropTypes.array,
   provinceInstances: PropTypes.object,
+  provincesWithoutMunicipalities: PropTypes.array,
   onClose: PropTypes.func,
   onChanges: PropTypes.func
 };

@@ -3,6 +3,7 @@ import CategoryFilter from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { toimintaalueStory } from "./storydata/toimintaalueStory";
+import maakunnat from "./storydata/maakunnat";
 
 storiesOf("CategoryFilter", module)
   .addDecorator(withInfo)
@@ -10,7 +11,7 @@ storiesOf("CategoryFilter", module)
     <CategoryFilter
       anchor={"maakuntakunnat"}
       provinces={toimintaalueStory.categories}
-      // changeObjectsByMaakunta={toimintaalueStory.changes}
+      provincesWithoutMunicipalities={maakunnat}
       changeObjectsByProvince={{}}
       showCategoryTitles={false}
       onChanges={changeObjectsByMaakunta => {

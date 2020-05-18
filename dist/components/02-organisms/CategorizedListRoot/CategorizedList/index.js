@@ -652,8 +652,10 @@ var CategorizedList = React.memo(function (props) {
         className: "".concat(component.styleClasses, " flex-2")
       }, /*#__PURE__*/React.createElement(CategoryFilter, {
         anchor: propsObj.anchor,
-        provinces: propsObj.provinces,
         changeObjectsByProvince: propsObj.changeObjectsByProvince,
+        municipalities: propsObj.municipalities,
+        provinces: propsObj.provinces,
+        provincesWithoutMunicipalities: propsObj.provincesWithoutMunicipalities,
         showCategoryTitles: propsObj.showCategoryTitles,
         onChanges: propsObj.onChanges,
         payload: {

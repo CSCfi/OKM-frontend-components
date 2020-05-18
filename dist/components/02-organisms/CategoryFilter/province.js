@@ -75,20 +75,25 @@ export function Province(province, baseAnchor) {
       }
 
       if (polygon) {
-        var fillColor = "#dadada";
+        var fillColor = "#dadada"; // Ahvenanmaa must be hidden.
 
-        if (percentage > 0 && percentage < 1) {
-          fillColor = mix("#109F52", "#ffffff", 1 - percentage);
-        } else if (percentage === 1) {
-          fillColor = "#109F52";
+        if (id === "FI-01") {
+          fillColor = "#ffffff";
+        } else {
+          if (percentage > 0 && percentage < 1) {
+            fillColor = mix("#109F52", "#C8DCC3", 1 - percentage);
+          } else if (percentage === 1) {
+            fillColor = "#109F52";
+          }
+
+          labelSeries.disposeChildren();
+          var label = labelSeries.mapImages.create();
+          label.latitude = polygon.visualLatitude;
+          label.longitude = polygon.visualLongitude;
+          label.children.getIndex(0).text = "".concat(Math.round(percentage * 100), " %");
         }
 
         polygon.fill = am4core.color(fillColor);
-        labelSeries.disposeChildren();
-        var label = labelSeries.mapImages.create();
-        label.latitude = polygon.visualLatitude;
-        label.longitude = polygon.visualLongitude;
-        label.children.getIndex(0).text = "".concat(Math.round(percentage * 100), " %");
       }
     },
     getActiveMunicipalities: function getActiveMunicipalities() {
@@ -165,7 +170,7 @@ export function Province(province, baseAnchor) {
       labelTemplate = labelSeries.mapImages.template.createChild(am4core.Label);
       labelTemplate.horizontalCenter = "middle";
       labelTemplate.verticalCenter = "middle";
-      labelTemplate.fontSize = 16;
+      labelTemplate.fontSize = 14;
       labelTemplate.interactionsEnabled = false;
       labelTemplate.nonScaling = true;
     },

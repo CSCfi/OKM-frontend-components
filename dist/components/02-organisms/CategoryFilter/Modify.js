@@ -7,8 +7,6 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
-import kunnat from "./storydata/kunnat";
-import maakunnat from "./storydata/maakunnat";
 import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
 import { Province } from "./province";
 import SimpleButton from "../../00-atoms/SimpleButton";
@@ -43,8 +41,12 @@ var Modify = React.memo(function (_ref) {
       categories = _ref$categories === void 0 ? [] : _ref$categories,
       _ref$changeObjectsByP = _ref.changeObjectsByProvince,
       changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
+      _ref$municipalities = _ref.municipalities,
+      municipalities = _ref$municipalities === void 0 ? [] : _ref$municipalities,
       _ref$provinceInstance = _ref.provinceInstances,
       provinceInstances = _ref$provinceInstance === void 0 ? {} : _ref$provinceInstance,
+      _ref$provincesWithout = _ref.provincesWithoutMunicipalities,
+      provincesWithoutMunicipalities = _ref$provincesWithout === void 0 ? [] : _ref$provincesWithout,
       onChanges = _ref.onChanges,
       onClose = _ref.onClose;
   var polygonSeries = useRef(null);
@@ -79,9 +81,8 @@ var Modify = React.memo(function (_ref) {
 
     kartta.current.projection = new am4maps.projections.Miller();
     kartta.current.geodataNames = am4geodata_lang_FI; // kartta.current.responsive.enabled = true;
-  }, []);
-  useEffect(function () {
     // Create map polygon series
+
     polygonSeries.current = kartta.current.series.push(new am4maps.MapPolygonSeries()); // Make map load polygon (like country names) data from GeoJSON
 
     polygonSeries.current.useGeodata = true; // Add expectancy data
@@ -108,8 +109,11 @@ var Modify = React.memo(function (_ref) {
     var activeState = polygonTemplate.current.states.create("active");
     activeState.properties.stroke = am4core.color("#367B25");
     polygonTemplate.current.events.on("hit", function (e) {
-      activePolygon.current = e.target;
-      setProvinceId(e.target.dataItem.dataContext.id);
+      if (e.target.dataItem.dataContext.id !== "FI-01") {
+        activePolygon.current = e.target; // FI-01 = Ahvenanmaa
+
+        setProvinceId(e.target.dataItem.dataContext.id);
+      }
     });
     return function cancel() {
       kartta.current.dispose();
@@ -244,11 +248,11 @@ var Modify = React.memo(function (_ref) {
     }
 
     var valittavissaOlevat = {
-      kunnat: getValittavissaOlevat(kunnat, true, selectedLocations),
-      maakunnat: getValittavissaOlevat(maakunnat, false)
+      kunnat: getValittavissaOlevat(municipalities, true, selectedLocations),
+      maakunnat: getValittavissaOlevat(provincesWithoutMunicipalities, false)
     };
     return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
-  }, [baseAnchor, cos, provinceInstances, selectedLocations]);
+  }, [baseAnchor, cos, municipalities, provinceInstances, provincesWithoutMunicipalities, selectedLocations]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Autocomplete, {
     minChars: 1,
     name: "filter example",
@@ -412,12 +416,12 @@ var Modify = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     id: "finland_map",
     ref: kartta,
-    className: "flex-1",
+    className: "w-2/5",
     style: {
       height: "700px"
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: "flex-2"
+    className: "w-3/5"
   }, provinceCategories.length > 0 ? /*#__PURE__*/React.createElement(CategorizedListRoot, {
     anchor: baseAnchor,
     categories: provinceCategories,

@@ -8,9 +8,11 @@ import { Province } from "./province";
 
 const CategoryFilter = ({
   anchor = "no-anchor-defined",
-  provinces = [],
   changeObjectsByProvince = {},
-  onChanges
+  municipalities = [],
+  onChanges,
+  provinces = [],
+  provincesWithoutMunicipalities = []
 }) => {
   const [isEditViewActive, toggleEditView] = useState(true);
 
@@ -36,47 +38,51 @@ const CategoryFilter = ({
   function renderToimintaalueList(provinces, changeObjects = {}) {
     return (
       <ul className="flex flex-wrap ml-8">
-        {map(province => {
-          const provinceInstance = provinceInstances[province.anchor];
-          const isProvinceActive = provinceInstance.isActive(
-            anchor,
-            changeObjects[province.anchor]
-          );
-          if (isProvinceActive) {
-            const activeMunicipalities = provinceInstance.getActiveMunicipalities(
+        {provinces.length ? (
+          map(province => {
+            const provinceInstance = provinceInstances[province.anchor];
+            const isProvinceActive = provinceInstance.isActive(
+              anchor,
               changeObjects[province.anchor]
             );
-            return (
-              <li key={province.anchor} className={"w-1/2 pt-4 pb-6 pr-6"}>
-                <div className="flex items-baseline">
-                  <h4>{province.components[0].properties.title}</h4>
-                  <p className="ml-2 text-xs">
-                    (
-                    {Math.round(
-                      (activeMunicipalities.length /
-                        province.categories[0].components.length) *
-                        100
-                    )}
-                    % kunnista)
-                  </p>
-                </div>
-                <ul className={"mt-4"}>
-                  <li>
-                    {addIndex(map)((kunta, index) => {
-                      return (
-                        <span key={`kunta-${index}`}>
-                          {kunta.properties.title}
-                          {activeMunicipalities[index + 1] ? ", " : null}
-                        </span>
-                      );
-                    }, activeMunicipalities).filter(Boolean)}
-                  </li>
-                </ul>
-              </li>
-            );
-          }
-          return null;
-        }, provinces || []).filter(Boolean)}
+            if (isProvinceActive) {
+              const activeMunicipalities = provinceInstance.getActiveMunicipalities(
+                changeObjects[province.anchor]
+              );
+              return (
+                <li key={province.anchor} className={"w-1/2 pt-4 pb-6 pr-6"}>
+                  <div className="flex items-baseline">
+                    <h4>{province.components[0].properties.title}</h4>
+                    <p className="ml-2 text-xs">
+                      (
+                      {Math.round(
+                        (activeMunicipalities.length /
+                          province.categories[0].components.length) *
+                          100
+                      )}
+                      % kunnista)
+                    </p>
+                  </div>
+                  <ul className={"mt-4"}>
+                    <li>
+                      {addIndex(map)((kunta, index) => {
+                        return (
+                          <span key={`kunta-${index}`}>
+                            {kunta.properties.title}
+                            {activeMunicipalities[index + 1] ? ", " : null}
+                          </span>
+                        );
+                      }, activeMunicipalities).filter(Boolean)}
+                    </li>
+                  </ul>
+                </li>
+              );
+            }
+            return null;
+          }, provinces || []).filter(Boolean)
+        ) : (
+          <div className="py-8">-</div>
+        )}
       </ul>
     );
   }
@@ -87,6 +93,8 @@ const CategoryFilter = ({
         provinceInstances={provinceInstances}
         anchor={anchor}
         categories={provinces}
+        municipalities={municipalities}
+        provincesWithoutMunicipalities={provincesWithoutMunicipalities}
         onChanges={onChanges}
         onClose={muutoksetMaakunnittain => {
           toggleEditView(false);
@@ -121,7 +129,9 @@ CategoryFilter.propTypes = {
   anchor: PropTypes.string,
   categories: PropTypes.array,
   changeObjectsByProvince: PropTypes.object,
-  onChanges: PropTypes.func.isRequired
+  municipalities: PropTypes.array,
+  onChanges: PropTypes.func.isRequired,
+  provincesWithoutMunicipalities: PropTypes.array
 };
 
 export default CategoryFilter;

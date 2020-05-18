@@ -8,11 +8,15 @@ import { Province } from "./province";
 var CategoryFilter = function CategoryFilter(_ref) {
   var _ref$anchor = _ref.anchor,
       anchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
-      _ref$provinces = _ref.provinces,
-      provinces = _ref$provinces === void 0 ? [] : _ref$provinces,
       _ref$changeObjectsByP = _ref.changeObjectsByProvince,
       changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
-      onChanges = _ref.onChanges;
+      _ref$municipalities = _ref.municipalities,
+      municipalities = _ref$municipalities === void 0 ? [] : _ref$municipalities,
+      onChanges = _ref.onChanges,
+      _ref$provinces = _ref.provinces,
+      provinces = _ref$provinces === void 0 ? [] : _ref$provinces,
+      _ref$provincesWithout = _ref.provincesWithoutMunicipalities,
+      provincesWithoutMunicipalities = _ref$provincesWithout === void 0 ? [] : _ref$provincesWithout;
 
   var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -44,7 +48,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
     var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return /*#__PURE__*/React.createElement("ul", {
       className: "flex flex-wrap ml-8"
-    }, map(function (province) {
+    }, provinces.length ? map(function (province) {
       var provinceInstance = provinceInstances[province.anchor];
       var isProvinceActive = provinceInstance.isActive(anchor, changeObjects[province.anchor]);
 
@@ -67,7 +71,9 @@ var CategoryFilter = function CategoryFilter(_ref) {
       }
 
       return null;
-    }, provinces || []).filter(Boolean));
+    }, provinces || []).filter(Boolean) : /*#__PURE__*/React.createElement("div", {
+      className: "py-8"
+    }, "-"));
   }
 
   if (isEditViewActive) {
@@ -75,6 +81,8 @@ var CategoryFilter = function CategoryFilter(_ref) {
       provinceInstances: provinceInstances,
       anchor: anchor,
       categories: provinces,
+      municipalities: municipalities,
+      provincesWithoutMunicipalities: provincesWithoutMunicipalities,
       onChanges: onChanges,
       onClose: function onClose(muutoksetMaakunnittain) {
         toggleEditView(false);
