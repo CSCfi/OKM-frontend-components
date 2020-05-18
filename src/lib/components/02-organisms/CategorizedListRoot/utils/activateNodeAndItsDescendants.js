@@ -1,4 +1,4 @@
-import { append, map } from "ramda";
+import { append, map, flatten, uniq } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
 import { uncheckSiblings } from "./uncheckSiblings";
@@ -35,14 +35,16 @@ export function activateNodeAndItsDescendants(
 
   // We are not ready yet. Every checkbox child node must be checked.
   if (childNodes.length) {
-    changeObjects = map(childNode => {
-      const result = new Checker().run(
-        childNode,
-        reducedStructure,
-        changeObjects
-      );
-      return result;
-    }, childNodes);
+    changeObjects = flatten(
+      map(childNode => {
+        const result = new Checker().run(
+          childNode,
+          reducedStructure,
+          changeObjects
+        );
+        return result;
+      }, childNodes)
+    );
   }
 
   // The first thing is to find out the change object of the target node.
