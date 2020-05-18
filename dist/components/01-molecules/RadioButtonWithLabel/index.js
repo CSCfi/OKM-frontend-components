@@ -52,8 +52,6 @@ var RadioButtonWithLabel = React.memo(function (props) {
     className: "my-auto"
   }, props.children)));
 }, function (prevProps, nextProps) {
-  // const isSameFunction =
-  //   "" + prevProps.onChanges === "" + nextProps.onChanges;
   return equals(prevProps.isChecked, nextProps.isChecked);
 });
 export default RadioButtonWithLabel;

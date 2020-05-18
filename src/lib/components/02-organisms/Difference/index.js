@@ -95,7 +95,7 @@ const Difference = ({
               onChanges={handleChange}
               payload={payload}
               value={value}
-              width="12em"
+              fullWidth={false}
               isRequired={isRequired}
             />
           )}
