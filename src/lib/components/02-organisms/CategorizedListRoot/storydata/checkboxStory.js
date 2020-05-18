@@ -18,7 +18,7 @@ export const checkboxStory = {
           name: "CheckboxWithLabel",
           properties: {
             code: "A.A",
-            isChecked: false,
+            isChecked: true,
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),
@@ -38,7 +38,7 @@ export const checkboxStory = {
               name: "CheckboxWithLabel",
               properties: {
                 code: "A.A.A",
-                isChecked: false,
+                isChecked: true,
                 labelStyles: Object.assign({}, labelStyles, {
                   custom: isInLupa
                 }),
