@@ -9,9 +9,9 @@ storiesOf("CategoryFilter", module)
   .add("Toiminta-alueen käyttötapaus", () => (
     <CategoryFilter
       anchor={"maakuntakunnat"}
-      categories={toimintaalueStory.categories}
+      provinces={toimintaalueStory.categories}
       // changeObjectsByMaakunta={toimintaalueStory.changes}
-      changeObjectsByMaakunta={{}}
+      changeObjectsByProvince={{}}
       showCategoryTitles={false}
       onChanges={changeObjectsByMaakunta => {
         console.info(changeObjectsByMaakunta);

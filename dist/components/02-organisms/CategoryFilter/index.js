@@ -1,93 +1,93 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState, useEffect, useMemo } from "react";
-import { map, keys, compose, prop, includes, find, equals, addIndex, propEq, zipObj, filter, pathEq } from "ramda";
+import { map, prop, equals, addIndex, zipObj } from "ramda";
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
+import { Province } from "./province";
 
 var CategoryFilter = function CategoryFilter(_ref) {
   var _ref$anchor = _ref.anchor,
       anchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
-      _ref$categories = _ref.categories,
-      categories = _ref$categories === void 0 ? [] : _ref$categories,
-      _ref$changeObjectsByM = _ref.changeObjectsByMaakunta,
-      changeObjectsByMaakunta = _ref$changeObjectsByM === void 0 ? {} : _ref$changeObjectsByM,
+      _ref$provinces = _ref.provinces,
+      provinces = _ref$provinces === void 0 ? [] : _ref$provinces,
+      _ref$changeObjectsByP = _ref.changeObjectsByProvince,
+      changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
       onChanges = _ref.onChanges;
 
-  var _useState = useState(false),
+  var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
       isEditViewActive = _useState2[0],
       toggleEditView = _useState2[1];
 
-  var _useState3 = useState(changeObjectsByMaakunta),
+  var _useState3 = useState(changeObjectsByProvince),
       _useState4 = _slicedToArray(_useState3, 2),
       cos = _useState4[0],
-      setCos = _useState4[1]; // const valitutKunnatMaakunnittain = useMemo(() => {
-  //   const maakuntaIds = map(prop("anchor"), categories);
-  //   const valitutKunnat = map(category => {
-  //     return {
-  //       title: category.components[0].properties.title,
-  //       kunnat: filter(kunta => {
-  //         return kunta.properties.isChecked;
-  //       }, category.categories[0].components)
-  //     };
-  //   }, categories);
-  //   return zipObj(maakuntaIds, valitutKunnat);
-  // }, [categories]);
+      setCos = _useState4[1];
 
-
+  var provinceInstances = useMemo(function () {
+    var provinceIds = map(prop("anchor"), provinces);
+    var instances = map(function (province) {
+      return new Province(province, anchor);
+    }, provinces);
+    return zipObj(provinceIds, instances);
+  }, [anchor, provinces]);
   useEffect(function () {
     onChanges(cos);
   }, [onChanges, cos]);
+  /**
+   * Renders a list of active provinces and municipalities.
+   * @param {array} provinces - List of all provinces in Finland except Åland.
+   * @param {object} changeObjects - Change objects of all provinces by province's anchor.
+   */
 
-  function renderToimintaalueList(maakunnat) {
-    var existing = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  function renderToimintaalueList(provinces) {
+    var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return /*#__PURE__*/React.createElement("ul", {
       className: "flex flex-wrap ml-8"
-    }, map(function (maakunta) {
-      var valitutKunnat = filter(pathEq(["properties", "isChecked"], true), maakunta.categories[0].components);
-      console.info(maakunta); // const category = find(propEq("anchor", maakuntaId), categories);
-      // const maakuntaChangeObj = find(
-      //   compose(includes(".A"), prop("anchor")),
-      //   categories[maakuntaId]
-      // );
-      // const kunnatCount = categories[maakuntaId].length;
-      // const category = find(propEq("anchor", maakuntaId), categories);
-      // const kunnatAmount = category.categories[0].components.length;
+    }, map(function (province) {
+      var provinceInstance = provinceInstances[province.anchor];
+      var isProvinceActive = provinceInstance.isActive(anchor, changeObjects[province.anchor]);
 
-      return /*#__PURE__*/React.createElement("li", {
-        key: maakunta.anchor,
-        className: "w-1/2 pt-4 pb-6 pr-6"
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "flex items-baseline"
-      }, /*#__PURE__*/React.createElement("h4", null, maakunta.components[0].properties.title), /*#__PURE__*/React.createElement("p", {
-        className: "ml-2 text-xs"
-      }, "(", Math.round(valitutKunnat.length / maakunta.categories[0].components.length * 100), "% kunnista)")), /*#__PURE__*/React.createElement("ul", {
-        className: "mt-4"
-      }, /*#__PURE__*/React.createElement("li", null, addIndex(map)(function (kunta, index) {
-        return /*#__PURE__*/React.createElement("span", {
-          key: "kunta-".concat(index)
-        }, kunta.properties.title, valitutKunnat[index + 1] ? ", " : null);
-      }, valitutKunnat).filter(Boolean))));
-    }, maakunnat || []));
+      if (isProvinceActive) {
+        var activeMunicipalities = provinceInstance.getActiveMunicipalities(changeObjects[province.anchor]);
+        return /*#__PURE__*/React.createElement("li", {
+          key: province.anchor,
+          className: "w-1/2 pt-4 pb-6 pr-6"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "flex items-baseline"
+        }, /*#__PURE__*/React.createElement("h4", null, province.components[0].properties.title), /*#__PURE__*/React.createElement("p", {
+          className: "ml-2 text-xs"
+        }, "(", Math.round(activeMunicipalities.length / province.categories[0].components.length * 100), "% kunnista)")), /*#__PURE__*/React.createElement("ul", {
+          className: "mt-4"
+        }, /*#__PURE__*/React.createElement("li", null, addIndex(map)(function (kunta, index) {
+          return /*#__PURE__*/React.createElement("span", {
+            key: "kunta-".concat(index)
+          }, kunta.properties.title, activeMunicipalities[index + 1] ? ", " : null);
+        }, activeMunicipalities).filter(Boolean))));
+      }
+
+      return null;
+    }, provinces || []).filter(Boolean));
   }
 
   if (isEditViewActive) {
     return /*#__PURE__*/React.createElement(Modify, {
+      provinceInstances: provinceInstances,
       anchor: anchor,
-      categories: categories,
+      categories: provinces,
       onChanges: onChanges,
       onClose: function onClose(muutoksetMaakunnittain) {
         toggleEditView(false);
         setCos(muutoksetMaakunnittain);
       },
-      changeObjectsByMaakunta: cos
+      changeObjectsByProvince: cos
     });
   } else {
     return /*#__PURE__*/React.createElement("div", {
       className: "p-4"
-    }, /*#__PURE__*/React.createElement("h3", null, "Nykyinen toiminta-alue"), renderToimintaalueList(categories), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h3", {
+    }, /*#__PURE__*/React.createElement("h3", null, "Nykyinen toiminta-alue"), renderToimintaalueList(provinces), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h3", {
       className: "mt-4"
-    }, "Uusi toiminta-alue"), !equals(cos, changeObjectsByMaakunta) ? renderToimintaalueList(cos, false) : /*#__PURE__*/React.createElement("p", {
+    }, "Uusi toiminta-alue"), !equals(cos, changeObjectsByProvince) ? renderToimintaalueList(provinces, cos) : /*#__PURE__*/React.createElement("p", {
       className: "pl-8 pt-4"
     }, "Sama kuin nykyinen toiminta-alue."), /*#__PURE__*/React.createElement("div", {
       className: "float-right pt-6"

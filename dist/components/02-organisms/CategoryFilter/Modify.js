@@ -2,17 +2,19 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import CategorizedListRoot from "../CategorizedListRoot";
 import Autocomplete from "../Autocomplete";
-import { assoc, equals, filter, find, includes, map, propEq, dissoc, concat, flatten, values, uniq, last, differenceWith, mapObjIndexed, keys } from "ramda";
+import { assoc, equals, filter, find, map, propEq, dissoc, concat, flatten, uniq, last, differenceWith, append, forEachObjIndexed, not, compose, includes } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
-import { getAnchorPart } from "../../../utils/common";
 import kunnat from "./storydata/kunnat";
 import maakunnat from "./storydata/maakunnat";
-import kuntaMaakuntaMapping from "./storydata/kuntaMaakuntaMapping";
-import { Maakunta } from "./maakunta";
+import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
+import { Province } from "./province";
 import SimpleButton from "../../00-atoms/SimpleButton";
+import { getAnchorPart } from "../../../utils/common";
+import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
+import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 var mapping = {
   "01": "FI-18",
   "02": "FI-19",
@@ -39,35 +41,35 @@ var Modify = React.memo(function (_ref) {
       baseAnchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
       _ref$categories = _ref.categories,
       categories = _ref$categories === void 0 ? [] : _ref$categories,
-      _ref$changeObjectsByM = _ref.changeObjectsByMaakunta,
-      changeObjectsByMaakunta = _ref$changeObjectsByM === void 0 ? {} : _ref$changeObjectsByM,
+      _ref$changeObjectsByP = _ref.changeObjectsByProvince,
+      changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
+      _ref$provinceInstance = _ref.provinceInstances,
+      provinceInstances = _ref$provinceInstance === void 0 ? {} : _ref$provinceInstance,
       onChanges = _ref.onChanges,
       onClose = _ref.onClose;
-  console.info("Muutosopbjektit: ", changeObjectsByMaakunta);
   var polygonSeries = useRef(null);
   var kartta = useRef(null);
   var activePolygon = useRef(null);
   var previousSelection = useRef([]);
   var polygonTemplate = useRef(null);
-  var maakuntaInstances = useRef([]);
 
   var _useState = useState(),
       _useState2 = _slicedToArray(_useState, 2),
-      maakuntaId = _useState2[0],
-      setMaakuntaId = _useState2[1];
+      provinceId = _useState2[0],
+      setProvinceId = _useState2[1];
 
-  var _useState3 = useState(changeObjectsByMaakunta),
+  var _useState3 = useState(changeObjectsByProvince),
       _useState4 = _slicedToArray(_useState3, 2),
       cos = _useState4[0],
       setCos = _useState4[1];
 
-  var maakuntaChanges = useMemo(function () {
-    return maakuntaId && cos[maakuntaId] ? cos[maakuntaId] : [];
-  }, [cos, maakuntaId]);
-  var maakuntaCategories = useMemo(function () {
-    var result = find(propEq("formId", maakuntaId), categories);
+  var provinceChanges = useMemo(function () {
+    return provinceId && cos[provinceId] ? cos[provinceId] : [];
+  }, [cos, provinceId]);
+  var provinceCategories = useMemo(function () {
+    var result = find(propEq("formId", provinceId), categories);
     return [result].filter(Boolean);
-  }, [categories, maakuntaId]);
+  }, [categories, provinceId]);
   useEffect(function () {
     onChanges(cos);
   }, [cos, onChanges]);
@@ -92,12 +94,11 @@ var Modify = React.memo(function (_ref) {
       }
     });
     polygonSeries.current.events.on("inited", function (ev) {
-      maakuntaInstances.current = mapObjIndexed(function (changeObjects, id) {
-        console.info("Muutosobjektit maakunnittain: ", changeObjectsByMaakunta);
-        var maakuntaInstance = new Maakunta(id, kartta.current, find(propEq("anchor", id), categories), polygonSeries.current);
-        maakuntaInstance.colorize(changeObjects);
-        return maakuntaInstance;
-      }, changeObjectsByMaakunta);
+      forEachObjIndexed(function (instance) {
+        instance.setMap(kartta.current);
+        instance.setPolygonSeries(polygonSeries.current);
+        instance.colorize(changeObjectsByProvince[instance.getId()]);
+      }, provinceInstances);
     }); // Configure series
 
     polygonTemplate.current = polygonSeries.current.mapPolygons.template;
@@ -107,45 +108,43 @@ var Modify = React.memo(function (_ref) {
     var activeState = polygonTemplate.current.states.create("active");
     activeState.properties.stroke = am4core.color("#367B25");
     polygonTemplate.current.events.on("hit", function (e) {
-      console.info(maakuntaInstances.current); // maakuntaInstances.current["FI-10"].colorize(0.5);
-
       activePolygon.current = e.target;
-      setMaakuntaId(e.target.dataItem.dataContext.id);
+      setProvinceId(e.target.dataItem.dataContext.id);
     });
     return function cancel() {
       kartta.current.dispose();
     };
-  }, [categories, changeObjectsByMaakunta]);
-  /**
-   * Updates the color and percentage of selected maakunta.
-   */
-
-  useEffect(function () {
-    if (maakuntaId) {
-      var maakuntaInstance = maakuntaInstances.current[maakuntaId];
-
-      if (!maakuntaInstance) {
-        maakuntaInstance = new Maakunta(maakuntaId, kartta.current, find(propEq("anchor", maakuntaId), categories), polygonSeries.current);
-        maakuntaInstances.current[maakuntaId] = maakuntaInstance;
-      }
-
-      maakuntaInstance.colorize(maakuntaChanges);
-    }
-  }, [categories, maakuntaId, maakuntaChanges]);
-  var updateChangeObjects = useCallback(function (payload, _maakuntaId) {
+  }, [categories, changeObjectsByProvince, provinceInstances]);
+  var updateChangeObjects = useCallback(function (payload, _provinceId) {
     var nextChangeObjects = [];
-    var nextMaakuntaChanges = payload.changes.length === 1 ? [] : uniq(payload.changes);
+    var nextProvinceChanges = uniq(payload.changes);
 
-    if (nextMaakuntaChanges.length) {
-      nextChangeObjects = assoc(_maakuntaId || maakuntaId, nextMaakuntaChanges, cos);
+    if (nextProvinceChanges.length) {
+      nextChangeObjects = assoc(_provinceId || provinceId, nextProvinceChanges, cos);
     } else {
-      nextChangeObjects = dissoc(_maakuntaId || maakuntaId, cos);
+      nextChangeObjects = dissoc(_provinceId || provinceId, cos);
     }
 
     if (!equals(cos, nextChangeObjects)) {
       setCos(nextChangeObjects);
     }
-  }, [maakuntaId, cos]);
+  }, [provinceId, cos]);
+  /**
+   * Updates the color and percentage of selected province.
+   */
+
+  useEffect(function () {
+    if (provinceId) {
+      var provinceInstance = provinceInstances[provinceId];
+
+      if (!provinceInstance) {
+        provinceInstance = new Province(provinceId, kartta.current, find(propEq("anchor", provinceId), categories), polygonSeries.current);
+        provinceInstances[provinceId] = provinceInstance;
+      }
+
+      provinceInstance.colorize(provinceChanges);
+    }
+  }, [categories, provinceId, provinceInstances, provinceChanges]);
 
   var _useState5 = useState([]),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -154,77 +153,91 @@ var Modify = React.memo(function (_ref) {
 
   useEffect(function () {
     var shouldBeSelected = filter(function (location) {
-      var isKunta = !!find(propEq("kuntaKoodiarvo", location.value), kuntaMaakuntaMapping);
-      var category = find(propEq("anchor", location.maakuntaKey), categories);
-      var isTheWholeMaakuntaSelected = category && cos[location.maakuntaKey] && cos[location.maakuntaKey].length - 1 === category.categories[0].components.length;
-      var anchor = isKunta ? "".concat(baseAnchor, ".").concat(location.maakuntaKey, ".kunnat.").concat(location.value) : "".concat(baseAnchor, ".").concat(location.maakuntaKey, ".").concat(location.value);
-      var changeObj = find(propEq("anchor", anchor), cos[location.maakuntaKey] || []);
-      return !!changeObj && !isTheWholeMaakuntaSelected || isTheWholeMaakuntaSelected && !isKunta;
-    }, selectedLocations);
-    var kunnat = flatten(values(map(function (arr) {
-      var maakuntaKey = getAnchorPart(arr[0].anchor, 1);
-      var maakuntaAnchor = "".concat(baseAnchor, ".").concat(maakuntaKey, ".A");
-      var maakuntaChangeObj = find(propEq("anchor", maakuntaAnchor), arr);
-      var maakuntaKuntineen = find(propEq("anchor", maakuntaKey), categories);
-      var kuntienMaaraMaakunnassa = maakuntaKuntineen.categories[0].components.length;
+      var provinceInstance = provinceInstances[location.provinceKey];
 
-      if (maakuntaChangeObj && arr.length === kuntienMaaraMaakunnassa + 1) {
-        return {
-          label: maakuntaChangeObj.properties.metadata.title,
-          value: maakuntaChangeObj.properties.metadata.koodiarvo,
-          maakuntaKey: maakuntaChangeObj.properties.metadata.maakuntaKey,
-          isKunta: false
-        };
-      } else {
-        return map(function (changeObj) {
-          if (includes(".kunnat", changeObj.anchor)) {
+      if (provinceInstance) {
+        var areAllMunicipalitiesActive = provinceInstance.areAllMunicipalitiesActive(cos[location.provinceKey]);
+
+        if (location.isKunta) {
+          return !areAllMunicipalitiesActive && provinceInstance.isKuntaActive(location.value, baseAnchor, cos[location.provinceKey]);
+        } else {
+          return areAllMunicipalitiesActive && provinceInstance.isActive(baseAnchor, cos[location.provinceKey]);
+        }
+      }
+
+      return true;
+    }, selectedLocations); // Selected by default
+
+    var selectedByDefault = flatten(map(function (province) {
+      var provinceInstance = provinceInstances[province.anchor];
+
+      if (provinceInstance) {
+        var activeMunicipalities = provinceInstance.getActiveMunicipalities(cos[province.anchor]);
+        var areAllMunicipalitiesActive = provinceInstance.areAllMunicipalitiesActive(cos[province.anchor], activeMunicipalities);
+
+        if (areAllMunicipalitiesActive) {
+          return {
+            label: province.components[0].properties.title,
+            value: province.components[0].properties.name,
+            provinceKey: province.anchor,
+            isKunta: false
+          };
+        } else {
+          return map(function (kunta) {
             return {
-              label: changeObj.properties.metadata.title,
-              value: changeObj.properties.metadata.koodiarvo,
-              maakuntaKey: changeObj.properties.metadata.maakuntaKey,
+              label: kunta.properties.title,
+              value: kunta.properties.name,
+              provinceKey: province.anchor,
               isKunta: true
             };
-          }
-
-          return null;
-        }, arr).filter(Boolean);
+          }, activeMunicipalities);
+        }
       }
-    }, cos)));
-    var locationsCombined = uniq(concat(kunnat || [], shouldBeSelected || []));
+
+      return null;
+    }, categories).filter(Boolean));
+    var locationsCombined = uniq(flatten([shouldBeSelected, selectedByDefault]));
     previousSelection.current = locationsCombined;
 
     if (!equals(selectedLocations, locationsCombined)) {
       setSelectedLocations(locationsCombined);
     }
-  }, [baseAnchor, categories, cos, selectedLocations]);
+  }, [baseAnchor, categories, cos, provinceInstances, selectedLocations]);
   var locale = "FI";
   var locations = useMemo(function () {
-    function getValittavissaOlevat(options, isKunta, selectedLocations) {
-      return map(function (location) {
+    function getValittavissaOlevat(options, isKunta) {
+      return map(function (option) {
         var okToList = true;
-        var maakuntaKey = "";
+        var provinceKey = "";
         var kuntaMapping = null;
-        var metadata = find(propEq("kieli", locale), location.metadata);
+        var metadata = find(propEq("kieli", locale), option.metadata);
 
         if (isKunta) {
-          kuntaMapping = find(propEq("kuntaKoodiarvo", location.koodiArvo), kuntaMaakuntaMapping);
+          kuntaMapping = find(propEq("kuntaKoodiarvo", option.koodiArvo), kuntaProvinceMapping);
 
           if (kuntaMapping) {
-            maakuntaKey = kuntaMapping.maakuntaKey;
-            var maakunta = find(function (l) {
-              return l.maakuntaKey === maakuntaKey && l.isKunta === false;
-            }, selectedLocations);
-            var isMaakuntaSelected = !!maakunta;
-            okToList = !isMaakuntaSelected;
+            provinceKey = kuntaMapping.maakuntaKey;
+            var provinceInstance = provinceInstances[provinceKey];
+            var isProvinceActive = provinceInstance.isActive(baseAnchor, cos[provinceKey]);
+            okToList = !isProvinceActive || !provinceInstance.isKuntaActive(option.koodiArvo, baseAnchor, cos[provinceKey]);
           }
         } else {
-          maakuntaKey = mapping[location.koodiArvo];
+          provinceKey = mapping[option.koodiArvo];
+          var _provinceInstance = provinceInstances[provinceKey];
+
+          if (_provinceInstance) {
+            var areAllMunicipalitiesActive = _provinceInstance.areAllMunicipalitiesActive(cos[provinceKey]);
+
+            okToList = !areAllMunicipalitiesActive;
+          } else {
+            okToList = false;
+          }
         }
 
         return okToList ? {
           label: metadata.nimi,
-          value: location.koodiArvo,
-          maakuntaKey: maakuntaKey,
+          value: option.koodiArvo,
+          provinceKey: provinceKey,
           isKunta: isKunta
         } : null;
       }, options).filter(Boolean);
@@ -232,129 +245,164 @@ var Modify = React.memo(function (_ref) {
 
     var valittavissaOlevat = {
       kunnat: getValittavissaOlevat(kunnat, true, selectedLocations),
-      maakunnat: getValittavissaOlevat(maakunnat, false, selectedLocations)
+      maakunnat: getValittavissaOlevat(maakunnat, false)
     };
     return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
-  }, [selectedLocations]);
+  }, [baseAnchor, cos, provinceInstances, selectedLocations]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Autocomplete, {
     minChars: 1,
     name: "filter example",
     options: locations,
     isSearch: true,
     callback: function callback(payload, values) {
+      var currentSel = values.value || [];
       var prevSel = previousSelection.current;
-      /**
-       * If there're not any selected items all the change object must
-       * be removed.
-       */
 
-      if (!values.value) {
-        setMaakuntaId(prevSel[0].maakuntaKey);
-        setCos({});
-      } else {
-        var cmp = function cmp(x, y) {
-          return x.value === y.value;
-        };
+      var cmp = function cmp(x, y) {
+        return x.value === y.value;
+      };
 
-        var itemsToRemove = differenceWith(cmp, prevSel || [], values.value);
+      var itemsToRemove = differenceWith(cmp, prevSel || [], currentSel); // Remvoval
 
-        if (itemsToRemove.length) {
-          setMaakuntaId(itemsToRemove[0].maakuntaKey);
-          var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaMaakuntaMapping); // const currentMaakuntaPolygon = polygonSeries.current.getPolygonById(
-          //   itemsToRemove[0].maakuntaKey
-          // );
-          // setMaakuntaId(currentMaakuntaPolygon.dataItem.dataContext.id);
+      if (itemsToRemove.length) {
+        var _provinceId2 = itemsToRemove[0].provinceKey;
+        var provinceInstance = provinceInstances[_provinceId2];
+        setProvinceId(_provinceId2);
+        var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaProvinceMapping); // const currentProvincePolygon = polygonSeries.current.getPolygonById(
+        //   itemsToRemove[0].provinceKey
+        // );
+        // setProvinceId(currentProvincePolygon.dataItem.dataContext.id);
 
-          if (isKunta) {
-            var maakuntaChangeObjects = filter(function (changeObj) {
-              return changeObj.properties.metadata.koodiarvo !== itemsToRemove[0].value;
-            }, cos[itemsToRemove[0].maakuntaKey]);
+        if (isKunta) {
+          var provinceRemovalChangeObj = null; // Aktiiviset kunnat
+
+          var activeMunicipalities = provinceInstance.getActiveMunicipalities(cos[_provinceId2]);
+          /**
+           * If there's only one active municipality we are going to
+           * deactivate the province.
+           **/
+
+          if (activeMunicipalities.length === 1) {
+            provinceRemovalChangeObj = provinceInstance.getRemovalChangeObj(baseAnchor);
+          }
+
+          if (cos[_provinceId2]) {
+            var provinceChangeObjects = filter(function (changeObj) {
+              var value = getAnchorPart(changeObj.anchor, 3);
+              return value !== itemsToRemove[0].value;
+            }, cos[_provinceId2]);
+            /**
+             * Couldn't remove the municipality. It means that we have
+             * to create a new change object.
+             **/
+
+            if (provinceChangeObjects && provinceChangeObjects.length === cos[_provinceId2].length) {
+              provinceChangeObjects = append(getRemovalChangeObj(baseAnchor, _provinceId2, itemsToRemove[0].value), provinceChangeObjects);
+            }
+
             updateChangeObjects({
-              changes: maakuntaChangeObjects
-            }, itemsToRemove[0].maakuntaKey);
+              changes: flatten([provinceRemovalChangeObj, provinceChangeObjects].filter(Boolean))
+            }, _provinceId2);
           } else {
-            // Maakunnan poisto
-            var nextCos = dissoc(itemsToRemove[0].maakuntaKey, cos);
-            setCos(nextCos);
+            updateChangeObjects({
+              changes: [provinceRemovalChangeObj, getRemovalChangeObj(baseAnchor, _provinceId2, itemsToRemove[0].value)].filter(Boolean)
+            }, _provinceId2);
           }
         } else {
-          var latestSelection = last(values.value);
-          var changeObjectsWithCurrentMaakuntaKey = cos[latestSelection.maakuntaKey];
+          // Maakunnan poisto
+          var nextCos;
 
-          var _isKunta = !!find(propEq("kuntaKoodiarvo", latestSelection.value), kuntaMaakuntaMapping);
-
-          var changeObj = null;
-          var maakuntaChangeObj = null;
-          var kunnatChangeObjects = [];
-          var maakuntaKuntineen = find(propEq("anchor", latestSelection.maakuntaKey), categories);
-
-          if (_isKunta) {
-            var anchor = _isKunta ? "".concat(baseAnchor, ".").concat(latestSelection.maakuntaKey, ".kunnat.").concat(latestSelection.value) : "";
-            changeObj = {
-              anchor: anchor,
-              properties: {
-                isChecked: true,
-                metadata: {
-                  title: latestSelection.label,
-                  koodiarvo: latestSelection.value,
-                  maakuntaKey: latestSelection.maakuntaKey
-                }
-              }
-            }; // If the selected item is kunta we have to activate its maakunta too.
-
-            maakuntaChangeObj = {
-              anchor: "".concat(baseAnchor, ".").concat(latestSelection.maakuntaKey, ".A"),
-              properties: {
-                isChecked: true,
-                isIndeterminate: true,
-                metadata: {
-                  title: maakuntaKuntineen.components[0].properties.forChangeObject.title,
-                  koodiarvo: maakuntaKuntineen.components[0].properties.forChangeObject.koodiarvo,
-                  maakuntaKey: maakuntaKuntineen.anchor
-                }
-              }
-            };
+          if (cos[itemsToRemove[0].provinceKey]) {
+            nextCos = dissoc(_provinceId2, cos);
           } else {
-            changeObjectsWithCurrentMaakuntaKey = [];
-            changeObj = {
-              anchor: "".concat(baseAnchor, ".").concat(latestSelection.maakuntaKey, ".A"),
-              properties: {
-                isChecked: true,
-                isIndeterminate: false,
-                metadata: {
-                  title: latestSelection.label,
-                  koodiarvo: latestSelection.value,
-                  maakuntaKey: latestSelection.maakuntaKey
-                }
-              }
-            };
-
-            if (maakuntaKuntineen) {
-              kunnatChangeObjects = map(function (kunta) {
-                return {
-                  anchor: "".concat(baseAnchor, ".").concat(latestSelection.maakuntaKey, ".kunnat.").concat(kunta.anchor),
-                  properties: {
-                    isChecked: true,
-                    metadata: {
-                      title: kunta.properties.forChangeObject.title,
-                      koodiarvo: kunta.properties.forChangeObject.koodiarvo,
-                      maakuntaKey: latestSelection.maakuntaKey
-                    }
-                  }
-                };
-              }, maakuntaKuntineen.categories[0].components);
-            }
+            var province = find(propEq("anchor", _provinceId2), categories);
+            nextCos = assoc(_provinceId2, flatten([[provinceInstance.getRemovalChangeObj(baseAnchor)], map(function (kunta) {
+              return getRemovalChangeObj(baseAnchor, _provinceId2, kunta.anchor);
+            }, province.categories[0].components)]), cos);
           }
 
-          var changeObjects = uniq(flatten([[changeObj, maakuntaChangeObj].filter(Boolean), changeObjectsWithCurrentMaakuntaKey || [], kunnatChangeObjects]));
-          updateChangeObjects({
-            changes: changeObjects
-          }, latestSelection.maakuntaKey);
-          setMaakuntaId(latestSelection.maakuntaKey);
+          setCos(nextCos);
         }
-      }
+      } // Addition
+      else {
+          var latestSelection = last(currentSel);
+          var _provinceId3 = latestSelection.provinceKey;
 
-      previousSelection.current = values.value;
+          var _changeObjects = cos[_provinceId3] || [];
+
+          var _provinceInstance2 = provinceInstances[_provinceId3];
+
+          var _activeMunicipalities = _provinceInstance2.getActiveMunicipalities(cos[_provinceId3]);
+
+          var provinceChangeObj = find(propEq("anchor", _provinceInstance2.getAnchor()), _changeObjects);
+
+          var _isKunta = !!find(propEq("kuntaKoodiarvo", latestSelection.value), kuntaProvinceMapping);
+
+          if (_isKunta) {
+            var anchor = getKuntaAnchor(baseAnchor, _provinceId3, latestSelection.value);
+            var changeObj = find(propEq("anchor", anchor), _changeObjects);
+
+            if (changeObj && !changeObj.properties.isChecked) {
+              // Delete change object
+              _changeObjects = filter(compose(not, propEq("anchor", anchor)), _changeObjects);
+            } else {
+              // Create change object
+              _changeObjects = append(getAdditionChangeObj(baseAnchor, _provinceId3, latestSelection.label, latestSelection.value), _changeObjects);
+            }
+
+            var provinceAnchor = _provinceInstance2.getAnchor();
+
+            if (provinceChangeObj) {
+              if (_activeMunicipalities.length === _provinceInstance2.getMunicipalities().length - 1) {
+                var originalProvince = _provinceInstance2.initializedAs(); // Delete province's change object
+
+
+                _changeObjects = filter(compose(not, propEq("anchor", provinceAnchor)), _changeObjects);
+
+                if (!(originalProvince.components[0].properties.isChecked && !originalProvince.components[0].properties.isIndeterminate)) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = _provinceInstance2.getAdditionChangeObj(false);
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              }
+            } else {
+              // Create province's change object
+              var _originalProvince = _provinceInstance2.initializedAs();
+
+              if (_activeMunicipalities.length === _provinceInstance2.getMunicipalities().length - 1) {
+                if (!(_originalProvince.components[0].properties.isChecked && !_originalProvince.components[0].properties.isIndeterminate)) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = _provinceInstance2.getAdditionChangeObj(false);
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              } else {
+                if (!(_originalProvince.components[0].properties.isChecked && _originalProvince.components[0].properties.isIndeterminate)) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = _provinceInstance2.getAdditionChangeObj(true);
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              }
+            }
+          } else {
+            /**
+             * Province and its municipalities have to be active.
+             * Let's remove irrelevant change objects first.
+             **/
+            _changeObjects = filter(function (changeObj) {
+              var isRelatedToCurrentProvince = includes(".".concat(_provinceId3, "."), changeObj.anchor);
+              return !isRelatedToCurrentProvince || changeObj.properties.isChecked;
+            }, _changeObjects); // Activate the selected province and its municipalities.
+
+            _changeObjects = _provinceInstance2.activateFully(_changeObjects);
+          }
+
+          updateChangeObjects({
+            changes: _changeObjects
+          }, latestSelection.provinceKey);
+          setProvinceId(latestSelection.provinceKey);
+        }
+
+      previousSelection.current = currentSel;
     },
     value: selectedLocations
   }), /*#__PURE__*/React.createElement("div", {
@@ -370,10 +418,10 @@ var Modify = React.memo(function (_ref) {
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "flex-2"
-  }, maakuntaCategories.length > 0 ? /*#__PURE__*/React.createElement(CategorizedListRoot, {
+  }, provinceCategories.length > 0 ? /*#__PURE__*/React.createElement(CategorizedListRoot, {
     anchor: baseAnchor,
-    categories: maakuntaCategories,
-    changes: maakuntaChanges,
+    categories: provinceCategories,
+    changes: provinceChanges,
     onUpdate: updateChangeObjects
   }) : null)), /*#__PURE__*/React.createElement("div", {
     className: "flex justify-end"
@@ -382,7 +430,7 @@ var Modify = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement(SimpleButton, {
     variant: "outlined",
     onClick: function onClick() {
-      return onClose(changeObjectsByMaakunta);
+      return onClose(changeObjectsByProvince);
     },
     text: "Peruuta"
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SimpleButton, {
