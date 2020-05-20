@@ -97,11 +97,6 @@ var CategorizedListRoot = React.memo(function (_ref) {
 }, function (prevState, nextState) {
   var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
   var areChangesSame = R.equals(prevState.changes, nextState.changes);
-
-  if (!(areCategoriesSame && areChangesSame)) {
-    console.info("Updating CategorizedListRoot", nextState.anchor);
-  }
-
   return areCategoriesSame && areChangesSame;
 });
 export default CategorizedListRoot;

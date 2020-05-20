@@ -91,7 +91,6 @@ const Modify = React.memo(
     }, [categories, provinceId]);
 
     useEffect(() => {
-      console.info("Luodaan kartta...");
       kartta.current = am4core.create("finland_map", am4maps.MapChart);
       kartta.current.geodata = am4geodata_finland;
       // Set projection
@@ -615,13 +614,6 @@ const Modify = React.memo(
     );
   },
   (cp, np) => {
-    console.info(
-      "ennen",
-      cp.cos,
-      "Jälkeen: ",
-      np.cos,
-      isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos)
-    );
     return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
   }
 );

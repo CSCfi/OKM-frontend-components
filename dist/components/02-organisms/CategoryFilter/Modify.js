@@ -73,7 +73,6 @@ var Modify = React.memo(function (_ref) {
     return [result].filter(Boolean);
   }, [categories, provinceId]);
   useEffect(function () {
-    console.info("Luodaan kartta...");
     kartta.current = am4core.create("finland_map", am4maps.MapChart);
     kartta.current.geodata = am4geodata_finland; // Set projection
 
@@ -447,7 +446,6 @@ var Modify = React.memo(function (_ref) {
     text: "Hyväksy"
   })))));
 }, function (cp, np) {
-  console.info("ennen", cp.cos, "Jälkeen: ", np.cos, isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos));
   return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
 });
 export default Modify;

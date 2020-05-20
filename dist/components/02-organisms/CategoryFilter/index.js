@@ -1,5 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { map, prop, addIndex, zipObj, isEmpty, equals } from "ramda";
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
@@ -28,6 +28,9 @@ var CategoryFilter = function CategoryFilter(_ref) {
       changeObjects = _useState4[0],
       setChangeObjects = _useState4[1];
 
+  useEffect(function () {
+    setChangeObjects(changeObjectsByProvince);
+  }, [changeObjectsByProvince]);
   var provinceInstances = useMemo(function () {
     var provinceIds = map(prop("anchor"), provinces);
     var instances = map(function (province) {

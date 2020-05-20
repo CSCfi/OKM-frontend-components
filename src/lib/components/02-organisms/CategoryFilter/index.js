@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import { map, prop, addIndex, zipObj, isEmpty, equals } from "ramda";
 
@@ -17,6 +17,10 @@ const CategoryFilter = ({
   const [isEditViewActive, toggleEditView] = useState(true);
 
   const [changeObjects, setChangeObjects] = useState(changeObjectsByProvince);
+
+  useEffect(() => {
+    setChangeObjects(changeObjectsByProvince);
+  }, [changeObjectsByProvince]);
 
   const provinceInstances = useMemo(() => {
     const provinceIds = map(prop("anchor"), provinces);
