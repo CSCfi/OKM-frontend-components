@@ -3,6 +3,7 @@ import CategoryFilter from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { toimintaalueStory } from "./storydata/toimintaalueStory";
+import kunnat from "./storydata/kunnat";
 import maakunnat from "./storydata/maakunnat";
 
 storiesOf("CategoryFilter", module)
@@ -10,6 +11,7 @@ storiesOf("CategoryFilter", module)
   .add("Toiminta-alueen käyttötapaus", () => (
     <CategoryFilter
       anchor={"maakuntakunnat"}
+      municipalities={kunnat}
       provinces={toimintaalueStory.categories}
       provincesWithoutMunicipalities={maakunnat}
       changeObjectsByProvince={{}}

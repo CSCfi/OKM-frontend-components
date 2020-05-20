@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
-import { map, prop, equals, addIndex, zipObj } from "ramda";
+import { map, prop, addIndex, zipObj, isEmpty, equals } from "ramda";
 
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
@@ -16,7 +16,7 @@ const CategoryFilter = ({
 }) => {
   const [isEditViewActive, toggleEditView] = useState(true);
 
-  const [cos, setCos] = useState(changeObjectsByProvince);
+  const [changeObjects, setChangeObjects] = useState(changeObjectsByProvince);
 
   const provinceInstances = useMemo(() => {
     const provinceIds = map(prop("anchor"), provinces);
@@ -25,10 +25,6 @@ const CategoryFilter = ({
     }, provinces);
     return zipObj(provinceIds, instances);
   }, [anchor, provinces]);
-
-  useEffect(() => {
-    onChanges(cos);
-  }, [onChanges, cos]);
 
   /**
    * Renders a list of active provinces and municipalities.
@@ -42,7 +38,6 @@ const CategoryFilter = ({
           map(province => {
             const provinceInstance = provinceInstances[province.anchor];
             const isProvinceActive = provinceInstance.isActive(
-              anchor,
               changeObjects[province.anchor]
             );
             if (isProvinceActive) {
@@ -95,12 +90,16 @@ const CategoryFilter = ({
         categories={provinces}
         municipalities={municipalities}
         provincesWithoutMunicipalities={provincesWithoutMunicipalities}
-        onChanges={onChanges}
-        onClose={muutoksetMaakunnittain => {
+        onClose={changesByProvince => {
           toggleEditView(false);
-          setCos(muutoksetMaakunnittain);
+          if (changesByProvince) {
+            setChangeObjects(changesByProvince);
+            onChanges(changesByProvince);
+          } else if (!equals(changeObjects, changeObjectsByProvince)) {
+            onChanges(changeObjectsByProvince);
+          }
         }}
-        changeObjectsByProvince={cos}
+        changeObjectsByProvince={changeObjects}
       />
     );
   } else {
@@ -110,8 +109,8 @@ const CategoryFilter = ({
         {renderToimintaalueList(provinces)}
         <hr />
         <h3 className={"mt-4"}>Uusi toiminta-alue</h3>
-        {!equals(cos, changeObjectsByProvince) ? (
-          renderToimintaalueList(provinces, cos)
+        {!isEmpty(changeObjects) ? (
+          renderToimintaalueList(provinces, changeObjects)
         ) : (
           <p className={"pl-8 pt-4"}>Sama kuin nykyinen toiminta-alue.</p>
         )}

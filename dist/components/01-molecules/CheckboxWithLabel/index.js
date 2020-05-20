@@ -4,7 +4,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import green from "@material-ui/core/colors/green";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import * as R from "ramda";
 import { isEqual } from "lodash";
 import Check from "@material-ui/icons/CheckBoxOutlined";
 /**
@@ -70,13 +69,8 @@ var CheckboxWithLabel = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement(Check, null), /*#__PURE__*/React.createElement("span", {
     className: "my-auto"
   }, children)));
-}, function (prevState, currentState) {
-  // const isSameOld =
-  //   R.equals(prevState.isChecked, currentState.isChecked) &&
-  //   R.equals(prevState.isIndeterminate, currentState.isIndeterminate) &&
-  //   R.equals(prevState.isDisabled, currentState.isDisabled);
-  // return isSameOld;
-  return false;
+}, function (cp, np) {
+  return cp.isChecked === np.isChecked && cp.isDisabled === np.isDisabled && cp.isIndeterminate === np.isIndeterminate && cp.isReadOnly === np.isReadOnly && isEqual(cp.payload, np.payload);
 });
 CheckboxWithLabel.defaultProps = {
   isChecked: false,

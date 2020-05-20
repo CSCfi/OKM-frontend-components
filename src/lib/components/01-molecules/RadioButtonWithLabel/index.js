@@ -7,7 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { withStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import Check from "@material-ui/icons/CheckBoxOutlined";
-import { equals } from "ramda";
+import { isEqual } from "lodash";
 
 const RadioButtonWithLabel = React.memo(
   props => {
@@ -25,6 +25,7 @@ const RadioButtonWithLabel = React.memo(
     })(props => <Radio color="default" {...props} />);
 
     const handleChanges = () => {
+      console.info("Muutos tapahtui.", props.payload, !props.isChecked);
       props.onChanges(props.payload, { isChecked: !props.isChecked });
     };
 
@@ -60,8 +61,11 @@ const RadioButtonWithLabel = React.memo(
       </React.Fragment>
     );
   },
-  (prevProps, nextProps) => {
-    return equals(prevProps.isChecked, nextProps.isChecked);
+  (cp, np) => {
+    return (
+      isEqual(cp.isChecked, np.isChecked) &&
+      isEqual(cp.labelStyles, np.labelStyles)
+    );
   }
 );
 

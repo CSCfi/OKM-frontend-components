@@ -91,7 +91,6 @@ const Difference = ({
           {!readonly && (
             <Input
               type="number"
-              inputProps={{ min: "0" }}
               onChanges={handleChange}
               payload={payload}
               value={value}

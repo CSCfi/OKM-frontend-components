@@ -153,7 +153,7 @@ var CategorizedList = React.memo(function (props) {
       })
     };
     return onChangesUpdate(changeObj);
-  }, [onChangesUpdate]);
+  }, [onChangesUpdate, props.anchor]);
   /**
    * Rendering starts here.
    */
@@ -310,7 +310,6 @@ var CategorizedList = React.memo(function (props) {
         onChanges: handleChanges,
         payload: {
           anchor: anchor,
-          // categories: category.categories,
           component: component,
           fullPath: fullPath,
           parent: props.parent,
@@ -680,7 +679,6 @@ var CategorizedList = React.memo(function (props) {
       categories: category.categories,
       changes: categoryChanges,
       debug: props.debug,
-      getAllChanges: props.getAllChanges,
       id: "".concat(props.id, "-").concat(category.code),
       level: props.level + 1,
       parent: {
@@ -702,9 +700,10 @@ var CategorizedList = React.memo(function (props) {
 }, function (prevState, nextState) {
   var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
   var areChangesSame = R.equals(prevState.changes, nextState.changes);
-  return areCategoriesSame && areChangesSame;
+  return areCategoriesSame && areChangesSame && JSON.stringify(prevState.onChangesUpdate) === JSON.stringify(nextState.onChangesUpdate);
 });
 CategorizedList.defaultProps = {
   level: 0
 };
+CategorizedList.displayName = "CategorizedList222";
 export default CategorizedList;

@@ -65,6 +65,57 @@ export function Province(province, baseAnchor) {
   }
 
   return {
+    activateFully: (changeObjects = []) => {
+      // Activate province
+      const provinceAnchor = getAnchor();
+      const provinceChangeObj = find(
+        propEq("anchor", provinceAnchor),
+        changeObjects
+      );
+      const provinceObj = province.components[0];
+      const municipalities = getMunicipalities();
+
+      // If change object is not valid it must be deleted.
+      if (provinceChangeObj) {
+        if (
+          !provinceChangeObj.properties.isChecked ||
+          provinceChangeObj.properties.isIndeterminate
+        ) {
+          changeObjects = filter(changeObj => {
+            return changeObj.anchor !== provinceAnchor;
+          }, changeObjects);
+
+          if (
+            !provinceObj.properties.isChecked ||
+            provinceObj.properties.isIndeterminate
+          ) {
+            // New valid change object must be created.
+            changeObjects = append(getAdditionChangeObj(false), changeObjects);
+          }
+        }
+      }
+      // If there isn't change object
+      else if (
+        !provinceObj.properties.isChecked ||
+        provinceObj.properties.isIndeterminate
+      ) {
+        // New valid change object must be created.
+        changeObjects = append(getAdditionChangeObj(false), changeObjects);
+      }
+
+      // Activate municipalities
+      const municipalityChangeObjects = map(municipality => {
+        if (!municipality.properties.isChecked) {
+          return getMunicipalityAdditionChangeObj(
+            baseAnchor,
+            id,
+            municipality.properties.title,
+            municipality.anchor
+          );
+        }
+      }, municipalities).filter(Boolean);
+      return concat(municipalityChangeObjects, changeObjects);
+    },
     areAllMunicipalitiesActive: (changeObjects = [], activeMunicipalities) => {
       return activeMunicipalities
         ? activeMunicipalities.length === getMunicipalities().length
@@ -144,7 +195,7 @@ export function Province(province, baseAnchor) {
     initializedAs: () => {
       return province;
     },
-    isActive: (baseAnchor, changeObjects = []) => {
+    isActive: (changeObjects = []) => {
       const changeObj = find(propEq("anchor", getAnchor()), changeObjects);
       return (
         (province.components[0].properties.isChecked && !changeObj) ||
@@ -162,30 +213,6 @@ export function Province(province, baseAnchor) {
         (kunta.properties.isChecked && !changeObj) ||
         (changeObj && changeObj.properties.isChecked)
       );
-    },
-    activateFully: changeObjects => {
-      // Activate province
-      const provinceObj = province.components[0];
-      const municipalities = getMunicipalities();
-      if (
-        !provinceObj.properties.isChecked ||
-        provinceObj.properties.isIndeterminate
-      ) {
-        changeObjects = append(getAdditionChangeObj(false), changeObjects);
-      }
-      // Activate municipalities
-      const municipalityChangeObjects = map(municipality => {
-        if (!municipality.properties.isChecked) {
-          return getMunicipalityAdditionChangeObj(
-            baseAnchor,
-            id,
-            municipality.properties.title,
-            municipality.anchor
-          );
-        }
-      }, municipalities).filter(Boolean);
-      return concat(municipalityChangeObjects, changeObjects);
-      // Activate province's municipalities
     },
     setMap: map => {
       kartta = map;

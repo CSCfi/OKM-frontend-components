@@ -46,13 +46,10 @@ var CategorizedListRoot = React.memo(function (_ref) {
    */
 
   var onChangesUpdate = useCallback(function (changeObj) {
-    var start = new Date().getTime(); // Target node is the component affected by the change.
-
+    // Target node is the component affected by the change.
     var targetNode = getTargetNode(changeObj, reducedStructure); // The array of change objects will be updated.
 
     var nextChanges = handleNodeMain(targetNode, anchor, reducedStructure, changesRef.current);
-    var end = new Date().getTime();
-    console.info("Muutosten määrittämiseen kuluva aika: ", "".concat((end - start) / 1000, " s"));
     /**
      * The updated array will be sent using the onUpdate callback function.
      * The anchor parameter is the root anchor of the current form. It can
@@ -100,6 +97,11 @@ var CategorizedListRoot = React.memo(function (_ref) {
 }, function (prevState, nextState) {
   var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
   var areChangesSame = R.equals(prevState.changes, nextState.changes);
+
+  if (!(areCategoriesSame && areChangesSame)) {
+    console.info("Updating CategorizedListRoot", nextState.anchor);
+  }
+
   return areCategoriesSame && areChangesSame;
 });
 export default CategorizedListRoot;

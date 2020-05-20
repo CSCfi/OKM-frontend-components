@@ -7,6 +7,7 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
+import { isEqual } from "lodash";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
@@ -140,6 +141,9 @@ var Input = React.memo(function (props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, value !== "" && props.requiredMessage));
+}, function (cp, np) {
+  console.info(cp.payload, np.payload, isEqual(cp.payload, np.payload));
+  return cp.isDisabled === np.isDisabled && cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isVisited === np.isVisited && cp.isDence === np.isDense && isEqual(cp.payload, np.payload);
 });
 Input.defaultProps = {
   ariaLabel: "Text area",

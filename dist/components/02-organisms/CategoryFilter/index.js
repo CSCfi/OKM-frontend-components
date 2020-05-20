@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useEffect, useMemo } from "react";
-import { map, prop, equals, addIndex, zipObj } from "ramda";
+import React, { useState, useMemo } from "react";
+import { map, prop, addIndex, zipObj, isEmpty, equals } from "ramda";
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
 import { Province } from "./province";
@@ -25,8 +25,8 @@ var CategoryFilter = function CategoryFilter(_ref) {
 
   var _useState3 = useState(changeObjectsByProvince),
       _useState4 = _slicedToArray(_useState3, 2),
-      cos = _useState4[0],
-      setCos = _useState4[1];
+      changeObjects = _useState4[0],
+      setChangeObjects = _useState4[1];
 
   var provinceInstances = useMemo(function () {
     var provinceIds = map(prop("anchor"), provinces);
@@ -35,9 +35,6 @@ var CategoryFilter = function CategoryFilter(_ref) {
     }, provinces);
     return zipObj(provinceIds, instances);
   }, [anchor, provinces]);
-  useEffect(function () {
-    onChanges(cos);
-  }, [onChanges, cos]);
   /**
    * Renders a list of active provinces and municipalities.
    * @param {array} provinces - List of all provinces in Finland except Åland.
@@ -50,7 +47,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
       className: "flex flex-wrap ml-8"
     }, provinces.length ? map(function (province) {
       var provinceInstance = provinceInstances[province.anchor];
-      var isProvinceActive = provinceInstance.isActive(anchor, changeObjects[province.anchor]);
+      var isProvinceActive = provinceInstance.isActive(changeObjects[province.anchor]);
 
       if (isProvinceActive) {
         var activeMunicipalities = provinceInstance.getActiveMunicipalities(changeObjects[province.anchor]);
@@ -83,19 +80,24 @@ var CategoryFilter = function CategoryFilter(_ref) {
       categories: provinces,
       municipalities: municipalities,
       provincesWithoutMunicipalities: provincesWithoutMunicipalities,
-      onChanges: onChanges,
-      onClose: function onClose(muutoksetMaakunnittain) {
+      onClose: function onClose(changesByProvince) {
         toggleEditView(false);
-        setCos(muutoksetMaakunnittain);
+
+        if (changesByProvince) {
+          setChangeObjects(changesByProvince);
+          onChanges(changesByProvince);
+        } else if (!equals(changeObjects, changeObjectsByProvince)) {
+          onChanges(changeObjectsByProvince);
+        }
       },
-      changeObjectsByProvince: cos
+      changeObjectsByProvince: changeObjects
     });
   } else {
     return /*#__PURE__*/React.createElement("div", {
       className: "p-4"
     }, /*#__PURE__*/React.createElement("h3", null, "Nykyinen toiminta-alue"), renderToimintaalueList(provinces), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h3", {
       className: "mt-4"
-    }, "Uusi toiminta-alue"), !equals(cos, changeObjectsByProvince) ? renderToimintaalueList(provinces, cos) : /*#__PURE__*/React.createElement("p", {
+    }, "Uusi toiminta-alue"), !isEmpty(changeObjects) ? renderToimintaalueList(provinces, changeObjects) : /*#__PURE__*/React.createElement("p", {
       className: "pl-8 pt-4"
     }, "Sama kuin nykyinen toiminta-alue."), /*#__PURE__*/React.createElement("div", {
       className: "float-right pt-6"

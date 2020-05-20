@@ -37,6 +37,7 @@ import SimpleButton from "../../00-atoms/SimpleButton";
 import { getAnchorPart } from "../../../utils/common";
 import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
 import { getAnchor as getKuntaAnchor } from "./kunta-utils";
+import { isEqual } from "lodash";
 
 const mapping = {
   "01": "FI-18",
@@ -68,7 +69,6 @@ const Modify = React.memo(
     municipalities = [],
     provinceInstances = {},
     provincesWithoutMunicipalities = [],
-    onChanges,
     onClose
   }) => {
     const polygonSeries = useRef(null);
@@ -91,10 +91,7 @@ const Modify = React.memo(
     }, [categories, provinceId]);
 
     useEffect(() => {
-      onChanges(cos);
-    }, [cos, onChanges]);
-
-    useEffect(() => {
+      console.info("Luodaan kartta...");
       kartta.current = am4core.create("finland_map", am4maps.MapChart);
       kartta.current.geodata = am4geodata_finland;
       // Set projection
@@ -162,6 +159,7 @@ const Modify = React.memo(
         } else {
           nextChangeObjects = dissoc(_provinceId || provinceId, cos);
         }
+        console.info(cos, nextChangeObjects);
         if (!equals(cos, nextChangeObjects)) {
           setCos(nextChangeObjects);
         }
@@ -209,7 +207,7 @@ const Modify = React.memo(
           } else {
             return (
               areAllMunicipalitiesActive &&
-              provinceInstance.isActive(baseAnchor, cos[location.provinceKey])
+              provinceInstance.isActive(cos[location.provinceKey])
             );
           }
         }
@@ -276,10 +274,9 @@ const Modify = React.memo(
             if (kuntaMapping) {
               provinceKey = kuntaMapping.maakuntaKey;
               const provinceInstance = provinceInstances[provinceKey];
-              const isProvinceActive = provinceInstance.isActive(
-                baseAnchor,
-                cos[provinceKey]
-              );
+              const isProvinceActive = provinceInstance
+                ? provinceInstance.isActive(cos[provinceKey])
+                : false;
               okToList =
                 !isProvinceActive ||
                 !provinceInstance.isKuntaActive(
@@ -292,9 +289,9 @@ const Modify = React.memo(
             provinceKey = mapping[option.koodiArvo];
             const provinceInstance = provinceInstances[provinceKey];
             if (provinceInstance) {
-              const areAllMunicipalitiesActive = provinceInstance.areAllMunicipalitiesActive(
-                cos[provinceKey]
-              );
+              const areAllMunicipalitiesActive = provinceInstance
+                ? provinceInstance.areAllMunicipalitiesActive(cos[provinceKey])
+                : false;
               okToList = !areAllMunicipalitiesActive;
             } else {
               okToList = false;
@@ -310,7 +307,6 @@ const Modify = React.memo(
             : null;
         }, options).filter(Boolean);
       }
-
       const valittavissaOlevat = {
         kunnat: getValittavissaOlevat(municipalities, true, selectedLocations),
         maakunnat: getValittavissaOlevat(provincesWithoutMunicipalities, false)
@@ -326,6 +322,254 @@ const Modify = React.memo(
       selectedLocations
     ]);
 
+    const onAutocompleteChanges = useCallback(
+      (payload, values) => {
+        const currentSel = values.value || [];
+        const prevSel = previousSelection.current;
+        const cmp = (x, y) => {
+          return x.value === y.value;
+        };
+        const itemsToRemove = differenceWith(cmp, prevSel || [], currentSel);
+        // Remvoval
+        if (itemsToRemove.length) {
+          const provinceId = itemsToRemove[0].provinceKey;
+          const provinceInstance = provinceInstances[provinceId];
+
+          setProvinceId(provinceId);
+
+          const isKunta = !!find(
+            propEq("kuntaKoodiarvo", itemsToRemove[0].value),
+            kuntaProvinceMapping
+          );
+
+          if (isKunta) {
+            let provinceRemovalChangeObj = null;
+            // Aktiiviset kunnat
+            const activeMunicipalities = provinceInstance.getActiveMunicipalities(
+              cos[provinceId]
+            );
+
+            if (cos[provinceId]) {
+              let provinceChangeObjects = filter(changeObj => {
+                const value = getAnchorPart(changeObj.anchor, 3);
+                return value !== itemsToRemove[0].value;
+              }, cos[provinceId]);
+
+              /**
+               * If there's only one active municipality we are going to
+               * deactivate the province.
+               **/
+              if (activeMunicipalities.length === 1) {
+                const isProvinceActiveByDefault = provinceInstance.isActive();
+                if (!isProvinceActiveByDefault) {
+                  provinceChangeObjects = filter(
+                    compose(
+                      not,
+                      propEq("anchor", provinceInstance.getAnchor())
+                    ),
+                    provinceChangeObjects
+                  );
+                }
+              }
+
+              /**
+               * Couldn't remove the municipality. It means that we have
+               * to create a new change object.
+               **/
+              if (
+                provinceChangeObjects &&
+                provinceChangeObjects.length === cos[provinceId].length
+              ) {
+                const provinceChangeObj = provinceInstance.isActive()
+                  ? provinceInstance.getRemovalChangeObj()
+                  : null;
+                provinceChangeObjects = provinceChangeObj
+                  ? append(provinceChangeObj, provinceChangeObjects)
+                  : provinceChangeObjects;
+              }
+              updateChangeObjects(
+                {
+                  changes: flatten(
+                    [provinceRemovalChangeObj, provinceChangeObjects].filter(
+                      Boolean
+                    )
+                  )
+                },
+                provinceId
+              );
+            } else {
+              updateChangeObjects(
+                {
+                  changes: [
+                    provinceRemovalChangeObj,
+                    getRemovalChangeObj(
+                      baseAnchor,
+                      provinceId,
+                      itemsToRemove[0].value
+                    )
+                  ].filter(Boolean)
+                },
+                provinceId
+              );
+            }
+          } else {
+            // Maakunnan poisto
+            let nextCos;
+            if (cos[itemsToRemove[0].provinceKey]) {
+              nextCos = dissoc(provinceId, cos);
+            } else {
+              const province = find(propEq("anchor", provinceId), categories);
+              nextCos = assoc(
+                provinceId,
+                flatten([
+                  [provinceInstance.getRemovalChangeObj(baseAnchor)],
+                  map(kunta => {
+                    return getRemovalChangeObj(
+                      baseAnchor,
+                      provinceId,
+                      kunta.anchor
+                    );
+                  }, province.categories[0].components)
+                ]),
+                cos
+              );
+            }
+            setCos(nextCos);
+          }
+        }
+        // Addition
+        else {
+          const latestSelection = last(currentSel);
+          const provinceId = latestSelection.provinceKey;
+          let _changeObjects = cos[provinceId] || [];
+          const provinceInstance = provinceInstances[provinceId];
+          const activeMunicipalities = provinceInstance.getActiveMunicipalities(
+            cos[provinceId]
+          );
+          let provinceChangeObj = find(
+            propEq("anchor", provinceInstance.getAnchor()),
+            _changeObjects
+          );
+          const isKunta = !!find(
+            propEq("kuntaKoodiarvo", latestSelection.value),
+            kuntaProvinceMapping
+          );
+          if (isKunta) {
+            const anchor = getKuntaAnchor(
+              baseAnchor,
+              provinceId,
+              latestSelection.value
+            );
+            let changeObj = find(propEq("anchor", anchor), _changeObjects);
+
+            if (changeObj && !changeObj.properties.isChecked) {
+              // Delete change object
+              _changeObjects = filter(
+                compose(not, propEq("anchor", anchor)),
+                _changeObjects
+              );
+            } else {
+              // Create change object
+              _changeObjects = append(
+                getAdditionChangeObj(
+                  baseAnchor,
+                  provinceId,
+                  latestSelection.label,
+                  latestSelection.value
+                ),
+                _changeObjects
+              );
+            }
+
+            const provinceAnchor = provinceInstance.getAnchor();
+            if (provinceChangeObj) {
+              if (
+                activeMunicipalities.length ===
+                provinceInstance.getMunicipalities().length - 1
+              ) {
+                const originalProvince = provinceInstance.initializedAs();
+                // Delete province's change object
+                _changeObjects = filter(
+                  compose(not, propEq("anchor", provinceAnchor)),
+                  _changeObjects
+                );
+                if (
+                  !(
+                    originalProvince.components[0].properties.isChecked &&
+                    !originalProvince.components[0].properties.isIndeterminate
+                  )
+                ) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
+                    false
+                  );
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              }
+            } else {
+              // Create province's change object
+              const originalProvince = provinceInstance.initializedAs();
+              if (
+                activeMunicipalities.length ===
+                provinceInstance.getMunicipalities().length - 1
+              ) {
+                if (
+                  !(
+                    originalProvince.components[0].properties.isChecked &&
+                    !originalProvince.components[0].properties.isIndeterminate
+                  )
+                ) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
+                    false
+                  );
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              } else {
+                if (
+                  !(
+                    originalProvince.components[0].properties.isChecked &&
+                    originalProvince.components[0].properties.isIndeterminate
+                  )
+                ) {
+                  // Original province isn't valid without a new change object.
+                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
+                    true
+                  );
+                  _changeObjects = append(provinceChangeObj, _changeObjects);
+                }
+              }
+            }
+          } else {
+            /**
+             * Province and its municipalities have to be active.
+             * Let's remove irrelevant change objects first.
+             **/
+            _changeObjects = filter(changeObj => {
+              const isRelatedToCurrentProvince = includes(
+                `.${provinceId}.`,
+                changeObj.anchor
+              );
+              return (
+                !isRelatedToCurrentProvince || changeObj.properties.isChecked
+              );
+            }, _changeObjects);
+            // Activate the selected province and its municipalities.
+            _changeObjects = provinceInstance.activateFully(_changeObjects);
+          }
+          updateChangeObjects(
+            {
+              changes: _changeObjects
+            },
+            latestSelection.provinceKey
+          );
+          setProvinceId(latestSelection.provinceKey);
+        }
+        previousSelection.current = currentSel;
+      },
+      [baseAnchor, categories, cos, provinceInstances, updateChangeObjects]
+    );
+
     return (
       <React.Fragment>
         <Autocomplete
@@ -333,273 +577,7 @@ const Modify = React.memo(
           name="filter example"
           options={locations}
           isSearch
-          callback={(payload, values) => {
-            const currentSel = values.value || [];
-            const prevSel = previousSelection.current;
-            const cmp = (x, y) => {
-              return x.value === y.value;
-            };
-            const itemsToRemove = differenceWith(
-              cmp,
-              prevSel || [],
-              currentSel
-            );
-            // Remvoval
-            if (itemsToRemove.length) {
-              const provinceId = itemsToRemove[0].provinceKey;
-              const provinceInstance = provinceInstances[provinceId];
-
-              setProvinceId(provinceId);
-
-              const isKunta = !!find(
-                propEq("kuntaKoodiarvo", itemsToRemove[0].value),
-                kuntaProvinceMapping
-              );
-
-              // const currentProvincePolygon = polygonSeries.current.getPolygonById(
-              //   itemsToRemove[0].provinceKey
-              // );
-
-              // setProvinceId(currentProvincePolygon.dataItem.dataContext.id);
-
-              if (isKunta) {
-                let provinceRemovalChangeObj = null;
-                // Aktiiviset kunnat
-                const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-                  cos[provinceId]
-                );
-
-                /**
-                 * If there's only one active municipality we are going to
-                 * deactivate the province.
-                 **/
-                if (activeMunicipalities.length === 1) {
-                  provinceRemovalChangeObj = provinceInstance.getRemovalChangeObj(
-                    baseAnchor
-                  );
-                }
-
-                if (cos[provinceId]) {
-                  let provinceChangeObjects = filter(changeObj => {
-                    const value = getAnchorPart(changeObj.anchor, 3);
-                    return value !== itemsToRemove[0].value;
-                  }, cos[provinceId]);
-
-                  /**
-                   * Couldn't remove the municipality. It means that we have
-                   * to create a new change object.
-                   **/
-                  if (
-                    provinceChangeObjects &&
-                    provinceChangeObjects.length === cos[provinceId].length
-                  ) {
-                    provinceChangeObjects = append(
-                      getRemovalChangeObj(
-                        baseAnchor,
-                        provinceId,
-                        itemsToRemove[0].value
-                      ),
-                      provinceChangeObjects
-                    );
-                  }
-                  updateChangeObjects(
-                    {
-                      changes: flatten(
-                        [
-                          provinceRemovalChangeObj,
-                          provinceChangeObjects
-                        ].filter(Boolean)
-                      )
-                    },
-                    provinceId
-                  );
-                } else {
-                  updateChangeObjects(
-                    {
-                      changes: [
-                        provinceRemovalChangeObj,
-                        getRemovalChangeObj(
-                          baseAnchor,
-                          provinceId,
-                          itemsToRemove[0].value
-                        )
-                      ].filter(Boolean)
-                    },
-                    provinceId
-                  );
-                }
-              } else {
-                // Maakunnan poisto
-                let nextCos;
-                if (cos[itemsToRemove[0].provinceKey]) {
-                  nextCos = dissoc(provinceId, cos);
-                } else {
-                  const province = find(
-                    propEq("anchor", provinceId),
-                    categories
-                  );
-                  nextCos = assoc(
-                    provinceId,
-                    flatten([
-                      [provinceInstance.getRemovalChangeObj(baseAnchor)],
-                      map(kunta => {
-                        return getRemovalChangeObj(
-                          baseAnchor,
-                          provinceId,
-                          kunta.anchor
-                        );
-                      }, province.categories[0].components)
-                    ]),
-                    cos
-                  );
-                }
-                setCos(nextCos);
-              }
-            }
-            // Addition
-            else {
-              const latestSelection = last(currentSel);
-              const provinceId = latestSelection.provinceKey;
-              let _changeObjects = cos[provinceId] || [];
-              const provinceInstance = provinceInstances[provinceId];
-              const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-                cos[provinceId]
-              );
-              let provinceChangeObj = find(
-                propEq("anchor", provinceInstance.getAnchor()),
-                _changeObjects
-              );
-              const isKunta = !!find(
-                propEq("kuntaKoodiarvo", latestSelection.value),
-                kuntaProvinceMapping
-              );
-              if (isKunta) {
-                const anchor = getKuntaAnchor(
-                  baseAnchor,
-                  provinceId,
-                  latestSelection.value
-                );
-                let changeObj = find(propEq("anchor", anchor), _changeObjects);
-
-                if (changeObj && !changeObj.properties.isChecked) {
-                  // Delete change object
-                  _changeObjects = filter(
-                    compose(not, propEq("anchor", anchor)),
-                    _changeObjects
-                  );
-                } else {
-                  // Create change object
-                  _changeObjects = append(
-                    getAdditionChangeObj(
-                      baseAnchor,
-                      provinceId,
-                      latestSelection.label,
-                      latestSelection.value
-                    ),
-                    _changeObjects
-                  );
-                }
-
-                const provinceAnchor = provinceInstance.getAnchor();
-                if (provinceChangeObj) {
-                  if (
-                    activeMunicipalities.length ===
-                    provinceInstance.getMunicipalities().length - 1
-                  ) {
-                    const originalProvince = provinceInstance.initializedAs();
-                    // Delete province's change object
-                    _changeObjects = filter(
-                      compose(not, propEq("anchor", provinceAnchor)),
-                      _changeObjects
-                    );
-                    if (
-                      !(
-                        originalProvince.components[0].properties.isChecked &&
-                        !originalProvince.components[0].properties
-                          .isIndeterminate
-                      )
-                    ) {
-                      // Original province isn't valid without a new change object.
-                      provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                        false
-                      );
-                      _changeObjects = append(
-                        provinceChangeObj,
-                        _changeObjects
-                      );
-                    }
-                  }
-                } else {
-                  // Create province's change object
-                  const originalProvince = provinceInstance.initializedAs();
-                  if (
-                    activeMunicipalities.length ===
-                    provinceInstance.getMunicipalities().length - 1
-                  ) {
-                    if (
-                      !(
-                        originalProvince.components[0].properties.isChecked &&
-                        !originalProvince.components[0].properties
-                          .isIndeterminate
-                      )
-                    ) {
-                      // Original province isn't valid without a new change object.
-                      provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                        false
-                      );
-                      _changeObjects = append(
-                        provinceChangeObj,
-                        _changeObjects
-                      );
-                    }
-                  } else {
-                    if (
-                      !(
-                        originalProvince.components[0].properties.isChecked &&
-                        originalProvince.components[0].properties
-                          .isIndeterminate
-                      )
-                    ) {
-                      // Original province isn't valid without a new change object.
-                      provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                        true
-                      );
-                      _changeObjects = append(
-                        provinceChangeObj,
-                        _changeObjects
-                      );
-                    }
-                  }
-                }
-              } else {
-                /**
-                 * Province and its municipalities have to be active.
-                 * Let's remove irrelevant change objects first.
-                 **/
-
-                _changeObjects = filter(changeObj => {
-                  const isRelatedToCurrentProvince = includes(
-                    `.${provinceId}.`,
-                    changeObj.anchor
-                  );
-                  return (
-                    !isRelatedToCurrentProvince ||
-                    changeObj.properties.isChecked
-                  );
-                }, _changeObjects);
-                // Activate the selected province and its municipalities.
-                _changeObjects = provinceInstance.activateFully(_changeObjects);
-              }
-              updateChangeObjects(
-                {
-                  changes: _changeObjects
-                },
-                latestSelection.provinceKey
-              );
-              setProvinceId(latestSelection.provinceKey);
-            }
-            previousSelection.current = currentSel;
-          }}
+          callback={onAutocompleteChanges}
           value={selectedLocations}
         />
         <div className="bg-white border overflow-auto p-2">
@@ -623,7 +601,7 @@ const Modify = React.memo(
             <div className="mr-4">
               <SimpleButton
                 variant={"outlined"}
-                onClick={() => onClose(changeObjectsByProvince)}
+                onClick={() => onClose()}
                 text={"Peruuta"}></SimpleButton>
             </div>
             <div>
@@ -635,6 +613,16 @@ const Modify = React.memo(
         </div>
       </React.Fragment>
     );
+  },
+  (cp, np) => {
+    console.info(
+      "ennen",
+      cp.cos,
+      "Jälkeen: ",
+      np.cos,
+      isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos)
+    );
+    return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
   }
 );
 
@@ -645,8 +633,7 @@ Modify.propTypes = {
   municipalities: PropTypes.array,
   provinceInstances: PropTypes.object,
   provincesWithoutMunicipalities: PropTypes.array,
-  onClose: PropTypes.func,
-  onChanges: PropTypes.func
+  onClose: PropTypes.func
 };
 
 export default Modify;

@@ -4782,7 +4782,7 @@ export var toimintaalueStory = {
           maakuntaKey: "FI-10",
           title: "Lappi"
         },
-        isChecked: true,
+        isChecked: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4813,7 +4813,7 @@ export var toimintaalueStory = {
             title: "Enontekiö",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4840,7 +4840,7 @@ export var toimintaalueStory = {
             title: "Inari",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4867,7 +4867,7 @@ export var toimintaalueStory = {
             title: "Kemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4894,7 +4894,7 @@ export var toimintaalueStory = {
             title: "Kemijärvi",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4921,7 +4921,7 @@ export var toimintaalueStory = {
             title: "Keminmaa",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4948,7 +4948,7 @@ export var toimintaalueStory = {
             title: "Kittilä",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -4975,7 +4975,7 @@ export var toimintaalueStory = {
             title: "Kolari",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5002,7 +5002,7 @@ export var toimintaalueStory = {
             title: "Muonio",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5029,7 +5029,7 @@ export var toimintaalueStory = {
             title: "Pelkosenniemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5056,7 +5056,7 @@ export var toimintaalueStory = {
             title: "Pello",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5083,7 +5083,7 @@ export var toimintaalueStory = {
             title: "Posio",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5110,7 +5110,7 @@ export var toimintaalueStory = {
             title: "Ranua",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5137,7 +5137,7 @@ export var toimintaalueStory = {
             title: "Rovaniemi",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5164,7 +5164,7 @@ export var toimintaalueStory = {
             title: "Rovaniemi mlk",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5191,7 +5191,7 @@ export var toimintaalueStory = {
             title: "Salla",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5218,7 +5218,7 @@ export var toimintaalueStory = {
             title: "Savukoski",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5245,7 +5245,7 @@ export var toimintaalueStory = {
             title: "Simo",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5272,7 +5272,7 @@ export var toimintaalueStory = {
             title: "Sodankylä",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5299,7 +5299,7 @@ export var toimintaalueStory = {
             title: "Tervola",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5326,7 +5326,7 @@ export var toimintaalueStory = {
             title: "Tornio",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5353,7 +5353,7 @@ export var toimintaalueStory = {
             title: "Utsjoki",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"
@@ -5380,7 +5380,7 @@ export var toimintaalueStory = {
             title: "Ylitornio",
             maakuntaKey: "FI-10"
           },
-          isChecked: true,
+          isChecked: false,
           labelStyles: {
             addition: {
               color: "purple"

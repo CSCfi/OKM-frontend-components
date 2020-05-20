@@ -87,9 +87,6 @@ var Difference = function Difference(_ref) {
     className: "flex-1 flex-col"
   }, /*#__PURE__*/React.createElement(Typography, null, inputAreaTitle), !readonly && /*#__PURE__*/React.createElement(Input, {
     type: "number",
-    inputProps: {
-      min: "0"
-    },
     onChanges: handleChange,
     payload: payload,
     value: value,

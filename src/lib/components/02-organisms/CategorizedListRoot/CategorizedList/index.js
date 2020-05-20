@@ -158,7 +158,7 @@ const CategorizedList = React.memo(
         };
         return onChangesUpdate(changeObj);
       },
-      [onChangesUpdate]
+      [onChangesUpdate, props.anchor]
     );
 
     /**
@@ -396,7 +396,6 @@ const CategorizedList = React.memo(
                             onChanges={handleChanges}
                             payload={{
                               anchor,
-                              // categories: category.categories,
                               component,
                               fullPath,
                               parent: props.parent,
@@ -923,7 +922,6 @@ const CategorizedList = React.memo(
                   categories={category.categories}
                   changes={categoryChanges}
                   debug={props.debug}
-                  getAllChanges={props.getAllChanges}
                   id={`${props.id}-${category.code}`}
                   level={props.level + 1}
                   parent={{
@@ -953,7 +951,12 @@ const CategorizedList = React.memo(
       JSON.stringify(prevState.categories) ===
       JSON.stringify(nextState.categories);
     const areChangesSame = R.equals(prevState.changes, nextState.changes);
-    return areCategoriesSame && areChangesSame;
+    return (
+      areCategoriesSame &&
+      areChangesSame &&
+      JSON.stringify(prevState.onChangesUpdate) ===
+        JSON.stringify(nextState.onChangesUpdate)
+    );
   }
 );
 
@@ -974,5 +977,7 @@ CategorizedList.propTypes = {
   onChangesUpdate: PropTypes.func,
   onChangesRemove: PropTypes.func
 };
+
+CategorizedList.displayName = "CategorizedList222";
 
 export default CategorizedList;
