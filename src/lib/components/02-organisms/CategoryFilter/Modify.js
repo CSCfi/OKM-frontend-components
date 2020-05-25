@@ -82,6 +82,10 @@ const Modify = React.memo(
 
     const [cos, setCos] = useState(changeObjectsByProvince);
 
+    useEffect(() => {
+      setCos(changeObjectsByProvince);
+    }, [changeObjectsByProvince]);
+
     const provinceChanges = useMemo(() => {
       return provinceId && cos[provinceId] ? cos[provinceId] : [];
     }, [cos, provinceId]);
@@ -619,7 +623,10 @@ const Modify = React.memo(
     );
   },
   (cp, np) => {
-    return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
+    return (
+      isEqual(cp.categories, np.categories) &&
+      isEqual(cp.changeObjectsByProvince, np.changeObjectsByProvince)
+    );
   }
 );
 
