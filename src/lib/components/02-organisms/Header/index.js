@@ -74,7 +74,8 @@ const Header = React.memo(
         className="inline-block no-underline text-gray-800">
         {shortDescription.text}
       </NavLink>,
-      <NavLink
+      !!authenticationLink ? (
+        <NavLink
         to={authenticationLink.path}
         exact={false}
         className="inline-block no-underline text-gray-800 hover:underline">
@@ -82,7 +83,8 @@ const Header = React.memo(
         {authenticationLink.text[1] && (
           <span className="font-bold">{authenticationLink.text[1]}</span>
         )}
-      </NavLink>,
+      </NavLink>
+      ) : (<React.Fragment />),
       organisation.path ? (
         <NavLink
           className="link-to-own-organisation"
@@ -154,11 +156,11 @@ const Header = React.memo(
                         {logo.text}
                       </Typography>
                     </NavLink>
-                    {!isAuthenticated && (
+                    {(!isAuthenticated && !!authenticationLink) ? (
                       <Button color="inherit" onClick={onLoginButtonClick}>
                         {logIn}
                       </Button>
-                    )}
+                    ) : (<React.Fragment />)}
                   </Toolbar>
                 </AppBar>
               </div>

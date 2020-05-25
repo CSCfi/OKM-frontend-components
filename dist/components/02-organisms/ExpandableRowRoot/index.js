@@ -5,8 +5,7 @@ import CategorizedListRoot from "../CategorizedListRoot";
 import NumberOfChanges from "../../00-atoms/NumberOfChanges";
 import { makeStyles } from "@material-ui/core/styles";
 import UndoIcon from "@material-ui/icons/Undo";
-import Button from "@material-ui/core/Button"; // import Icon from "@material-ui/core/Icon";
-
+import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 var useStyles = makeStyles(function () {
   return {
@@ -22,7 +21,8 @@ var defaultProps = {
   hideAmountOfChanges: false,
   isExpanded: false,
   messages: {
-    undo: "Undo"
+    undo: "Undo",
+    changesText: "Muutokset:"
   },
   showCategoryTitles: false
 };
@@ -78,7 +78,8 @@ var ExpandableRowRoot = function ExpandableRowRoot(_ref) {
     className: "flex items-center"
   }, !hideAmountOfChanges && /*#__PURE__*/React.createElement(NumberOfChanges, {
     changes: changes,
-    id: anchor
+    id: anchor,
+    messages: messages
   }), !disableReverting && /*#__PURE__*/React.createElement("span", {
     className: "mx-6"
   }, /*#__PURE__*/React.createElement(Tooltip, {

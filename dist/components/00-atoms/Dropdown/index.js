@@ -146,7 +146,7 @@ var Dropdown = React.memo(function (props) {
     }
   }, isVisited && !props.value && props.requiredMessage));
 }, function (prevProps, nextProps) {
-  var isSameFunction = "" + prevProps.onChanges === "" + nextProps.onChanges;
+  var isSameFunction = prevProps.onChanges === nextProps.onChanges;
   return isSameFunction && equals(prevProps.isDisabled, nextProps.isDisabled) && equals(prevProps.value, nextProps.value) && equals(prevProps.isRequired, nextProps.isRequired);
 });
 export default withStyles(selectCustomStyles)(Dropdown);

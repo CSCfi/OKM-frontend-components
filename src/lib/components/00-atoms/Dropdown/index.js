@@ -145,7 +145,7 @@ const Dropdown = React.memo(
   },
   (prevProps, nextProps) => {
     const isSameFunction =
-      "" + prevProps.onChanges === "" + nextProps.onChanges;
+      prevProps.onChanges === nextProps.onChanges;
     return (
       isSameFunction &&
       equals(prevProps.isDisabled, nextProps.isDisabled) &&

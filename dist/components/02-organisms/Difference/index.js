@@ -90,7 +90,7 @@ var Difference = function Difference(_ref) {
     onChanges: handleChange,
     payload: payload,
     value: value,
-    width: "12em",
+    fullWidth: false,
     isRequired: isRequired
   }), readonly && applyForValue), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 flex-col"

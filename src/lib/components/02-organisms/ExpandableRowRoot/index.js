@@ -6,7 +6,6 @@ import NumberOfChanges from "../../00-atoms/NumberOfChanges";
 import { makeStyles } from "@material-ui/core/styles";
 import UndoIcon from "@material-ui/icons/Undo";
 import Button from "@material-ui/core/Button";
-// import Icon from "@material-ui/core/Icon";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
@@ -22,7 +21,8 @@ const defaultProps = {
   hideAmountOfChanges: false,
   isExpanded: false,
   messages: {
-    undo: "Undo"
+    undo: "Undo",
+    changesText: "Muutokset:"
   },
   showCategoryTitles: false
 };
@@ -68,7 +68,7 @@ const ExpandableRowRoot = ({
             {changes.length > 0 && (
               <div className="flex items-center">
                 {!hideAmountOfChanges && (
-                  <NumberOfChanges changes={changes} id={anchor} />
+                  <NumberOfChanges changes={changes} id={anchor} messages={messages} />
                 )}
                 {!disableReverting && (
                   <span className="mx-6">
