@@ -15,7 +15,6 @@ const CategoryFilter = ({
   provinces = [],
   provincesWithoutMunicipalities = []
 }) => {
-  console.info(localizations);
   const [isEditViewActive, toggleEditView] = useState(true);
 
   const [changeObjects, setChangeObjects] = useState(changeObjectsByProvince);

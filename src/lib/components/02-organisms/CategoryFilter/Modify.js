@@ -611,7 +611,7 @@ const Modify = React.memo(
             <div>
               <SimpleButton
                 onClick={() => onClose(cos)}
-                text={localizations.approve}></SimpleButton>
+                text={localizations.accept}></SimpleButton>
             </div>
           </div>
         </div>
