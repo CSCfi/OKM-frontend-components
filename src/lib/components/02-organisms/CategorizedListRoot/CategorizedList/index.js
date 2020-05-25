@@ -887,6 +887,7 @@ const CategorizedList = React.memo(
                             changeObjectsByProvince={
                               propsObj.changeObjectsByProvince
                             }
+                            localizations={propsObj.localizations}
                             municipalities={propsObj.municipalities}
                             provinces={propsObj.provinces}
                             provincesWithoutMunicipalities={

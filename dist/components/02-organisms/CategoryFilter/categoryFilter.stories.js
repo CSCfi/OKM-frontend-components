@@ -9,7 +9,7 @@ storiesOf("CategoryFilter", module).addDecorator(withInfo).add("Toiminta-alueen 
   return /*#__PURE__*/React.createElement(CategoryFilter, {
     anchor: "maakuntakunnat",
     localizations: {
-      approve: "Hyväksy",
+      accept: "Hyväksy",
       cancel: "Peruuta",
       ofMunicipalities: "kunnista",
       sameAsTheCurrentAreaOfAction: "Sama kuin nykyinen toiminta-alue"

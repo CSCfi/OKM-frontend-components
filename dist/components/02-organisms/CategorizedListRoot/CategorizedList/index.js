@@ -652,6 +652,7 @@ var CategorizedList = React.memo(function (props) {
       }, /*#__PURE__*/React.createElement(CategoryFilter, {
         anchor: propsObj.anchor,
         changeObjectsByProvince: propsObj.changeObjectsByProvince,
+        localizations: propsObj.localizations,
         municipalities: propsObj.municipalities,
         provinces: propsObj.provinces,
         provincesWithoutMunicipalities: propsObj.provincesWithoutMunicipalities,
