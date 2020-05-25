@@ -14,14 +14,16 @@ export function getAdditionChangeObj(baseAnchor, maakuntaKey, title, koodiarvo) 
     }
   };
 }
-export function getRemovalChangeObj(baseAnchor, maakuntaKey, koodiarvo) {
+export function getRemovalChangeObj(baseAnchor, maakuntaKey, koodiarvo, title) {
   return {
     anchor: getAnchor(baseAnchor, maakuntaKey, koodiarvo),
     properties: {
       isChecked: false,
       isIndeterminate: false,
       metadata: {
-        maakuntaKey: maakuntaKey
+        koodiarvo: koodiarvo,
+        maakuntaKey: maakuntaKey,
+        title: title
       }
     }
   };

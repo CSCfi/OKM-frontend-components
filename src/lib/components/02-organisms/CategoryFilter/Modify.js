@@ -158,7 +158,6 @@ const Modify = React.memo(
         } else {
           nextChangeObjects = dissoc(_provinceId || provinceId, cos);
         }
-        console.info(cos, nextChangeObjects);
         if (!equals(cos, nextChangeObjects)) {
           setCos(nextChangeObjects);
         }
@@ -337,7 +336,6 @@ const Modify = React.memo(
             propEq("kuntaKoodiarvo", itemsToRemove[0].value),
             kuntaProvinceMapping
           );
-
           if (isKunta) {
             let provinceRemovalChangeObj = null;
             // Aktiiviset kunnat
@@ -378,7 +376,8 @@ const Modify = React.memo(
               if (provinceInstance.isKuntaActive(itemsToRemove[0].value)) {
                 provinceChangeObjects = append(
                   provinceInstance.getRemovalChangeObjForMunicipality(
-                    itemsToRemove[0].value
+                    itemsToRemove[0].value,
+                    itemsToRemove[0].label
                   ),
                   provinceChangeObjects
                 );
@@ -407,7 +406,8 @@ const Modify = React.memo(
                     getRemovalChangeObj(
                       baseAnchor,
                       provinceId,
-                      itemsToRemove[0].value
+                      itemsToRemove[0].value,
+                      itemsToRemove[0].label
                     )
                   ].filter(Boolean)
                 },
@@ -429,7 +429,8 @@ const Modify = React.memo(
                     return getRemovalChangeObj(
                       baseAnchor,
                       provinceId,
-                      kunta.anchor
+                      kunta.anchor,
+                      kunta.properties.title
                     );
                   }, province.categories[0].components)
                 ]),

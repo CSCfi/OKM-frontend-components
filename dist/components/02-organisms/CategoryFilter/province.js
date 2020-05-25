@@ -159,13 +159,15 @@ export function Province(province, baseAnchor) {
           isChecked: false,
           isIndeterminate: false,
           metadata: {
+            title: title,
+            koodiarvo: code,
             provinceKey: id
           }
         }
       };
     },
-    getRemovalChangeObjForMunicipality: function getRemovalChangeObjForMunicipality(koodiarvo) {
-      return getRemovalChangeObj(baseAnchor, id, koodiarvo);
+    getRemovalChangeObjForMunicipality: function getRemovalChangeObjForMunicipality(koodiarvo, title) {
+      return getRemovalChangeObj(baseAnchor, id, koodiarvo, title);
     },
     getTitle: function getTitle() {
       return title;

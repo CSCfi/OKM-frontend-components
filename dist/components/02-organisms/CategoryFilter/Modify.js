@@ -266,6 +266,7 @@ var Modify = React.memo(function (_ref) {
       var provinceInstance = provinceInstances[_provinceId2];
       setProvinceId(_provinceId2);
       var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaProvinceMapping);
+      console.info("POISTETTAVA: ", itemsToRemove[0]);
 
       if (isKunta) {
         var provinceRemovalChangeObj = null; // Aktiiviset kunnat
@@ -294,7 +295,7 @@ var Modify = React.memo(function (_ref) {
           }
 
           if (provinceInstance.isKuntaActive(itemsToRemove[0].value)) {
-            provinceChangeObjects = append(provinceInstance.getRemovalChangeObjForMunicipality(itemsToRemove[0].value), provinceChangeObjects);
+            provinceChangeObjects = append(provinceInstance.getRemovalChangeObjForMunicipality(itemsToRemove[0].value, itemsToRemove[0].label), provinceChangeObjects);
           } else {
             provinceChangeObjects = filter(compose(not, propEq("anchor", itemsToRemove[0].anchor)), provinceChangeObjects);
           }
@@ -304,7 +305,7 @@ var Modify = React.memo(function (_ref) {
           }, _provinceId2);
         } else {
           updateChangeObjects({
-            changes: [provinceRemovalChangeObj, getRemovalChangeObj(baseAnchor, _provinceId2, itemsToRemove[0].value)].filter(Boolean)
+            changes: [provinceRemovalChangeObj, getRemovalChangeObj(baseAnchor, _provinceId2, itemsToRemove[0].value, itemsToRemove[0].label)].filter(Boolean)
           }, _provinceId2);
         }
       } else {
@@ -316,7 +317,7 @@ var Modify = React.memo(function (_ref) {
         } else {
           var province = find(propEq("anchor", _provinceId2), categories);
           nextCos = assoc(_provinceId2, flatten([[provinceInstance.getRemovalChangeObj(baseAnchor)], map(function (kunta) {
-            return getRemovalChangeObj(baseAnchor, _provinceId2, kunta.anchor);
+            return getRemovalChangeObj(baseAnchor, _provinceId2, kunta.anchor, kunta.properties.title);
           }, province.categories[0].components)]), cos);
         }
 

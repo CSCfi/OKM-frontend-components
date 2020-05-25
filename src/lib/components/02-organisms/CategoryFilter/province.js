@@ -187,13 +187,15 @@ export function Province(province, baseAnchor) {
           isChecked: false,
           isIndeterminate: false,
           metadata: {
+            title,
+            koodiarvo: code,
             provinceKey: id
           }
         }
       };
     },
-    getRemovalChangeObjForMunicipality: koodiarvo => {
-      return getRemovalChangeObj(baseAnchor, id, koodiarvo);
+    getRemovalChangeObjForMunicipality: (koodiarvo, title) => {
+      return getRemovalChangeObj(baseAnchor, id, koodiarvo, title);
     },
     getTitle: () => {
       return title;
