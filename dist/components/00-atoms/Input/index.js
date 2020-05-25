@@ -142,7 +142,6 @@ var Input = React.memo(function (props) {
     }
   }, value !== "" && props.requiredMessage));
 }, function (cp, np) {
-  console.info(cp.payload, np.payload, isEqual(cp.payload, np.payload));
   return cp.isDisabled === np.isDisabled && cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isVisited === np.isVisited && cp.isDence === np.isDense && isEqual(cp.payload, np.payload);
 });
 Input.defaultProps = {

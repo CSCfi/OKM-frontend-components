@@ -67,6 +67,9 @@ var Modify = React.memo(function (_ref) {
       cos = _useState4[0],
       setCos = _useState4[1];
 
+  useEffect(function () {
+    setCos(changeObjectsByProvince);
+  }, [changeObjectsByProvince]);
   var provinceChanges = useMemo(function () {
     return provinceId && cos[provinceId] ? cos[provinceId] : [];
   }, [cos, provinceId]);
@@ -445,6 +448,6 @@ var Modify = React.memo(function (_ref) {
     text: localizations.accept
   })))));
 }, function (cp, np) {
-  return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
+  return isEqual(cp.categories, np.categories) && isEqual(cp.changeObjectsByProvince, np.changeObjectsByProvince);
 });
 export default Modify;
