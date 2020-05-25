@@ -13,10 +13,7 @@ const ConfirmDialog = props => {
     handleOk,
     handleCancel,
     onClose,
-    title,
-    content,
-    yesMessage,
-    noMessage
+    messages
   } = props;
 
   return (
@@ -26,20 +23,20 @@ const ConfirmDialog = props => {
       aria-labelledby="confirm-dialog"
       maxWidth="sm">
       <DialogTitle id="confirm-dialog" onClose={onClose}>
-        {title}
+        {messages.title}
       </DialogTitle>
       <DialogContent>
-        <div className="p-2">{content}</div>
+        <div className="p-2">{messages.content}</div>
       </DialogContent>
       <DialogActions>
         <div className="flex pr-6 pb-4">
           <div className="mr-4">
             <Button onClick={handleCancel} color="primary" variant="outlined">
-              {noMessage}
+              {messages.cancel}
             </Button>
           </div>
           <Button onClick={handleOk} color="primary" variant="contained">
-            {yesMessage}
+            {messages.ok}
           </Button>
         </div>
       </DialogActions>
@@ -48,20 +45,13 @@ const ConfirmDialog = props => {
 };
 
 ConfirmDialog.propTypes = {
-  // Title.
-  title: PropTypes.string,
-  // Main content of the dialog. Usually a sentence or a paragraph.
-  content: PropTypes.string,
   // Is the dialog visible? Default value is false.
   isConfirmDialogVisible: PropTypes.bool,
   // Callback function for handling the click of OK button.
   handleOk: PropTypes.func,
   // Callback function for handling the click of Cancel button.
   handleCancel: PropTypes.func,
-  // Text content of the OK button.
-  yesMessage: PropTypes.string,
-  // Text content of the Cancel button.
-  noMessage: PropTypes.string
+  messages: PropTypes.object
 };
 
 export default ConfirmDialog;
