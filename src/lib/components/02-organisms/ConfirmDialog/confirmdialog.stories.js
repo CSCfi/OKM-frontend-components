@@ -7,7 +7,8 @@ const messages = {
   ok: "Merkitse päätetyksi",
   cancel: "Peruuta",
   content: "Tähän kuvaava ohjeteksti varmistamaan, että muutokset on allekirjoitutettu ministerillä. Muutosta ei voi esittelijä kumota.",
-  title: "Merkitäänkö asia päätetyksi?"
+  title: "Merkitäänkö asia päätetyksi?",
+  noSave: "Älä tallenna"
 }
 
 storiesOf("Confirm Dialog", module)
@@ -17,6 +18,16 @@ storiesOf("Confirm Dialog", module)
       isConfirmDialogVisible={true}
       handleCancel={() => console.log("cancel")}
       handleOk={() => console.log("ok")}
+      onClose={() => console.log("onClose clicked!")}
+      messages={messages}
+    />
+  ))
+  .add("With abandon changes", () => (
+    <ConfirmDialog
+      isConfirmDialogVisible={true}
+      handleCancel={() => console.log("cancel")}
+      handleOk={() => console.log("ok")}
+      handleExitAndAbandonChanges={() => console.log("exit not saving")}
       onClose={() => console.log("onClose clicked!")}
       messages={messages}
     />

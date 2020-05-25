@@ -12,6 +12,7 @@ const ConfirmDialog = props => {
     isConfirmDialogVisible = false,
     handleOk,
     handleCancel,
+    handleExitAndAbandonChanges,
     onClose,
     messages
   } = props;
@@ -35,6 +36,13 @@ const ConfirmDialog = props => {
               {messages.cancel}
             </Button>
           </div>
+          {!!handleExitAndAbandonChanges &&
+            <div className="mr-4">
+              <Button onClick={handleExitAndAbandonChanges} color="primary" variant="outlined">
+                {messages.noSave}
+              </Button>
+            </div>
+          }
           <Button onClick={handleOk} color="primary" variant="contained">
             {messages.ok}
           </Button>
@@ -48,6 +56,7 @@ ConfirmDialog.propTypes = {
   isConfirmDialogVisible: PropTypes.bool,
   handleOk: PropTypes.func,
   handleCancel: PropTypes.func,
+  handleExitAndAbandonChanges: PropTypes.func,
   messages: PropTypes.object
 };
 

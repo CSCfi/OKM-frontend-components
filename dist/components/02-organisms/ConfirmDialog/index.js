@@ -11,6 +11,7 @@ var ConfirmDialog = function ConfirmDialog(props) {
       isConfirmDialogVisible = _props$isConfirmDialo === void 0 ? false : _props$isConfirmDialo,
       handleOk = props.handleOk,
       handleCancel = props.handleCancel,
+      handleExitAndAbandonChanges = props.handleExitAndAbandonChanges,
       onClose = props.onClose,
       messages = props.messages;
   return /*#__PURE__*/React.createElement(Dialog, {
@@ -31,7 +32,13 @@ var ConfirmDialog = function ConfirmDialog(props) {
     onClick: handleCancel,
     color: "primary",
     variant: "outlined"
-  }, messages.cancel)), /*#__PURE__*/React.createElement(Button, {
+  }, messages.cancel)), !!handleExitAndAbandonChanges && /*#__PURE__*/React.createElement("div", {
+    className: "mr-4"
+  }, /*#__PURE__*/React.createElement(Button, {
+    onClick: handleExitAndAbandonChanges,
+    color: "primary",
+    variant: "outlined"
+  }, messages.noSave)), /*#__PURE__*/React.createElement(Button, {
     onClick: handleOk,
     color: "primary",
     variant: "contained"
