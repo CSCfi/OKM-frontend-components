@@ -8,6 +8,12 @@ import maakunnat from "./storydata/maakunnat";
 storiesOf("CategoryFilter", module).addDecorator(withInfo).add("Toiminta-alueen käyttötapaus", function () {
   return /*#__PURE__*/React.createElement(CategoryFilter, {
     anchor: "maakuntakunnat",
+    localizations: {
+      approve: "Hyväksy",
+      cancel: "Peruuta",
+      ofMunicipalities: "kunnista",
+      sameAsTheCurrentAreaOfAction: "Sama kuin nykyinen toiminta-alue"
+    },
     municipalities: kunnat,
     provinces: toimintaalueStory.categories,
     provincesWithoutMunicipalities: maakunnat,

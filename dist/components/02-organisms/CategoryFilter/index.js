@@ -10,6 +10,8 @@ var CategoryFilter = function CategoryFilter(_ref) {
       anchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
       _ref$changeObjectsByP = _ref.changeObjectsByProvince,
       changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
+      _ref$localizations = _ref.localizations,
+      localizations = _ref$localizations === void 0 ? {} : _ref$localizations,
       _ref$municipalities = _ref.municipalities,
       municipalities = _ref$municipalities === void 0 ? [] : _ref$municipalities,
       onChanges = _ref.onChanges,
@@ -61,7 +63,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
           className: "flex items-baseline"
         }, /*#__PURE__*/React.createElement("h4", null, province.components[0].properties.title), /*#__PURE__*/React.createElement("p", {
           className: "ml-2 text-xs"
-        }, "(", Math.round(activeMunicipalities.length / province.categories[0].components.length * 100), "% kunnista)")), /*#__PURE__*/React.createElement("ul", {
+        }, "(", Math.round(activeMunicipalities.length / province.categories[0].components.length * 100), "% ", localizations.ofMunicipalities, ")")), /*#__PURE__*/React.createElement("ul", {
           className: "mt-4"
         }, /*#__PURE__*/React.createElement("li", null, addIndex(map)(function (kunta, index) {
           return /*#__PURE__*/React.createElement("span", {
@@ -82,6 +84,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
       anchor: anchor,
       categories: provinces,
       municipalities: municipalities,
+      localizations: localizations,
       provincesWithoutMunicipalities: provincesWithoutMunicipalities,
       onClose: function onClose(changesByProvince) {
         toggleEditView(false);
@@ -100,9 +103,9 @@ var CategoryFilter = function CategoryFilter(_ref) {
       className: "p-4"
     }, /*#__PURE__*/React.createElement("h3", null, "Nykyinen toiminta-alue"), renderToimintaalueList(provinces), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("h3", {
       className: "mt-4"
-    }, "Uusi toiminta-alue"), !isEmpty(changeObjects) ? renderToimintaalueList(provinces, changeObjects) : /*#__PURE__*/React.createElement("p", {
+    }, localizations.newAreaOfAction), !isEmpty(changeObjects) ? renderToimintaalueList(provinces, changeObjects) : /*#__PURE__*/React.createElement("p", {
       className: "pl-8 pt-4"
-    }, "Sama kuin nykyinen toiminta-alue."), /*#__PURE__*/React.createElement("div", {
+    }, localizations.sameAsTheCurrentAreaOfAction), /*#__PURE__*/React.createElement("div", {
       className: "float-right pt-6"
     }, /*#__PURE__*/React.createElement(SimpleButton, {
       onClick: function onClick() {

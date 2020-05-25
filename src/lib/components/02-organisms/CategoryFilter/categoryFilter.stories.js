@@ -12,7 +12,7 @@ storiesOf("CategoryFilter", module)
     <CategoryFilter
       anchor={"maakuntakunnat"}
       localizations={{
-        approve: "Hyväksy",
+        accept: "Hyväksy",
         cancel: "Peruuta",
         ofMunicipalities: "kunnista",
         sameAsTheCurrentAreaOfAction: "Sama kuin nykyinen toiminta-alue"

@@ -42,6 +42,8 @@ var Modify = React.memo(function (_ref) {
       categories = _ref$categories === void 0 ? [] : _ref$categories,
       _ref$changeObjectsByP = _ref.changeObjectsByProvince,
       changeObjectsByProvince = _ref$changeObjectsByP === void 0 ? {} : _ref$changeObjectsByP,
+      _ref$localizations = _ref.localizations,
+      localizations = _ref$localizations === void 0 ? {} : _ref$localizations,
       _ref$municipalities = _ref.municipalities,
       municipalities = _ref$municipalities === void 0 ? [] : _ref$municipalities,
       _ref$provinceInstance = _ref.provinceInstances,
@@ -125,8 +127,6 @@ var Modify = React.memo(function (_ref) {
     } else {
       nextChangeObjects = dissoc(_provinceId || provinceId, cos);
     }
-
-    console.info(cos, nextChangeObjects);
 
     if (!equals(cos, nextChangeObjects)) {
       setCos(nextChangeObjects);
@@ -266,7 +266,6 @@ var Modify = React.memo(function (_ref) {
       var provinceInstance = provinceInstances[_provinceId2];
       setProvinceId(_provinceId2);
       var isKunta = !!find(propEq("kuntaKoodiarvo", itemsToRemove[0].value), kuntaProvinceMapping);
-      console.info("POISTETTAVA: ", itemsToRemove[0]);
 
       if (isKunta) {
         var provinceRemovalChangeObj = null; // Aktiiviset kunnat
@@ -406,7 +405,7 @@ var Modify = React.memo(function (_ref) {
   }, [baseAnchor, categories, cos, provinceInstances, updateChangeObjects]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Autocomplete, {
     minChars: 1,
-    name: "filter example",
+    name: "maakunnat-ja-kunnat-filter",
     options: locations,
     isSearch: true,
     callback: onAutocompleteChanges,
@@ -438,12 +437,12 @@ var Modify = React.memo(function (_ref) {
     onClick: function onClick() {
       return onClose();
     },
-    text: "Peruuta"
+    text: localizations.cancel
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SimpleButton, {
     onClick: function onClick() {
       return onClose(cos);
     },
-    text: "Hyväksy"
+    text: localizations.accept
   })))));
 }, function (cp, np) {
   return isEqual(cp.categories, np.categories) && isEqual(cp.cos, np.cos);
