@@ -45,11 +45,8 @@ const ConfirmDialog = props => {
 };
 
 ConfirmDialog.propTypes = {
-  // Is the dialog visible? Default value is false.
   isConfirmDialogVisible: PropTypes.bool,
-  // Callback function for handling the click of OK button.
   handleOk: PropTypes.func,
-  // Callback function for handling the click of Cancel button.
   handleCancel: PropTypes.func,
   messages: PropTypes.object
 };
