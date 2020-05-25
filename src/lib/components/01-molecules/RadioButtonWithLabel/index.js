@@ -25,7 +25,6 @@ const RadioButtonWithLabel = React.memo(
     })(props => <Radio color="default" {...props} />);
 
     const handleChanges = () => {
-      console.info("Muutos tapahtui.", props.payload, !props.isChecked);
       props.onChanges(props.payload, { isChecked: !props.isChecked });
     };
 
