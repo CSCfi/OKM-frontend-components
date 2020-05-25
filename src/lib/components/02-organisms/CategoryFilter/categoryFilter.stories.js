@@ -11,6 +11,12 @@ storiesOf("CategoryFilter", module)
   .add("Toiminta-alueen käyttötapaus", () => (
     <CategoryFilter
       anchor={"maakuntakunnat"}
+      localizations={{
+        approve: "Hyväksy",
+        cancel: "Peruuta",
+        ofMunicipalities: "kunnista",
+        sameAsTheCurrentAreaOfAction: "Sama kuin nykyinen toiminta-alue"
+      }}
       municipalities={kunnat}
       provinces={toimintaalueStory.categories}
       provincesWithoutMunicipalities={maakunnat}

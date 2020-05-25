@@ -66,6 +66,7 @@ const Modify = React.memo(
     anchor: baseAnchor = "no-anchor-defined",
     categories = [],
     changeObjectsByProvince = {},
+    localizations = {},
     municipalities = [],
     provinceInstances = {},
     provincesWithoutMunicipalities = [],
@@ -577,7 +578,7 @@ const Modify = React.memo(
       <React.Fragment>
         <Autocomplete
           minChars={1}
-          name="filter example"
+          name="maakunnat-ja-kunnat-filter"
           options={locations}
           isSearch
           callback={onAutocompleteChanges}
@@ -605,12 +606,12 @@ const Modify = React.memo(
               <SimpleButton
                 variant={"outlined"}
                 onClick={() => onClose()}
-                text={"Peruuta"}></SimpleButton>
+                text={localizations.cancel}></SimpleButton>
             </div>
             <div>
               <SimpleButton
                 onClick={() => onClose(cos)}
-                text={"Hyväksy"}></SimpleButton>
+                text={localizations.approve}></SimpleButton>
             </div>
           </div>
         </div>
@@ -629,7 +630,8 @@ Modify.propTypes = {
   municipalities: PropTypes.array,
   provinceInstances: PropTypes.object,
   provincesWithoutMunicipalities: PropTypes.array,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  localizations: PropTypes.object
 };
 
 export default Modify;

@@ -9,11 +9,13 @@ import { Province } from "./province";
 const CategoryFilter = ({
   anchor = "no-anchor-defined",
   changeObjectsByProvince = {},
+  localizations = {},
   municipalities = [],
   onChanges,
   provinces = [],
   provincesWithoutMunicipalities = []
 }) => {
+  console.info(localizations);
   const [isEditViewActive, toggleEditView] = useState(true);
 
   const [changeObjects, setChangeObjects] = useState(changeObjectsByProvince);
@@ -59,7 +61,7 @@ const CategoryFilter = ({
                           province.categories[0].components.length) *
                           100
                       )}
-                      % kunnista)
+                      % {localizations.ofMunicipalities})
                     </p>
                   </div>
                   <ul className={"mt-4"}>
@@ -93,6 +95,7 @@ const CategoryFilter = ({
         anchor={anchor}
         categories={provinces}
         municipalities={municipalities}
+        localizations={localizations}
         provincesWithoutMunicipalities={provincesWithoutMunicipalities}
         onClose={changesByProvince => {
           toggleEditView(false);
@@ -112,11 +115,13 @@ const CategoryFilter = ({
         <h3>Nykyinen toiminta-alue</h3>
         {renderToimintaalueList(provinces)}
         <hr />
-        <h3 className={"mt-4"}>Uusi toiminta-alue</h3>
+        <h3 className={"mt-4"}>{localizations.newAreaOfAction}</h3>
         {!isEmpty(changeObjects) ? (
           renderToimintaalueList(provinces, changeObjects)
         ) : (
-          <p className={"pl-8 pt-4"}>Sama kuin nykyinen toiminta-alue.</p>
+          <p className={"pl-8 pt-4"}>
+            {localizations.sameAsTheCurrentAreaOfAction}
+          </p>
         )}
         <div className={"float-right pt-6"}>
           <SimpleButton
@@ -132,6 +137,7 @@ CategoryFilter.propTypes = {
   anchor: PropTypes.string,
   categories: PropTypes.array,
   changeObjectsByProvince: PropTypes.object,
+  localizations: PropTypes.object,
   municipalities: PropTypes.array,
   onChanges: PropTypes.func.isRequired,
   provincesWithoutMunicipalities: PropTypes.array
