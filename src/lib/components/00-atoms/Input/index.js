@@ -151,7 +151,6 @@ const Input = React.memo(
     );
   },
   (cp, np) => {
-    console.info(cp.payload, np.payload, isEqual(cp.payload, np.payload));
     return (
       cp.isDisabled === np.isDisabled &&
       cp.isHidden === np.isHidden &&
