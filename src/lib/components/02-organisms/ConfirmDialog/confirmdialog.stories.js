@@ -3,19 +3,32 @@ import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import ConfirmDialog from "./index";
 
+const messages = {
+  ok: "Merkitse päätetyksi",
+  cancel: "Peruuta",
+  content: "Tähän kuvaava ohjeteksti varmistamaan, että muutokset on allekirjoitutettu ministerillä. Muutosta ei voi esittelijä kumota.",
+  title: "Merkitäänkö asia päätetyksi?",
+  noSave: "Älä tallenna"
+}
+
 storiesOf("Confirm Dialog", module)
   .addDecorator(withInfo)
   .add("Example 1", () => (
     <ConfirmDialog
-      content={
-        "Tähän kuvaava ohjeteksti varmistamaan, että muutokset on allekirjoitutettu ministerillä. Muutosta ei voi esittelijä kumota."
-      }
-      title={"Merkitäänkö asia päätetyksi?"}
       isConfirmDialogVisible={true}
       handleCancel={() => console.log("cancel")}
       handleOk={() => console.log("ok")}
       onClose={() => console.log("onClose clicked!")}
-      yesMessage={"Merkitse päätetyksi"}
-      noMessage={"Peruuta"}
+      messages={messages}
+    />
+  ))
+  .add("With abandon changes", () => (
+    <ConfirmDialog
+      isConfirmDialogVisible={true}
+      handleCancel={() => console.log("cancel")}
+      handleOk={() => console.log("ok")}
+      handleExitAndAbandonChanges={() => console.log("exit not saving")}
+      onClose={() => console.log("onClose clicked!")}
+      messages={messages}
     />
   ));
