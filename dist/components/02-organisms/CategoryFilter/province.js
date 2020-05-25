@@ -2,7 +2,7 @@ import { find, propEq, filter, assoc, dissoc, endsWith, compose, prop, append, m
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import mix from "./province-utils";
-import { getAnchor as getKuntaAnchor } from "./kunta-utils";
+import { getAnchor as getKuntaAnchor, getRemovalChangeObj } from "./kunta-utils";
 import { getAdditionChangeObj as getMunicipalityAdditionChangeObj } from "./kunta-utils";
 export function Province(province, baseAnchor) {
   var id = province.anchor;
@@ -164,6 +164,9 @@ export function Province(province, baseAnchor) {
         }
       };
     },
+    getRemovalChangeObjForMunicipality: function getRemovalChangeObjForMunicipality(koodiarvo) {
+      return getRemovalChangeObj(baseAnchor, id, koodiarvo);
+    },
     getTitle: function getTitle() {
       return title;
     },
@@ -175,8 +178,8 @@ export function Province(province, baseAnchor) {
       var changeObj = find(propEq("anchor", _getAnchor()), changeObjects);
       return province.components[0].properties.isChecked && !changeObj || changeObj && changeObj.properties.isChecked;
     },
-    isKuntaActive: function isKuntaActive(koodiarvo, baseAnchor) {
-      var changeObjects = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+    isKuntaActive: function isKuntaActive(koodiarvo) {
+      var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       var anchor = getKuntaAnchor(baseAnchor, id, koodiarvo);
       var changeObj = find(propEq("anchor", anchor), changeObjects);
       var kunta = find(propEq("anchor", koodiarvo), province.categories[0].components);

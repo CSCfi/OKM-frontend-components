@@ -162,7 +162,7 @@ var Modify = React.memo(function (_ref) {
         var areAllMunicipalitiesActive = provinceInstance.areAllMunicipalitiesActive(cos[location.provinceKey]);
 
         if (location.isKunta) {
-          return !areAllMunicipalitiesActive && provinceInstance.isKuntaActive(location.value, baseAnchor, cos[location.provinceKey]);
+          return !areAllMunicipalitiesActive && provinceInstance.isKuntaActive(location.value, cos[location.provinceKey]);
         } else {
           return areAllMunicipalitiesActive && provinceInstance.isActive(cos[location.provinceKey]);
         }
@@ -222,7 +222,7 @@ var Modify = React.memo(function (_ref) {
             provinceKey = kuntaMapping.maakuntaKey;
             var provinceInstance = provinceInstances[provinceKey];
             var isProvinceActive = provinceInstance ? provinceInstance.isActive(cos[provinceKey]) : false;
-            okToList = !isProvinceActive || !provinceInstance.isKuntaActive(option.koodiArvo, baseAnchor, cos[provinceKey]);
+            okToList = !isProvinceActive || !provinceInstance.isKuntaActive(option.koodiArvo, cos[provinceKey]);
           }
         } else {
           provinceKey = mapping[option.koodiArvo];
@@ -250,7 +250,7 @@ var Modify = React.memo(function (_ref) {
       maakunnat: getValittavissaOlevat(provincesWithoutMunicipalities, false)
     };
     return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
-  }, [baseAnchor, cos, municipalities, provinceInstances, provincesWithoutMunicipalities, selectedLocations]);
+  }, [cos, municipalities, provinceInstances, provincesWithoutMunicipalities, selectedLocations]);
   var onAutocompleteChanges = useCallback(function (payload, values) {
     var currentSel = values.value || [];
     var prevSel = previousSelection.current;
@@ -287,17 +287,16 @@ var Modify = React.memo(function (_ref) {
 
             if (!isProvinceActiveByDefault) {
               provinceChangeObjects = filter(compose(not, propEq("anchor", provinceInstance.getAnchor())), provinceChangeObjects);
+            } else {
+              var provinceChangeObj = provinceInstance.isActive() ? provinceInstance.getRemovalChangeObj() : null;
+              provinceChangeObjects = provinceChangeObj ? append(provinceChangeObj, provinceChangeObjects) : provinceChangeObjects;
             }
           }
-          /**
-           * Couldn't remove the municipality. It means that we have
-           * to create a new change object.
-           **/
 
-
-          if (provinceChangeObjects && provinceChangeObjects.length === cos[_provinceId2].length) {
-            var provinceChangeObj = provinceInstance.isActive() ? provinceInstance.getRemovalChangeObj() : null;
-            provinceChangeObjects = provinceChangeObj ? append(provinceChangeObj, provinceChangeObjects) : provinceChangeObjects;
+          if (provinceInstance.isKuntaActive(itemsToRemove[0].value)) {
+            provinceChangeObjects = append(provinceInstance.getRemovalChangeObjForMunicipality(itemsToRemove[0].value), provinceChangeObjects);
+          } else {
+            provinceChangeObjects = filter(compose(not, propEq("anchor", itemsToRemove[0].anchor)), provinceChangeObjects);
           }
 
           updateChangeObjects({

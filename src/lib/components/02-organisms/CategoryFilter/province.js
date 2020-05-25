@@ -14,7 +14,10 @@ import {
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import mix from "./province-utils";
-import { getAnchor as getKuntaAnchor } from "./kunta-utils";
+import {
+  getAnchor as getKuntaAnchor,
+  getRemovalChangeObj
+} from "./kunta-utils";
 import { getAdditionChangeObj as getMunicipalityAdditionChangeObj } from "./kunta-utils";
 
 export function Province(province, baseAnchor) {
@@ -189,6 +192,9 @@ export function Province(province, baseAnchor) {
         }
       };
     },
+    getRemovalChangeObjForMunicipality: koodiarvo => {
+      return getRemovalChangeObj(baseAnchor, id, koodiarvo);
+    },
     getTitle: () => {
       return title;
     },
@@ -202,7 +208,7 @@ export function Province(province, baseAnchor) {
         (changeObj && changeObj.properties.isChecked)
       );
     },
-    isKuntaActive: (koodiarvo, baseAnchor, changeObjects = []) => {
+    isKuntaActive: (koodiarvo, changeObjects = []) => {
       const anchor = getKuntaAnchor(baseAnchor, id, koodiarvo);
       const changeObj = find(propEq("anchor", anchor), changeObjects);
       const kunta = find(

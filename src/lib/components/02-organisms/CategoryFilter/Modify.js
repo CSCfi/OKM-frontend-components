@@ -199,7 +199,6 @@ const Modify = React.memo(
               !areAllMunicipalitiesActive &&
               provinceInstance.isKuntaActive(
                 location.value,
-                baseAnchor,
                 cos[location.provinceKey]
               )
             );
@@ -280,7 +279,6 @@ const Modify = React.memo(
                 !isProvinceActive ||
                 !provinceInstance.isKuntaActive(
                   option.koodiArvo,
-                  baseAnchor,
                   cos[provinceKey]
                 );
             }
@@ -313,7 +311,6 @@ const Modify = React.memo(
 
       return concat(valittavissaOlevat.kunnat, valittavissaOlevat.maakunnat);
     }, [
-      baseAnchor,
       cos,
       municipalities,
       provinceInstances,
@@ -368,24 +365,30 @@ const Modify = React.memo(
                     ),
                     provinceChangeObjects
                   );
+                } else {
+                  const provinceChangeObj = provinceInstance.isActive()
+                    ? provinceInstance.getRemovalChangeObj()
+                    : null;
+                  provinceChangeObjects = provinceChangeObj
+                    ? append(provinceChangeObj, provinceChangeObjects)
+                    : provinceChangeObjects;
                 }
               }
 
-              /**
-               * Couldn't remove the municipality. It means that we have
-               * to create a new change object.
-               **/
-              if (
-                provinceChangeObjects &&
-                provinceChangeObjects.length === cos[provinceId].length
-              ) {
-                const provinceChangeObj = provinceInstance.isActive()
-                  ? provinceInstance.getRemovalChangeObj()
-                  : null;
-                provinceChangeObjects = provinceChangeObj
-                  ? append(provinceChangeObj, provinceChangeObjects)
-                  : provinceChangeObjects;
+              if (provinceInstance.isKuntaActive(itemsToRemove[0].value)) {
+                provinceChangeObjects = append(
+                  provinceInstance.getRemovalChangeObjForMunicipality(
+                    itemsToRemove[0].value
+                  ),
+                  provinceChangeObjects
+                );
+              } else {
+                provinceChangeObjects = filter(
+                  compose(not, propEq("anchor", itemsToRemove[0].anchor)),
+                  provinceChangeObjects
+                );
               }
+
               updateChangeObjects(
                 {
                   changes: flatten(
