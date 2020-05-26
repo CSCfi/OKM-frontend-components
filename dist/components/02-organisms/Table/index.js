@@ -53,7 +53,7 @@ var Table = function Table(_ref) {
 
   var sortedStructure = useMemo(function () {
     setSortingHistory(function (prevValue) {
-      return _objectSpread({}, prevValue, _defineProperty({}, orderOfBodyRows.columnIndex, orderOfBodyRows.order));
+      return _objectSpread(_objectSpread({}, prevValue), {}, _defineProperty({}, orderOfBodyRows.columnIndex, orderOfBodyRows.order));
     });
     var indexOfTbody = R.findIndex(R.propEq("role", "tbody"), structure);
 

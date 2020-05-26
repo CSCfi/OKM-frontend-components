@@ -53,57 +53,62 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AlertMessage = React.memo(props => {
-  const classes = useStyles();
-  const [isVisible, setVisible] = useState(true);
+const AlertMessage = React.memo(
+  props => {
+    const classes = useStyles();
+    const [isVisible, setVisible] = useState(true);
 
-  const clickCallback = e => {
-    e.preventDefault();
-    return props.handleLinkClick();
-  };
+    const clickCallback = e => {
+      e.preventDefault();
+      return props.handleLinkClick();
+    };
 
-  return (
-    <div className={`${classes.root} ${isVisible ? "" : "hidden"}`}>
-      <Collapse in={props.isVisible}>
-        <Alert
-          id={props.id}
-          aria-label={props.ariaLabel}
-          severity={props.type}
-          variant="outlined"
-          action={
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%"
-              }}>
-              {props.linkUrl && props.linkText && (
-                <Link href={props.linkUrl} style={{ cursor: "pointer" }}>
-                  {props.linkText}
-                </Link>
-              )}
-              {!props.linkUrl && props.handleLinkClick && props.linkText && (
-                <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
-                  {props.linkText}
-                </Link>
-              )}
-              <IconButton
-                style={{ marginLeft: "1em" }}
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => setVisible(false)}>
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            </div>
-          }>
-          {props.title && <AlertTitle>{props.title}</AlertTitle>}
-          <p>{props.message && props.message}</p>
-        </Alert>
-      </Collapse>
-    </div>
-  );
-});
+    return (
+      <div className={`${classes.root} ${isVisible ? "" : "hidden"}`}>
+        <Collapse in={props.isVisible}>
+          <Alert
+            id={props.id}
+            aria-label={props.ariaLabel}
+            severity={props.type}
+            variant="outlined"
+            action={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%"
+                }}>
+                {props.linkUrl && props.linkText && (
+                  <Link href={props.linkUrl} style={{ cursor: "pointer" }}>
+                    {props.linkText}
+                  </Link>
+                )}
+                {!props.linkUrl && props.handleLinkClick && props.linkText && (
+                  <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
+                    {props.linkText}
+                  </Link>
+                )}
+                <IconButton
+                  style={{ marginLeft: "1em" }}
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setVisible(false)}>
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              </div>
+            }>
+            {props.title && <AlertTitle>{props.title}</AlertTitle>}
+            <p>{props.message && props.message}</p>
+          </Alert>
+        </Collapse>
+      </div>
+    );
+  },
+  (pp, cp) => {
+    return pp.payload === cp.payload;
+  }
+);
 
 AlertMessage.defaultProps = {
   id: "Alert",

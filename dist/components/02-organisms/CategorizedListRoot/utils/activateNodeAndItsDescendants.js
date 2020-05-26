@@ -1,8 +1,16 @@
-import { append, flatten, map, uniq } from "ramda";
+import { append, map, flatten, uniq } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
 import { uncheckSiblings } from "./uncheckSiblings";
 import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
+
+function Checker() {
+  return {
+    run: function run(node, reducedStructure, changeObjects) {
+      return activateNodeAndItsDescendants(node, reducedStructure, changeObjects);
+    }
+  };
+}
 /**
  * Function activates the target node and updates the situation of
  * related nodes too.
@@ -12,13 +20,15 @@ import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
  * @returns {array} - Updated array of change objects.
  */
 
+
 export function activateNodeAndItsDescendants(node, reducedStructure, changeObjects) {
-  var childNodes = getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]); // We are not ready yet. Every checkbox child node must be checked.
+  var childNodes = node.hasDescendants ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]) : []; // We are not ready yet. Every checkbox child node must be checked.
 
   if (childNodes.length) {
-    changeObjects = uniq(flatten(map(function (childNode) {
-      return activateNodeAndItsDescendants(childNode, reducedStructure, changeObjects);
-    }, childNodes)));
+    changeObjects = flatten(map(function (childNode) {
+      var result = new Checker().run(childNode, reducedStructure, changeObjects);
+      return result;
+    }, childNodes));
   } // The first thing is to find out the change object of the target node.
 
 

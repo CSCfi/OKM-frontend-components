@@ -16,7 +16,8 @@ import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
 import * as R from "ramda";
-import { isEqual, map } from "lodash";
+import { map } from "lodash";
+import CategoryFilter from "../../CategoryFilter";
 
 /** @namespace components */
 
@@ -141,7 +142,7 @@ const CategorizedList = React.memo(
      */
     const handleChanges = useCallback(
       (payload, changeProps) => {
-        return onChangesUpdate({
+        const changeObj = {
           anchor: `${R.compose(
             R.join("."),
             R.tail(),
@@ -154,9 +155,10 @@ const CategorizedList = React.memo(
               payload
             )
           }
-        });
+        };
+        return onChangesUpdate(changeObj);
       },
-      [onChangesUpdate]
+      [onChangesUpdate, props.anchor]
     );
 
     /**
@@ -368,6 +370,10 @@ const CategorizedList = React.memo(
                       ? props.rootPath.concat([i, "components", ii])
                       : "");
 
+                  if (propsObj.isVisible === false) {
+                    return null;
+                  }
+
                   /**
                    * Component is defined in a form structure. There can be
                    * different sort of components and their all need the
@@ -390,12 +396,10 @@ const CategorizedList = React.memo(
                             onChanges={handleChanges}
                             payload={{
                               anchor,
-                              categories: category.categories,
                               component,
                               fullPath,
                               parent: props.parent,
-                              rootPath: props.rootPath,
-                              siblings: props.categories
+                              rootPath: props.rootPath
                             }}
                             labelStyles={labelStyles}>
                             <div className="flex">
@@ -421,8 +425,7 @@ const CategorizedList = React.memo(
                               component,
                               fullPath,
                               parent: props.parent,
-                              rootPath: props.rootPath,
-                              siblings: props.categories
+                              rootPath: props.rootPath
                             }}
                             labelStyles={labelStyles}
                             value={propsObj.value}
@@ -468,8 +471,7 @@ const CategorizedList = React.memo(
                                     component,
                                     fullPath,
                                     parent: props.parent,
-                                    rootPath: props.rootPath,
-                                    siblings: props.categories
+                                    rootPath: props.rootPath
                                   }}
                                   value={propsObj.selectedOption}
                                   isDisabled={isDisabled}
@@ -526,8 +528,7 @@ const CategorizedList = React.memo(
                                   component,
                                   fullPath,
                                   parent: props.parent,
-                                  rootPath: props.rootPath,
-                                  siblings: props.categories
+                                  rootPath: props.rootPath
                                 }}
                                 placeholder={propsObj.placeholder}
                                 title={propsObj.title}
@@ -579,8 +580,7 @@ const CategorizedList = React.memo(
                                     component,
                                     fullPath,
                                     parent: props.parent,
-                                    rootPath: props.rootPath,
-                                    siblings: props.categories
+                                    rootPath: props.rootPath
                                   }}
                                   error={propsObj.error}
                                   fullWidth={propsObj.fullWidth}
@@ -630,7 +630,6 @@ const CategorizedList = React.memo(
                                     fullPath,
                                     parent: props.parent,
                                     rootPath: props.rootPath,
-                                    siblings: props.categories,
                                     attachments: attachments
                                   }}
                                   messages={component.messages}
@@ -701,8 +700,7 @@ const CategorizedList = React.memo(
                                     component,
                                     fullPath,
                                     parent: props.parent,
-                                    rootPath: props.rootPath,
-                                    siblings: props.categories
+                                    rootPath: props.rootPath
                                   }}
                                 />
                               </div>
@@ -747,8 +745,7 @@ const CategorizedList = React.memo(
                                     component,
                                     fullPath,
                                     parent: props.parent,
-                                    rootPath: props.rootPath,
-                                    siblings: props.categories
+                                    rootPath: props.rootPath
                                   }}
                                   placeholder={propsObj.placeholder}
                                   value={R.flatten([propsObj.value])}
@@ -799,8 +796,7 @@ const CategorizedList = React.memo(
                                     component,
                                     fullPath,
                                     parent: props.parent,
-                                    rootPath: props.rootPath,
-                                    siblings: props.categories
+                                    rootPath: props.rootPath
                                   }}
                                   placeholder={propsObj.placeholder}
                                   value={R.flatten([propsObj.value])}
@@ -824,8 +820,7 @@ const CategorizedList = React.memo(
                               component,
                               fullPath,
                               parent: props.parent,
-                              rootPath: props.rootPath,
-                              siblings: props.categories
+                              rootPath: props.rootPath
                             }}
                             titles={propsObj.titles}
                           />
@@ -844,8 +839,7 @@ const CategorizedList = React.memo(
                               component,
                               fullPath,
                               parent: props.parent,
-                              rootPath: props.rootPath,
-                              siblings: props.categories
+                              rootPath: props.rootPath
                             }}
                           />
                         </div>
@@ -878,12 +872,37 @@ const CategorizedList = React.memo(
                               component,
                               fullPath,
                               parent: props.parent,
-                              rootPath: props.rootPath,
-                              siblings: props.categories
+                              rootPath: props.rootPath
                             }}
                             isReadOnly={propsObj.isReadOnly}
                             requiredMessage={propsObj.requiredMessage}
                             showValidationErrors={showValidationErrors}
+                          />
+                        </div>
+                      )}
+                      {component.name === "CategoryFilter" && (
+                        <div className={`${component.styleClasses} flex-2`}>
+                          <CategoryFilter
+                            anchor={propsObj.anchor}
+                            changeObjectsByProvince={
+                              propsObj.changeObjectsByProvince
+                            }
+                            localizations={propsObj.localizations}
+                            municipalities={propsObj.municipalities}
+                            provinces={propsObj.provinces}
+                            provincesWithoutMunicipalities={
+                              propsObj.provincesWithoutMunicipalities
+                            }
+                            showCategoryTitles={propsObj.showCategoryTitles}
+                            onChanges={propsObj.onChanges}
+                            payload={{
+                              anchor,
+                              categories: category.categories,
+                              component,
+                              fullPath,
+                              parent: props.parent,
+                              rootPath: props.rootPath
+                            }}
                           />
                         </div>
                       )}
@@ -904,15 +923,13 @@ const CategorizedList = React.memo(
                   categories={category.categories}
                   changes={categoryChanges}
                   debug={props.debug}
-                  getAllChanges={props.getAllChanges}
                   id={`${props.id}-${category.code}`}
                   level={props.level + 1}
                   parent={{
                     anchor,
                     category,
                     parent: props.parent,
-                    rootPath: props.rootPath,
-                    siblings: props.categories
+                    rootPath: props.rootPath
                   }}
                   parentRootPath={props.rootPath}
                   rootPath={props.rootPath.concat([i, "categories"])}
@@ -935,7 +952,12 @@ const CategorizedList = React.memo(
       JSON.stringify(prevState.categories) ===
       JSON.stringify(nextState.categories);
     const areChangesSame = R.equals(prevState.changes, nextState.changes);
-    return areCategoriesSame && areChangesSame;
+    return (
+      areCategoriesSame &&
+      areChangesSame &&
+      JSON.stringify(prevState.onChangesUpdate) ===
+        JSON.stringify(nextState.onChangesUpdate)
+    );
   }
 );
 
@@ -956,5 +978,7 @@ CategorizedList.propTypes = {
   onChangesUpdate: PropTypes.func,
   onChangesRemove: PropTypes.func
 };
+
+CategorizedList.displayName = "CategorizedList222";
 
 export default CategorizedList;

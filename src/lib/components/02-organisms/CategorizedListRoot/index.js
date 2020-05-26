@@ -37,7 +37,8 @@ const CategorizedListRoot = React.memo(
      * structure is used on defining the updated array of change objects.
      */
     const reducedStructure = useMemo(() => {
-      return getReducedStructure(categories);
+      const result = getReducedStructure(categories);
+      return result;
     }, [categories]);
 
     /**
@@ -117,14 +118,12 @@ const CategorizedListRoot = React.memo(
       </React.Fragment>
     );
   },
-  (prevProps, nextProps) => {
-    const isSameOld =
-      R.equals(prevProps.categories, nextProps.categories) &&
-      R.equals(prevProps.changes, nextProps.changes);
-    if (!isSameOld) {
-      console.info("Päivitetään CategorizedListRoot ", nextProps.anchor);
-    }
-    return isSameOld;
+  (prevState, nextState) => {
+    const areCategoriesSame =
+      JSON.stringify(prevState.categories) ===
+      JSON.stringify(nextState.categories);
+    const areChangesSame = R.equals(prevState.changes, nextState.changes);
+    return areCategoriesSame && areChangesSame;
   }
 );
 

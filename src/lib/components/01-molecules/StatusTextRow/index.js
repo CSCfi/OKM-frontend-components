@@ -49,6 +49,15 @@ const StatusTextRow = React.memo(
         </div>
       );
     }
+  },
+  (cp, np) => {
+    return (
+      cp.isHidden === np.isHidden &&
+      cp.isReadOnly === np.isReadOnly &&
+      cp.isRequired === np.isRequired &&
+      cp.isValid === np.isValid &&
+      cp.statusText === np.statusText
+    );
   }
 );
 

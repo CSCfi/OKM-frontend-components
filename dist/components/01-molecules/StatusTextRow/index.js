@@ -45,5 +45,7 @@ var StatusTextRow = React.memo(function (_ref) {
       className: "pr-4"
     }, "*"), " "));
   }
+}, function (cp, np) {
+  return cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isValid === np.isValid && cp.statusText === np.statusText;
 });
 export default StatusTextRow;

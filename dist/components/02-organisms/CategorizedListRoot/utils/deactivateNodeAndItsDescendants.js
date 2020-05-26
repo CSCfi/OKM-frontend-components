@@ -17,7 +17,7 @@ export function deactivateNodeAndItsDescendants(node, reducedStructure, changeOb
     return changeObjects;
   }
 
-  var childNodes = getChildNodes(node, reducedStructure, ["CheckboxWithLabel", "RadioButtonWithLabel"]); // We are not ready yet. Every checkbox child node must be checked.
+  var childNodes = node.hasDescendants ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel", "RadioButtonWithLabel"]) : []; // We are not ready yet. Every checkbox child node must be checked.
 
   if (childNodes.length) {
     changeObjects = uniq(flatten(map(function (childNode) {

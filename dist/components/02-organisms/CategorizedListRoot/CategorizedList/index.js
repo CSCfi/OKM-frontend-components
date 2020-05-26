@@ -16,7 +16,8 @@ import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
 import * as R from "ramda";
-import { isEqual, map } from "lodash";
+import { map } from "lodash";
+import CategoryFilter from "../../CategoryFilter";
 /** @namespace components */
 
 /**
@@ -145,13 +146,14 @@ var CategorizedList = React.memo(function (props) {
 
 
   var handleChanges = useCallback(function (payload, changeProps) {
-    return onChangesUpdate({
+    var changeObj = {
       anchor: "".concat(R.compose(R.join("."), R.tail(), R.split("."))(payload.anchor), ".").concat(payload.component.anchor),
-      properties: _objectSpread({}, changeProps, {
+      properties: _objectSpread(_objectSpread({}, changeProps), {}, {
         metadata: R.path(["component", "properties", "forChangeObject"], payload)
       })
-    });
-  }, [onChangesUpdate]);
+    };
+    return onChangesUpdate(changeObj);
+  }, [onChangesUpdate, props.anchor]);
   /**
    * Rendering starts here.
    */
@@ -280,6 +282,10 @@ var CategorizedList = React.memo(function (props) {
       var labelStyles = Object.assign({}, isAddition ? (propsObj.labelStyles || {}).addition : {}, isRemoved ? (propsObj.labelStyles || {}).removal : {}, (propsObj.labelStyles || {}).custom || {});
       var styleClasses = component.styleClasses || [];
       var title = propsObj.title + (props.debug ? props.rootPath.concat([i, "components", ii]) : "");
+
+      if (propsObj.isVisible === false) {
+        return null;
+      }
       /**
        * Component is defined in a form structure. There can be
        * different sort of components and their all need the
@@ -288,6 +294,7 @@ var CategorizedList = React.memo(function (props) {
        * callback functions should be handled. And remember to
        * import the component in the beginning of this file.
        **/
+
 
       return /*#__PURE__*/React.createElement(React.Fragment, {
         key: "item-".concat(ii)
@@ -303,12 +310,10 @@ var CategorizedList = React.memo(function (props) {
         onChanges: handleChanges,
         payload: {
           anchor: anchor,
-          categories: category.categories,
           component: component,
           fullPath: fullPath,
           parent: props.parent,
-          rootPath: props.rootPath,
-          siblings: props.categories
+          rootPath: props.rootPath
         },
         labelStyles: labelStyles
       }, /*#__PURE__*/React.createElement("div", {
@@ -331,8 +336,7 @@ var CategorizedList = React.memo(function (props) {
           component: component,
           fullPath: fullPath,
           parent: props.parent,
-          rootPath: props.rootPath,
-          siblings: props.categories
+          rootPath: props.rootPath
         },
         labelStyles: labelStyles,
         value: propsObj.value,
@@ -361,8 +365,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           },
           value: propsObj.selectedOption,
           isDisabled: isDisabled,
@@ -394,8 +397,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           },
           placeholder: propsObj.placeholder,
           title: propsObj.title,
@@ -431,8 +433,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           },
           error: propsObj.error,
           fullWidth: propsObj.fullWidth,
@@ -464,7 +465,6 @@ var CategorizedList = React.memo(function (props) {
             fullPath: fullPath,
             parent: props.parent,
             rootPath: props.rootPath,
-            siblings: props.categories,
             attachments: attachments
           },
           messages: component.messages,
@@ -518,8 +518,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           }
         }));
       }(category) : null, component.name === "Multiselect" ? function (category) {
@@ -545,8 +544,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           },
           placeholder: propsObj.placeholder,
           value: R.flatten([propsObj.value]),
@@ -578,8 +576,7 @@ var CategorizedList = React.memo(function (props) {
             component: component,
             fullPath: fullPath,
             parent: props.parent,
-            rootPath: props.rootPath,
-            siblings: props.categories
+            rootPath: props.rootPath
           },
           placeholder: propsObj.placeholder,
           value: R.flatten([propsObj.value]),
@@ -599,8 +596,7 @@ var CategorizedList = React.memo(function (props) {
           component: component,
           fullPath: fullPath,
           parent: props.parent,
-          rootPath: props.rootPath,
-          siblings: props.categories
+          rootPath: props.rootPath
         },
         titles: propsObj.titles
       })), component.name === "SimpleButton" && /*#__PURE__*/React.createElement("div", {
@@ -616,8 +612,7 @@ var CategorizedList = React.memo(function (props) {
           component: component,
           fullPath: fullPath,
           parent: props.parent,
-          rootPath: props.rootPath,
-          siblings: props.categories
+          rootPath: props.rootPath
         }
       })), component.name === "Datepicker" && /*#__PURE__*/React.createElement("div", {
         className: "".concat(component.styleClasses, " flex-2")
@@ -647,12 +642,30 @@ var CategorizedList = React.memo(function (props) {
           component: component,
           fullPath: fullPath,
           parent: props.parent,
-          rootPath: props.rootPath,
-          siblings: props.categories
+          rootPath: props.rootPath
         },
         isReadOnly: propsObj.isReadOnly,
         requiredMessage: propsObj.requiredMessage,
         showValidationErrors: showValidationErrors
+      })), component.name === "CategoryFilter" && /*#__PURE__*/React.createElement("div", {
+        className: "".concat(component.styleClasses, " flex-2")
+      }, /*#__PURE__*/React.createElement(CategoryFilter, {
+        anchor: propsObj.anchor,
+        changeObjectsByProvince: propsObj.changeObjectsByProvince,
+        localizations: propsObj.localizations,
+        municipalities: propsObj.municipalities,
+        provinces: propsObj.provinces,
+        provincesWithoutMunicipalities: propsObj.provincesWithoutMunicipalities,
+        showCategoryTitles: propsObj.showCategoryTitles,
+        onChanges: propsObj.onChanges,
+        payload: {
+          anchor: anchor,
+          categories: category.categories,
+          component: component,
+          fullPath: fullPath,
+          parent: props.parent,
+          rootPath: props.rootPath
+        }
       })));
     })),
     /**
@@ -667,15 +680,13 @@ var CategorizedList = React.memo(function (props) {
       categories: category.categories,
       changes: categoryChanges,
       debug: props.debug,
-      getAllChanges: props.getAllChanges,
       id: "".concat(props.id, "-").concat(category.code),
       level: props.level + 1,
       parent: {
         anchor: anchor,
         category: category,
         parent: props.parent,
-        rootPath: props.rootPath,
-        siblings: props.categories
+        rootPath: props.rootPath
       },
       parentRootPath: props.rootPath,
       rootPath: props.rootPath.concat([i, "categories"]),
@@ -690,9 +701,10 @@ var CategorizedList = React.memo(function (props) {
 }, function (prevState, nextState) {
   var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
   var areChangesSame = R.equals(prevState.changes, nextState.changes);
-  return areCategoriesSame && areChangesSame;
+  return areCategoriesSame && areChangesSame && JSON.stringify(prevState.onChangesUpdate) === JSON.stringify(nextState.onChangesUpdate);
 });
 CategorizedList.defaultProps = {
   level: 0
 };
+CategorizedList.displayName = "CategorizedList222";
 export default CategorizedList;

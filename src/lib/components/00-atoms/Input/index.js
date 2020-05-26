@@ -7,6 +7,7 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
+import { isEqual } from "lodash";
 
 import styles from "./input.module.css";
 
@@ -41,71 +42,74 @@ const inputStyles = {
   }
 };
 
-const Input = React.memo(props => {
-  const [isVisited, setIsVisited] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const { classes } = props;
-  const [value, setValue] = useState("");
-  const [handle, setHandle] = useState(null);
+const Input = React.memo(
+  props => {
+    const [isVisited, setIsVisited] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+    const { classes } = props;
+    const [value, setValue] = useState("");
+    const [handle, setHandle] = useState(null);
 
-  const updateValue = e => {
-    setValue(e.target.value);
-    if (handle) {
-      clearTimeout(handle);
-    }
-    setHandle(
-      (v => {
-        return setTimeout(() => {
-          props.onChanges(props.payload, { value: v });
-        }, props.delay);
-      })(e.target.value)
-    );
-  };
+    const updateValue = e => {
+      setValue(e.target.value);
+      if (handle) {
+        clearTimeout(handle);
+      }
+      setHandle(
+        (v => {
+          return setTimeout(() => {
+            props.onChanges(props.payload, { value: v });
+          }, props.delay);
+        })(e.target.value)
+      );
+    };
 
-  useEffect(() => {
-    if (props.value !== value || value !== "") {
-      setValue(props.value || ""); // props.value might be undefined
-    }
-  }, [props.value]);
+    useEffect(() => {
+      if (props.value !== value || value !== "") {
+        setValue(props.value || ""); // props.value might be undefined
+      }
+    }, [props.value]);
 
-  return (
-    <React.Fragment>
-      <div className="flex items-center">
-        <TextField
-          id={props.id}
-          aria-label={props.ariaLabel}
-          value={value}
-          label={props.label}
-          disabled={props.isDisabled || props.isReadOnly}
-          inputprops={{
-            readOnly: props.isReadOnly
-          }}
-          placeholder={props.placeholder}
-          rows={props.rows}
-          margin={props.isDense ? "dense" : ""}
-          rowsMax={props.rowsMax}
-          onChange={updateValue}
-          required={props.isRequired && !props.isReadOnly}
-          error={
-            !props.isReadOnly && props.error
-              ? props.error
-              : (props.isRequired && value && !props.isValid) ||
-                (!props.isRequired && !props.isValid)
-          }
-          variant="outlined"
-          style={
-            props.fullWidth
-              ? { border: "none" }
-              : { width: props.width, border: "none" }
-          }
-          fullWidth={props.fullWidth}
-          type={props.type}
-          onBlurCapture={
-            !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
-          }
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          className={`${props.isHidden ? "hidden" : ""} 
+    return (
+      <React.Fragment>
+        <div className="flex items-center">
+          <TextField
+            id={props.id}
+            aria-label={props.ariaLabel}
+            value={value}
+            label={props.label}
+            disabled={props.isDisabled || props.isReadOnly}
+            inputprops={{
+              readOnly: props.isReadOnly
+            }}
+            placeholder={props.placeholder}
+            rows={props.rows}
+            margin={props.isDense ? "dense" : ""}
+            rowsMax={props.rowsMax}
+            onChange={updateValue}
+            required={props.isRequired && !props.isReadOnly}
+            error={
+              !props.isReadOnly && props.error
+                ? props.error
+                : (props.isRequired && value && !props.isValid) ||
+                  (!props.isRequired && !props.isValid)
+            }
+            variant="outlined"
+            style={
+              props.fullWidth
+                ? { border: "none" }
+                : { width: props.width, border: "none" }
+            }
+            fullWidth={props.fullWidth}
+            type={props.type}
+            onBlurCapture={
+              !props.value
+                ? () => setIsVisited(true)
+                : () => setIsVisited(false)
+            }
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className={`${props.isHidden ? "hidden" : ""} 
           ${
             !props.isReadOnly &&
             value === "" &&
@@ -117,35 +121,47 @@ const Input = React.memo(props => {
           } 
           ${props.isReadOnly && classes.readonlyNoValue}
         `}
-        />
-        {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
-          <div className="ml-8">
-            <Tooltip tooltip={props.tooltip.text} trigger="click">
-              <HelpIcon
-                classes={{
-                  colorPrimary: styles.tooltipBg
-                }}
-                color="primary"
-              />
-            </Tooltip>
-          </div>
+          />
+          {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
+            <div className="ml-8">
+              <Tooltip tooltip={props.tooltip.text} trigger="click">
+                <HelpIcon
+                  classes={{
+                    colorPrimary: styles.tooltipBg
+                  }}
+                  color="primary"
+                />
+              </Tooltip>
+            </div>
+          )}
+        </div>
+        {props.showValidationErrors && props.requiredMessage && (
+          <FormHelperText
+            id="component-message-text"
+            style={{
+              marginTop: "0.1em",
+              paddingLeft: "1.2em",
+              marginBottom: "0.5em",
+              color: COLORS.OIVA_ORANGE_TEXT
+            }}>
+            {value !== "" && props.requiredMessage}
+          </FormHelperText>
         )}
-      </div>
-      {props.showValidationErrors && props.requiredMessage && (
-        <FormHelperText
-          id="component-message-text"
-          style={{
-            marginTop: "0.1em",
-            paddingLeft: "1.2em",
-            marginBottom: "0.5em",
-            color: COLORS.OIVA_ORANGE_TEXT
-          }}>
-          {value !== "" && props.requiredMessage}
-        </FormHelperText>
-      )}
-    </React.Fragment>
-  );
-});
+      </React.Fragment>
+    );
+  },
+  (cp, np) => {
+    return (
+      cp.isDisabled === np.isDisabled &&
+      cp.isHidden === np.isHidden &&
+      cp.isReadOnly === np.isReadOnly &&
+      cp.isRequired === np.isRequired &&
+      cp.isVisited === np.isVisited &&
+      cp.isDence === np.isDense &&
+      isEqual(cp.payload, np.payload)
+    );
+  }
+);
 
 Input.defaultProps = {
   ariaLabel: "Text area",

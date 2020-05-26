@@ -20,7 +20,7 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
      * array of change objects.
      **/
     changeObjects = over(lensIndex(changeObjIndex), function (changeObject) {
-      return _objectSpread({}, changeObject, {
+      return _objectSpread(_objectSpread({}, changeObject), {}, {
         properties: Object.assign({}, changeObject.properties, properties)
       });
     }, changeObjects);
@@ -31,7 +31,7 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
      **/
     changeObjects = append({
       anchor: node.fullAnchor,
-      properties: Object.assign({}, _objectSpread({}, properties, {
+      properties: Object.assign({}, _objectSpread(_objectSpread({}, properties), {}, {
         metadata: node.properties.forChangeObject
       }))
     }, changeObjects);

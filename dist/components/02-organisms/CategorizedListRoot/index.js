@@ -36,7 +36,8 @@ var CategorizedListRoot = React.memo(function (_ref) {
    */
 
   var reducedStructure = useMemo(function () {
-    return getReducedStructure(categories);
+    var result = getReducedStructure(categories);
+    return result;
   }, [categories]);
   /**
    * Function will be called when something changes on the form. The only
@@ -93,13 +94,9 @@ var CategorizedListRoot = React.memo(function (_ref) {
       showValidationErrors: showValidationErrors
     });
   }() : null);
-}, function (prevProps, nextProps) {
-  var isSameOld = R.equals(prevProps.categories, nextProps.categories) && R.equals(prevProps.changes, nextProps.changes);
-
-  if (!isSameOld) {
-    console.info("Päivitetään CategorizedListRoot ", nextProps.anchor);
-  }
-
-  return isSameOld;
+}, function (prevState, nextState) {
+  var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
+  var areChangesSame = R.equals(prevState.changes, nextState.changes);
+  return areCategoriesSame && areChangesSame;
 });
 export default CategorizedListRoot;
