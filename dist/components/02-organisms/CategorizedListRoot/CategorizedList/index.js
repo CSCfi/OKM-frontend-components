@@ -652,11 +652,13 @@ var CategorizedList = React.memo(function (props) {
       }, /*#__PURE__*/React.createElement(CategoryFilter, {
         anchor: propsObj.anchor,
         changeObjectsByProvince: propsObj.changeObjectsByProvince,
+        isEditViewActive: propsObj.isEditViewActive,
         localizations: propsObj.localizations,
         municipalities: propsObj.municipalities,
         provinces: propsObj.provinces,
         provincesWithoutMunicipalities: propsObj.provincesWithoutMunicipalities,
         showCategoryTitles: propsObj.showCategoryTitles,
+        toggleEditView: propsObj.toggleEditView,
         onChanges: propsObj.onChanges,
         payload: {
           anchor: anchor,

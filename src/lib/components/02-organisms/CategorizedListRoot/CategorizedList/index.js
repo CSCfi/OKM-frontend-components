@@ -887,6 +887,7 @@ const CategorizedList = React.memo(
                             changeObjectsByProvince={
                               propsObj.changeObjectsByProvince
                             }
+                            isEditViewActive={propsObj.isEditViewActive}
                             localizations={propsObj.localizations}
                             municipalities={propsObj.municipalities}
                             provinces={propsObj.provinces}
@@ -894,6 +895,7 @@ const CategorizedList = React.memo(
                               propsObj.provincesWithoutMunicipalities
                             }
                             showCategoryTitles={propsObj.showCategoryTitles}
+                            toggleEditView={propsObj.toggleEditView}
                             onChanges={propsObj.onChanges}
                             payload={{
                               anchor,
