@@ -7,7 +7,8 @@ var defaultProps = {
   anchor: "anchornamemissing",
   categories: [],
   changes: [null],
-  showCategoryTitles: false
+  showCategoryTitles: false,
+  uncheckParentWithoutActiveChildNodes: false
 };
 /**
  * CategorizedListRoot is the entry point of form handling.
@@ -24,7 +25,9 @@ var CategorizedListRoot = React.memo(function (_ref) {
       _ref$showCategoryTitl = _ref.showCategoryTitles,
       showCategoryTitles = _ref$showCategoryTitl === void 0 ? defaultProps.showCategoryTitles : _ref$showCategoryTitl,
       isReadOnly = _ref.isReadOnly,
-      showValidationErrors = _ref.showValidationErrors;
+      showValidationErrors = _ref.showValidationErrors,
+      _ref$uncheckParentWit = _ref.uncheckParentWithoutActiveChildNodes,
+      uncheckParentWithoutActiveChildNodes = _ref$uncheckParentWit === void 0 ? defaultProps.uncheckParentWithoutActiveChildNodes : _ref$uncheckParentWit;
   var changesRef = useRef(null);
   changesRef.current = useMemo(function () {
     return changes;
@@ -49,7 +52,7 @@ var CategorizedListRoot = React.memo(function (_ref) {
     // Target node is the component affected by the change.
     var targetNode = getTargetNode(changeObj, reducedStructure); // The array of change objects will be updated.
 
-    var nextChanges = handleNodeMain(targetNode, anchor, reducedStructure, changesRef.current);
+    var nextChanges = handleNodeMain(uncheckParentWithoutActiveChildNodes, targetNode, anchor, reducedStructure, changesRef.current);
     /**
      * The updated array will be sent using the onUpdate callback function.
      * The anchor parameter is the root anchor of the current form. It can
@@ -60,7 +63,7 @@ var CategorizedListRoot = React.memo(function (_ref) {
       anchor: anchor,
       changes: nextChanges
     });
-  }, [anchor, onUpdate, reducedStructure]);
+  }, [anchor, onUpdate, reducedStructure, uncheckParentWithoutActiveChildNodes]);
   /**
    * Function skips the tree checking (onChangesUpdate func, handleNodeMain).
    * Tree checking might be needed on future use cases.

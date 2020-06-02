@@ -35,7 +35,7 @@ export var findCategoryAnchor = function findCategoryAnchor(category, anchor) {
     R.addIndex(R.forEach)(function (component, index) {
       path = R.append(index, path);
       var fullAnchor = R.join(".", [anchor, component.anchor]);
-      structure = R.append(_objectSpread(_objectSpread({}, component), {}, {
+      structure = R.append(_objectSpread({}, component, {
         anchorParts: R.split(".", fullAnchor),
         formId: category.formId,
         fullAnchor: fullAnchor,

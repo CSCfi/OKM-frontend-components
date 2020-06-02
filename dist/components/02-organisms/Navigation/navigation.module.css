@@ -11,7 +11,5 @@
 }
 
 .active {
-  --bg-opacity: 1;
   background-color: #276749;
-  background-color: rgba(39, 103, 73, var(--bg-opacity));
 }

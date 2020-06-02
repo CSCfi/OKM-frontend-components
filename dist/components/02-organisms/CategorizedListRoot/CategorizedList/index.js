@@ -148,7 +148,7 @@ var CategorizedList = React.memo(function (props) {
   var handleChanges = useCallback(function (payload, changeProps) {
     var changeObj = {
       anchor: "".concat(R.compose(R.join("."), R.tail(), R.split("."))(payload.anchor), ".").concat(payload.component.anchor),
-      properties: _objectSpread(_objectSpread({}, changeProps), {}, {
+      properties: _objectSpread({}, changeProps, {
         metadata: R.path(["component", "properties", "forChangeObject"], payload)
       })
     };

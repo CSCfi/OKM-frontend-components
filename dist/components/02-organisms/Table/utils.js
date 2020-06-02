@@ -104,7 +104,7 @@ export function dataCellsOnRow(id, cellsOfARow) {
         styleClasses: cellData.styleClasses || ["w-1/".concat(cellsOfARow.length)],
         title: cellData.text
       }, cellData);
-      return _objectSpread(_objectSpread({}, cell), {}, {
+      return _objectSpread({}, cell, {
         includes: cellData.includes || []
       });
     }, cellsOfARow)
