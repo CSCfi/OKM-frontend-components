@@ -430,10 +430,6 @@ const Modify = React.memo(
            * ACTIVATION OF PROVINCES AND MUNICIPALITIES
            ********************************************/
 
-          //  const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-          //   cos[provinceId]
-          // );
-
           if (isMunicipality) {
             /********************************
              * ACTIVATION OF A MUNICIPALITY
@@ -508,7 +504,10 @@ const Modify = React.memo(
                   anchor={baseAnchor}
                   categories={provinceCategories}
                   changes={provinceChanges}
-                  onUpdate={updateChangeObjects}></CategorizedListRoot>
+                  onUpdate={updateChangeObjects}
+                  uncheckParentWithoutActiveChildNodes={
+                    true
+                  }></CategorizedListRoot>
               ) : null}
             </div>
           </div>
