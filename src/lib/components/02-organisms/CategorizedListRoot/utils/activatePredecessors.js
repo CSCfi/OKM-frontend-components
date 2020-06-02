@@ -1,9 +1,6 @@
-import { filter } from "ramda";
 import { findParent } from "./findParent";
-import { isNodeChecked } from "./isNodeChecked";
-import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { uncheckSiblings } from "./uncheckSiblings";
-import { getChildNodes } from "./getChildNodes";
+import { modifyNode } from "./modifyNode";
 
 /**
  * Activates the node's predecessors.
@@ -26,31 +23,7 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     "RadioButtonWithLabel"
   ]);
 
-  const childNodes = getChildNodes(node, reducedStructure);
-
-  const checkedChildNodes = filter(childNode => {
-    return isNodeChecked(childNode, changeObjects);
-  }, childNodes);
-
-  let isIndeterminate = !childNodes.length
-    ? node.properties.isIndeterminate
-    : checkedChildNodes.length < childNodes.length;
-
-  if (
-    !node.properties.isChecked ||
-    node.properties.isIndeterminate !== isIndeterminate
-  ) {
-    changeObjects = updateChangeObjectsArray(
-      node,
-      { isChecked: true, isIndeterminate: isIndeterminate },
-      changeObjects
-    );
-  } else {
-    changeObjects = filter(
-      changeObj => changeObj.anchor !== node.fullAnchor,
-      changeObjects
-    );
-  }
+  changeObjects = modifyNode(node, reducedStructure, changeObjects);
 
   if (parentNode) {
     if (parentNode.name === "RadioButtonWithLabel") {

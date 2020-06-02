@@ -9,7 +9,8 @@ const defaultProps = {
   anchor: "anchornamemissing",
   categories: [],
   changes: [null],
-  showCategoryTitles: false
+  showCategoryTitles: false,
+  uncheckParentWithoutActiveChildNodes: false
 };
 
 /**
@@ -23,7 +24,8 @@ const CategorizedListRoot = React.memo(
     onUpdate,
     showCategoryTitles = defaultProps.showCategoryTitles,
     isReadOnly,
-    showValidationErrors
+    showValidationErrors,
+    uncheckParentWithoutActiveChildNodes = defaultProps.uncheckParentWithoutActiveChildNodes
   }) => {
     const changesRef = useRef(null);
 
@@ -52,6 +54,7 @@ const CategorizedListRoot = React.memo(
         const targetNode = getTargetNode(changeObj, reducedStructure);
         // The array of change objects will be updated.
         const nextChanges = handleNodeMain(
+          uncheckParentWithoutActiveChildNodes,
           targetNode,
           anchor,
           reducedStructure,
@@ -67,7 +70,7 @@ const CategorizedListRoot = React.memo(
           changes: nextChanges
         });
       },
-      [anchor, onUpdate, reducedStructure]
+      [anchor, onUpdate, reducedStructure, uncheckParentWithoutActiveChildNodes]
     );
 
     /**
@@ -141,7 +144,9 @@ CategorizedListRoot.propTypes = {
   // Defines if the form can be modified.
   isReadOnly: PropTypes.bool,
   // Boolean for showing the validation errors.
-  showValidationErrors: PropTypes.bool
+  showValidationErrors: PropTypes.bool,
+  // Node's predecessors will be unchecked if the node and its siblings are unchecked.
+  uncheckParentWithoutActiveChildNodes: PropTypes.bool
 };
 
 export default CategorizedListRoot;

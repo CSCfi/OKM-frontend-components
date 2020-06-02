@@ -1,10 +1,11 @@
 import * as R from "ramda";
 import { activatePredecessors } from "./utils/activatePredecessors";
-import { deactivatePredecessors } from "./utils/deactivatePredecessors";
+import { deactivateNodesPredecessors } from "./utils/deactivateNodesPredecessors";
 import { activateNodeAndItsDescendants } from "./utils/activateNodeAndItsDescendants";
 import { deactivateNodeAndItsDescendants } from "./utils/deactivateNodeAndItsDescendants";
 import { removeAnchorPart } from "../../../utils/common";
 import { removeDeprecatedChanges } from "./utils/removeDeprecatedChanges";
+import { deactivateNode } from "./utils/deactivateNode";
 
 /**
  * @module CategorizedListRoot/utils
@@ -134,6 +135,7 @@ export const getChangesForReadOnlyLomake = (
  * @param {array} changes - Array of change objects.
  */
 export const handleNodeMain = (
+  uncheckParentWithoutActiveChildNodes = false,
   nodeWithRequestedChanges,
   rootAnchor,
   reducedStructure,
@@ -205,11 +207,15 @@ export const handleNodeMain = (
       changeObjects
     );
     // 2) Deactivate the node's predecessors.
-    changeObjects = deactivatePredecessors(
-      node,
-      reducedStructure,
-      changeObjects
-    );
+    if (uncheckParentWithoutActiveChildNodes) {
+      changeObjects = deactivateNodesPredecessors(
+        node,
+        reducedStructure,
+        changeObjects
+      );
+    } else {
+      changeObjects = deactivateNode(node, reducedStructure, changeObjects);
+    }
   } else {
     /**
      * Otherwise the properties of the new change object will be merged with
