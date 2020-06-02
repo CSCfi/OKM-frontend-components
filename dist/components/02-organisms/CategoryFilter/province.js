@@ -47,7 +47,9 @@ export function Province(province, baseAnchor) {
     };
   }
 
-  function _getChangeObject(currentChangeObjProps, targetProperties) {
+  function _getChangeObject() {
+    var currentChangeObjProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var targetProperties = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var originalProperties = province.components[0].properties;
     var isOriginalOK = !includes(false, values(mapObjIndexed(function (value, key) {
       return equals(originalProperties[key], value) ? true : false;
@@ -143,6 +145,53 @@ export function Province(province, baseAnchor) {
         }
       }, _getMunicipalities()).filter(Boolean);
       return concat([provinceChangeObj], municipalityChangeObjects).filter(Boolean);
+    },
+    activateMunicipality: function activateMunicipality(koodiarvo) {
+      var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var municipality = municipalityInstances[koodiarvo];
+      var nextChangeObjects = changeObjects;
+
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        nextChangeObjects = filter(function (changeObj) {
+          return changeObj.anchor !== municipality.getAnchor();
+        }, changeObjects);
+
+        var _changeObj = find(propEq("anchor", municipality.getAnchor()), changeObjects) || {};
+
+        var nextChangeObj = municipality.getChangeObject(_changeObj.properties, {
+          isChecked: true
+        });
+
+        if (nextChangeObj) {
+          nextChangeObjects = append(nextChangeObj, nextChangeObjects);
+        }
+      }
+      /**
+       * The province might not be active. Let's get a change object for it.
+       */
+
+
+      var activeMunicipalities = _getActiveMunicipalities(nextChangeObjects);
+
+      var changeObj = find(propEq("anchor", _getAnchor()), changeObjects) || {};
+      nextChangeObjects = filter(function (changeObj) {
+        return changeObj.anchor !== _getAnchor();
+      }, nextChangeObjects);
+
+      var nextProvinceChangeObj = _getChangeObject(changeObj.properties, {
+        isChecked: true,
+        isIndeterminate: activeMunicipalities.length !== _getMunicipalities().length
+      });
+
+      console.info(nextProvinceChangeObj);
+
+      if (nextProvinceChangeObj) {
+        nextChangeObjects = append(nextProvinceChangeObj, nextChangeObjects);
+      }
+
+      return nextChangeObjects;
     },
     areAllMunicipalitiesActive: function areAllMunicipalitiesActive() {
       var changeObjects = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -270,6 +319,53 @@ export function Province(province, baseAnchor) {
     isMunicipalityActive: function isMunicipalityActive(koodiarvo) {
       var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       return _isMunicipalityActive(koodiarvo, changeObjects);
+    },
+    removeMunicipality: function removeMunicipality(koodiarvo) {
+      var changeObjects = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var municipality = municipalityInstances[koodiarvo];
+      var nextChangeObjects = changeObjects;
+
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        var anchor = municipality.getAnchor();
+        nextChangeObjects = filter(function (changeObj) {
+          return changeObj.anchor !== anchor;
+        }, changeObjects);
+        var changeObj = find(propEq("anchor", anchor), changeObjects) || {};
+        var nextChangeObj = municipality.getChangeObject(changeObj.properties, {
+          isChecked: false
+        });
+        nextChangeObjects = append(nextChangeObj, nextChangeObjects).filter(Boolean);
+      }
+      /**
+       * If all the municipalities will be deactive we need to deactivate the
+       * province too.
+       */
+
+
+      var activeMunicipalities = _getActiveMunicipalities(nextChangeObjects);
+
+      if (!activeMunicipalities.length) {
+        var _anchor = _getAnchor();
+
+        var _changeObj2 = find(propEq("anchor", _anchor), changeObjects) || {};
+
+        var provinceChangeObj = _getChangeObject(_changeObj2.properties, {
+          isChecked: false,
+          isIndeterminate: false
+        });
+
+        if (provinceChangeObj) {
+          nextChangeObjects = append(provinceChangeObj, nextChangeObjects).filter(Boolean);
+        } else {
+          nextChangeObjects = filter(function (changeObj) {
+            return changeObj.anchor !== _anchor;
+          }, nextChangeObjects);
+        }
+      }
+
+      return nextChangeObjects;
     },
     setMap: function setMap(map) {
       kartta = map; // Configure label series

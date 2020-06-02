@@ -1358,6 +1358,7 @@ export const toimintaalueStory = {
               title: "Etelä-Savo"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -2099,6 +2100,7 @@ export const toimintaalueStory = {
               title: "Kainuu"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -2392,6 +2394,7 @@ export const toimintaalueStory = {
               title: "Kanta-Häme"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -2881,6 +2884,7 @@ export const toimintaalueStory = {
               title: "Keski-Pohjanmaa"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -3230,6 +3234,7 @@ export const toimintaalueStory = {
               title: "Keski-Suomi"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -4111,6 +4116,7 @@ export const toimintaalueStory = {
               title: "Kymenlaakso"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -4516,6 +4522,7 @@ export const toimintaalueStory = {
               title: "Lappi"
             },
             isChecked: false,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -5173,6 +5180,7 @@ export const toimintaalueStory = {
               title: "Pirkanmaa"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -6306,6 +6314,7 @@ export const toimintaalueStory = {
               title: "Pohjanmaa"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -6907,6 +6916,7 @@ export const toimintaalueStory = {
               title: "Pohjois-Karjala"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -7480,6 +7490,7 @@ export const toimintaalueStory = {
               title: "Pohjois-Pohjanmaa"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -8781,6 +8792,7 @@ export const toimintaalueStory = {
               title: "Pohjois-Savo"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -9522,6 +9534,7 @@ export const toimintaalueStory = {
               title: "Päijät-Häme"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -9955,6 +9968,7 @@ export const toimintaalueStory = {
               title: "Satakunta"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -10780,6 +10794,7 @@ export const toimintaalueStory = {
               title: "Uusimaa"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"
@@ -11941,6 +11956,7 @@ export const toimintaalueStory = {
               title: "Varsinais-Suomi"
             },
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: {
               addition: {
                 color: "purple"

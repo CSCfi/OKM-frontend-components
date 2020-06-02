@@ -10,7 +10,9 @@ function Municipality(baseAnchor, municipality) {
       isCheckedByDefault = _municipality$propert2.isChecked,
       name = _municipality$propert2.name;
 
-  function getChangeObject(currentChangeObjProps, targetProperties) {
+  function getChangeObject() {
+    var currentChangeObjProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var targetProperties = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var originalProperties = municipality.properties;
     var isOriginalOK = !includes(false, values(mapObjIndexed(function (value, key) {
       return equals(originalProperties[key], value) ? true : false;

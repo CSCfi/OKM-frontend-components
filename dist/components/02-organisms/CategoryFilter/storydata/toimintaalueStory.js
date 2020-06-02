@@ -1298,6 +1298,7 @@ export var toimintaalueStory = {
           title: "Etelä-Savo"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2008,6 +2009,7 @@ export var toimintaalueStory = {
           title: "Kainuu"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2286,6 +2288,7 @@ export var toimintaalueStory = {
           title: "Kanta-Häme"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2753,6 +2756,7 @@ export var toimintaalueStory = {
           title: "Keski-Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3085,6 +3089,7 @@ export var toimintaalueStory = {
           title: "Keski-Suomi"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3930,6 +3935,7 @@ export var toimintaalueStory = {
           title: "Kymenlaakso"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4316,6 +4322,7 @@ export var toimintaalueStory = {
           title: "Lappi"
         },
         isChecked: false,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4945,6 +4952,7 @@ export var toimintaalueStory = {
           title: "Pirkanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -6033,6 +6041,7 @@ export var toimintaalueStory = {
           title: "Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -6608,6 +6617,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Karjala"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -7156,6 +7166,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -8406,6 +8417,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Savo"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -9116,6 +9128,7 @@ export var toimintaalueStory = {
           title: "Päijät-Häme"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -9529,6 +9542,7 @@ export var toimintaalueStory = {
           title: "Satakunta"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -10320,6 +10334,7 @@ export var toimintaalueStory = {
           title: "Uusimaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -11435,6 +11450,7 @@ export var toimintaalueStory = {
           title: "Varsinais-Suomi"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"

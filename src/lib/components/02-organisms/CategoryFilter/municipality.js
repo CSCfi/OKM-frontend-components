@@ -9,7 +9,7 @@ function Municipality(baseAnchor, municipality) {
   const anchor = `${baseAnchor}.${provinceId}.kunnat.${koodiarvo}`;
   const { isChecked: isCheckedByDefault, name } = municipality.properties;
 
-  function getChangeObject(currentChangeObjProps, targetProperties) {
+  function getChangeObject(currentChangeObjProps = {}, targetProperties = {}) {
     const originalProperties = municipality.properties;
 
     const isOriginalOK = !includes(

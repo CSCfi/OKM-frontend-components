@@ -68,7 +68,7 @@ export function Province(province, baseAnchor) {
     };
   }
 
-  function getChangeObject(currentChangeObjProps, targetProperties) {
+  function getChangeObject(currentChangeObjProps = {}, targetProperties = {}) {
     const originalProperties = province.components[0].properties;
 
     const isOriginalOK = !includes(
@@ -194,6 +194,50 @@ export function Province(province, baseAnchor) {
       return concat([provinceChangeObj], municipalityChangeObjects).filter(
         Boolean
       );
+    },
+    activateMunicipality: (koodiarvo, changeObjects = []) => {
+      const municipality = municipalityInstances[koodiarvo];
+      let nextChangeObjects = changeObjects;
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        nextChangeObjects = filter(
+          changeObj => changeObj.anchor !== municipality.getAnchor(),
+          changeObjects
+        );
+        const changeObj =
+          find(propEq("anchor", municipality.getAnchor()), changeObjects) || {};
+        const nextChangeObj = municipality.getChangeObject(
+          changeObj.properties,
+          {
+            isChecked: true
+          }
+        );
+        if (nextChangeObj) {
+          nextChangeObjects = append(nextChangeObj, nextChangeObjects);
+        }
+      }
+      /**
+       * The province might not be active. Let's get a change object for it.
+       */
+      const activeMunicipalities = getActiveMunicipalities(nextChangeObjects);
+      const changeObj =
+        find(propEq("anchor", getAnchor()), changeObjects) || {};
+      nextChangeObjects = filter(
+        changeObj => changeObj.anchor !== getAnchor(),
+        nextChangeObjects
+      );
+      const nextProvinceChangeObj = getChangeObject(changeObj.properties, {
+        isChecked: true,
+        isIndeterminate:
+          activeMunicipalities.length !== getMunicipalities().length
+      });
+      console.info(nextProvinceChangeObj);
+      if (nextProvinceChangeObj) {
+        nextChangeObjects = append(nextProvinceChangeObj, nextChangeObjects);
+      }
+
+      return nextChangeObjects;
     },
     areAllMunicipalitiesActive: (changeObjects = [], activeMunicipalities) => {
       return activeMunicipalities
@@ -326,6 +370,55 @@ export function Province(province, baseAnchor) {
     },
     isMunicipalityActive: (koodiarvo, changeObjects = []) => {
       return isMunicipalityActive(koodiarvo, changeObjects);
+    },
+    removeMunicipality: (koodiarvo, changeObjects = []) => {
+      const municipality = municipalityInstances[koodiarvo];
+      let nextChangeObjects = changeObjects;
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        const anchor = municipality.getAnchor();
+        nextChangeObjects = filter(
+          changeObj => changeObj.anchor !== anchor,
+          changeObjects
+        );
+        const changeObj = find(propEq("anchor", anchor), changeObjects) || {};
+        const nextChangeObj = municipality.getChangeObject(
+          changeObj.properties,
+          {
+            isChecked: false
+          }
+        );
+        nextChangeObjects = append(nextChangeObj, nextChangeObjects).filter(
+          Boolean
+        );
+      }
+      /**
+       * If all the municipalities will be deactive we need to deactivate the
+       * province too.
+       */
+      const activeMunicipalities = getActiveMunicipalities(nextChangeObjects);
+      if (!activeMunicipalities.length) {
+        const anchor = getAnchor();
+        const changeObj = find(propEq("anchor", anchor), changeObjects) || {};
+        const provinceChangeObj = getChangeObject(changeObj.properties, {
+          isChecked: false,
+          isIndeterminate: false
+        });
+        if (provinceChangeObj) {
+          nextChangeObjects = append(
+            provinceChangeObj,
+            nextChangeObjects
+          ).filter(Boolean);
+        } else {
+          nextChangeObjects = filter(
+            changeObj => changeObj.anchor !== anchor,
+            nextChangeObjects
+          );
+        }
+      }
+
+      return nextChangeObjects;
     },
     setMap: map => {
       kartta = map;
