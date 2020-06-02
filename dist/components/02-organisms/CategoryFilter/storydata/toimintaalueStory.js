@@ -106,473 +106,6 @@ export var toimintaalueStory = {
     }]
   },
   categories: [{
-    anchor: "FI-01",
-    formId: "FI-01",
-    components: [{
-      anchor: "A",
-      name: "CheckboxWithLabel",
-      properties: {
-        code: "21",
-        forChangeObject: {
-          koodiarvo: "21",
-          maakuntaKey: "FI-01",
-          title: "Ahvenanmaa"
-        },
-        isChecked: false,
-        labelStyles: {
-          addition: {
-            color: "purple"
-          },
-          removal: {
-            color: "purple",
-            textDecoration: "line-through"
-          },
-          custom: {
-            fontWeight: 600
-          }
-        },
-        name: "21",
-        title: "Ahvenanmaa"
-      }
-    }],
-    categories: [{
-      anchor: "kunnat",
-      formId: "FI-01",
-      components: [{
-        anchor: "035",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "035",
-          forChangeObject: {
-            koodiarvo: "035",
-            title: "Brändö",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "035",
-          title: "Brändö"
-        }
-      }, {
-        anchor: "043",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "043",
-          forChangeObject: {
-            koodiarvo: "043",
-            title: "Eckerö",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "043",
-          title: "Eckerö"
-        }
-      }, {
-        anchor: "060",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "060",
-          forChangeObject: {
-            koodiarvo: "060",
-            title: "Finström",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "060",
-          title: "Finström"
-        }
-      }, {
-        anchor: "062",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "062",
-          forChangeObject: {
-            koodiarvo: "062",
-            title: "Föglö",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "062",
-          title: "Föglö"
-        }
-      }, {
-        anchor: "065",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "065",
-          forChangeObject: {
-            koodiarvo: "065",
-            title: "Geta",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "065",
-          title: "Geta"
-        }
-      }, {
-        anchor: "076",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "076",
-          forChangeObject: {
-            koodiarvo: "076",
-            title: "Hammarland",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "076",
-          title: "Hammarland"
-        }
-      }, {
-        anchor: "170",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "170",
-          forChangeObject: {
-            koodiarvo: "170",
-            title: "Jomala",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "170",
-          title: "Jomala"
-        }
-      }, {
-        anchor: "295",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "295",
-          forChangeObject: {
-            koodiarvo: "295",
-            title: "Kumlinge",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "295",
-          title: "Kumlinge"
-        }
-      }, {
-        anchor: "318",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "318",
-          forChangeObject: {
-            koodiarvo: "318",
-            title: "Kökar",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "318",
-          title: "Kökar"
-        }
-      }, {
-        anchor: "417",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "417",
-          forChangeObject: {
-            koodiarvo: "417",
-            title: "Lemland",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "417",
-          title: "Lemland"
-        }
-      }, {
-        anchor: "438",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "438",
-          forChangeObject: {
-            koodiarvo: "438",
-            title: "Lumparland",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "438",
-          title: "Lumparland"
-        }
-      }, {
-        anchor: "478",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "478",
-          forChangeObject: {
-            koodiarvo: "478",
-            title: "Maarianhamina",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "478",
-          title: "Maarianhamina"
-        }
-      }, {
-        anchor: "736",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "736",
-          forChangeObject: {
-            koodiarvo: "736",
-            title: "Saltvik",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "736",
-          title: "Saltvik"
-        }
-      }, {
-        anchor: "766",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "766",
-          forChangeObject: {
-            koodiarvo: "766",
-            title: "Sottunga",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "766",
-          title: "Sottunga"
-        }
-      }, {
-        anchor: "771",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "771",
-          forChangeObject: {
-            koodiarvo: "771",
-            title: "Sund",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "771",
-          title: "Sund"
-        }
-      }, {
-        anchor: "941",
-        name: "CheckboxWithLabel",
-        styleClasses: ["w-1/2"],
-        properties: {
-          code: "941",
-          forChangeObject: {
-            koodiarvo: "941",
-            title: "Vårdö",
-            maakuntaKey: "FI-01"
-          },
-          isChecked: false,
-          labelStyles: {
-            addition: {
-              color: "purple"
-            },
-            removal: {
-              color: "purple",
-              textDecoration: "line-through"
-            },
-            custom: {
-              fontWeight: 600
-            }
-          },
-          name: "941",
-          title: "Vårdö"
-        }
-      }]
-    }]
-  }, {
     anchor: "FI-02",
     formId: "FI-02",
     components: [{
@@ -1765,6 +1298,7 @@ export var toimintaalueStory = {
           title: "Etelä-Savo"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2475,6 +2009,7 @@ export var toimintaalueStory = {
           title: "Kainuu"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -2753,6 +2288,7 @@ export var toimintaalueStory = {
           title: "Kanta-Häme"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3220,6 +2756,7 @@ export var toimintaalueStory = {
           title: "Keski-Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -3552,6 +3089,7 @@ export var toimintaalueStory = {
           title: "Keski-Suomi"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4397,6 +3935,7 @@ export var toimintaalueStory = {
           title: "Kymenlaakso"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -4783,6 +4322,7 @@ export var toimintaalueStory = {
           title: "Lappi"
         },
         isChecked: false,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -5412,6 +4952,7 @@ export var toimintaalueStory = {
           title: "Pirkanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -6500,6 +6041,7 @@ export var toimintaalueStory = {
           title: "Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -7075,6 +6617,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Karjala"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -7623,6 +7166,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Pohjanmaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -8873,6 +8417,7 @@ export var toimintaalueStory = {
           title: "Pohjois-Savo"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -9583,6 +9128,7 @@ export var toimintaalueStory = {
           title: "Päijät-Häme"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -9996,6 +9542,7 @@ export var toimintaalueStory = {
           title: "Satakunta"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -10787,6 +10334,7 @@ export var toimintaalueStory = {
           title: "Uusimaa"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"
@@ -11902,6 +11450,7 @@ export var toimintaalueStory = {
           title: "Varsinais-Suomi"
         },
         isChecked: true,
+        isIndeterminate: false,
         labelStyles: {
           addition: {
             color: "purple"

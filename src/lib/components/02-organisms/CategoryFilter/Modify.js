@@ -25,19 +25,21 @@ import {
   forEachObjIndexed,
   not,
   compose,
-  includes
+  includes,
+  sum,
+  values
 } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
 import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
-import { Province } from "./province";
 import SimpleButton from "../../00-atoms/SimpleButton";
 import { getAnchorPart } from "../../../utils/common";
 import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
 import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 import { isEqual } from "lodash";
+import RadioButtonWithLabel from "../../01-molecules/RadioButtonWithLabel";
 
 const mapping = {
   "01": "FI-18",
@@ -66,6 +68,7 @@ const Modify = React.memo(
     anchor: baseAnchor = "no-anchor-defined",
     categories = [],
     changeObjectsByProvince = {},
+    country,
     localizations = {},
     municipalities = [],
     provinceInstances = {},
@@ -82,6 +85,25 @@ const Modify = React.memo(
 
     const [cos, setCos] = useState(changeObjectsByProvince);
 
+    const percentages = useMemo(() => {
+      return country.getPercentages(cos);
+    }, [cos, country]);
+
+    useEffect(() => {
+      if (kartta.current) {
+        country.colorize(cos);
+      }
+    }, [cos, country]);
+
+    const isCountryActive = useMemo(() => {
+      const percentagesArray = values(percentages);
+      return sum(percentagesArray) / percentagesArray.length === 100;
+    }, [percentages]);
+
+    const isCountryDeactive = useMemo(() => {
+      return sum(values(percentages)) === 0;
+    }, [percentages]);
+
     useEffect(() => {
       setCos(changeObjectsByProvince);
     }, [changeObjectsByProvince]);
@@ -96,59 +118,65 @@ const Modify = React.memo(
     }, [categories, provinceId]);
 
     useEffect(() => {
-      kartta.current = am4core.create("finland_map", am4maps.MapChart);
-      kartta.current.geodata = am4geodata_finland;
+      let finland = am4core.create("finland_map", am4maps.MapChart);
+      finland.geodata = am4geodata_finland;
       // Set projection
-      kartta.current.projection = new am4maps.projections.Miller();
+      finland.projection = new am4maps.projections.Miller();
 
-      kartta.current.geodataNames = am4geodata_lang_FI;
+      finland.geodataNames = am4geodata_lang_FI;
       // kartta.current.responsive.enabled = true;
 
-      // Create map polygon series
-      polygonSeries.current = kartta.current.series.push(
-        new am4maps.MapPolygonSeries()
-      );
-
-      // Make map load polygon (like country names) data from GeoJSON
-      polygonSeries.current.useGeodata = true;
-
-      // Add expectancy data
-      polygonSeries.current.events.on("beforedatavalidated", function(ev) {
-        var source = ev.target.data;
-        if (source.maybe) {
-          ev.target.data = source.maybe.here.values;
-        }
-      });
-
-      polygonSeries.current.events.on("inited", function(ev) {
-        forEachObjIndexed(instance => {
-          instance.setMap(kartta.current);
-          instance.setPolygonSeries(polygonSeries.current);
-          instance.colorize(changeObjectsByProvince[instance.getId()]);
-        }, provinceInstances);
-      });
-
-      // Configure series
-      polygonTemplate.current = polygonSeries.current.mapPolygons.template;
-      polygonTemplate.current.tooltipText = "{name}";
-      polygonTemplate.current.fill = am4core.color("#dadada");
-
-      // Create active state
-      const activeState = polygonTemplate.current.states.create("active");
-      activeState.properties.stroke = am4core.color("#367B25");
-
-      polygonTemplate.current.events.on("hit", function(e) {
-        if (e.target.dataItem.dataContext.id !== "FI-01") {
-          activePolygon.current = e.target;
-          // FI-01 = Ahvenanmaa
-          setProvinceId(e.target.dataItem.dataContext.id);
-        }
-      });
+      kartta.current = finland;
 
       return function cancel() {
         kartta.current.dispose();
       };
-    }, [categories, changeObjectsByProvince, provinceInstances]);
+    }, []);
+
+    useEffect(() => {
+      if (kartta.current.series.length === 0) {
+        // Create map polygon series
+        polygonSeries.current = kartta.current.series.push(
+          new am4maps.MapPolygonSeries()
+        );
+
+        // Make map load polygon (like country names) data from GeoJSON
+        polygonSeries.current.useGeodata = true;
+
+        // Add expectancy data
+        polygonSeries.current.events.on("beforedatavalidated", function(ev) {
+          var source = ev.target.data;
+          if (source.maybe) {
+            ev.target.data = source.maybe.here.values;
+          }
+        });
+
+        polygonSeries.current.events.on("inited", function(ev) {
+          forEachObjIndexed(instance => {
+            instance.setMap(kartta.current);
+            instance.setPolygonSeries(polygonSeries.current);
+            instance.colorize(cos[instance.getId()]);
+          }, provinceInstances);
+        });
+
+        // Configure series
+        polygonTemplate.current = polygonSeries.current.mapPolygons.template;
+        polygonTemplate.current.tooltipText = "{name}";
+        polygonTemplate.current.fill = am4core.color("#dadada");
+
+        // Create active state
+        const activeState = polygonTemplate.current.states.create("active");
+        activeState.properties.stroke = am4core.color("#367B25");
+
+        polygonTemplate.current.events.on("hit", function(e) {
+          if (e.target.dataItem.dataContext.id !== "FI-01") {
+            activePolygon.current = e.target;
+            // FI-01 = Ahvenanmaa
+            setProvinceId(e.target.dataItem.dataContext.id);
+          }
+        });
+      }
+    }, [categories, cos, provinceInstances]);
 
     const updateChangeObjects = useCallback(
       (payload, _provinceId) => {
@@ -170,25 +198,6 @@ const Modify = React.memo(
       [provinceId, cos]
     );
 
-    /**
-     * Updates the color and percentage of selected province.
-     */
-    useEffect(() => {
-      if (provinceId) {
-        let provinceInstance = provinceInstances[provinceId];
-        if (!provinceInstance) {
-          provinceInstance = new Province(
-            provinceId,
-            kartta.current,
-            find(propEq("anchor", provinceId), categories),
-            polygonSeries.current
-          );
-          provinceInstances[provinceId] = provinceInstance;
-        }
-        provinceInstance.colorize(provinceChanges);
-      }
-    }, [categories, provinceId, provinceInstances, provinceChanges]);
-
     const [selectedLocations, setSelectedLocations] = useState([]);
 
     useEffect(() => {
@@ -201,7 +210,7 @@ const Modify = React.memo(
           if (location.isKunta) {
             return (
               !areAllMunicipalitiesActive &&
-              provinceInstance.isKuntaActive(
+              provinceInstance.isMunicipalityActive(
                 location.value,
                 cos[location.provinceKey]
               )
@@ -236,10 +245,10 @@ const Modify = React.memo(
                 isKunta: false
               };
             } else {
-              return map(kunta => {
+              return map(municipality => {
                 return {
-                  label: kunta.properties.title,
-                  value: kunta.properties.name,
+                  label: municipality.getTitle(),
+                  value: municipality.getName(),
                   provinceKey: province.anchor,
                   isKunta: true
                 };
@@ -281,7 +290,7 @@ const Modify = React.memo(
                 : false;
               okToList =
                 !isProvinceActive ||
-                !provinceInstance.isKuntaActive(
+                !provinceInstance.isMunicipalityActive(
                   option.koodiArvo,
                   cos[provinceKey]
                 );
@@ -323,263 +332,158 @@ const Modify = React.memo(
     ]);
 
     const onAutocompleteChanges = useCallback(
+      /**
+       * The idea of this callback function is to update the list of
+       * change objects. By doing so the map (Finland with provinces) and
+       * the categorized lists related to it will be updated. The array of
+       * change objects is the single point of changes. The content of
+       * the autocomplete field will be updated based on it after this
+       * function has been run.
+       */
       (payload, values) => {
         const currentSel = values.value || [];
         const prevSel = previousSelection.current;
-        const cmp = (x, y) => {
-          return x.value === y.value;
-        };
-        const itemsToRemove = differenceWith(cmp, prevSel || [], currentSel);
-        // Remvoval
-        if (itemsToRemove.length) {
-          const provinceId = itemsToRemove[0].provinceKey;
-          const provinceInstance = provinceInstances[provinceId];
+        /**
+         * Items to deactivate is calculated by comparing the old value of the
+         * autocomplete field to its current value.
+         * DifferenceWith returns an array when it gets two arrays as
+         * parameters. In this use case the length of returned array
+         * should always be 1 because this callback function will be run on
+         * every change occurring in the autocomplete field.
+         */
+        const itemsToDeactivate = differenceWith(
+          (x, y) => x.value === y.value,
+          prevSel || [],
+          currentSel
+        );
 
-          setProvinceId(provinceId);
+        /**
+         * Current selection (currentSel) includes all the selected items.
+         * The items are in the autocomplete field. The most recent one
+         * is what interests us.
+         */
+        const latestSelection = last(currentSel);
 
-          const isKunta = !!find(
-            propEq("kuntaKoodiarvo", itemsToRemove[0].value),
-            kuntaProvinceMapping
-          );
-          if (isKunta) {
-            let provinceRemovalChangeObj = null;
-            // Aktiiviset kunnat
-            const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-              cos[provinceId]
+        /**
+         * Every item can provide a providence id. Depending of the use case
+         * it will be fetched from the removed item or by using the latest
+         * selection.
+         */
+        const provinceId = itemsToDeactivate.length
+          ? itemsToDeactivate[0].provinceKey
+          : latestSelection.provinceKey;
+
+        /**
+         * Province instance can easily be picked up from the object of
+         * province instances. The object has been formed before entering
+         * the edit view (Modify.js).
+         */
+        const provinceInstance = provinceInstances[provinceId];
+
+        /**
+         * Value is koodiarvo or some other identifier of a province or a
+         * municipality.
+         */
+        const value = itemsToDeactivate.length
+          ? itemsToDeactivate[0].value
+          : latestSelection.value;
+
+        /**
+         * The target item is either a province or a municipality.
+         */
+        const isMunicipality = !!find(
+          propEq("kuntaKoodiarvo", value),
+          kuntaProvinceMapping
+        );
+
+        /**
+         * This callback function handles and makes changes only to the current
+         * province and its municipalities.
+         */
+        let _changeObjects = cos[provinceId] || [];
+
+        if (itemsToDeactivate.length) {
+          /**********************************************
+           * DEACTIVATION OF PROVINCES AND MUNICIPALITIES
+           **********************************************/
+
+          if (isMunicipality) {
+            /********************************
+             * DEACTIVATION OF A MUNICIPALITY
+             ********************************/
+
+            // removeMunicipality deactivate the province when needed
+            _changeObjects = provinceInstance.removeMunicipality(
+              value,
+              _changeObjects
             );
-
-            if (cos[provinceId]) {
-              let provinceChangeObjects = filter(changeObj => {
-                const value = getAnchorPart(changeObj.anchor, 3);
-                return value !== itemsToRemove[0].value;
-              }, cos[provinceId]);
-
-              /**
-               * If there's only one active municipality we are going to
-               * deactivate the province.
-               **/
-              if (activeMunicipalities.length === 1) {
-                const isProvinceActiveByDefault = provinceInstance.isActive();
-                if (!isProvinceActiveByDefault) {
-                  provinceChangeObjects = filter(
-                    compose(
-                      not,
-                      propEq("anchor", provinceInstance.getAnchor())
-                    ),
-                    provinceChangeObjects
-                  );
-                } else {
-                  const provinceChangeObj = provinceInstance.isActive()
-                    ? provinceInstance.getRemovalChangeObj()
-                    : null;
-                  provinceChangeObjects = provinceChangeObj
-                    ? append(provinceChangeObj, provinceChangeObjects)
-                    : provinceChangeObjects;
-                }
-              }
-
-              if (provinceInstance.isKuntaActive(itemsToRemove[0].value)) {
-                provinceChangeObjects = append(
-                  provinceInstance.getRemovalChangeObjForMunicipality(
-                    itemsToRemove[0].value,
-                    itemsToRemove[0].label
-                  ),
-                  provinceChangeObjects
-                );
-              } else {
-                provinceChangeObjects = filter(
-                  compose(not, propEq("anchor", itemsToRemove[0].anchor)),
-                  provinceChangeObjects
-                );
-              }
-
-              updateChangeObjects(
-                {
-                  changes: flatten(
-                    [provinceRemovalChangeObj, provinceChangeObjects].filter(
-                      Boolean
-                    )
-                  )
-                },
-                provinceId
-              );
-            } else {
-              updateChangeObjects(
-                {
-                  changes: [
-                    provinceRemovalChangeObj,
-                    getRemovalChangeObj(
-                      baseAnchor,
-                      provinceId,
-                      itemsToRemove[0].value,
-                      itemsToRemove[0].label
-                    )
-                  ].filter(Boolean)
-                },
-                provinceId
-              );
-            }
           } else {
-            // Maakunnan poisto
-            let nextCos;
-            if (cos[itemsToRemove[0].provinceKey]) {
-              nextCos = dissoc(provinceId, cos);
-            } else {
-              const province = find(propEq("anchor", provinceId), categories);
-              nextCos = assoc(
-                provinceId,
-                flatten([
-                  [provinceInstance.getRemovalChangeObj(baseAnchor)],
-                  map(kunta => {
-                    return getRemovalChangeObj(
-                      baseAnchor,
-                      provinceId,
-                      kunta.anchor,
-                      kunta.properties.title
-                    );
-                  }, province.categories[0].components)
-                ]),
-                cos
-              );
-            }
-            setCos(nextCos);
+            /********************************
+             * DEACTIVATION OF A PROVINCE
+             ********************************/
+
+            // The province and its municipalities will be deactivated.
+            _changeObjects = provinceInstance.deactivate(cos[provinceId]);
           }
-        }
-        // Addition
-        else {
-          const latestSelection = last(currentSel);
-          const provinceId = latestSelection.provinceKey;
-          let _changeObjects = cos[provinceId] || [];
-          const provinceInstance = provinceInstances[provinceId];
-          const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-            cos[provinceId]
-          );
-          let provinceChangeObj = find(
-            propEq("anchor", provinceInstance.getAnchor()),
-            _changeObjects
-          );
-          const isKunta = !!find(
-            propEq("kuntaKoodiarvo", latestSelection.value),
-            kuntaProvinceMapping
-          );
-          if (isKunta) {
-            const anchor = getKuntaAnchor(
-              baseAnchor,
-              provinceId,
-              latestSelection.value
+        } else {
+          /********************************************
+           * ACTIVATION OF PROVINCES AND MUNICIPALITIES
+           ********************************************/
+
+          if (isMunicipality) {
+            /********************************
+             * ACTIVATION OF A MUNICIPALITY
+             ********************************/
+
+            // activateMunicipality activate the province when needed
+            _changeObjects = provinceInstance.activateMunicipality(
+              value,
+              _changeObjects
             );
-            let changeObj = find(propEq("anchor", anchor), _changeObjects);
-
-            if (changeObj && !changeObj.properties.isChecked) {
-              // Delete change object
-              _changeObjects = filter(
-                compose(not, propEq("anchor", anchor)),
-                _changeObjects
-              );
-            } else {
-              // Create change object
-              _changeObjects = append(
-                getAdditionChangeObj(
-                  baseAnchor,
-                  provinceId,
-                  latestSelection.label,
-                  latestSelection.value
-                ),
-                _changeObjects
-              );
-            }
-
-            const provinceAnchor = provinceInstance.getAnchor();
-            if (provinceChangeObj) {
-              if (
-                activeMunicipalities.length ===
-                provinceInstance.getMunicipalities().length - 1
-              ) {
-                const originalProvince = provinceInstance.initializedAs();
-                // Delete province's change object
-                _changeObjects = filter(
-                  compose(not, propEq("anchor", provinceAnchor)),
-                  _changeObjects
-                );
-                if (
-                  !(
-                    originalProvince.components[0].properties.isChecked &&
-                    !originalProvince.components[0].properties.isIndeterminate
-                  )
-                ) {
-                  // Original province isn't valid without a new change object.
-                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                    false
-                  );
-                  _changeObjects = append(provinceChangeObj, _changeObjects);
-                }
-              }
-            } else {
-              // Create province's change object
-              const originalProvince = provinceInstance.initializedAs();
-              if (
-                activeMunicipalities.length ===
-                provinceInstance.getMunicipalities().length - 1
-              ) {
-                if (
-                  !(
-                    originalProvince.components[0].properties.isChecked &&
-                    !originalProvince.components[0].properties.isIndeterminate
-                  )
-                ) {
-                  // Original province isn't valid without a new change object.
-                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                    false
-                  );
-                  _changeObjects = append(provinceChangeObj, _changeObjects);
-                }
-              } else {
-                if (
-                  !(
-                    originalProvince.components[0].properties.isChecked &&
-                    originalProvince.components[0].properties.isIndeterminate
-                  )
-                ) {
-                  // Original province isn't valid without a new change object.
-                  provinceChangeObj = provinceInstance.getAdditionChangeObj(
-                    true
-                  );
-                  _changeObjects = append(provinceChangeObj, _changeObjects);
-                }
-              }
-            }
           } else {
-            /**
-             * Province and its municipalities have to be active.
-             * Let's remove irrelevant change objects first.
-             **/
-            _changeObjects = filter(changeObj => {
-              const isRelatedToCurrentProvince = includes(
-                `.${provinceId}.`,
-                changeObj.anchor
-              );
-              return (
-                !isRelatedToCurrentProvince || changeObj.properties.isChecked
-              );
-            }, _changeObjects);
+            /**************************
+             * ACTIVATION OF A PROVINCE
+             **************************/
+
             // Activate the selected province and its municipalities.
-            _changeObjects = provinceInstance.activateFully(_changeObjects);
+            _changeObjects = provinceInstance.activateFully();
           }
-          updateChangeObjects(
-            {
-              changes: _changeObjects
-            },
-            latestSelection.provinceKey
-          );
-          setProvinceId(latestSelection.provinceKey);
         }
+        setProvinceId(provinceId);
         previousSelection.current = currentSel;
+        setCos(assoc(provinceId, _changeObjects, cos));
       },
-      [baseAnchor, categories, cos, provinceInstances, updateChangeObjects]
+      [cos, provinceInstances]
     );
 
     return (
       <React.Fragment>
+        <fieldset className="p-4 bg-white border-t border-r border-l border-gray-300">
+          <legend>{localizations.quickFilter}</legend>
+          <div className="flex">
+            <RadioButtonWithLabel
+              payload={{ anchor: "koko-maa" }}
+              isChecked={isCountryActive}
+              onChanges={() => {
+                setCos(country.activate(cos));
+              }}
+              value={"1"}>
+              {localizations.wholeCountryWithoutAhvenanmaa}
+            </RadioButtonWithLabel>
+            <RadioButtonWithLabel
+              payload={{ anchor: "ei-alueita" }}
+              isChecked={isCountryDeactive}
+              onChanges={() => {
+                setCos(country.deactivate(cos));
+              }}
+              value={"0"}>
+              {localizations.areaOfActionIsUndefined}
+            </RadioButtonWithLabel>
+          </div>
+        </fieldset>
+
+        <hr />
+
         <Autocomplete
           minChars={1}
           name="maakunnat-ja-kunnat-filter"
@@ -588,20 +492,22 @@ const Modify = React.memo(
           callback={onAutocompleteChanges}
           value={selectedLocations}
         />
-        <div className="bg-white border overflow-auto p-2">
-          <div className="mt-12 p-4 flex">
+        <div className="bg-white overflow-auto p-2">
+          <div className="p-4 flex">
             <div
               id="finland_map"
-              ref={kartta}
               className="w-2/5"
-              style={{ height: "700px" }}></div>
+              style={{ height: "500px" }}></div>
             <div className="w-3/5">
               {provinceCategories.length > 0 ? (
                 <CategorizedListRoot
                   anchor={baseAnchor}
                   categories={provinceCategories}
                   changes={provinceChanges}
-                  onUpdate={updateChangeObjects}></CategorizedListRoot>
+                  onUpdate={updateChangeObjects}
+                  uncheckParentWithoutActiveChildNodes={
+                    true
+                  }></CategorizedListRoot>
               ) : null}
             </div>
           </div>
@@ -634,10 +540,11 @@ Modify.propTypes = {
   anchor: PropTypes.string,
   categories: PropTypes.array,
   changeObjectsByProvince: PropTypes.object,
+  country: PropTypes.object,
   municipalities: PropTypes.array,
   provinceInstances: PropTypes.object,
   provincesWithoutMunicipalities: PropTypes.array,
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   localizations: PropTypes.object
 };
 

@@ -9,22 +9,34 @@ import {
   prop,
   append,
   map,
-  concat
+  concat,
+  flatten,
+  mapObjIndexed,
+  equals,
+  values,
+  includes,
+  forEach
 } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import mix from "./province-utils";
-import {
-  getAnchor as getKuntaAnchor,
-  getRemovalChangeObj
-} from "./kunta-utils";
+import { getRemovalChangeObj } from "./kunta-utils";
 import { getAdditionChangeObj as getMunicipalityAdditionChangeObj } from "./kunta-utils";
+import Municipality from "./municipality";
 
 export function Province(province, baseAnchor) {
   const id = province.anchor;
   const code = province.components[0].properties.code;
   const title = province.components[0].properties.title;
   const kunnatAmount = province.categories[0].components.length;
+
+  const municipalityInstances = {};
+
+  forEach(municipality => {
+    const instance = new Municipality(baseAnchor, municipality);
+    municipalityInstances[instance.getKoodiarvo()] = instance;
+  }, province.categories[0].components);
+
   let polygonSeries = null;
   let polygon = null;
   let labelSeries = null;
@@ -35,22 +47,15 @@ export function Province(province, baseAnchor) {
     return `${baseAnchor}.${id}.${province.components[0].anchor}`;
   }
 
-  function getActiveMunicipalities(changeObjects) {
-    return filter(kunta => {
-      const changeObj = find(
-        compose(endsWith(`kunnat.${kunta.anchor}`), prop("anchor")),
-        changeObjects
-      );
-      return (
-        (kunta.properties.isChecked && !changeObj) ||
-        (changeObj && changeObj.properties.isChecked)
-      );
-    }, province.categories[0].components);
+  function getActiveMunicipalities(changeObjects = []) {
+    return filter(municipality => {
+      return municipality.isActive(changeObjects);
+    }, values(municipalityInstances));
   }
 
   function getAdditionChangeObj(isIndeterminate) {
     return {
-      anchor: getAnchor(baseAnchor),
+      anchor: getAnchor(),
       properties: {
         isChecked: true,
         isIndeterminate,
@@ -63,61 +68,176 @@ export function Province(province, baseAnchor) {
     };
   }
 
+  function getChangeObject(currentChangeObjProps = {}, targetProperties = {}) {
+    const originalProperties = province.components[0].properties;
+
+    const isOriginalOK = !includes(
+      false,
+      values(
+        mapObjIndexed((value, key) => {
+          return equals(originalProperties[key], value) ? true : false;
+        }, targetProperties)
+      )
+    );
+
+    const isCurrentChangeObjOK = !includes(
+      false,
+      values(
+        mapObjIndexed((value, key) => {
+          return equals(currentChangeObjProps[key], value) ? true : false;
+        }, targetProperties)
+      )
+    );
+
+    if (isOriginalOK) {
+      return null;
+    } else {
+      const anchor = getAnchor();
+      if (isCurrentChangeObjOK) {
+        return {
+          anchor,
+          properties: currentChangeObjProps
+        };
+      } else {
+        const changeObj = {
+          anchor,
+          properties: Object.assign(
+            {},
+            currentChangeObjProps,
+            targetProperties,
+            {
+              metadata: {
+                title,
+                koodiarvo: code,
+                provinceKey: id
+              }
+            }
+          )
+        };
+        return changeObj;
+      }
+    }
+  }
+
   function getMunicipalities() {
     return province.categories[0].components;
   }
 
-  return {
-    activateFully: (changeObjects = []) => {
-      // Activate province
-      const provinceAnchor = getAnchor();
-      const provinceChangeObj = find(
-        propEq("anchor", provinceAnchor),
-        changeObjects
-      );
-      const provinceObj = province.components[0];
-      const municipalities = getMunicipalities();
-
-      // If change object is not valid it must be deleted.
-      if (provinceChangeObj) {
-        if (
-          !provinceChangeObj.properties.isChecked ||
-          provinceChangeObj.properties.isIndeterminate
-        ) {
-          changeObjects = filter(changeObj => {
-            return changeObj.anchor !== provinceAnchor;
-          }, changeObjects);
-
-          if (
-            !provinceObj.properties.isChecked ||
-            provinceObj.properties.isIndeterminate
-          ) {
-            // New valid change object must be created.
-            changeObjects = append(getAdditionChangeObj(false), changeObjects);
-          }
+  function _getRemovalChangeObj() {
+    return {
+      anchor: getAnchor(),
+      properties: {
+        isChecked: false,
+        isIndeterminate: false,
+        metadata: {
+          title,
+          koodiarvo: code,
+          provinceKey: id
         }
       }
-      // If there isn't change object
-      else if (
-        !provinceObj.properties.isChecked ||
-        provinceObj.properties.isIndeterminate
-      ) {
-        // New valid change object must be created.
-        changeObjects = append(getAdditionChangeObj(false), changeObjects);
+    };
+  }
+
+  function isActive(changeObjects = []) {
+    const changeObj = find(propEq("anchor", getAnchor()), changeObjects);
+    return (
+      (province.components[0].properties.isChecked && !changeObj) ||
+      (changeObj && changeObj.properties.isChecked)
+    );
+  }
+
+  function isIndeterminate(changeObjects = []) {
+    const changeObj = find(propEq("anchor", getAnchor()), changeObjects);
+    return (
+      (province.components[0].properties.isIndeterminate && !changeObj) ||
+      (changeObj && changeObj.properties.isIndeterminate)
+    );
+  }
+
+  function isMunicipalityActive(koodiarvo, changeObjects = []) {
+    const instance = koodiarvo ? municipalityInstances[koodiarvo] : null;
+    if (!instance) {
+      console.warn(
+        "Couldn't find the municipality instance by koodiarvo",
+        koodiarvo,
+        municipalityInstances
+      );
+    }
+    return instance ? instance.isActive(changeObjects) : false;
+  }
+
+  return {
+    activateFully: () => {
+      // Activate province
+      const isActiveByDefault = isActive();
+      const isIndeterminateByDefault = isIndeterminate();
+      let provinceChangeObj = null;
+
+      if (!isActiveByDefault || isIndeterminateByDefault) {
+        provinceChangeObj = getAdditionChangeObj(false);
       }
 
       // Activate municipalities
       const municipalityChangeObjects = map(municipality => {
         if (!municipality.properties.isChecked) {
-          return getMunicipalityAdditionChangeObj(
-            baseAnchor,
-            id,
-            municipality.properties.title,
-            municipality.anchor
-          );
+          return !isMunicipalityActive(municipality.anchor)
+            ? getMunicipalityAdditionChangeObj(
+                baseAnchor,
+                id,
+                municipality.properties.title,
+                municipality.anchor
+              )
+            : null;
         }
-      }, municipalities).filter(Boolean);
-      return concat(municipalityChangeObjects, changeObjects);
+      }, getMunicipalities()).filter(Boolean);
+
+      return concat([provinceChangeObj], municipalityChangeObjects).filter(
+        Boolean
+      );
+    },
+    activateMunicipality: (koodiarvo, changeObjects = []) => {
+      const municipality = municipalityInstances[koodiarvo];
+      let nextChangeObjects = changeObjects;
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        nextChangeObjects = filter(
+          changeObj => changeObj.anchor !== municipality.getAnchor(),
+          changeObjects
+        );
+        const changeObj =
+          find(propEq("anchor", municipality.getAnchor()), changeObjects) || {};
+        const nextChangeObj = municipality.getChangeObject(
+          changeObj.properties,
+          {
+            isChecked: true
+          }
+        );
+        if (nextChangeObj) {
+          nextChangeObjects = append(nextChangeObj, nextChangeObjects);
+        }
+      }
+      /**
+       * The province might not be active. Let's get a change object for it.
+       */
+      const activeMunicipalities = getActiveMunicipalities(nextChangeObjects);
+      const changeObj =
+        find(propEq("anchor", getAnchor()), changeObjects) || {};
+      nextChangeObjects = filter(
+        changeObj => changeObj.anchor !== getAnchor(),
+        nextChangeObjects
+      );
+      const nextProvinceChangeObj = getChangeObject(changeObj.properties, {
+        isChecked: true,
+        isIndeterminate:
+          activeMunicipalities.length !== getMunicipalities().length
+      });
+      console.info(nextProvinceChangeObj);
+      if (nextProvinceChangeObj) {
+        nextChangeObjects = append(nextProvinceChangeObj, nextChangeObjects);
+      }
+
+      return nextChangeObjects;
     },
     areAllMunicipalitiesActive: (changeObjects = [], activeMunicipalities) => {
       return activeMunicipalities
@@ -134,9 +254,9 @@ export function Province(province, baseAnchor) {
       if (polygonSerie) {
         polygonSerie.fill = am4core.color("#ff0000");
       }
-      const valitutKunnat = getActiveMunicipalities(changeObjects);
+      const valitutKunnat = getActiveMunicipalities(changeObjects) || [];
 
-      const percentage = valitutKunnat.length / kunnatAmount;
+      const percentage = (valitutKunnat.length / kunnatAmount) * 100;
       if (kunnatAmount) {
         polygonSerie = assoc("value", percentage, polygonSerie);
       } else {
@@ -148,19 +268,52 @@ export function Province(province, baseAnchor) {
         if (id === "FI-01") {
           fillColor = "#ffffff";
         } else {
-          if (percentage > 0 && percentage < 1) {
-            fillColor = mix("#109F52", "#C8DCC3", 1 - percentage);
-          } else if (percentage === 1) {
+          if (percentage > 0 && percentage < 100) {
+            fillColor = mix("#109F52", "#C8DCC3", 1 - percentage / 100);
+          } else if (percentage === 100) {
             fillColor = "#109F52";
           }
-          labelSeries.disposeChildren();
-          const label = labelSeries.mapImages.create();
-          label.latitude = polygon.visualLatitude;
-          label.longitude = polygon.visualLongitude;
-          label.children.getIndex(0).text = `${Math.round(percentage * 100)} %`;
+          if (labelSeries) {
+            labelSeries.disposeChildren();
+            try {
+              const label = labelSeries.mapImages.create();
+              label.latitude = polygon.visualLatitude;
+              label.longitude = polygon.visualLongitude;
+              label.children.getIndex(0).text = `${Math.round(percentage)} %`;
+            } catch (err) {
+              console.warn(err);
+            }
+          }
         }
         polygon.fill = am4core.color(fillColor);
       }
+      return percentage;
+    },
+    deactivate: (changeObjects = []) => {
+      const changeObjectsForMunicipalities = values(
+        mapObjIndexed(municipality => {
+          const changeObj = find(
+            propEq("anchor", municipality.getAnchor()),
+            changeObjects
+          );
+          return municipality.getChangeObject(
+            changeObj ? changeObj.properties : {},
+            {
+              isChecked: false
+            }
+          );
+        }, municipalityInstances)
+      ).filter(Boolean);
+
+      const generatedProvinceChangeObject = isActive()
+        ? _getRemovalChangeObj()
+        : null;
+
+      return flatten(
+        [changeObjectsForMunicipalities, generatedProvinceChangeObject].filter(
+          Boolean
+        )
+      );
     },
     getActiveMunicipalities: (changeObjects = []) => {
       return getActiveMunicipalities(changeObjects);
@@ -171,6 +324,9 @@ export function Province(province, baseAnchor) {
     getAnchor: () => {
       return getAnchor();
     },
+    getChangeObject: (properties, targetProperties) => {
+      return getChangeObject(properties, targetProperties);
+    },
     getCode: () => {
       return code;
     },
@@ -180,19 +336,15 @@ export function Province(province, baseAnchor) {
     getMunicipalities: () => {
       return getMunicipalities();
     },
+    getPercentageOfActiveMunicipalities: (changeObjects = []) => {
+      return (
+        (getActiveMunicipalities(changeObjects).length /
+          getMunicipalities().length) *
+        100
+      );
+    },
     getRemovalChangeObj: () => {
-      return {
-        anchor: getAnchor(),
-        properties: {
-          isChecked: false,
-          isIndeterminate: false,
-          metadata: {
-            title,
-            koodiarvo: code,
-            provinceKey: id
-          }
-        }
-      };
+      return _getRemovalChangeObj();
     },
     getRemovalChangeObjForMunicipality: (koodiarvo, title) => {
       return getRemovalChangeObj(baseAnchor, id, koodiarvo, title);
@@ -204,38 +356,90 @@ export function Province(province, baseAnchor) {
       return province;
     },
     isActive: (changeObjects = []) => {
-      const changeObj = find(propEq("anchor", getAnchor()), changeObjects);
-      return (
-        (province.components[0].properties.isChecked && !changeObj) ||
-        (changeObj && changeObj.properties.isChecked)
-      );
+      return isActive(changeObjects);
     },
-    isKuntaActive: (koodiarvo, changeObjects = []) => {
-      const anchor = getKuntaAnchor(baseAnchor, id, koodiarvo);
-      const changeObj = find(propEq("anchor", anchor), changeObjects);
-      const kunta = find(
-        propEq("anchor", koodiarvo),
-        province.categories[0].components
-      );
-      return (
-        (kunta.properties.isChecked && !changeObj) ||
-        (changeObj && changeObj.properties.isChecked)
-      );
+    /**
+     * Function finds out if the province and its all municipalities are
+     * active.
+     */
+    isFullyDeactive: (changeObjects = []) => {
+      const deactiveMunicipalities = filter(municipality => {
+        return municipality.isDeactive(changeObjects);
+      }, municipalityInstances);
+      return deactiveMunicipalities.length === getMunicipalities().length;
+    },
+    isMunicipalityActive: (koodiarvo, changeObjects = []) => {
+      return isMunicipalityActive(koodiarvo, changeObjects);
+    },
+    removeMunicipality: (koodiarvo, changeObjects = []) => {
+      const municipality = municipalityInstances[koodiarvo];
+      let nextChangeObjects = changeObjects;
+      if (!municipality) {
+        console.warn("Couldn't find a municipality with koodiarvo", koodiarvo);
+      } else {
+        const anchor = municipality.getAnchor();
+        nextChangeObjects = filter(
+          changeObj => changeObj.anchor !== anchor,
+          changeObjects
+        );
+        const changeObj = find(propEq("anchor", anchor), changeObjects) || {};
+        const nextChangeObj = municipality.getChangeObject(
+          changeObj.properties,
+          {
+            isChecked: false
+          }
+        );
+        nextChangeObjects = append(nextChangeObj, nextChangeObjects).filter(
+          Boolean
+        );
+      }
+      /**
+       * If all the municipalities will be deactive we need to deactivate the
+       * province too.
+       */
+      const activeMunicipalities = getActiveMunicipalities(nextChangeObjects);
+      if (!activeMunicipalities.length) {
+        const anchor = getAnchor();
+        const changeObj = find(propEq("anchor", anchor), changeObjects) || {};
+        const provinceChangeObj = getChangeObject(changeObj.properties, {
+          isChecked: false,
+          isIndeterminate: false
+        });
+        if (provinceChangeObj) {
+          nextChangeObjects = append(
+            provinceChangeObj,
+            nextChangeObjects
+          ).filter(Boolean);
+        } else {
+          nextChangeObjects = filter(
+            changeObj => changeObj.anchor !== anchor,
+            nextChangeObjects
+          );
+        }
+      }
+
+      return nextChangeObjects;
     },
     setMap: map => {
       kartta = map;
       // Configure label series
-      labelSeries = kartta.series.push(new am4maps.MapImageSeries());
-      labelTemplate = labelSeries.mapImages.template.createChild(am4core.Label);
-      labelTemplate.horizontalCenter = "middle";
-      labelTemplate.verticalCenter = "middle";
-      labelTemplate.fontSize = 14;
-      labelTemplate.interactionsEnabled = false;
-      labelTemplate.nonScaling = true;
+      labelSeries = kartta.series
+        ? kartta.series.push(new am4maps.MapImageSeries())
+        : null;
+      labelTemplate = labelSeries
+        ? labelSeries.mapImages.template.createChild(am4core.Label)
+        : null;
+      if (labelTemplate) {
+        labelTemplate.horizontalCenter = "middle";
+        labelTemplate.verticalCenter = "middle";
+        labelTemplate.fontSize = 14;
+        labelTemplate.interactionsEnabled = false;
+        labelTemplate.nonScaling = true;
+      }
     },
     setPolygonSeries: _polygonSeries => {
       polygonSeries = _polygonSeries;
-      polygon = polygonSeries.getPolygonById(id);
+      polygon = polygonSeries ? polygonSeries.getPolygonById(id) : null;
     }
   };
 }

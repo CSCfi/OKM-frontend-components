@@ -1,9 +1,6 @@
-import { find } from "ramda";
 import { findParent } from "./findParent";
-import { findSiblings } from "./findSiblings";
-import { isNodeChecked } from "./isNodeChecked";
-import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { uncheckSiblings } from "./uncheckSiblings";
+import { modifyNode } from "./modifyNode";
 
 /**
  * Activates the node's predecessors.
@@ -26,43 +23,9 @@ export function activatePredecessors(node, reducedStructure, changeObjects) {
     "RadioButtonWithLabel"
   ]);
 
-  // If parentNode exists and its type is either checkbox or radio button...
-  if (parentNode && parentNode.formId === node.formId) {
-    /**
-     * To be able to define the isIndeterminate property we have to find out
-     * the node's siblings and count how many of them is checked.
-     */
-    const siblings = findSiblings(node, reducedStructure);
+  changeObjects = modifyNode(node, reducedStructure, changeObjects);
 
-    /**
-     * Let's try to find the first unchecked sibling. In both cases we are
-     * gonna check the parent node.
-     **/
-
-    const firstUncheckedSibling = find(sibling => {
-      return !isNodeChecked(sibling, changeObjects);
-    }, siblings);
-
-    if (firstUncheckedSibling) {
-      // isIndeterminate = true
-      changeObjects = updateChangeObjectsArray(
-        parentNode,
-        { isChecked: true, isIndeterminate: true },
-        changeObjects
-      );
-    } else {
-      /**
-       * The target node and its every sibling are all checked. It's time to
-       * set the parent's its isIndeterminate property as false.
-       */
-      changeObjects = updateChangeObjectsArray(
-        parentNode,
-        { isChecked: true, isIndeterminate: false },
-        changeObjects
-      );
-    }
-
-    // If the parent node is a radio button its siblings must be unchecked.
+  if (parentNode) {
     if (parentNode.name === "RadioButtonWithLabel") {
       changeObjects = uncheckSiblings(
         parentNode,

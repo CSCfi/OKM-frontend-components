@@ -11,5 +11,5 @@ export function isNodeChecked(node, changeObjects) {
   const changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
   return !changeObj
     ? node.properties.isChecked
-    : changeObj.properties.isChecked;
+    : changeObj.properties.isChecked && !changeObj.properties.isDeprecated;
 }

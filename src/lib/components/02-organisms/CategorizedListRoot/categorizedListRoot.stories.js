@@ -69,7 +69,10 @@ storiesOf("CategorizedListRoot", module)
         categories={simpleStory.categories}
         changes={simpleStory.changes}
         render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
+          <CategorizedListRoot
+            showCategoryTitles={false}
+            {...props}
+          />
         )}></Stage>
     );
   })
