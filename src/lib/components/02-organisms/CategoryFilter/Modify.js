@@ -40,7 +40,6 @@ import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
 import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 import { isEqual } from "lodash";
 import RadioButtonWithLabel from "../../01-molecules/RadioButtonWithLabel";
-import Kartta from "./Kartta";
 
 const mapping = {
   "01": "FI-18",
@@ -91,7 +90,9 @@ const Modify = React.memo(
     }, [cos, country]);
 
     useEffect(() => {
-      country.colorize(cos);
+      if (kartta.current) {
+        country.colorize(cos);
+      }
     }, [cos, country]);
 
     const isCountryActive = useMemo(() => {
@@ -117,20 +118,15 @@ const Modify = React.memo(
     }, [categories, provinceId]);
 
     useEffect(() => {
-      kartta.current = am4core.create("finland_map", am4maps.MapChart);
-      kartta.current.geodata = am4geodata_finland;
+      let finland = am4core.create("finland_map", am4maps.MapChart);
+      finland.geodata = am4geodata_finland;
       // Set projection
-      kartta.current.projection = new am4maps.projections.Miller();
+      finland.projection = new am4maps.projections.Miller();
 
-      kartta.current.geodataNames = am4geodata_lang_FI;
+      finland.geodataNames = am4geodata_lang_FI;
       // kartta.current.responsive.enabled = true;
 
-      kartta.current = am4core.create("finland_map", am4maps.MapChart);
-      kartta.current.geodata = am4geodata_finland;
-      // Set projection
-      kartta.current.projection = new am4maps.projections.Miller();
-
-      kartta.current.geodataNames = am4geodata_lang_FI;
+      kartta.current = finland;
 
       return function cancel() {
         kartta.current.dispose();
@@ -540,9 +536,9 @@ const Modify = React.memo(
 
     return (
       <React.Fragment>
-        <fieldset className="p-4 border border-gray-600">
+        <fieldset className="p-4 bg-white border-t border-r border-l border-gray-300">
           <legend>{localizations.quickFilter}</legend>
-          <div className="flex pb-8">
+          <div className="flex">
             <RadioButtonWithLabel
               payload={{ anchor: "koko-maa" }}
               isChecked={isCountryActive}
@@ -576,7 +572,10 @@ const Modify = React.memo(
         />
         <div className="bg-white overflow-auto p-2">
           <div className="p-4 flex">
-            <Kartta kartta={kartta.current} />
+            <div
+              id="finland_map"
+              className="w-2/5"
+              style={{ height: "500px" }}></div>
             <div className="w-3/5">
               {provinceCategories.length > 0 ? (
                 <CategorizedListRoot

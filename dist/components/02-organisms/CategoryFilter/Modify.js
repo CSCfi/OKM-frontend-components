@@ -14,7 +14,6 @@ import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
 import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 import { isEqual } from "lodash";
 import RadioButtonWithLabel from "../../01-molecules/RadioButtonWithLabel";
-import Kartta from "./Kartta";
 var mapping = {
   "01": "FI-18",
   "02": "FI-19",
@@ -73,7 +72,9 @@ var Modify = React.memo(function (_ref) {
     return country.getPercentages(cos);
   }, [cos, country]);
   useEffect(function () {
-    country.colorize(cos);
+    if (kartta.current) {
+      country.colorize(cos);
+    }
   }, [cos, country]);
   var isCountryActive = useMemo(function () {
     var percentagesArray = values(percentages);
@@ -93,17 +94,13 @@ var Modify = React.memo(function (_ref) {
     return [result].filter(Boolean);
   }, [categories, provinceId]);
   useEffect(function () {
-    kartta.current = am4core.create("finland_map", am4maps.MapChart);
-    kartta.current.geodata = am4geodata_finland; // Set projection
+    var finland = am4core.create("finland_map", am4maps.MapChart);
+    finland.geodata = am4geodata_finland; // Set projection
 
-    kartta.current.projection = new am4maps.projections.Miller();
-    kartta.current.geodataNames = am4geodata_lang_FI; // kartta.current.responsive.enabled = true;
+    finland.projection = new am4maps.projections.Miller();
+    finland.geodataNames = am4geodata_lang_FI; // kartta.current.responsive.enabled = true;
 
-    kartta.current = am4core.create("finland_map", am4maps.MapChart);
-    kartta.current.geodata = am4geodata_finland; // Set projection
-
-    kartta.current.projection = new am4maps.projections.Miller();
-    kartta.current.geodataNames = am4geodata_lang_FI;
+    kartta.current = finland;
     return function cancel() {
       kartta.current.dispose();
     };
@@ -385,9 +382,9 @@ var Modify = React.memo(function (_ref) {
     previousSelection.current = currentSel;
   }, [baseAnchor, cos, provinceInstances, updateChangeObjects]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("fieldset", {
-    className: "p-4 border border-gray-600"
+    className: "p-4 bg-white border-t border-r border-l border-gray-300"
   }, /*#__PURE__*/React.createElement("legend", null, localizations.quickFilter), /*#__PURE__*/React.createElement("div", {
-    className: "flex pb-8"
+    className: "flex"
   }, /*#__PURE__*/React.createElement(RadioButtonWithLabel, {
     payload: {
       anchor: "koko-maa"
@@ -417,8 +414,12 @@ var Modify = React.memo(function (_ref) {
     className: "bg-white overflow-auto p-2"
   }, /*#__PURE__*/React.createElement("div", {
     className: "p-4 flex"
-  }, /*#__PURE__*/React.createElement(Kartta, {
-    kartta: kartta.current
+  }, /*#__PURE__*/React.createElement("div", {
+    id: "finland_map",
+    className: "w-2/5",
+    style: {
+      height: "500px"
+    }
   }), /*#__PURE__*/React.createElement("div", {
     className: "w-3/5"
   }, provinceCategories.length > 0 ? /*#__PURE__*/React.createElement(CategorizedListRoot, {
