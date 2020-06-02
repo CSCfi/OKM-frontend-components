@@ -19,6 +19,7 @@ export const checkboxStory = {
           properties: {
             code: "A.A",
             isChecked: true,
+            isIndeterminate: false,
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),
