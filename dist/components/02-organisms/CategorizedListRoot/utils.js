@@ -1,11 +1,12 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import * as R from "ramda";
 import { activatePredecessors } from "./utils/activatePredecessors";
-import { deactivatePredecessors } from "./utils/deactivatePredecessors";
+import { deactivateNodesPredecessors } from "./utils/deactivateNodesPredecessors";
 import { activateNodeAndItsDescendants } from "./utils/activateNodeAndItsDescendants";
 import { deactivateNodeAndItsDescendants } from "./utils/deactivateNodeAndItsDescendants";
 import { removeAnchorPart } from "../../../utils/common";
 import { removeDeprecatedChanges } from "./utils/removeDeprecatedChanges";
+import { deactivateNode } from "./utils/deactivateNode";
 /**
  * @module CategorizedListRoot/utils
  **/
@@ -35,7 +36,7 @@ export var findCategoryAnchor = function findCategoryAnchor(category, anchor) {
     R.addIndex(R.forEach)(function (component, index) {
       path = R.append(index, path);
       var fullAnchor = R.join(".", [anchor, component.anchor]);
-      structure = R.append(_objectSpread(_objectSpread({}, component), {}, {
+      structure = R.append(_objectSpread({}, component, {
         anchorParts: R.split(".", fullAnchor),
         formId: category.formId,
         fullAnchor: fullAnchor,
@@ -106,8 +107,12 @@ export var getChangesForReadOnlyLomake = function getChangesForReadOnlyLomake(re
  * @param {array} changes - Array of change objects.
  */
 
-export var handleNodeMain = function handleNodeMain(nodeWithRequestedChanges, rootAnchor, reducedStructure) {
-  var changes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+export var handleNodeMain = function handleNodeMain() {
+  var uncheckParentWithoutActiveChildNodes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  var nodeWithRequestedChanges = arguments.length > 1 ? arguments[1] : undefined;
+  var rootAnchor = arguments.length > 2 ? arguments[2] : undefined;
+  var reducedStructure = arguments.length > 3 ? arguments[3] : undefined;
+  var changes = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
 
   /**
    * node = definition of a component that user has interacted with. Node
@@ -163,7 +168,11 @@ export var handleNodeMain = function handleNodeMain(nodeWithRequestedChanges, ro
      */
     changeObjects = deactivateNodeAndItsDescendants(node, reducedStructure, changeObjects); // 2) Deactivate the node's predecessors.
 
-    changeObjects = deactivatePredecessors(node, reducedStructure, changeObjects);
+    if (uncheckParentWithoutActiveChildNodes) {
+      changeObjects = deactivateNodesPredecessors(node, reducedStructure, changeObjects);
+    } else {
+      changeObjects = deactivateNode(node, reducedStructure, changeObjects);
+    }
   } else {
     /**
      * Otherwise the properties of the new change object will be merged with

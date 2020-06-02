@@ -63,7 +63,7 @@ var TableCell = function TableCell(_ref) {
 
   var menuActions = useMemo(function () {
     return properties.menu ? R.map(function (action) {
-      return _objectSpread(_objectSpread({}, action), {}, {
+      return _objectSpread({}, action, {
         onClick: function onClick() {
           return _onClick(action.id, {
             cell: properties,

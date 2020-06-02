@@ -51,9 +51,9 @@ var Autocomplete = React.memo(function (props) {
     }));
   };
 
-  var optionStyles = _objectSpread(_objectSpread({}, props.height === heights.SHORT ? autocompleteShortStyles : null), {}, {
+  var optionStyles = _objectSpread({}, props.height === heights.SHORT ? autocompleteShortStyles : null, {
     control: props.height === heights.SHORT ? autocompleteShortStyles.control : function (styles) {
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         backgroundColor: "white"
       });
     },
@@ -63,11 +63,11 @@ var Autocomplete = React.memo(function (props) {
           isFocused = _ref.isFocused,
           isSelected = _ref.isSelected;
       var color = chroma("#c3dafe");
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         backgroundColor: isDisabled ? null : isSelected ? data.color : isFocused ? color.css() : null,
         color: isDisabled ? "#ccc" : isSelected ? chroma.contrast(color, "white") > 2 ? "white" : "black" : data.color,
         cursor: isDisabled ? "not-allowed" : "default",
-        ":active": _objectSpread(_objectSpread({}, styles[":active"]), {}, {
+        ":active": _objectSpread({}, styles[":active"], {
           backgroundColor: !isDisabled && (isSelected ? data.color : color.css())
         })
       });
@@ -78,25 +78,25 @@ var Autocomplete = React.memo(function (props) {
       };
     },
     menu: function menu(styles) {
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         zIndex: 999
       });
     },
     multiValue: function multiValue(styles) {
       var color = chroma("#c3dafe");
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         backgroundColor: color.css()
       });
     },
     multiValueLabel: function multiValueLabel(styles, _ref2) {
       var data = _ref2.data;
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         color: data.color
       });
     },
     multiValueRemove: function multiValueRemove(styles, _ref3) {
       var data = _ref3.data;
-      return _objectSpread(_objectSpread({}, styles), {}, {
+      return _objectSpread({}, styles, {
         color: data.color,
         ":hover": {
           backgroundColor: data.color,

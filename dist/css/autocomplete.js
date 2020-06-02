@@ -5,12 +5,12 @@ export var heights = {
 };
 export var autocompleteShortStyles = {
   dropdownIndicator: function dropdownIndicator(base) {
-    return _objectSpread(_objectSpread({}, base), {}, {
+    return _objectSpread({}, base, {
       padding: 4
     });
   },
   clearIndicator: function clearIndicator(base) {
-    return _objectSpread(_objectSpread({}, base), {}, {
+    return _objectSpread({}, base, {
       padding: 4
     });
   },
@@ -18,13 +18,13 @@ export var autocompleteShortStyles = {
     return _objectSpread({}, base);
   },
   input: function input(base) {
-    return _objectSpread(_objectSpread({}, base), {}, {
+    return _objectSpread({}, base, {
       margin: 0,
       padding: 0
     });
   },
   control: function control(styles) {
-    return _objectSpread(_objectSpread({}, styles), {}, {
+    return _objectSpread({}, styles, {
       backgroundColor: "white",
       minHeight: 'fit-content'
     });

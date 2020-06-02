@@ -95,7 +95,7 @@ var Multiselect = React.memo(function (props) {
     setOptions(props.options && props.options[0].group ? props.options : props.options && props.options.map(function (option) {
       // if first option does not have a group, use first letters as groups
       var firstLetter = option.label && option.label[0].toUpperCase();
-      return _objectSpread(_objectSpread({}, option), {}, {
+      return _objectSpread({}, option, {
         group: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter
       });
     }));

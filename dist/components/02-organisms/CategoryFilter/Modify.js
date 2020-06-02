@@ -343,9 +343,6 @@ var Modify = React.memo(function (_ref) {
       /********************************************
        * ACTIVATION OF PROVINCES AND MUNICIPALITIES
        ********************************************/
-      //  const activeMunicipalities = provinceInstance.getActiveMunicipalities(
-      //   cos[provinceId]
-      // );
       if (isMunicipality) {
         /********************************
          * ACTIVATION OF A MUNICIPALITY
@@ -410,7 +407,8 @@ var Modify = React.memo(function (_ref) {
     anchor: baseAnchor,
     categories: provinceCategories,
     changes: provinceChanges,
-    onUpdate: updateChangeObjects
+    onUpdate: updateChangeObjects,
+    uncheckParentWithoutActiveChildNodes: true
   }) : null)), /*#__PURE__*/React.createElement("div", {
     className: "flex justify-end"
   }, /*#__PURE__*/React.createElement("div", {

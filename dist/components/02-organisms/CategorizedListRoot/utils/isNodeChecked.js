@@ -9,5 +9,5 @@ import { getChangeObjByAnchor } from "../utils";
 
 export function isNodeChecked(node, changeObjects) {
   var changeObj = getChangeObjByAnchor(node.fullAnchor, changeObjects);
-  return !changeObj ? node.properties.isChecked : changeObj.properties.isChecked;
+  return !changeObj ? node.properties.isChecked : changeObj.properties.isChecked && !changeObj.properties.isDeprecated;
 }
