@@ -154,7 +154,7 @@ const Datepicker = React.memo(
   },
   (cp, np) => {
     // cp = current props, np = next props
-    return equals(cp.payload, np.payload);
+    return equals(cp.payload, np.payload) && equals(cp.value, np.value);
   }
 );
 

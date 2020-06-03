@@ -179,7 +179,7 @@ var Datepicker = React.memo(function (props) {
   }, isVisited && !selectedDate && props.requiredMessage)));
 }, function (cp, np) {
   // cp = current props, np = next props
-  return equals(cp.payload, np.payload);
+  return equals(cp.payload, np.payload) && equals(cp.value, np.value);
 });
 Datepicker.defaultProps = {
   ariaLabel: "Datepicker",

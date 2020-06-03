@@ -2,12 +2,15 @@ import React from "react";
 import Datepicker from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
+import {withState} from "@dump247/storybook-state";
+
+let initialState = {value: new Date(Date.now()), payload: {}};
 
 storiesOf("Datepicker", module)
   .addDecorator(withInfo)
-  .add("Simple example", () => {
+  .add("Simple example",  withState(initialState)(({store}) => {
     const onChanges = (payload, { value }) => {
-      console.info(payload, value);
+      store.set({value, payload});
     };
     const today = new Date(Date.now());
     const yesterday = new Date(Date.now() - 86400000);
@@ -25,8 +28,8 @@ storiesOf("Datepicker", module)
       <div>
         <p>Normal</p>
         <Datepicker
-          value={today}
-          payload={{ value: today }}
+          value={store.state.value}
+          payload={store.state.payload}
           onChanges={onChanges}
           messages={messages}
           locale={"fi"}
@@ -34,8 +37,8 @@ storiesOf("Datepicker", module)
         <p>Error + clearable</p>
         <Datepicker
           label="Datepicker"
-          value={yesterday}
-          payload={{ value: yesterday }}
+          value={store.state.value}
+          payload={store.state.payload}
           onChanges={onChanges}
           error={true}
           clearable={true}
@@ -46,8 +49,8 @@ storiesOf("Datepicker", module)
         <p>Read only</p>
         <Datepicker
           label="Datepicker"
-          value={yesterday}
-          payload={{ value: yesterday }}
+          value={store.state.value}
+          payload={store.state.payload}
           showTodayButton={false}
           messages={messages}
           locale={"fi"}
@@ -74,7 +77,7 @@ storiesOf("Datepicker", module)
         <p>Wide given</p>
         <Datepicker
           label="Datepicker"
-          value={today}
+          value={store.state.value}
           onChanges={onChanges}
           messages={messages}
           locale={"fi"}
@@ -82,4 +85,4 @@ storiesOf("Datepicker", module)
         />
       </div>
     );
-  });
+  }));
