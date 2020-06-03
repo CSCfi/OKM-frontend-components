@@ -2,10 +2,20 @@ import React from "react";
 import Datepicker from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
-storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", function () {
-  var onChanges = function onChanges(payload, _ref) {
-    var value = _ref.value;
-    console.info(payload, value);
+import { withState } from "@dump247/storybook-state";
+var initialState = {
+  value: new Date(Date.now()),
+  payload: {}
+};
+storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", withState(initialState)(function (_ref) {
+  var store = _ref.store;
+
+  var onChanges = function onChanges(payload, _ref2) {
+    var value = _ref2.value;
+    store.set({
+      value: value,
+      payload: payload
+    });
   };
 
   var today = new Date(Date.now());
@@ -20,19 +30,15 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     dateinvalid: "dateinvalid"
   };
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Normal"), /*#__PURE__*/React.createElement(Datepicker, {
-    value: today,
-    payload: {
-      value: today
-    },
+    value: store.state.value,
+    payload: store.state.payload,
     onChanges: onChanges,
     messages: messages,
     locale: "fi"
   }), /*#__PURE__*/React.createElement("p", null, "Error + clearable"), /*#__PURE__*/React.createElement(Datepicker, {
     label: "Datepicker",
-    value: yesterday,
-    payload: {
-      value: yesterday
-    },
+    value: store.state.value,
+    payload: store.state.payload,
     onChanges: onChanges,
     error: true,
     clearable: true,
@@ -41,10 +47,8 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     locale: "fi"
   }), /*#__PURE__*/React.createElement("p", null, "Read only"), /*#__PURE__*/React.createElement(Datepicker, {
     label: "Datepicker",
-    value: yesterday,
-    payload: {
-      value: yesterday
-    },
+    value: store.state.value,
+    payload: store.state.payload,
     showTodayButton: false,
     messages: messages,
     locale: "fi",
@@ -66,10 +70,10 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", fun
     requiredMessage: "Pakollinen"
   }), /*#__PURE__*/React.createElement("p", null, "Wide given"), /*#__PURE__*/React.createElement(Datepicker, {
     label: "Datepicker",
-    value: today,
+    value: store.state.value,
     onChanges: onChanges,
     messages: messages,
     locale: "fi",
     width: "30rem"
   }));
-});
+}));
