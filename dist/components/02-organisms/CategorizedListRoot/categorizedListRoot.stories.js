@@ -3,7 +3,7 @@ import CategorizedListRoot from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { checkboxStory } from "./storydata/checkboxStory";
-import { simpleStory } from "./storydata/simpleStory";
+import { threeLevelsOfCheckboxes } from "./storydata/threeLevelsOfCheckboxes";
 import { simpleRadioStory } from "./storydata/simpleRadioStory";
 import { complexStory } from "./storydata/complexStory";
 import { radioStory } from "./storydata/radioStory";
@@ -62,10 +62,11 @@ storiesOf("CategorizedListRoot", module).addDecorator(withInfo).add("One checkbo
 }).add("Three levels of checkboxes", function () {
   return /*#__PURE__*/React.createElement(Stage, {
     anchor: "simple",
-    categories: simpleStory.categories,
-    changes: simpleStory.changes,
+    categories: threeLevelsOfCheckboxes.categories,
+    changes: threeLevelsOfCheckboxes.changes,
     render: function render(props) {
       return /*#__PURE__*/React.createElement(CategorizedListRoot, Object.assign({
+        uncheckParentWithoutActiveChildNodes: true,
         showCategoryTitles: false
       }, props));
     }
