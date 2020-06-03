@@ -11,7 +11,6 @@ const StatusTextRow = React.memo(
     children,
     isHidden,
     isRequired,
-    isValid,
     labelStyles,
     layout,
     statusText,
@@ -48,6 +47,8 @@ const StatusTextRow = React.memo(
           </div>
         </div>
       );
+    } else {
+      return <React.Fragment />;
     }
   },
   (cp, np) => {
@@ -55,7 +56,6 @@ const StatusTextRow = React.memo(
       cp.isHidden === np.isHidden &&
       cp.isReadOnly === np.isReadOnly &&
       cp.isRequired === np.isRequired &&
-      cp.isValid === np.isValid &&
       cp.statusText === np.statusText
     );
   }
@@ -64,7 +64,6 @@ const StatusTextRow = React.memo(
 StatusTextRow.propTypes = {
   isHidden: PropTypes.bool,
   isRequired: PropTypes.bool,
-  isValid: PropTypes.bool,
   labelStyles: PropTypes.object,
   layout: PropTypes.object,
   styleClasses: PropTypes.array,

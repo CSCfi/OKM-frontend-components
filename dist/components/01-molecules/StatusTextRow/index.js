@@ -44,6 +44,8 @@ var StatusTextRow = React.memo(function (_ref) {
     }, statusText), children, !isReadOnly && isRequired && /*#__PURE__*/React.createElement("span", {
       className: "pr-4"
     }, "*"), " "));
+  } else {
+    return /*#__PURE__*/React.createElement(React.Fragment, null);
   }
 }, function (cp, np) {
   return cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isValid === np.isValid && cp.statusText === np.statusText;
