@@ -5,7 +5,7 @@ const labelStyles = {
   removal: isRemoved
 };
 
-export const simpleStory = {
+export const threeLevelsOfCheckboxes = {
   changes: [],
   categories: [
     {
@@ -19,6 +19,7 @@ export const simpleStory = {
           properties: {
             code: "A.A",
             isChecked: false,
+            isIndeterminate: false,
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),

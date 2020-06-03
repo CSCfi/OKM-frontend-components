@@ -3,7 +3,7 @@ import CategorizedListRoot from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { checkboxStory } from "./storydata/checkboxStory";
-import { simpleStory } from "./storydata/simpleStory";
+import { threeLevelsOfCheckboxes } from "./storydata/threeLevelsOfCheckboxes";
 import { simpleRadioStory } from "./storydata/simpleRadioStory";
 import { complexStory } from "./storydata/complexStory";
 import { radioStory } from "./storydata/radioStory";
@@ -66,10 +66,11 @@ storiesOf("CategorizedListRoot", module)
     return (
       <Stage
         anchor={"simple"}
-        categories={simpleStory.categories}
-        changes={simpleStory.changes}
+        categories={threeLevelsOfCheckboxes.categories}
+        changes={threeLevelsOfCheckboxes.changes}
         render={props => (
           <CategorizedListRoot
+            uncheckParentWithoutActiveChildNodes={true}
             showCategoryTitles={false}
             {...props}
           />
