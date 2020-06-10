@@ -474,13 +474,11 @@ var CategorizedList = React.memo(function (props) {
           requiredMessage: propsObj.requiredMessage,
           showValidationErrors: showValidationErrors
         }));
-      }(category) : null, component.name === "StatusTextRow" ? function (category) {
-        var codeMarkup = propsObj.code ? /*#__PURE__*/React.createElement("span", {
-          className: "pr-4"
-        }, propsObj.code) : null;
+      }(category) : null, component.name === "StatusTextRow" ? function () {
         return /*#__PURE__*/React.createElement("div", {
           className: "flex-2"
         }, /*#__PURE__*/React.createElement(StatusTextRow, {
+          code: propsObj.code,
           labelStyles: labelStyles,
           styleClasses: styleClasses,
           layout: component.layout,
@@ -489,14 +487,9 @@ var CategorizedList = React.memo(function (props) {
           isHidden: propsObj.isHidden,
           isReadOnly: propsObj.isReadOnly,
           isRequired: propsObj.isRequired,
-          isValid: propsObj.isValid
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "flex"
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "flex-1"
-        }, codeMarkup, /*#__PURE__*/React.createElement("span", null, title), !propsObj.isReadOnly && propsObj.isRequired && /*#__PURE__*/React.createElement("span", {
-          className: "pr-4"
-        }, "*"), " "))));
+          isValid: propsObj.isValid,
+          title: propsObj.title
+        }));
       }(category) : null, component.name === "Alert" ? function () {
         return /*#__PURE__*/React.createElement("div", {
           className: "flex-1 mb-2 ".concat(component.styleClasses)

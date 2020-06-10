@@ -8,7 +8,7 @@ const defaultProps = {
 
 const StatusTextRow = React.memo(
   ({
-    children,
+    code,
     isHidden,
     isRequired,
     labelStyles,
@@ -16,7 +16,8 @@ const StatusTextRow = React.memo(
     statusText,
     statusTextStyleClasses,
     styleClasses,
-    isReadOnly
+    isReadOnly,
+    title
   }) => {
     const [classNames, setClassNames] = useState(defaultProps.styleClasses);
 
@@ -42,8 +43,13 @@ const StatusTextRow = React.memo(
                 {statusText}
               </div>
             )}
-            {children}
-            {!isReadOnly && isRequired && <span className="pr-4">*</span>}{" "}
+            <div className="flex">
+              <div className="flex-1">
+                {code ? <span className="pr-4">{code}</span> : null}
+                <span>{title}</span>
+                {!isReadOnly && isRequired && <span className="pr-4">*</span>}
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -56,12 +62,15 @@ const StatusTextRow = React.memo(
       cp.isHidden === np.isHidden &&
       cp.isReadOnly === np.isReadOnly &&
       cp.isRequired === np.isRequired &&
-      cp.statusText === np.statusText
+      cp.statusText === np.statusText &&
+      cp.code === np.code &&
+      cp.title === np.title
     );
   }
 );
 
 StatusTextRow.propTypes = {
+  code: PropTypes.string,
   isHidden: PropTypes.bool,
   isRequired: PropTypes.bool,
   labelStyles: PropTypes.object,
@@ -69,7 +78,8 @@ StatusTextRow.propTypes = {
   styleClasses: PropTypes.array,
   statusText: PropTypes.string,
   statusTextStyleClasses: PropTypes.array,
-  isReadOnly: PropTypes.bool
+  isReadOnly: PropTypes.bool,
+  title: PropTypes.string
 };
 
 export default StatusTextRow;

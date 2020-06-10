@@ -644,13 +644,11 @@ const CategorizedList = React.memo(
                           })(category)
                         : null}
                       {component.name === "StatusTextRow"
-                        ? (category => {
-                            const codeMarkup = propsObj.code ? (
-                              <span className="pr-4">{propsObj.code}</span>
-                            ) : null;
+                        ? (() => {
                             return (
                               <div className="flex-2">
                                 <StatusTextRow
+                                  code={propsObj.code}
                                   labelStyles={labelStyles}
                                   styleClasses={styleClasses}
                                   layout={component.layout}
@@ -661,18 +659,8 @@ const CategorizedList = React.memo(
                                   isHidden={propsObj.isHidden}
                                   isReadOnly={propsObj.isReadOnly}
                                   isRequired={propsObj.isRequired}
-                                  isValid={propsObj.isValid}>
-                                  <div className="flex">
-                                    <div className="flex-1">
-                                      {codeMarkup}
-                                      <span>{title}</span>
-                                      {!propsObj.isReadOnly &&
-                                        propsObj.isRequired && (
-                                          <span className="pr-4">*</span>
-                                        )}{" "}
-                                    </div>
-                                  </div>
-                                </StatusTextRow>
+                                  isValid={propsObj.isValid}
+                                  title={propsObj.title}></StatusTextRow>
                               </div>
                             );
                           })(category)
