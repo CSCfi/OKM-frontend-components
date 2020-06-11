@@ -39,8 +39,8 @@ const RadioButtonWithLabel = React.memo(
               disabled={props.isDisabled}
               control={
                 <GreenRadio
-                  id={props.payload.anchor}
-                  data-anchor={props.payload.anchor}
+                  id={props.id}
+                  data-anchor={props.id}
                   checked={props.isChecked}
                   value={props.value}
                   onChange={handleChanges}
@@ -69,6 +69,7 @@ const RadioButtonWithLabel = React.memo(
 );
 
 RadioButtonWithLabel.propTypes = {
+  id: PropTypes.string,
   isChecked: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   name: PropTypes.string,
