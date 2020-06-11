@@ -7,7 +7,7 @@ import { isInLupa, isAdded } from "../../../css/label";
 storiesOf("StatusTextRow", module)
   .addDecorator(withInfo)
   .add("is added and is in lupa", () => (
-    <StatusTextRow labelStyles={Object.assign({}, isInLupa, isAdded)}>
-      <div>Example text 1</div>
-    </StatusTextRow>
+    <StatusTextRow
+      labelStyles={Object.assign({}, isInLupa, isAdded)}
+      title="Example text 1"></StatusTextRow>
   ));
