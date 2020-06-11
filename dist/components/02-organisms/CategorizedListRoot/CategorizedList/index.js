@@ -265,7 +265,6 @@ var CategorizedList = React.memo(function (props) {
     }, map(category.components, function (component, ii) {
       var fullAnchor = "".concat(anchor, ".").concat(component.anchor);
       var fullPath = props.rootPath.concat([i, "components", ii]);
-      var idSuffix = "".concat(i, "-").concat(ii);
       var changeObj = getChangeObjByAnchor(fullAnchor, props.changes);
       var parentComponent = props.parent && props.parent.category.components ? props.parent.category.components[0] : null;
       var parentChangeObj = parentComponent ? getChangeObjByAnchor("".concat(props.parent.anchor, ".").concat(parentComponent.anchor), props.changes) : {};
@@ -301,7 +300,7 @@ var CategorizedList = React.memo(function (props) {
       }, component.name === "CheckboxWithLabel" && /*#__PURE__*/React.createElement("div", {
         className: component.styleClasses
       }, /*#__PURE__*/React.createElement(CheckboxWithLabel, {
-        id: "checkbox-with-label-".concat(idSuffix),
+        id: fullAnchor,
         name: component.name,
         isChecked: propsObj.isChecked,
         isDisabled: propsObj.isDisabled,
@@ -325,7 +324,7 @@ var CategorizedList = React.memo(function (props) {
       }, title)))), component.name === "RadioButtonWithLabel" && /*#__PURE__*/React.createElement("div", {
         className: "flex-2"
       }, /*#__PURE__*/React.createElement(RadioButtonWithLabel, {
-        id: "radio-button-with-label-".concat(idSuffix),
+        id: fullAnchor,
         name: propsObj.name,
         isChecked: propsObj.isChecked,
         isReadOnly: propsObj.isReadOnly,
@@ -356,7 +355,7 @@ var CategorizedList = React.memo(function (props) {
         return /*#__PURE__*/React.createElement("div", {
           className: "px-2 mb-1"
         }, /*#__PURE__*/React.createElement(Dropdown, {
-          id: "dropdown-".concat(idSuffix),
+          id: fullAnchor,
           onChanges: handleChanges,
           options: propsObj.options,
           payload: {
@@ -525,7 +524,7 @@ var CategorizedList = React.memo(function (props) {
         }, /*#__PURE__*/React.createElement(Multiselect, {
           ariaLabel: propsObj.ariaLabel,
           callback: handleChanges,
-          id: "multiselect-".concat(idSuffix),
+          id: fullPath,
           isMulti: propsObj.isMulti,
           isRequired: propsObj.isRequired,
           isReadOnly: propsObj.isReadOnly,
@@ -557,7 +556,7 @@ var CategorizedList = React.memo(function (props) {
           className: "flex-1 ".concat(component.styleClasses)
         }, /*#__PURE__*/React.createElement(Autocomplete, {
           callback: handleChanges,
-          id: "autocomplete-".concat(idSuffix),
+          id: fullAnchor,
           isMulti: propsObj.isMulti,
           isRequired: propsObj.isRequired,
           isReadOnly: propsObj.isReadOnly,

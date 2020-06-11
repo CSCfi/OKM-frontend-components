@@ -33,7 +33,8 @@ function Country(provinces) {
     /**
      * Returns true if the whole country is deactivate.
      */
-    getPercentages: function getPercentages(changeObjectsByProvince) {
+    getPercentages: function getPercentages() {
+      var changeObjectsByProvince = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var percentages = mapObjIndexed(function (province) {
         return province.getPercentageOfActiveMunicipalities(changeObjectsByProvince[province.getId()]);
       }, provinces);

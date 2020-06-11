@@ -1,4 +1,4 @@
-export var toimintaalueStory = {
+export default {
   changes: {
     "FI-10": [{
       anchor: "maakuntakunnat.FI-10.kunnat.583",

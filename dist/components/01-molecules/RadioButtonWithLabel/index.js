@@ -39,8 +39,8 @@ var RadioButtonWithLabel = React.memo(function (props) {
     },
     disabled: props.isDisabled,
     control: /*#__PURE__*/React.createElement(GreenRadio, {
-      id: props.payload.anchor,
-      "data-anchor": props.payload.anchor,
+      id: props.id,
+      "data-anchor": props.id,
       checked: props.isChecked,
       value: props.value,
       onChange: handleChanges
