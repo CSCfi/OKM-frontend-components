@@ -31,7 +31,7 @@ function Country(provinces) {
     /**
      * Returns true if the whole country is deactivate.
      */
-    getPercentages: changeObjectsByProvince => {
+    getPercentages: (changeObjectsByProvince = {}) => {
       const percentages = mapObjIndexed(province => {
         return province.getPercentageOfActiveMunicipalities(
           changeObjectsByProvince[province.getId()]

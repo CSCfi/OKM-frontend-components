@@ -5,7 +5,6 @@ import {
   prop,
   addIndex,
   zipObj,
-  isEmpty,
   equals,
   values,
   flatten
@@ -25,9 +24,13 @@ const CategoryFilter = ({
   onChanges,
   toggleEditView,
   provinces = [],
-  provincesWithoutMunicipalities = []
+  provincesWithoutMunicipalities = [],
+  quickFilterChangeObjects = []
 }) => {
   const [changeObjects, setChangeObjects] = useState(changeObjectsByProvince);
+  const [quickFilterChanges, setQuickFilterChanges] = useState(
+    quickFilterChangeObjects
+  );
 
   useEffect(() => {
     setChangeObjects(changeObjectsByProvince);
@@ -127,16 +130,21 @@ const CategoryFilter = ({
         municipalities={municipalities}
         localizations={localizations}
         provincesWithoutMunicipalities={provincesWithoutMunicipalities}
-        onClose={changesByProvince => {
+        onClose={(quickFilterChanges, changesByProvince) => {
           toggleEditView(false);
           setChangeObjects(changesByProvince);
+          setQuickFilterChanges(quickFilterChanges);
           if (changesByProvince) {
-            onChanges(changesByProvince);
+            onChanges({
+              changesByProvince,
+              quickFilterChanges
+            });
           } else if (!equals(changeObjects, changeObjectsByProvince)) {
-            onChanges(changeObjectsByProvince);
+            onChanges({ changeObjectsByProvince, quickFilterChanges });
           }
         }}
         changeObjectsByProvince={changeObjects}
+        quickFilterChangeObjects={quickFilterChanges}
       />
     );
   } else {
