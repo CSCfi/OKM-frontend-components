@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState, useMemo, useEffect } from "react";
-import { map, prop, addIndex, zipObj, isEmpty, equals, values, flatten } from "ramda";
+import { map, prop, addIndex, zipObj, equals, values, flatten } from "ramda";
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
 import { Province } from "./province";
@@ -22,12 +22,19 @@ var CategoryFilter = function CategoryFilter(_ref) {
       _ref$provinces = _ref.provinces,
       provinces = _ref$provinces === void 0 ? [] : _ref$provinces,
       _ref$provincesWithout = _ref.provincesWithoutMunicipalities,
-      provincesWithoutMunicipalities = _ref$provincesWithout === void 0 ? [] : _ref$provincesWithout;
+      provincesWithoutMunicipalities = _ref$provincesWithout === void 0 ? [] : _ref$provincesWithout,
+      _ref$quickFilterChang = _ref.quickFilterChangeObjects,
+      quickFilterChangeObjects = _ref$quickFilterChang === void 0 ? [] : _ref$quickFilterChang;
 
   var _useState = useState(changeObjectsByProvince),
       _useState2 = _slicedToArray(_useState, 2),
       changeObjects = _useState2[0],
       setChangeObjects = _useState2[1];
+
+  var _useState3 = useState(quickFilterChangeObjects),
+      _useState4 = _slicedToArray(_useState3, 2),
+      quickFilterChanges = _useState4[0],
+      setQuickFilterChanges = _useState4[1];
 
   useEffect(function () {
     setChangeObjects(changeObjectsByProvince);
@@ -110,17 +117,25 @@ var CategoryFilter = function CategoryFilter(_ref) {
       municipalities: municipalities,
       localizations: localizations,
       provincesWithoutMunicipalities: provincesWithoutMunicipalities,
-      onClose: function onClose(changesByProvince) {
+      onClose: function onClose(quickFilterChanges, changesByProvince) {
         toggleEditView(false);
         setChangeObjects(changesByProvince);
+        setQuickFilterChanges(quickFilterChanges);
 
         if (changesByProvince) {
-          onChanges(changesByProvince);
+          onChanges({
+            changesByProvince: changesByProvince,
+            quickFilterChanges: quickFilterChanges
+          });
         } else if (!equals(changeObjects, changeObjectsByProvince)) {
-          onChanges(changeObjectsByProvince);
+          onChanges({
+            changeObjectsByProvince: changeObjectsByProvince,
+            quickFilterChanges: quickFilterChanges
+          });
         }
       },
-      changeObjectsByProvince: changeObjects
+      changeObjectsByProvince: changeObjects,
+      quickFilterChangeObjects: quickFilterChanges
     });
   } else {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h3", {

@@ -1,19 +1,25 @@
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import CategorizedListRoot from "../CategorizedListRoot";
 import Autocomplete from "../Autocomplete";
-import { assoc, equals, filter, find, map, propEq, dissoc, concat, flatten, uniq, last, differenceWith, append, forEachObjIndexed, not, compose, includes, sum, values } from "ramda";
+import { assoc, equals, filter, find, map, propEq, dissoc, concat, flatten, uniq, last, differenceWith, forEachObjIndexed, sum, endsWith, isEmpty, append, pathEq, values } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
 import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
 import SimpleButton from "../../00-atoms/SimpleButton";
-import { getAnchorPart } from "../../../utils/common";
-import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
-import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 import { isEqual } from "lodash";
-import RadioButtonWithLabel from "../../01-molecules/RadioButtonWithLabel";
+var labelStyles = {
+  addition: {
+    color: "purple"
+  },
+  removal: {
+    color: "purple",
+    textDecoration: "line-through"
+  }
+};
 var mapping = {
   "01": "FI-18",
   "02": "FI-19",
@@ -47,6 +53,8 @@ var Modify = React.memo(function (_ref) {
       localizations = _ref$localizations === void 0 ? {} : _ref$localizations,
       _ref$municipalities = _ref.municipalities,
       municipalities = _ref$municipalities === void 0 ? [] : _ref$municipalities,
+      _ref$quickFilterChang = _ref.quickFilterChangeObjects,
+      quickFilterChangeObjects = _ref$quickFilterChang === void 0 ? [] : _ref$quickFilterChang,
       _ref$provinceInstance = _ref.provinceInstances,
       provinceInstances = _ref$provinceInstance === void 0 ? {} : _ref$provinceInstance,
       _ref$provincesWithout = _ref.provincesWithoutMunicipalities,
@@ -63,11 +71,24 @@ var Modify = React.memo(function (_ref) {
       provinceId = _useState2[0],
       setProvinceId = _useState2[1];
 
-  var _useState3 = useState(changeObjectsByProvince),
+  var _useState3 = useState(quickFilterChangeObjects),
       _useState4 = _slicedToArray(_useState3, 2),
-      cos = _useState4[0],
-      setCos = _useState4[1];
+      quickFilterChanges = _useState4[0],
+      setQuickFilterChanges = _useState4[1];
 
+  var _useState5 = useState(changeObjectsByProvince),
+      _useState6 = _slicedToArray(_useState5, 2),
+      cos = _useState6[0],
+      setCos = _useState6[1];
+
+  var isCountryActiveByDefault = useMemo(function () {
+    var percentagesArray = values(country.getPercentages());
+    return sum(percentagesArray) / percentagesArray.length === 100;
+  }, [country]);
+  var isCountryDeactiveByDefault = useMemo(function () {
+    var percentagesArray = values(country.getPercentages());
+    return sum(percentagesArray) === 0;
+  }, [country]);
   var percentages = useMemo(function () {
     return country.getPercentages(cos);
   }, [cos, country]);
@@ -83,6 +104,69 @@ var Modify = React.memo(function (_ref) {
   var isCountryDeactive = useMemo(function () {
     return sum(values(percentages)) === 0;
   }, [percentages]);
+  useEffect(function () {
+    var anchor = "".concat(baseAnchor, "-radios.quick-filters.koko-maa");
+    var changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+
+    if (isCountryActive && !changeObj && !isEmpty(cos) && !isCountryActiveByDefault) {
+      setQuickFilterChanges(append({
+        anchor: anchor,
+        properties: {
+          isChecked: true
+        }
+      }, quickFilterChanges));
+    }
+  }, [baseAnchor, cos, isCountryActive, isCountryActiveByDefault, quickFilterChanges]);
+  useEffect(function () {
+    var anchor = "".concat(baseAnchor, "-radios.quick-filters.ei-alueita");
+    var changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+
+    if (isCountryDeactive && !changeObj && !isEmpty(cos) && !isCountryDeactiveByDefault) {
+      setQuickFilterChanges(append({
+        anchor: anchor,
+        properties: {
+          isChecked: true
+        }
+      }, quickFilterChanges));
+    }
+  }, [cos, baseAnchor, isCountryDeactive, isCountryDeactiveByDefault, quickFilterChanges]);
+  useEffect(function () {
+    if (!isCountryActive && !isCountryDeactive && quickFilterChanges.length > 0) {
+      var changeObjects = filter(function (changeObj) {
+        return !changeObj.properties.isChecked;
+      }, quickFilterChanges);
+
+      if (!equals(changeObjects, quickFilterChanges)) {
+        setQuickFilterChanges(changeObjects);
+      }
+    }
+  }, [isCountryActive, isCountryDeactive, quickFilterChanges]);
+  useEffect(function () {
+    var anchor = "".concat(baseAnchor, "-radios.quick-filters.ei-alueita");
+    var changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+
+    if (!isCountryDeactive && isCountryDeactiveByDefault && !changeObj) {
+      setQuickFilterChanges([{
+        anchor: anchor,
+        properties: {
+          isChecked: false
+        }
+      }]);
+    }
+  }, [baseAnchor, isCountryDeactive, isCountryDeactiveByDefault, quickFilterChanges]);
+  useEffect(function () {
+    if (isCountryDeactive) {
+      var anchor = "".concat(baseAnchor, "-radios.quick-filters.ei-alueita");
+      var changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+
+      if (isCountryDeactiveByDefault && changeObj) {
+        var nextQuickFilterChanges = filter(function (_changeObj) {
+          return _changeObj.anchor !== changeObj.anchor;
+        }, quickFilterChanges);
+        setQuickFilterChanges(nextQuickFilterChanges);
+      }
+    }
+  }, [baseAnchor, isCountryDeactive, isCountryDeactiveByDefault, quickFilterChanges]);
   useEffect(function () {
     setCos(changeObjectsByProvince);
   }, [changeObjectsByProvince]);
@@ -157,10 +241,10 @@ var Modify = React.memo(function (_ref) {
     }
   }, [provinceId, cos]);
 
-  var _useState5 = useState([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      selectedLocations = _useState6[0],
-      setSelectedLocations = _useState6[1];
+  var _useState7 = useState([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      selectedLocations = _useState8[0],
+      setSelectedLocations = _useState8[1];
 
   useEffect(function () {
     var shouldBeSelected = filter(function (location) {
@@ -268,8 +352,8 @@ var Modify = React.memo(function (_ref) {
    * the autocomplete field will be updated based on it after this
    * function has been run.
    */
-  function (payload, values) {
-    var currentSel = values.value || [];
+  function (payload, _values) {
+    var currentSel = _values.value || [];
     var prevSel = previousSelection.current;
     /**
      * Items to deactivate is calculated by comparing the old value of the
@@ -291,10 +375,19 @@ var Modify = React.memo(function (_ref) {
 
     var latestSelection = last(currentSel);
     /**
+     * If there isn't an item to deactivate and the latestSelection is
+     * missing too then it's time to stop immediately.
+     */
+
+    if (!itemsToDeactivate.length && !latestSelection) {
+      return true;
+    }
+    /**
      * Every item can provide a providence id. Depending of the use case
      * it will be fetched from the removed item or by using the latest
      * selection.
      */
+
 
     var provinceId = itemsToDeactivate.length ? itemsToDeactivate[0].provinceKey : latestSelection.provinceKey;
     /**
@@ -360,31 +453,71 @@ var Modify = React.memo(function (_ref) {
 
     setProvinceId(provinceId);
     previousSelection.current = currentSel;
-    setCos(assoc(provinceId, _changeObjects, cos));
+    var nextChanges = assoc(provinceId, _changeObjects, cos);
+    var hasChanges = flatten(values(nextChanges)).length > 0;
+    setCos(hasChanges ? nextChanges : []);
   }, [cos, provinceInstances]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("fieldset", {
     className: "p-4 bg-white border-t border-r border-l border-gray-300"
   }, /*#__PURE__*/React.createElement("legend", null, localizations.quickFilter), /*#__PURE__*/React.createElement("div", {
     className: "flex"
-  }, /*#__PURE__*/React.createElement(RadioButtonWithLabel, {
-    payload: {
-      anchor: "koko-maa"
-    },
-    isChecked: isCountryActive,
-    onChanges: function onChanges() {
-      setCos(country.activate(cos));
-    },
-    value: "1"
-  }, localizations.wholeCountryWithoutAhvenanmaa), /*#__PURE__*/React.createElement(RadioButtonWithLabel, {
-    payload: {
-      anchor: "ei-alueita"
-    },
-    isChecked: isCountryDeactive,
-    onChanges: function onChanges() {
-      setCos(country.deactivate(cos));
-    },
-    value: "0"
-  }, localizations.areaOfActionIsUndefined))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(Autocomplete, {
+  }, /*#__PURE__*/React.createElement(CategorizedListRoot, {
+    anchor: "".concat(baseAnchor, "-radios"),
+    categories: [{
+      anchor: "quick-filters",
+      components: [{
+        anchor: "koko-maa",
+        name: "RadioButtonWithLabel",
+        properties: {
+          forChangeObject: {
+            koodiarvo: "FI1"
+          },
+          isChecked: isCountryActive,
+          labelStyles: _objectSpread({}, labelStyles, {
+            custom: {
+              fontWeight: isCountryActiveByDefault ? 600 : "initial"
+            }
+          }),
+          title: localizations.wholeCountryWithoutAhvenanmaa,
+          value: "1"
+        }
+      }, {
+        anchor: "ei-alueita",
+        name: "RadioButtonWithLabel",
+        properties: {
+          forChangeObject: {
+            koodiarvo: "FI2"
+          },
+          isChecked: isCountryDeactive,
+          labelStyles: _objectSpread({}, labelStyles, {
+            custom: {
+              fontWeight: isCountryDeactiveByDefault ? 600 : "initial"
+            }
+          }),
+          title: localizations.areaOfActionIsUndefined,
+          value: "0"
+        }
+      }]
+    }],
+    changes: quickFilterChanges,
+    onUpdate: function onUpdate(payload) {
+      var changes = payload.changes;
+      var nextChanges = null;
+      var activeChange = find(pathEq(["properties", "isChecked"], true), payload.changes);
+
+      if (endsWith("ei-alueita", activeChange.anchor)) {
+        nextChanges = country.deactivate(cos);
+        changes = isCountryDeactiveByDefault ? [] : changes;
+      } else if (endsWith("koko-maa", activeChange.anchor)) {
+        nextChanges = country.activate(cos);
+        changes = isCountryActiveByDefault ? [] : changes;
+      }
+
+      setCos(nextChanges);
+      setQuickFilterChanges(changes);
+      setProvinceId(null);
+    }
+  }))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(Autocomplete, {
     minChars: 1,
     name: "maakunnat-ja-kunnat-filter",
     options: locations,
@@ -416,12 +549,12 @@ var Modify = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement(SimpleButton, {
     variant: "outlined",
     onClick: function onClick() {
-      return onClose();
+      return onClose(quickFilterChanges);
     },
     text: localizations.cancel
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(SimpleButton, {
     onClick: function onClick() {
-      return onClose(cos);
+      return onClose(quickFilterChanges, cos);
     },
     text: localizations.accept
   })))));

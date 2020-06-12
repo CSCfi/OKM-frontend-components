@@ -1,4 +1,4 @@
-import { find, propEq, filter, assoc, dissoc, endsWith, compose, prop, append, map, concat, flatten, mapObjIndexed, equals, values, includes, forEach } from "ramda";
+import { find, propEq, filter, assoc, dissoc, append, map, concat, flatten, mapObjIndexed, equals, values, includes, forEach, compose, not } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import mix from "./province-utils";
@@ -185,8 +185,6 @@ export function Province(province, baseAnchor) {
         isIndeterminate: activeMunicipalities.length !== _getMunicipalities().length
       });
 
-      console.info(nextProvinceChangeObj);
-
       if (nextProvinceChangeObj) {
         nextChangeObjects = append(nextProvinceChangeObj, nextChangeObjects);
       }
@@ -332,11 +330,14 @@ export function Province(province, baseAnchor) {
         nextChangeObjects = filter(function (changeObj) {
           return changeObj.anchor !== anchor;
         }, changeObjects);
-        var changeObj = find(propEq("anchor", anchor), changeObjects) || {};
-        var nextChangeObj = municipality.getChangeObject(changeObj.properties, {
-          isChecked: false
-        });
-        nextChangeObjects = append(nextChangeObj, nextChangeObjects).filter(Boolean);
+        var changeObj = find(propEq("anchor", anchor), changeObjects) || {}; // If municipality is active by default a new change object is needed.
+
+        if (municipality.isActive()) {
+          var nextChangeObj = municipality.getChangeObject(changeObj.properties, {
+            isChecked: false
+          });
+          nextChangeObjects = append(nextChangeObj, nextChangeObjects).filter(Boolean);
+        }
       }
       /**
        * If all the municipalities will be deactive we need to deactivate the
@@ -357,6 +358,7 @@ export function Province(province, baseAnchor) {
         });
 
         if (provinceChangeObj) {
+          nextChangeObjects = filter(compose(not, propEq("anchor", provinceChangeObj.anchor)), nextChangeObjects);
           nextChangeObjects = append(provinceChangeObj, nextChangeObjects).filter(Boolean);
         } else {
           nextChangeObjects = filter(function (changeObj) {

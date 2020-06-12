@@ -327,7 +327,6 @@ const CategorizedList = React.memo(
                 {map(category.components, (component, ii) => {
                   const fullAnchor = `${anchor}.${component.anchor}`;
                   const fullPath = props.rootPath.concat([i, "components", ii]);
-                  const idSuffix = `${i}-${ii}`;
                   const changeObj = getChangeObjByAnchor(
                     fullAnchor,
                     props.changes
@@ -387,7 +386,7 @@ const CategorizedList = React.memo(
                       {component.name === "CheckboxWithLabel" && (
                         <div className={component.styleClasses}>
                           <CheckboxWithLabel
-                            id={`checkbox-with-label-${idSuffix}`}
+                            id={fullAnchor}
                             name={component.name}
                             isChecked={propsObj.isChecked}
                             isDisabled={propsObj.isDisabled}
@@ -414,7 +413,7 @@ const CategorizedList = React.memo(
                       {component.name === "RadioButtonWithLabel" && (
                         <div className="flex-2">
                           <RadioButtonWithLabel
-                            id={`radio-button-with-label-${idSuffix}`}
+                            id={fullAnchor}
                             name={propsObj.name}
                             isChecked={propsObj.isChecked}
                             isReadOnly={propsObj.isReadOnly}
@@ -462,7 +461,7 @@ const CategorizedList = React.memo(
                             return (
                               <div className="px-2 mb-1">
                                 <Dropdown
-                                  id={`dropdown-${idSuffix}`}
+                                  id={fullAnchor}
                                   onChanges={handleChanges}
                                   options={propsObj.options}
                                   payload={{
@@ -721,7 +720,7 @@ const CategorizedList = React.memo(
                                 <Multiselect
                                   ariaLabel={propsObj.ariaLabel}
                                   callback={handleChanges}
-                                  id={`multiselect-${idSuffix}`}
+                                  id={fullPath}
                                   isMulti={propsObj.isMulti}
                                   isRequired={propsObj.isRequired}
                                   isReadOnly={propsObj.isReadOnly}
@@ -772,7 +771,7 @@ const CategorizedList = React.memo(
                                 className={`flex-1 ${component.styleClasses}`}>
                                 <Autocomplete
                                   callback={handleChanges}
-                                  id={`autocomplete-${idSuffix}`}
+                                  id={fullAnchor}
                                   isMulti={propsObj.isMulti}
                                   isRequired={propsObj.isRequired}
                                   isReadOnly={propsObj.isReadOnly}

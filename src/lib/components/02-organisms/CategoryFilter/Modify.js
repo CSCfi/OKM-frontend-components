@@ -21,12 +21,12 @@ import {
   uniq,
   last,
   differenceWith,
-  append,
   forEachObjIndexed,
-  not,
-  compose,
-  includes,
   sum,
+  endsWith,
+  isEmpty,
+  append,
+  pathEq,
   values
 } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
@@ -35,11 +35,17 @@ import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
 import am4geodata_lang_FI from "@amcharts/amcharts4-geodata/lang/FI";
 import kuntaProvinceMapping from "./storydata/kuntaProvinceMapping";
 import SimpleButton from "../../00-atoms/SimpleButton";
-import { getAnchorPart } from "../../../utils/common";
-import { getRemovalChangeObj, getAdditionChangeObj } from "./kunta-utils";
-import { getAnchor as getKuntaAnchor } from "./kunta-utils";
 import { isEqual } from "lodash";
-import RadioButtonWithLabel from "../../01-molecules/RadioButtonWithLabel";
+
+const labelStyles = {
+  addition: {
+    color: "purple"
+  },
+  removal: {
+    color: "purple",
+    textDecoration: "line-through"
+  }
+};
 
 const mapping = {
   "01": "FI-18",
@@ -71,6 +77,7 @@ const Modify = React.memo(
     country,
     localizations = {},
     municipalities = [],
+    quickFilterChangeObjects = [],
     provinceInstances = {},
     provincesWithoutMunicipalities = [],
     onClose
@@ -82,8 +89,21 @@ const Modify = React.memo(
     const polygonTemplate = useRef(null);
 
     const [provinceId, setProvinceId] = useState();
+    const [quickFilterChanges, setQuickFilterChanges] = useState(
+      quickFilterChangeObjects
+    );
 
     const [cos, setCos] = useState(changeObjectsByProvince);
+
+    const isCountryActiveByDefault = useMemo(() => {
+      const percentagesArray = values(country.getPercentages());
+      return sum(percentagesArray) / percentagesArray.length === 100;
+    }, [country]);
+
+    const isCountryDeactiveByDefault = useMemo(() => {
+      const percentagesArray = values(country.getPercentages());
+      return sum(percentagesArray) === 0;
+    }, [country]);
 
     const percentages = useMemo(() => {
       return country.getPercentages(cos);
@@ -103,6 +123,119 @@ const Modify = React.memo(
     const isCountryDeactive = useMemo(() => {
       return sum(values(percentages)) === 0;
     }, [percentages]);
+
+    useEffect(() => {
+      const anchor = `${baseAnchor}-radios.quick-filters.koko-maa`;
+      const changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+      if (
+        isCountryActive &&
+        !changeObj &&
+        !isEmpty(cos) &&
+        !isCountryActiveByDefault
+      ) {
+        setQuickFilterChanges(
+          append(
+            {
+              anchor,
+              properties: {
+                isChecked: true
+              }
+            },
+            quickFilterChanges
+          )
+        );
+      }
+    }, [
+      baseAnchor,
+      cos,
+      isCountryActive,
+      isCountryActiveByDefault,
+      quickFilterChanges
+    ]);
+
+    useEffect(() => {
+      const anchor = `${baseAnchor}-radios.quick-filters.ei-alueita`;
+      const changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+      if (
+        isCountryDeactive &&
+        !changeObj &&
+        !isEmpty(cos) &&
+        !isCountryDeactiveByDefault
+      ) {
+        setQuickFilterChanges(
+          append(
+            {
+              anchor,
+              properties: {
+                isChecked: true
+              }
+            },
+            quickFilterChanges
+          )
+        );
+      }
+    }, [
+      cos,
+      baseAnchor,
+      isCountryDeactive,
+      isCountryDeactiveByDefault,
+      quickFilterChanges
+    ]);
+
+    useEffect(() => {
+      if (
+        !isCountryActive &&
+        !isCountryDeactive &&
+        quickFilterChanges.length > 0
+      ) {
+        const changeObjects = filter(
+          changeObj => !changeObj.properties.isChecked,
+          quickFilterChanges
+        );
+        if (!equals(changeObjects, quickFilterChanges)) {
+          setQuickFilterChanges(changeObjects);
+        }
+      }
+    }, [isCountryActive, isCountryDeactive, quickFilterChanges]);
+
+    useEffect(() => {
+      const anchor = `${baseAnchor}-radios.quick-filters.ei-alueita`;
+      const changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+      if (!isCountryDeactive && isCountryDeactiveByDefault && !changeObj) {
+        setQuickFilterChanges([
+          {
+            anchor,
+            properties: {
+              isChecked: false
+            }
+          }
+        ]);
+      }
+    }, [
+      baseAnchor,
+      isCountryDeactive,
+      isCountryDeactiveByDefault,
+      quickFilterChanges
+    ]);
+
+    useEffect(() => {
+      if (isCountryDeactive) {
+        const anchor = `${baseAnchor}-radios.quick-filters.ei-alueita`;
+        const changeObj = find(propEq("anchor", anchor), quickFilterChanges);
+        if (isCountryDeactiveByDefault && changeObj) {
+          const nextQuickFilterChanges = filter(
+            _changeObj => _changeObj.anchor !== changeObj.anchor,
+            quickFilterChanges
+          );
+          setQuickFilterChanges(nextQuickFilterChanges);
+        }
+      }
+    }, [
+      baseAnchor,
+      isCountryDeactive,
+      isCountryDeactiveByDefault,
+      quickFilterChanges
+    ]);
 
     useEffect(() => {
       setCos(changeObjectsByProvince);
@@ -340,8 +473,8 @@ const Modify = React.memo(
        * the autocomplete field will be updated based on it after this
        * function has been run.
        */
-      (payload, values) => {
-        const currentSel = values.value || [];
+      (payload, _values) => {
+        const currentSel = _values.value || [];
         const prevSel = previousSelection.current;
         /**
          * Items to deactivate is calculated by comparing the old value of the
@@ -363,6 +496,14 @@ const Modify = React.memo(
          * is what interests us.
          */
         const latestSelection = last(currentSel);
+
+        /**
+         * If there isn't an item to deactivate and the latestSelection is
+         * missing too then it's time to stop immediately.
+         */
+        if (!itemsToDeactivate.length && !latestSelection) {
+          return true;
+        }
 
         /**
          * Every item can provide a providence id. Depending of the use case
@@ -451,7 +592,9 @@ const Modify = React.memo(
         }
         setProvinceId(provinceId);
         previousSelection.current = currentSel;
-        setCos(assoc(provinceId, _changeObjects, cos));
+        const nextChanges = assoc(provinceId, _changeObjects, cos);
+        const hasChanges = flatten(values(nextChanges)).length > 0;
+        setCos(hasChanges ? nextChanges : []);
       },
       [cos, provinceInstances]
     );
@@ -461,24 +604,74 @@ const Modify = React.memo(
         <fieldset className="p-4 bg-white border-t border-r border-l border-gray-300">
           <legend>{localizations.quickFilter}</legend>
           <div className="flex">
-            <RadioButtonWithLabel
-              payload={{ anchor: "koko-maa" }}
-              isChecked={isCountryActive}
-              onChanges={() => {
-                setCos(country.activate(cos));
-              }}
-              value={"1"}>
-              {localizations.wholeCountryWithoutAhvenanmaa}
-            </RadioButtonWithLabel>
-            <RadioButtonWithLabel
-              payload={{ anchor: "ei-alueita" }}
-              isChecked={isCountryDeactive}
-              onChanges={() => {
-                setCos(country.deactivate(cos));
-              }}
-              value={"0"}>
-              {localizations.areaOfActionIsUndefined}
-            </RadioButtonWithLabel>
+            <CategorizedListRoot
+              anchor={`${baseAnchor}-radios`}
+              categories={[
+                {
+                  anchor: "quick-filters",
+                  components: [
+                    {
+                      anchor: "koko-maa",
+                      name: "RadioButtonWithLabel",
+                      properties: {
+                        forChangeObject: {
+                          koodiarvo: "FI1"
+                        },
+                        isChecked: isCountryActive,
+                        labelStyles: {
+                          ...labelStyles,
+                          custom: {
+                            fontWeight: isCountryActiveByDefault
+                              ? 600
+                              : "initial"
+                          }
+                        },
+                        title: localizations.wholeCountryWithoutAhvenanmaa,
+                        value: "1"
+                      }
+                    },
+                    {
+                      anchor: "ei-alueita",
+                      name: "RadioButtonWithLabel",
+                      properties: {
+                        forChangeObject: {
+                          koodiarvo: "FI2"
+                        },
+                        isChecked: isCountryDeactive,
+                        labelStyles: {
+                          ...labelStyles,
+                          custom: {
+                            fontWeight: isCountryDeactiveByDefault
+                              ? 600
+                              : "initial"
+                          }
+                        },
+                        title: localizations.areaOfActionIsUndefined,
+                        value: "0"
+                      }
+                    }
+                  ]
+                }
+              ]}
+              changes={quickFilterChanges}
+              onUpdate={payload => {
+                let { changes } = payload;
+                let nextChanges = null;
+                const activeChange = find(
+                  pathEq(["properties", "isChecked"], true),
+                  payload.changes
+                );
+                if (endsWith("ei-alueita", activeChange.anchor)) {
+                  nextChanges = country.deactivate(cos);
+                  changes = isCountryDeactiveByDefault ? [] : changes;
+                } else if (endsWith("koko-maa", activeChange.anchor)) {
+                  nextChanges = country.activate(cos);
+                  changes = isCountryActiveByDefault ? [] : changes;
+                }
+                setCos(nextChanges);
+                setQuickFilterChanges(changes);
+                setProvinceId(null);
+              }}></CategorizedListRoot>
           </div>
         </fieldset>
 
@@ -515,12 +708,12 @@ const Modify = React.memo(
             <div className="mr-4">
               <SimpleButton
                 variant={"outlined"}
-                onClick={() => onClose()}
+                onClick={() => onClose(quickFilterChanges)}
                 text={localizations.cancel}></SimpleButton>
             </div>
             <div>
               <SimpleButton
-                onClick={() => onClose(cos)}
+                onClick={() => onClose(quickFilterChanges, cos)}
                 text={localizations.accept}></SimpleButton>
             </div>
           </div>
@@ -545,7 +738,8 @@ Modify.propTypes = {
   provinceInstances: PropTypes.object,
   provincesWithoutMunicipalities: PropTypes.array,
   onClose: PropTypes.func.isRequired,
-  localizations: PropTypes.object
+  localizations: PropTypes.object,
+  quickFilterChangeObjects: PropTypes.array
 };
 
 export default Modify;
