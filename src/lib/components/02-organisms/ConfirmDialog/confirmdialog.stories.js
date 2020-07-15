@@ -2,6 +2,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import ConfirmDialog from "./index";
+import { withState } from "@dump247/storybook-state";
+
 
 const messages = {
   ok: "Merkitse päätetyksi",
@@ -13,22 +15,24 @@ const messages = {
 
 storiesOf("Confirm Dialog", module)
   .addDecorator(withInfo)
-  .add("Example 1", () => (
+  .add("Example 1", withState({clicked: false})(({store}) => (
     <ConfirmDialog
       isConfirmDialogVisible={true}
       handleCancel={() => console.log("cancel")}
-      handleOk={() => console.log("ok")}
+      handleOk={() => store.set({clicked: true})}
       onClose={() => console.log("onClose clicked!")}
       messages={messages}
+      loadingSpinner={store.state.clicked}
     />
-  ))
-  .add("With abandon changes", () => (
+  )))
+  .add("With abandon changes", withState({clicked: false})(({store}) => (
     <ConfirmDialog
       isConfirmDialogVisible={true}
       handleCancel={() => console.log("cancel")}
-      handleOk={() => console.log("ok")}
+      handleOk={() => store.set({clicked: true})}
       handleExitAndAbandonChanges={() => console.log("exit not saving")}
       onClose={() => console.log("onClose clicked!")}
       messages={messages}
+      loadingSpinner={store.state.clicked}
     />
-  ));
+    )));

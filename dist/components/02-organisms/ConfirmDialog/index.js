@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "../DialogTitle";
 import "../../../css/tailwind.css";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 var ConfirmDialog = function ConfirmDialog(props) {
   var _props$isConfirmDialo = props.isConfirmDialogVisible,
@@ -13,7 +14,9 @@ var ConfirmDialog = function ConfirmDialog(props) {
       handleCancel = props.handleCancel,
       handleExitAndAbandonChanges = props.handleExitAndAbandonChanges,
       onClose = props.onClose,
-      messages = props.messages;
+      messages = props.messages,
+      _props$loadingSpinner = props.loadingSpinner,
+      loadingSpinner = _props$loadingSpinner === void 0 ? false : _props$loadingSpinner;
   return /*#__PURE__*/React.createElement(Dialog, {
     open: isConfirmDialogVisible,
     fullWidth: true,
@@ -41,8 +44,11 @@ var ConfirmDialog = function ConfirmDialog(props) {
   }, messages.noSave)), /*#__PURE__*/React.createElement(Button, {
     onClick: handleOk,
     color: "primary",
-    variant: "contained"
-  }, messages.ok))));
+    variant: "contained",
+    disabled: loadingSpinner
+  }, loadingSpinner ? /*#__PURE__*/React.createElement(CircularProgress, {
+    size: 20
+  }) : messages.ok))));
 };
 
 export default ConfirmDialog;

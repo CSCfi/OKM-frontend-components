@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "../DialogTitle";
 import "../../../css/tailwind.css";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const ConfirmDialog = props => {
   const {
@@ -14,7 +15,8 @@ const ConfirmDialog = props => {
     handleCancel,
     handleExitAndAbandonChanges,
     onClose,
-    messages
+    messages,
+    loadingSpinner = false
   } = props;
 
   return (
@@ -43,8 +45,12 @@ const ConfirmDialog = props => {
               </Button>
             </div>
           }
-          <Button onClick={handleOk} color="primary" variant="contained">
-            {messages.ok}
+          <Button onClick={handleOk} color="primary" variant="contained" disabled={loadingSpinner}>
+            {
+              loadingSpinner ?
+                <CircularProgress size={20}/> :
+                messages.ok
+            }
           </Button>
         </div>
       </DialogActions>
@@ -57,7 +63,8 @@ ConfirmDialog.propTypes = {
   handleOk: PropTypes.func,
   handleCancel: PropTypes.func,
   handleExitAndAbandonChanges: PropTypes.func,
-  messages: PropTypes.object
+  messages: PropTypes.object,
+  loadingSpinner: PropTypes.bool
 };
 
 export default ConfirmDialog;
