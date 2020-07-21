@@ -25,10 +25,10 @@ export function activateNodeAndItsDescendants(node, reducedStructure, changeObje
   var childNodes = node.hasDescendants ? getChildNodes(node, reducedStructure, ["CheckboxWithLabel"]) : []; // We are not ready yet. Every checkbox child node must be checked.
 
   if (childNodes.length) {
-    changeObjects = flatten(map(function (childNode) {
+    changeObjects = uniq(flatten(map(function (childNode) {
       var result = new Checker().run(childNode, reducedStructure, changeObjects);
       return result;
-    }, childNodes));
+    }, childNodes)));
   } // The first thing is to find out the change object of the target node.
 
 

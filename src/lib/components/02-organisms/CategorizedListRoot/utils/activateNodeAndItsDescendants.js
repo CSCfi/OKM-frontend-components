@@ -35,15 +35,17 @@ export function activateNodeAndItsDescendants(
 
   // We are not ready yet. Every checkbox child node must be checked.
   if (childNodes.length) {
-    changeObjects = flatten(
-      map(childNode => {
-        const result = new Checker().run(
-          childNode,
-          reducedStructure,
-          changeObjects
-        );
-        return result;
-      }, childNodes)
+    changeObjects = uniq(
+      flatten(
+        map(childNode => {
+          const result = new Checker().run(
+            childNode,
+            reducedStructure,
+            changeObjects
+          );
+          return result;
+        }, childNodes)
+      )
     );
   }
 

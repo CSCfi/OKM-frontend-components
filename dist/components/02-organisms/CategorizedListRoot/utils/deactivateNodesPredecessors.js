@@ -6,7 +6,7 @@ import { findSiblings } from "./findSiblings";
 import { isEveryNodeUnchecked } from "./isEveryNodeUnchecked";
 import { modifyNode } from "./modifyNode";
 /**
- * Sets the isIndeterminate property of node's descendants as true.
+ * Deactivates node's predecessors.
  * @param {*} node - Includes an anchor and a properties object.
  * @param {*} reducedStructure - Flatten form structure.
  * @param {*} changeObjects - Array of change Objects.
