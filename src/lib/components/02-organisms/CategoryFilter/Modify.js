@@ -69,6 +69,59 @@ const mapping = {
   "21": "FI-01"
 };
 
+const countyNamesFinnish = {
+  "FI-01": "Ahvenanmaa",
+  "FI-02": "Etelä-Karjala",
+  "FI-03": "Etelä-Pohjanmaa",
+  "FI-04": "Etelä-Savo",
+  "FI-05": "Kainuu",
+  "FI-06": "Kanta-Häme",
+  "FI-07": "Keski-Pohjanmaa",
+  "FI-08": "Keski-Suomi",
+  "FI-09": "Kymenlaakso",
+  "FI-10": "Lappi",
+  "FI-11": "Pirkanmaa",
+  "FI-12": "Pohjanmaa",
+  "FI-13": "Pohjois-Karjala",
+  "FI-14": "Pohjois-Pohjanmaa",
+  "FI-15": "Pohjois-Savo",
+  "FI-16": "Päijät-Häme",
+  "FI-17": "Satakunta",
+  "FI-18": "Uusimaa",
+  "FI-19": "Varsinais-Suomi",
+}
+
+const countyNamesSwedish = {
+  "FI-01": "Åland",
+  "FI-02": "Södra Karelen",
+  "FI-03": "Södra Österbotten",
+  "FI-04": "Södra Savolax",
+  "FI-05": "Kajanaland",
+  "FI-06": "Egentliga Tavastland",
+  "FI-07": "Mellersta Österbotten",
+  "FI-08": "Mellersta Finland",
+  "FI-09": "Kymmenedalen",
+  "FI-10": "Lappland",
+  "FI-11": "Birkaland",
+  "FI-12": "Österbotten",
+  "FI-13": "Norra Karelen",
+  "FI-14": "Norra Österbotten",
+  "FI-15": "Norra Savolax",
+  "FI-16": "Päijänne-Tavastland",
+  "FI-17": "Satakunta",
+  "FI-18": "Nyland",
+  "FI-19": "Egentliga Finland",
+}
+
+const resetCountyNames = (mapdata, locale = 'fi') => {
+  mapdata.features.forEach((feature) => {
+    feature.properties.name = locale === 'sv' ?
+      countyNamesSwedish[feature.id] :
+      countyNamesFinnish[feature.id];
+  });
+  return mapdata;
+}
+
 const Modify = React.memo(
   ({
     anchor: baseAnchor = "no-anchor-defined",
@@ -252,7 +305,7 @@ const Modify = React.memo(
 
     useEffect(() => {
       let finland = am4core.create("finland_map", am4maps.MapChart);
-      finland.geodata = am4geodata_finland;
+      finland.geodata = resetCountyNames(am4geodata_finland);
       // Set projection
       finland.projection = new am4maps.projections.Miller();
 
