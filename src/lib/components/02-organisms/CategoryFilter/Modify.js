@@ -307,7 +307,7 @@ const Modify = React.memo(
       let finland = am4core.create("finland_map", am4maps.MapChart);
       finland.geodata = resetCountyNames(am4geodata_finland);
       // Set projection
-      finland.projection = new am4maps.projections.Miller();
+      finland.projection = new am4maps.projections.Mercator();
 
       finland.geodataNames = am4geodata_lang_FI;
       // kartta.current.responsive.enabled = true;
