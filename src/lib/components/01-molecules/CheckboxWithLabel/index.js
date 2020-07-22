@@ -43,7 +43,10 @@ const CheckboxWithLabel = React.memo(
     })();
 
     const handleChanges = useCallback(() => {
-      onChanges(payload, { isChecked: !isChecked });
+      onChanges(payload, {
+        isChecked: !isChecked,
+        isIndeterminate: isChecked ? true : false
+      });
     }, [isChecked, onChanges, payload]);
 
     return (
