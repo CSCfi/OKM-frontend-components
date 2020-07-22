@@ -42,7 +42,8 @@ var CheckboxWithLabel = React.memo(function (_ref) {
   })();
   var handleChanges = useCallback(function () {
     onChanges(payload, {
-      isChecked: !isChecked
+      isChecked: !isChecked,
+      isIndeterminate: isChecked ? true : false
     });
   }, [isChecked, onChanges, payload]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, !isReadOnly ? /*#__PURE__*/React.createElement(FormGroup, {
