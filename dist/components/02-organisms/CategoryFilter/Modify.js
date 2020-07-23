@@ -41,6 +41,57 @@ var mapping = {
   "19": "FI-10",
   "21": "FI-01"
 };
+var countyNamesFinnish = {
+  "FI-01": "Ahvenanmaa",
+  "FI-02": "Etelä-Karjala",
+  "FI-03": "Etelä-Pohjanmaa",
+  "FI-04": "Etelä-Savo",
+  "FI-05": "Kainuu",
+  "FI-06": "Kanta-Häme",
+  "FI-07": "Keski-Pohjanmaa",
+  "FI-08": "Keski-Suomi",
+  "FI-09": "Kymenlaakso",
+  "FI-10": "Lappi",
+  "FI-11": "Pirkanmaa",
+  "FI-12": "Pohjanmaa",
+  "FI-13": "Pohjois-Karjala",
+  "FI-14": "Pohjois-Pohjanmaa",
+  "FI-15": "Pohjois-Savo",
+  "FI-16": "Päijät-Häme",
+  "FI-17": "Satakunta",
+  "FI-18": "Uusimaa",
+  "FI-19": "Varsinais-Suomi"
+};
+var countyNamesSwedish = {
+  "FI-01": "Åland",
+  "FI-02": "Södra Karelen",
+  "FI-03": "Södra Österbotten",
+  "FI-04": "Södra Savolax",
+  "FI-05": "Kajanaland",
+  "FI-06": "Egentliga Tavastland",
+  "FI-07": "Mellersta Österbotten",
+  "FI-08": "Mellersta Finland",
+  "FI-09": "Kymmenedalen",
+  "FI-10": "Lappland",
+  "FI-11": "Birkaland",
+  "FI-12": "Österbotten",
+  "FI-13": "Norra Karelen",
+  "FI-14": "Norra Österbotten",
+  "FI-15": "Norra Savolax",
+  "FI-16": "Päijänne-Tavastland",
+  "FI-17": "Satakunta",
+  "FI-18": "Nyland",
+  "FI-19": "Egentliga Finland"
+};
+
+var resetCountyNames = function resetCountyNames(mapdata) {
+  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fi';
+  mapdata.features.forEach(function (feature) {
+    feature.properties.name = locale === 'sv' ? countyNamesSwedish[feature.id] : countyNamesFinnish[feature.id];
+  });
+  return mapdata;
+};
+
 var Modify = React.memo(function (_ref) {
   var _ref$anchor = _ref.anchor,
       baseAnchor = _ref$anchor === void 0 ? "no-anchor-defined" : _ref$anchor,
@@ -179,9 +230,9 @@ var Modify = React.memo(function (_ref) {
   }, [categories, provinceId]);
   useEffect(function () {
     var finland = am4core.create("finland_map", am4maps.MapChart);
-    finland.geodata = am4geodata_finland; // Set projection
+    finland.geodata = resetCountyNames(am4geodata_finland); // Set projection
 
-    finland.projection = new am4maps.projections.Miller();
+    finland.projection = new am4maps.projections.Mercator();
     finland.geodataNames = am4geodata_lang_FI; // kartta.current.responsive.enabled = true;
 
     kartta.current = finland;
