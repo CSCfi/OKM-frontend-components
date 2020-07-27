@@ -6,6 +6,7 @@ import { deactivateNodeAndItsDescendants } from "./utils/deactivateNodeAndItsDes
 import { removeAnchorPart } from "../../../utils/common";
 import { removeDeprecatedChanges } from "./utils/removeDeprecatedChanges";
 import { deactivateNode } from "./utils/deactivateNode";
+import { findParent } from "./utils/findParent";
 
 /**
  * @module CategorizedListRoot/utils
@@ -194,7 +195,18 @@ export const handleNodeMain = (
       )
     );
     // 2) Activate the node's predecessors.
-    changeObjects = activatePredecessors(node, reducedStructure, changeObjects);
+    if (
+      findParent(node, reducedStructure, [
+        "CheckboxWithLabel",
+        "RadioButtonWithLabel"
+      ])
+    ) {
+      changeObjects = activatePredecessors(
+        node,
+        reducedStructure,
+        changeObjects
+      );
+    }
   } else if (requestedChanges.isChecked === false) {
     /**
      * If user has clicked a checked checkbox or a radio button we must do

@@ -68,7 +68,7 @@ export function activateNodeAndItsDescendants(
       );
     } else {
       /**
-       * If the original value if not true and change object's isChecked
+       * If the original value is not true and change object's isChecked
        * value is not true then the isChecked's value on change object must
        * be updated to be true.
        */
