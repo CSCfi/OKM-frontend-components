@@ -8,9 +8,9 @@ var VerticalLayout = function VerticalLayout(_ref) {
     className: "template-c-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "align-self-end p-4"
-  }, items[0], " -\xA0", items[1]), /*#__PURE__*/React.createElement("div", {
+  }, items[0]), /*#__PURE__*/React.createElement("div", {
     className: "justify-self-end align-self-center p-4"
-  }, items[2]), /*#__PURE__*/React.createElement("div", {
+  }, items[1]), /*#__PURE__*/React.createElement("div", {
     className: "p-4"
   }, children));
 };

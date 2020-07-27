@@ -57,11 +57,7 @@ var Header = React.memo(function (_ref) {
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6",
     classes: typographyClasses
-  }, logo.text)), /*#__PURE__*/React.createElement(NavLink, {
-    to: shortDescription.path,
-    exact: true,
-    className: "inline-block no-underline text-gray-800"
-  }, shortDescription.text), !!authenticationLink ? /*#__PURE__*/React.createElement(NavLink, {
+  }, logo.text), shortDescription.text), !!authenticationLink ? /*#__PURE__*/React.createElement(NavLink, {
     to: authenticationLink.path,
     exact: false,
     className: "inline-block no-underline text-gray-800 hover:underline"
