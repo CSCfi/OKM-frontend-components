@@ -76,15 +76,17 @@ const Header = React.memo(
       </NavLink>,
       !!authenticationLink ? (
         <NavLink
-        to={authenticationLink.path}
-        exact={false}
-        className="inline-block no-underline text-gray-800 hover:underline">
-        <span>{authenticationLink.text[0]} </span>
-        {authenticationLink.text[1] && (
-          <span className="font-bold">{authenticationLink.text[1]}</span>
-        )}
-      </NavLink>
-      ) : (<React.Fragment />),
+          to={authenticationLink.path}
+          exact={false}
+          className="inline-block no-underline text-gray-800 hover:underline">
+          <span>{authenticationLink.text[0]} </span>
+          {authenticationLink.text[1] && (
+            <span className="font-bold">{authenticationLink.text[1]}</span>
+          )}
+        </NavLink>
+      ) : (
+        <React.Fragment />
+      ),
       organisation.path ? (
         <NavLink
           className="link-to-own-organisation"
@@ -119,7 +121,8 @@ const Header = React.memo(
                       label: css["locale-label"],
                       selected: css["locale-selected"],
                       sizeSmall: css["locale-button"]
-                    }}>
+                    }}
+                    disabled={locale === "fi"}>
                     {inFinnish}
                   </ToggleButton>
                   <ToggleButton
@@ -130,7 +133,8 @@ const Header = React.memo(
                       label: css["locale-label"],
                       selected: css["locale-selected"],
                       sizeSmall: css["locale-button"]
-                    }}>
+                    }}
+                    disabled={locale === "sv"}>
                     {inSwedish}
                   </ToggleButton>
                 </ToggleButtonGroup>
@@ -156,11 +160,13 @@ const Header = React.memo(
                         {logo.text}
                       </Typography>
                     </NavLink>
-                    {(!isAuthenticated && !!authenticationLink) ? (
+                    {!isAuthenticated && !!authenticationLink ? (
                       <Button color="inherit" onClick={onLoginButtonClick}>
                         {logIn}
                       </Button>
-                    ) : (<React.Fragment />)}
+                    ) : (
+                      <React.Fragment />
+                    )}
                   </Toolbar>
                 </AppBar>
               </div>
@@ -186,7 +192,8 @@ const Header = React.memo(
                         label: css["locale-label"],
                         selected: css["locale-selected"],
                         sizeSmall: css["locale-button"]
-                      }}>
+                      }}
+                      disabled={locale === "fi"}>
                       {inFinnish}
                     </ToggleButton>
                     <ToggleButton
@@ -197,7 +204,8 @@ const Header = React.memo(
                         label: css["locale-label"],
                         selected: css["locale-selected"],
                         sizeSmall: css["locale-button"]
-                      }}>
+                      }}
+                      disabled={locale === "sv"}>
                       {inSwedish}
                     </ToggleButton>
                   </ToggleButtonGroup>

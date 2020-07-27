@@ -92,7 +92,8 @@ var Header = React.memo(function (_ref) {
       label: css["locale-label"],
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
-    }
+    },
+    disabled: locale === "fi"
   }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
     key: 2,
     value: "sv",
@@ -101,7 +102,8 @@ var Header = React.memo(function (_ref) {
       label: css["locale-label"],
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
-    }
+    },
+    disabled: locale === "sv"
   }, inSwedish))), template !== "C" && /*#__PURE__*/React.createElement("div", {
     className: "fixed w-full z-50 ".concat(classes.root, " ")
   }, /*#__PURE__*/React.createElement(AppBar, {
@@ -145,7 +147,8 @@ var Header = React.memo(function (_ref) {
       label: css["locale-label"],
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
-    }
+    },
+    disabled: locale === "fi"
   }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
     key: 2,
     value: "sv",
@@ -154,7 +157,8 @@ var Header = React.memo(function (_ref) {
       label: css["locale-label"],
       selected: css["locale-selected"],
       sizeSmall: css["locale-button"]
-    }
+    },
+    disabled: locale === "sv"
   }, inSwedish))))));
 }, function (currentProps, nextProps) {
   var isSameOld = equals("" + currentProps.onLocaleChange, "" + nextProps.onLocaleChange) && equals(currentProps.organisation, nextProps.organisation) && equals(currentProps.locale, nextProps.locale);
