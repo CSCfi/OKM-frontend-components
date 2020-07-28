@@ -113,7 +113,8 @@ const Header = React.memo(
                       label: css["locale-label"],
                       selected: css["locale-selected"],
                       sizeSmall: css["locale-button"]
-                    }}>
+                    }}
+                    disabled={locale === "fi"}>
                     {inFinnish}
                   </ToggleButton>
                   <ToggleButton
@@ -124,7 +125,8 @@ const Header = React.memo(
                       label: css["locale-label"],
                       selected: css["locale-selected"],
                       sizeSmall: css["locale-button"]
-                    }}>
+                    }}
+                    disabled={locale === "sv"}>
                     {inSwedish}
                   </ToggleButton>
                 </ToggleButtonGroup>
@@ -182,7 +184,8 @@ const Header = React.memo(
                         label: css["locale-label"],
                         selected: css["locale-selected"],
                         sizeSmall: css["locale-button"]
-                      }}>
+                      }}
+                      disabled={locale === "fi"}>
                       {inFinnish}
                     </ToggleButton>
                     <ToggleButton
@@ -193,7 +196,8 @@ const Header = React.memo(
                         label: css["locale-label"],
                         selected: css["locale-selected"],
                         sizeSmall: css["locale-button"]
-                      }}>
+                      }}
+                      disabled={locale === "sv"}>
                       {inSwedish}
                     </ToggleButton>
                   </ToggleButtonGroup>
