@@ -60,13 +60,15 @@ const Header = React.memo(
     const classes = useStyles();
     const typographyClasses = useStylesForTypography();
     const items = [
-      <NavLink
-        to={logo.path}
-        exact={true}
-        className="inline-block no-underline text-gray-800">
+      <a href={logo.path} className="inline-block no-underline text-gray-800">
         <Typography variant="h6" classes={typographyClasses}>
           {logo.text}
         </Typography>
+      </a>,
+      <NavLink
+        to={shortDescription.path}
+        exact={true}
+        className="inline-block no-underline text-gray-800">
         {shortDescription.text}
       </NavLink>,
       !!authenticationLink ? (
