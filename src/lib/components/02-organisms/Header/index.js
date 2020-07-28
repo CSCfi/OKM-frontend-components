@@ -64,13 +64,8 @@ const Header = React.memo(
         <Typography variant="h6" classes={typographyClasses}>
           {logo.text}
         </Typography>
-      </a>,
-      <NavLink
-        to={shortDescription.path}
-        exact={true}
-        className="inline-block no-underline text-gray-800">
         {shortDescription.text}
-      </NavLink>,
+      </a>,
       !!authenticationLink ? (
         <NavLink
           to={authenticationLink.path}

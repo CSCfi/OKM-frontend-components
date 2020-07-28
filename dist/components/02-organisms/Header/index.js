@@ -50,9 +50,8 @@ var Header = React.memo(function (_ref) {
       template = _ref$template === void 0 ? "A" : _ref$template;
   var classes = useStyles();
   var typographyClasses = useStylesForTypography();
-  var items = [/*#__PURE__*/React.createElement(NavLink, {
-    to: logo.path,
-    exact: true,
+  var items = [/*#__PURE__*/React.createElement("a", {
+    href: logo.path,
     className: "inline-block no-underline text-gray-800"
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6",
