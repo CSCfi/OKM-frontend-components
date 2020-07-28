@@ -14,11 +14,9 @@ var HorizontalLayout = function HorizontalLayout(_ref) {
     className: "flex"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col pr-4 border-r align-self-center"
-  }, /*#__PURE__*/React.createElement("div", null, items[2]), /*#__PURE__*/React.createElement("div", null, items[3])), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", null, items[1]), /*#__PURE__*/React.createElement("div", null, items[2])), /*#__PURE__*/React.createElement("div", {
     className: "align-self-center pl-4"
-  }, children))), /*#__PURE__*/React.createElement("div", {
-    className: "pr-4"
-  }, /*#__PURE__*/React.createElement("p", null, items[1])));
+  }, children))));
 };
 
 export default HorizontalLayout;

@@ -60,31 +60,25 @@ const Header = React.memo(
     const classes = useStyles();
     const typographyClasses = useStylesForTypography();
     const items = [
-      <NavLink
-        to={logo.path}
-        exact={true}
-        className="inline-block no-underline text-gray-800">
+      <a href={logo.path} className="inline-block no-underline text-gray-800">
         <Typography variant="h6" classes={typographyClasses}>
           {logo.text}
         </Typography>
-      </NavLink>,
-      <NavLink
-        to={shortDescription.path}
-        exact={true}
-        className="inline-block no-underline text-gray-800">
         {shortDescription.text}
-      </NavLink>,
+      </a>,
       !!authenticationLink ? (
         <NavLink
-        to={authenticationLink.path}
-        exact={false}
-        className="inline-block no-underline text-gray-800 hover:underline">
-        <span>{authenticationLink.text[0]} </span>
-        {authenticationLink.text[1] && (
-          <span className="font-bold">{authenticationLink.text[1]}</span>
-        )}
-      </NavLink>
-      ) : (<React.Fragment />),
+          to={authenticationLink.path}
+          exact={false}
+          className="inline-block no-underline text-gray-800 hover:underline">
+          <span>{authenticationLink.text[0]} </span>
+          {authenticationLink.text[1] && (
+            <span className="font-bold">{authenticationLink.text[1]}</span>
+          )}
+        </NavLink>
+      ) : (
+        <React.Fragment />
+      ),
       organisation.path ? (
         <NavLink
           className="link-to-own-organisation"
@@ -156,11 +150,13 @@ const Header = React.memo(
                         {logo.text}
                       </Typography>
                     </NavLink>
-                    {(!isAuthenticated && !!authenticationLink) ? (
+                    {!isAuthenticated && !!authenticationLink ? (
                       <Button color="inherit" onClick={onLoginButtonClick}>
                         {logIn}
                       </Button>
-                    ) : (<React.Fragment />)}
+                    ) : (
+                      <React.Fragment />
+                    )}
                   </Toolbar>
                 </AppBar>
               </div>
