@@ -26,9 +26,15 @@ var TableRow = function TableRow(_ref) {
   return /*#__PURE__*/React.createElement("div", {
     key: "key-".concat(Math.random()),
     role: "row",
+    tabIndex: 0,
     className: "hover:bg-gray-".concat(tableLevel + 1, "00 cursor-pointer flex"),
     onClick: function onClick() {
       onRowClick();
+    },
+    onKeyDown: function onKeyDown(e) {
+      if (e.key === "Enter") {
+        onRowClick();
+      }
     }
   }, children);
 };

@@ -20,9 +20,15 @@ const TableRow = ({ children, onClick, row, tableLevel = 0 }) => {
     <div
       key={`key-${Math.random()}`}
       role="row"
+      tabIndex={0}
       className={`hover:bg-gray-${tableLevel + 1}00 cursor-pointer flex`}
       onClick={() => {
         onRowClick();
+      }}
+      onKeyDown={e => {
+        if (e.key === "Enter") {
+          onRowClick();
+        }
       }}>
       {children}
     </div>
