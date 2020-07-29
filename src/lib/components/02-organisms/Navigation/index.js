@@ -50,13 +50,15 @@ const Navigation = ({
     <React.Fragment>
       {(!direction || direction === "horizontal") && (
         <AppBar position="static" classes={classes}>
-          <Toolbar
-            variant="dense"
-            className={`flex flex-wrap text-black border 
+          <nav>
+            <Toolbar
+              variant="dense"
+              className={`flex flex-wrap text-black border 
         border-gray-300 text-sm overflow-auto hide-scrollbar bg-${theme.backgroundColor}`}
-            disableGutters={true}>
-            <HorizontalLayout items={items}></HorizontalLayout>
-          </Toolbar>
+              disableGutters={true}>
+              <HorizontalLayout items={items}></HorizontalLayout>
+            </Toolbar>
+          </nav>
         </AppBar>
       )}
       {direction === "vertical" && (
