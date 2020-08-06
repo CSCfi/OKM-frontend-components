@@ -72,7 +72,6 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
         },
         changeObjects
       );
-      console.log(changeObjects);
     }
   } else if (changeObjIndex > -1) {
     changeObjects = remove(changeObjIndex, 1, changeObjects);
