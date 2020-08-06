@@ -1,4 +1,4 @@
-import { append, compose, dropLast, equals, filter, lensIndex, not, propEq, view } from "ramda";
+import { append, compose, dropLast, equals, filter, isNil, reject, lensIndex, not, propEq, view } from "ramda";
 import { getChangeObjByAnchor } from "../utils";
 /**
  * Sets isChecked: false for the given nodes.
@@ -33,10 +33,10 @@ export function uncheckNodes(nodes, reducedStructure, changeObjects) {
      */
     changeObjects = append({
       anchor: node.fullAnchor,
-      properties: {
+      properties: reject(isNil)({
         metadata: node.properties.forChangeObject,
         isChecked: false
-      }
+      })
     }, changeObjects);
   } // uncheckNodes must be run for all the child nodes.
 

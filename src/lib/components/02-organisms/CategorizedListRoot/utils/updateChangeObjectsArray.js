@@ -6,7 +6,9 @@ import {
   mapObjIndexed,
   equals,
   includes,
-  remove
+  remove,
+  isNil,
+  reject
 } from "ramda";
 import { getChangeObjIndexByAnchor } from "../utils";
 
@@ -55,16 +57,17 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
        * Going here means that the change object wasn't found. We need to create
        * a new change object and add it to the array of change objects.
        **/
+
       changeObjects = append(
         {
           anchor: node.fullAnchor,
-          properties: Object.assign(
+          properties: reject(isNil)(Object.assign(
             {},
             {
               ...properties,
               metadata: node.properties.forChangeObject
             }
-          )
+          ))
         },
         changeObjects
       );

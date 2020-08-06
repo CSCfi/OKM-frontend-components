@@ -1,4 +1,4 @@
-import { append, flatten, map, uniq } from "ramda";
+import { append, flatten, map, uniq, reject, isNil } from "ramda";
 import { getChildNodes } from "./getChildNodes";
 import { getChangeObjByAnchor } from "../utils";
 import { uncheckSiblings } from "./uncheckSiblings";
@@ -73,11 +73,11 @@ export function deactivateNodeAndItsDescendants(
     changeObjects = append(
       {
         anchor: node.fullAnchor,
-        properties: {
+        properties: reject(isNil)({
           metadata: node.properties.forChangeObject,
           isChecked: false,
           isIndeterminate: false
-        }
+        })
       },
       changeObjects
     );
