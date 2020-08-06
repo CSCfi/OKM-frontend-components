@@ -148,17 +148,18 @@ const CategorizedList = React.memo(
             R.tail(),
             R.split(".")
           )(payload.anchor)}.${payload.component.anchor}`,
-          properties: {
+          properties: R.reject(R.isNil)({
             ...changeProps,
             metadata: R.path(
               ["component", "properties", "forChangeObject"],
               payload
             )
-          }
+          })
         };
+        console.log(changeObj);
         return onChangesUpdate(changeObj);
       },
-      [onChangesUpdate, props.anchor]
+      [onChangesUpdate]
     );
 
     /**

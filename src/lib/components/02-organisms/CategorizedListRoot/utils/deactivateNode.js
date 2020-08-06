@@ -1,4 +1,4 @@
-import { append, filter } from "ramda";
+import { append, reject, isNil } from "ramda";
 import { findParent } from "./findParent";
 import { updateChangeObjectsArray } from "./updateChangeObjectsArray";
 import { getChangeObjByAnchor } from "../utils";
@@ -50,11 +50,11 @@ export function deactivateNode(node, reducedStructure, changeObjects) {
       changeObjects = append(
         {
           anchor: parentNode.fullAnchor,
-          properties: {
+          properties: reject(isNil)({
             metadata: parentNode.properties.forChangeObject,
             isChecked: true,
             isIndeterminate: true
-          }
+          })
         },
         changeObjects
       );

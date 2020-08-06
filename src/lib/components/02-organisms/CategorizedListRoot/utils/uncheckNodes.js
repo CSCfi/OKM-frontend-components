@@ -4,6 +4,8 @@ import {
   dropLast,
   equals,
   filter,
+  isNil,
+  reject,
   lensIndex,
   not,
   propEq,
@@ -49,10 +51,10 @@ export function uncheckNodes(
     changeObjects = append(
       {
         anchor: node.fullAnchor,
-        properties: {
+        properties: reject(isNil)({
           metadata: node.properties.forChangeObject,
           isChecked: false
-        }
+        })
       },
       changeObjects
     );

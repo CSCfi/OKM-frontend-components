@@ -1,5 +1,5 @@
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
-import { append, lensIndex, over, values, mapObjIndexed, equals, includes, remove } from "ramda";
+import { append, lensIndex, over, values, mapObjIndexed, equals, includes, remove, isNil, reject } from "ramda";
 import { getChangeObjIndexByAnchor } from "../utils";
 /**
  * Function updated the array of change objects by updating one of the
@@ -35,10 +35,11 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
        **/
       changeObjects = append({
         anchor: node.fullAnchor,
-        properties: Object.assign({}, _objectSpread({}, properties, {
+        properties: reject(isNil)(Object.assign({}, _objectSpread({}, properties, {
           metadata: node.properties.forChangeObject
-        }))
+        })))
       }, changeObjects);
+      console.log(changeObjects);
     }
   } else if (changeObjIndex > -1) {
     changeObjects = remove(changeObjIndex, 1, changeObjects);
