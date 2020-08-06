@@ -61,7 +61,6 @@ export function updateChangeObjectsArray(node, properties, changeObjects) {
       changeObjects = append(
         {
           anchor: node.fullAnchor,
-
           properties: reject(isNil)(Object.assign(
             {},
             {
