@@ -4,7 +4,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import css from "./header.module.css";
 import { NavLink } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import { AppBar, Toolbar, useMediaQuery, Typography, IconButton, Button } from "@material-ui/core";
+import { AppBar, Button, IconButton, Toolbar, Typography, useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
@@ -47,7 +47,9 @@ var Header = React.memo(function (_ref) {
       organisation = _ref.organisation,
       shortDescription = _ref.shortDescription,
       _ref$template = _ref.template,
-      template = _ref$template === void 0 ? "A" : _ref$template;
+      template = _ref$template === void 0 ? "A" : _ref$template,
+      _ref$languageSelectio = _ref.languageSelectionAriaLabel,
+      languageSelectionAriaLabel = _ref$languageSelectio === void 0 ? "Kielivalinta" : _ref$languageSelectio;
   var classes = useStyles();
   var typographyClasses = useStylesForTypography();
   var items = [/*#__PURE__*/React.createElement("a", {
@@ -80,6 +82,7 @@ var Header = React.memo(function (_ref) {
     value: locale,
     exclusive: true
   }, /*#__PURE__*/React.createElement(ToggleButton, {
+    "aria-label": languageSelectionAriaLabel + inFinnish,
     key: 1,
     value: "fi",
     className: "whitespace-no-wrap",
@@ -90,6 +93,7 @@ var Header = React.memo(function (_ref) {
     },
     disabled: locale === "fi"
   }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
+    "aria-label": languageSelectionAriaLabel + inSwedish,
     key: 2,
     value: "sv",
     className: "whitespace-no-wrap",
@@ -135,6 +139,7 @@ var Header = React.memo(function (_ref) {
     value: locale,
     exclusive: true
   }, /*#__PURE__*/React.createElement(ToggleButton, {
+    "aria-label": languageSelectionAriaLabel + inFinnish,
     key: 1,
     value: "fi",
     className: "whitespace-no-wrap",
@@ -145,6 +150,7 @@ var Header = React.memo(function (_ref) {
     },
     disabled: locale === "fi"
   }, inFinnish), /*#__PURE__*/React.createElement(ToggleButton, {
+    "aria-label": languageSelectionAriaLabel + inSwedish,
     key: 2,
     value: "sv",
     className: "whitespace-no-wrap",

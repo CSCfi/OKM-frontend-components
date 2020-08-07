@@ -3,20 +3,13 @@ import PropTypes from "prop-types";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import css from "./header.module.css";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import {
-  AppBar,
-  Toolbar,
-  useMediaQuery,
-  Typography,
-  IconButton,
-  Button
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {AppBar, Button, IconButton, Toolbar, Typography, useMediaQuery} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 import HorizontalLayout from "./HorizontalLayout";
 import VerticalLayout from "./VerticalLayout";
-import { equals } from "ramda";
+import {equals} from "ramda";
 
 const MEDIA_QUERIES = {
   MOBILE: "only screen and (min-width: 360px) and (max-width: 767px)",
@@ -43,20 +36,21 @@ const useStylesForTypography = makeStyles(() => ({
 
 const Header = React.memo(
   ({
-    inFinnish,
-    inSwedish,
-    isAuthenticated,
-    locale,
-    logIn,
-    logo,
-    authenticationLink,
-    onLocaleChange,
-    onLoginButtonClick,
-    onMenuClick,
-    organisation,
-    shortDescription,
-    template = "A"
-  }) => {
+     inFinnish,
+     inSwedish,
+     isAuthenticated,
+     locale,
+     logIn,
+     logo,
+     authenticationLink,
+     onLocaleChange,
+     onLoginButtonClick,
+     onMenuClick,
+     organisation,
+     shortDescription,
+     template = "A",
+     languageSelectionAriaLabel = "Kielivalinta"
+   }) => {
     const classes = useStyles();
     const typographyClasses = useStylesForTypography();
     const items = [
@@ -106,6 +100,7 @@ const Header = React.memo(
                   value={locale}
                   exclusive>
                   <ToggleButton
+                    aria-label={languageSelectionAriaLabel + inFinnish}
                     key={1}
                     value="fi"
                     className="whitespace-no-wrap"
@@ -118,6 +113,7 @@ const Header = React.memo(
                     {inFinnish}
                   </ToggleButton>
                   <ToggleButton
+                    aria-label={languageSelectionAriaLabel + inSwedish}
                     key={2}
                     value="sv"
                     className="whitespace-no-wrap"
@@ -177,6 +173,7 @@ const Header = React.memo(
                     value={locale}
                     exclusive>
                     <ToggleButton
+                      aria-label={languageSelectionAriaLabel + inFinnish}
                       key={1}
                       value="fi"
                       className="whitespace-no-wrap"
@@ -189,6 +186,7 @@ const Header = React.memo(
                       {inFinnish}
                     </ToggleButton>
                     <ToggleButton
+                      aria-label={languageSelectionAriaLabel + inSwedish}
                       key={2}
                       value="sv"
                       className="whitespace-no-wrap"
@@ -231,7 +229,8 @@ Header.propTypes = {
   onMenuClick: PropTypes.func.isRequired,
   organisation: PropTypes.object,
   shortDescription: PropTypes.object,
-  template: PropTypes.string
+  template: PropTypes.string,
+  languageSelectionAriaLabel: PropTypes.string
 };
 
 export default Header;
