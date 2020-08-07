@@ -42,13 +42,13 @@ var Navigation = function Navigation(_ref) {
   return /*#__PURE__*/React.createElement(React.Fragment, null, (!direction || direction === "horizontal") && /*#__PURE__*/React.createElement(AppBar, {
     position: "static",
     classes: classes
-  }, /*#__PURE__*/React.createElement(Toolbar, {
+  }, /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement(Toolbar, {
     variant: "dense",
     className: "flex flex-wrap text-black border \n        border-gray-300 text-sm overflow-auto hide-scrollbar bg-".concat(theme.backgroundColor),
     disableGutters: true
   }, /*#__PURE__*/React.createElement(HorizontalLayout, {
     items: items
-  }))), direction === "vertical" && /*#__PURE__*/React.createElement(VerticalLayout, {
+  })))), direction === "vertical" && /*#__PURE__*/React.createElement(VerticalLayout, {
     items: items
   }));
 };
