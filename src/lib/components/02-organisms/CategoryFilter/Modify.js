@@ -27,7 +27,9 @@ import {
   isEmpty,
   append,
   pathEq,
-  values
+  values,
+  sortBy,
+  prop
 } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
@@ -88,8 +90,8 @@ const countyNamesFinnish = {
   "FI-16": "Päijät-Häme",
   "FI-17": "Satakunta",
   "FI-18": "Uusimaa",
-  "FI-19": "Varsinais-Suomi",
-}
+  "FI-19": "Varsinais-Suomi"
+};
 
 const countyNamesSwedish = {
   "FI-01": "Åland",
@@ -110,17 +112,18 @@ const countyNamesSwedish = {
   "FI-16": "Päijänne-Tavastland",
   "FI-17": "Satakunta",
   "FI-18": "Nyland",
-  "FI-19": "Egentliga Finland",
-}
+  "FI-19": "Egentliga Finland"
+};
 
-const resetCountyNames = (mapdata, locale = 'fi') => {
-  mapdata.features.forEach((feature) => {
-    feature.properties.name = locale === 'sv' ?
-      countyNamesSwedish[feature.id] :
-      countyNamesFinnish[feature.id];
+const resetCountyNames = (mapdata, locale = "fi") => {
+  mapdata.features.forEach(feature => {
+    feature.properties.name =
+      locale === "sv"
+        ? countyNamesSwedish[feature.id]
+        : countyNamesFinnish[feature.id];
   });
   return mapdata;
-}
+};
 
 const Modify = React.memo(
   ({
@@ -450,7 +453,7 @@ const Modify = React.memo(
       );
       previousSelection.current = locationsCombined;
       if (!equals(selectedLocations, locationsCombined)) {
-        setSelectedLocations(locationsCombined);
+        setSelectedLocations(sortBy(prop("label"), locationsCombined));
       }
     }, [baseAnchor, categories, cos, provinceInstances, selectedLocations]);
 

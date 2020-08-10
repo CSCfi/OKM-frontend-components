@@ -1,5 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core";
 import Tooltip from "../../02-organisms/Tooltip";
@@ -7,7 +7,7 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
-import { isEqual } from "lodash";
+import { equals } from "ramda";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
@@ -52,43 +52,19 @@ var Input = React.memo(function (props) {
 
   var classes = props.classes;
 
-  var _useState5 = useState(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      value = _useState6[0],
-      setValue = _useState6[1];
-
-  var _useState7 = useState(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      handle = _useState8[0],
-      setHandle = _useState8[1];
-
   var updateValue = function updateValue(e) {
-    setValue(e.target.value);
-
-    if (handle) {
-      clearTimeout(handle);
-    }
-
-    setHandle(function (v) {
-      return setTimeout(function () {
-        props.onChanges(props.payload, {
-          value: v
-        });
-      }, props.delay);
-    }(e.target.value));
+    props.onChanges(props.payload, {
+      value: e.target.value
+    });
   };
 
-  useEffect(function () {
-    if (props.value !== value || value !== "") {
-      setValue(props.value || ""); // props.value might be undefined
-    }
-  }, [props.value]);
+  console.info(props.value);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
   }, /*#__PURE__*/React.createElement(TextField, {
     id: props.id,
     "aria-label": props.ariaLabel,
-    value: value,
+    value: props.value,
     label: props.label,
     disabled: props.isDisabled || props.isReadOnly,
     inputprops: {
@@ -100,7 +76,7 @@ var Input = React.memo(function (props) {
     rowsMax: props.rowsMax,
     onChange: updateValue,
     required: props.isRequired && !props.isReadOnly,
-    error: !props.isReadOnly && props.error ? props.error : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
+    error: !props.isReadOnly && props.error ? props.error : props.isRequired && props.value && !props.isValid || !props.isRequired && !props.isValid,
     variant: "outlined",
     style: props.fullWidth ? {
       border: "none"
@@ -121,7 +97,7 @@ var Input = React.memo(function (props) {
     onBlur: function onBlur() {
       return setIsFocused(false);
     },
-    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && value === "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
+    className: "".concat(props.isHidden ? "hidden" : "", " \n          ").concat(!props.isReadOnly && props.value === "" && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n          ").concat(props.isReadOnly && classes.readonlyNoValue, "\n        ")
   }), !props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8"
   }, /*#__PURE__*/React.createElement(Tooltip, {
@@ -140,9 +116,10 @@ var Input = React.memo(function (props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, value !== "" && props.requiredMessage));
+  }, props.value !== "" && props.requiredMessage));
 }, function (cp, np) {
-  return cp.isDisabled === np.isDisabled && cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isVisited === np.isVisited && cp.isDence === np.isDense && isEqual(cp.payload, np.payload);
+  var isSameOld = cp.isDisabled === np.isDisabled && cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isVisited === np.isVisited && cp.isDence === np.isDense && cp.value === np.value && equals(cp.payload, np.payload);
+  return isSameOld;
 });
 Input.defaultProps = {
   ariaLabel: "Text area",

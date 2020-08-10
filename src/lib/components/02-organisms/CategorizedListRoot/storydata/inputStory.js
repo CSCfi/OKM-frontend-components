@@ -196,7 +196,11 @@ export const inputStory = {
                   name: "Input",
                   width: "300",
                   properties: {
-                    defaultValue: "Text 1",
+                    isValidFn: () => {
+                      console.info("This is Is valid fn");
+                      return true;
+                    },
+                    value: "Text 1",
                     label: "Input"
                   }
                 }

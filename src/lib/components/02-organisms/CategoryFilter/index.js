@@ -7,7 +7,8 @@ import {
   zipObj,
   equals,
   values,
-  flatten
+  flatten,
+  sort
 } from "ramda";
 
 import Modify from "./Modify";
@@ -77,6 +78,17 @@ const CategoryFilter = ({
         zeroPercentages.push(province.components[0].properties.title);
       }
       if (isProvinceActive) {
+        const activeMunicipalitiesInAlphabeticOrder = sort((a, b) => {
+          const titleA = a.getTitle();
+          const titleB = b.getTitle();
+          if (titleA < titleB) {
+            return -1;
+          } else if (titleA > titleB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }, activeMunicipalities);
         return (
           <li key={province.anchor} className={"w-1/2 pt-4 pb-6 pr-6"}>
             <div className="flex items-baseline">
@@ -95,7 +107,7 @@ const CategoryFilter = ({
                         {activeMunicipalities[index + 1] ? ", " : null}
                       </span>
                     );
-                  }, activeMunicipalities).filter(Boolean)}
+                  }, activeMunicipalitiesInAlphabeticOrder).filter(Boolean)}
                 </li>
               </ul>
             ) : null}
