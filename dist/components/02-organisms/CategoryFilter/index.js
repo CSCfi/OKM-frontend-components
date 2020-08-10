@@ -1,6 +1,6 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState, useMemo, useEffect } from "react";
-import { map, prop, addIndex, zipObj, equals, values, flatten } from "ramda";
+import { map, prop, addIndex, zipObj, equals, values, flatten, sort } from "ramda";
 import Modify from "./Modify";
 import SimpleButton from "../../00-atoms/SimpleButton";
 import { Province } from "./province";
@@ -74,6 +74,18 @@ var CategoryFilter = function CategoryFilter(_ref) {
       }
 
       if (isProvinceActive) {
+        var activeMunicipalitiesInAlphabeticOrder = sort(function (a, b) {
+          var titleA = a.getTitle();
+          var titleB = b.getTitle();
+
+          if (titleA < titleB) {
+            return -1;
+          } else if (titleA > titleB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        }, activeMunicipalities);
         return /*#__PURE__*/React.createElement("li", {
           key: province.anchor,
           className: "w-1/2 pt-4 pb-6 pr-6"
@@ -87,7 +99,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
           return /*#__PURE__*/React.createElement("span", {
             key: "kunta-".concat(index)
           }, kunta.getTitle(), activeMunicipalities[index + 1] ? ", " : null);
-        }, activeMunicipalities).filter(Boolean))) : null);
+        }, activeMunicipalitiesInAlphabeticOrder).filter(Boolean))) : null);
       }
 
       return null;

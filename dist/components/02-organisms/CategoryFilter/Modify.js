@@ -3,7 +3,7 @@ import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import CategorizedListRoot from "../CategorizedListRoot";
 import Autocomplete from "../Autocomplete";
-import { assoc, equals, filter, find, map, propEq, dissoc, concat, flatten, uniq, last, differenceWith, forEachObjIndexed, sum, endsWith, isEmpty, append, pathEq, values } from "ramda";
+import { assoc, equals, filter, find, map, propEq, dissoc, concat, flatten, uniq, last, differenceWith, forEachObjIndexed, sum, endsWith, isEmpty, append, pathEq, values, sortBy, prop } from "ramda";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_finland from "@amcharts/amcharts4-geodata/finlandHigh";
@@ -85,9 +85,9 @@ var countyNamesSwedish = {
 };
 
 var resetCountyNames = function resetCountyNames(mapdata) {
-  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fi';
+  var locale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "fi";
   mapdata.features.forEach(function (feature) {
-    feature.properties.name = locale === 'sv' ? countyNamesSwedish[feature.id] : countyNamesFinnish[feature.id];
+    feature.properties.name = locale === "sv" ? countyNamesSwedish[feature.id] : countyNamesFinnish[feature.id];
   });
   return mapdata;
 };
@@ -346,7 +346,7 @@ var Modify = React.memo(function (_ref) {
     previousSelection.current = locationsCombined;
 
     if (!equals(selectedLocations, locationsCombined)) {
-      setSelectedLocations(locationsCombined);
+      setSelectedLocations(sortBy(prop("label"), locationsCombined));
     }
   }, [baseAnchor, categories, cos, provinceInstances, selectedLocations]);
   var locale = "FI";
