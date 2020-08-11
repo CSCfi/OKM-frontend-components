@@ -10,7 +10,8 @@ const defaultProps = {
   text: "[text is missing]",
   variant: "contained",
   color: "primary",
-  size: "large"
+  size: "large",
+  disabled: false
 };
 
 const styles = createStyles(theme => ({
@@ -35,7 +36,8 @@ const SimpleButton = ({
   color = defaultProps.color,
   ariaLabel,
   size = defaultProps.size,
-  classes
+  classes,
+  disabled = defaultProps.disabled
 }) => {
   const handleClick = event => {
     onClick(payload, {}, event);
@@ -51,6 +53,7 @@ const SimpleButton = ({
           color={color}
           disableElevation
           disableRipple
+          disabled={disabled}
           aria-label={ariaLabel}
           className={classes.root}>
           {text}

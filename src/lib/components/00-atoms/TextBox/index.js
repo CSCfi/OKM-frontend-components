@@ -125,7 +125,7 @@ const TextBox = props => {
         <React.Fragment>
           <div className="flex flex-row w-full">
             <div className="flex flex-col w-full">
-              {props.title && (
+              {props.title && !props.isHidden && (
                 <InputLabel
                   disabled={props.isDisabled || props.isReadOnly}
                   htmlFor="props.id"
@@ -209,7 +209,7 @@ const TextBox = props => {
                 onBlur={() => setIsFocused(false)}
                 label={props.label}
               />
-              {props.showValidationErrors && props.requiredMessage && (
+              {props.showValidationErrors && props.requiredMessage && !props.isHidden && (
                 <FormHelperText
                   id="component-message-text"
                   style={{

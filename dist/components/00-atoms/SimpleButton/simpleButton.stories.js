@@ -26,3 +26,11 @@ storiesOf("SimpleButton", module).add("Text button", function () {
     variant: "default"
   }));
 });
+storiesOf("SimpleButton", module).add("Disabled Normal button", function () {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col w-56 p-4"
+  }, /*#__PURE__*/React.createElement(SimpleButton, {
+    text: "Text is here",
+    disabled: "true"
+  }));
+});
