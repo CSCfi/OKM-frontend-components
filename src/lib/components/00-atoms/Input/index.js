@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core";
@@ -7,7 +7,7 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
-import { isEqual } from "lodash";
+import { equals } from "ramda";
 
 import styles from "./input.module.css";
 
@@ -47,36 +47,18 @@ const Input = React.memo(
     const [isVisited, setIsVisited] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const { classes } = props;
-    const [value, setValue] = useState("");
-    const [handle, setHandle] = useState(null);
 
     const updateValue = e => {
-      setValue(e.target.value);
-      if (handle) {
-        clearTimeout(handle);
-      }
-      setHandle(
-        (v => {
-          return setTimeout(() => {
-            props.onChanges(props.payload, { value: v });
-          }, props.delay);
-        })(e.target.value)
-      );
+      props.onChanges(props.payload, { value: e.target.value });
     };
-
-    useEffect(() => {
-      if (props.value !== value || value !== "") {
-        setValue(props.value || ""); // props.value might be undefined
-      }
-    }, [props.value]);
-
+    console.info(props.value);
     return (
       <React.Fragment>
         <div className="flex items-center">
           <TextField
             id={props.id}
             aria-label={props.ariaLabel}
-            value={value}
+            value={props.value}
             label={props.label}
             disabled={props.isDisabled || props.isReadOnly}
             inputprops={{
@@ -91,7 +73,7 @@ const Input = React.memo(
             error={
               !props.isReadOnly && props.error
                 ? props.error
-                : (props.isRequired && value && !props.isValid) ||
+                : (props.isRequired && props.value && !props.isValid) ||
                   (!props.isRequired && !props.isValid)
             }
             variant="outlined"
@@ -112,7 +94,7 @@ const Input = React.memo(
             className={`${props.isHidden ? "hidden" : ""} 
           ${
             !props.isReadOnly &&
-            value === "" &&
+            props.value === "" &&
             !isFocused &&
             props.isRequired &&
             (isVisited || props.showValidationErrors)
@@ -144,22 +126,23 @@ const Input = React.memo(
               marginBottom: "0.5em",
               color: COLORS.OIVA_ORANGE_TEXT
             }}>
-            {value !== "" && props.requiredMessage}
+            {props.value !== "" && props.requiredMessage}
           </FormHelperText>
         )}
       </React.Fragment>
     );
   },
   (cp, np) => {
-    return (
+    const isSameOld =
       cp.isDisabled === np.isDisabled &&
       cp.isHidden === np.isHidden &&
       cp.isReadOnly === np.isReadOnly &&
       cp.isRequired === np.isRequired &&
       cp.isVisited === np.isVisited &&
       cp.isDence === np.isDense &&
-      isEqual(cp.payload, np.payload)
-    );
+      cp.value === np.value &&
+      equals(cp.payload, np.payload);
+    return isSameOld;
   }
 );
 
