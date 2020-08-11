@@ -8,7 +8,8 @@ var defaultProps = {
   text: "[text is missing]",
   variant: "contained",
   color: "primary",
-  size: "large"
+  size: "large",
+  disabled: false
 };
 var styles = createStyles(function (theme) {
   return {
@@ -40,7 +41,9 @@ var SimpleButton = function SimpleButton(_ref) {
       ariaLabel = _ref.ariaLabel,
       _ref$size = _ref.size,
       size = _ref$size === void 0 ? defaultProps.size : _ref$size,
-      classes = _ref.classes;
+      classes = _ref.classes,
+      _ref$disabled = _ref.disabled,
+      disabled = _ref$disabled === void 0 ? defaultProps.disabled : _ref$disabled;
 
   var handleClick = function handleClick(event) {
     onClick(payload, {}, event);
@@ -53,6 +56,7 @@ var SimpleButton = function SimpleButton(_ref) {
     color: color,
     disableElevation: true,
     disableRipple: true,
+    disabled: disabled,
     "aria-label": ariaLabel,
     className: classes.root
   }, text));

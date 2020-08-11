@@ -139,7 +139,7 @@ var TextBox = function TextBox(props) {
     className: "flex flex-row w-full"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col w-full"
-  }, props.title && /*#__PURE__*/React.createElement(InputLabel, {
+  }, props.title && !props.isHidden && /*#__PURE__*/React.createElement(InputLabel, {
     disabled: props.isDisabled || props.isReadOnly,
     htmlFor: "props.id",
     shrink: isFocused || value || props.placeholder ? true : false,
@@ -179,7 +179,7 @@ var TextBox = function TextBox(props) {
       return setIsFocused(false);
     },
     label: props.label
-  }), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
+  }), props.showValidationErrors && props.requiredMessage && !props.isHidden && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       paddingLeft: "0.5em",
