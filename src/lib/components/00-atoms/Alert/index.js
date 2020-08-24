@@ -79,12 +79,16 @@ const AlertMessage = React.memo(
                   width: "100%"
                 }}>
                 {props.linkUrl && props.linkText && (
-                  <Link href={props.linkUrl} style={{ cursor: "pointer" }}>
+                  <Link
+                    href={props.linkUrl}
+                    style={{ cursor: "pointer", textDecoration: "underline" }}>
                     {props.linkText}
                   </Link>
                 )}
                 {!props.linkUrl && props.handleLinkClick && props.linkText && (
-                  <Link onClick={clickCallback} style={{ cursor: "pointer" }}>
+                  <Link
+                    onClick={clickCallback}
+                    style={{ cursor: "pointer", textDecoration: "underline" }}>
                     {props.linkText}
                   </Link>
                 )}
