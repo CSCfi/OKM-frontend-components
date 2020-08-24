@@ -163,7 +163,22 @@ var Modify = React.memo(function (_ref) {
       setQuickFilterChanges(append({
         anchor: anchor,
         properties: {
-          isChecked: true
+          isChecked: true,
+          metadata: {
+            koodiarvo: 'FI1'
+          }
+        }
+      }, quickFilterChanges));
+    }
+
+    if (!isCountryActive && !changeObj && !isEmpty(cos) && isCountryActiveByDefault) {
+      setQuickFilterChanges(append({
+        anchor: anchor,
+        properties: {
+          isChecked: false,
+          metadata: {
+            koodiarvo: 'FI1'
+          }
         }
       }, quickFilterChanges));
     }
@@ -176,7 +191,10 @@ var Modify = React.memo(function (_ref) {
       setQuickFilterChanges(append({
         anchor: anchor,
         properties: {
-          isChecked: true
+          isChecked: true,
+          metadata: {
+            koodiarvo: 'FI2'
+          }
         }
       }, quickFilterChanges));
     }
@@ -190,6 +208,11 @@ var Modify = React.memo(function (_ref) {
       if (!equals(changeObjects, quickFilterChanges)) {
         setQuickFilterChanges(changeObjects);
       }
+    } // Remove quickFilterChanges if country activity is changed to default
+
+
+    if (quickFilterChanges && quickFilterChanges.length && (isCountryActive && isCountryActiveByDefault || isCountryDeactive && isCountryDeactiveByDefault)) {
+      setQuickFilterChanges([]);
     }
   }, [isCountryActive, isCountryDeactive, quickFilterChanges]);
   useEffect(function () {
@@ -200,7 +223,10 @@ var Modify = React.memo(function (_ref) {
       setQuickFilterChanges([{
         anchor: anchor,
         properties: {
-          isChecked: false
+          isChecked: false,
+          metadata: {
+            koodiarvo: 'FI2'
+          }
         }
       }]);
     }
