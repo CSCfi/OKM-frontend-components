@@ -2,6 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import multidimensionalTable from "./storydata/multidimensionalTable";
+import dateTable from "./storydata/dateTable";
 import simpleTable from "./storydata/simpleTable";
 import Table from "./index";
 import SearchFilter from "../SearchFilter/index";
@@ -58,4 +59,8 @@ storiesOf("Table", module).addDecorator(withInfo).add("Multidimensional table", 
   }))), /*#__PURE__*/React.createElement(Table, {
     structure: conditionalMenuInTableCell
   }));
+}).add("Dates", function () {
+  return /*#__PURE__*/React.createElement(Table, {
+    structure: dateTable
+  });
 });

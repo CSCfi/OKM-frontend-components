@@ -87,12 +87,14 @@ var AlertMessage = React.memo(function (props) {
     }, props.linkUrl && props.linkText && /*#__PURE__*/React.createElement(Link, {
       href: props.linkUrl,
       style: {
-        cursor: "pointer"
+        cursor: "pointer",
+        textDecoration: "underline"
       }
     }, props.linkText), !props.linkUrl && props.handleLinkClick && props.linkText && /*#__PURE__*/React.createElement(Link, {
       onClick: clickCallback,
       style: {
-        cursor: "pointer"
+        cursor: "pointer",
+        textDecoration: "underline"
       }
     }, props.linkText), /*#__PURE__*/React.createElement(IconButton, {
       style: {
