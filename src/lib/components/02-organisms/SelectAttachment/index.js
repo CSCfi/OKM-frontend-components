@@ -9,6 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 import {Input} from "../Attachments";
 import styled from "styled-components";
 import {COLORS} from "../Attachments/styles";
+import {checkFiletypeAndSize} from "../Attachments/utils";
 
 const Error = styled.div`
   color: ${COLORS.OIVA_RED};
@@ -33,23 +34,7 @@ const SelectAttachment = React.memo(props => {
       .toLowerCase();
 
     // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
-    if (
-      e.target.files[0].size <= 26214400 &&
-      [
-        "pdf",
-        "doc",
-        "txt",
-        "docx",
-        "xls",
-        "xlsx",
-        "xlsm",
-        "jpg",
-        "jpeg",
-        "jpe",
-        "jfif",
-        "gif"
-      ].includes(type)
-    ) {
+    if (checkFiletypeAndSize(type, e.target.files[0].size))  {
       let liite = {};
       liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;

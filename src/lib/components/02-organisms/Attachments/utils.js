@@ -35,3 +35,21 @@ export const downloadFileFn = ({
     }
   };
 };
+
+export const checkFiletypeAndSize = (type, size) => {
+  return size <= 26214400 &&
+    [
+      "pdf",
+      "doc",
+      "txt",
+      "docx",
+      "xls",
+      "xlsx",
+      "xlsm",
+      "jpg",
+      "jpeg",
+      "jpe",
+      "jfif",
+      "gif"
+    ].includes(type);
+};
