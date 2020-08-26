@@ -51,7 +51,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "../DialogTitle";
-import { downloadFileFn } from "./utils";
+import { checkFiletypeAndSize, downloadFileFn } from "./utils";
 import { FormHelperText } from "@material-ui/core";
 import Incomplete from "@material-ui/icons/ErrorOutlined";
 import { COLORS } from "./styles";
@@ -136,7 +136,7 @@ var Attachments = React.memo(function (props) {
     console.log("File selected");
     var type = e.target.files[0].name.split(".").pop().toLowerCase(); // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
 
-    if (e.target.files[0].size <= 26214400 && ["pdf", "doc", "txt", "docx", "xls", "xlsx", "xlsm", "jpg", "jpeg", "jpe", "jfif", "gif"].includes(type)) {
+    if (checkFiletypeAndSize(type, e.target.files[0].size)) {
       var liite = {};
       liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;
