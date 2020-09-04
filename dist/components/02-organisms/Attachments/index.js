@@ -110,8 +110,6 @@ var Attachments = React.memo(function (props) {
 
 
   var addAttachment = function addAttachment() {
-    console.info(selectedAttachment);
-
     if (selectedAttachment.nimi) {
       setNameMissing(false);
       closeNameModal(); // Find correct attachment and set name
@@ -135,7 +133,6 @@ var Attachments = React.memo(function (props) {
     setFileError(false); // setFileAdded("");
 
     if (e.target.files.length === 0) return;
-    console.log("File selected");
     var type = e.target.files[0].name.split(".").pop().toLowerCase(); // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
 
     if (checkFiletypeAndSize(type, e.target.files[0].size)) {
