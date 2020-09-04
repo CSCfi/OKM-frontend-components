@@ -110,6 +110,8 @@ var Attachments = React.memo(function (props) {
 
 
   var addAttachment = function addAttachment() {
+    console.info(selectedAttachment);
+
     if (selectedAttachment.nimi) {
       setNameMissing(false);
       closeNameModal(); // Find correct attachment and set name
@@ -138,11 +140,11 @@ var Attachments = React.memo(function (props) {
 
     if (checkFiletypeAndSize(type, e.target.files[0].size)) {
       var liite = {};
-      liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;
+      liite.tiedostoId = Math.random() + "-" + liite.filename;
       liite.kieli = "fi";
       liite.tyyppi = type;
-      liite.nimi = e.target.files[0].name.split(".")[0].toLowerCase();
+      liite.nimi = liite.filename.substr(0, liite.filename.lastIndexOf("."));
       liite.tiedosto = new Blob([e.target.files[0]]);
       liite.koko = e.target.files[0].size;
       liite.removed = false;

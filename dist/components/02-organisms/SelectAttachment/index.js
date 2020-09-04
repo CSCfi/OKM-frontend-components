@@ -51,11 +51,11 @@ var SelectAttachment = React.memo(function (props) {
 
     if (checkFiletypeAndSize(type, e.target.files[0].size)) {
       var liite = {};
-      liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;
+      liite.tiedostoId = Math.random() + "-" + liite.filename;
       liite.kieli = "fi";
       liite.tyyppi = props.fileType ? props.fileType : type;
-      liite.nimi = e.target.files[0].name.split(".")[0].toLowerCase();
+      liite.nimi = liite.filename.substr(0, liite.filename.lastIndexOf("."));
       liite.tiedosto = new Blob([e.target.files[0]]);
       liite.koko = e.target.files[0].size;
       liite.removed = false;
@@ -91,7 +91,7 @@ var SelectAttachment = React.memo(function (props) {
 
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Attachment, {
     style: {
-      cursor: 'pointer'
+      cursor: "pointer"
     },
     id: props.id,
     name: props.name,

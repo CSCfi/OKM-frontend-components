@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Attachment from "../Attachment";
 import DialogTitle from "../DialogTitle";
@@ -6,10 +6,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import {Input} from "../Attachments";
+import { Input } from "../Attachments";
 import styled from "styled-components";
-import {COLORS} from "../Attachments/styles";
-import {checkFiletypeAndSize} from "../Attachments/utils";
+import { COLORS } from "../Attachments/styles";
+import { checkFiletypeAndSize } from "../Attachments/utils";
 
 const Error = styled.div`
   color: ${COLORS.OIVA_RED};
@@ -34,13 +34,13 @@ const SelectAttachment = React.memo(props => {
       .toLowerCase();
 
     // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
-    if (checkFiletypeAndSize(type, e.target.files[0].size))  {
+    if (checkFiletypeAndSize(type, e.target.files[0].size)) {
       let liite = {};
-      liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;
+      liite.tiedostoId = Math.random() + "-" + liite.filename;
       liite.kieli = "fi";
       liite.tyyppi = props.fileType ? props.fileType : type;
-      liite.nimi = e.target.files[0].name.split(".")[0].toLowerCase();
+      liite.nimi = liite.filename.substr(0, liite.filename.lastIndexOf("."));
       liite.tiedosto = new Blob([e.target.files[0]]);
       liite.koko = e.target.files[0].size;
       liite.removed = false;
@@ -59,32 +59,33 @@ const SelectAttachment = React.memo(props => {
   const addAttachment = () => {
     if (selectedAttachment.nimi) {
       props.attachmentAdded(selectedAttachment);
-    }
-    else {
+    } else {
       setNameMissing(true);
     }
-  }
+  };
 
   const cancelAttachment = () => {
     setSelectedAttachment([]);
     setIsNameModalOpen(false);
-  }
+  };
 
-  const setAttachmentName = (e) => {
+  const setAttachmentName = e => {
     const liite = selectedAttachment;
     liite.nimi = e.target.value;
     setSelectedAttachment(liite);
-  }
+  };
 
   return (
     <React.Fragment>
-      <Attachment style={{cursor: 'pointer'}}
+      <Attachment
+        style={{ cursor: "pointer" }}
         id={props.id}
         name={props.name}
         styles={props.styles}
         setAttachment={setAttachment}
         setAttachmentName={setAttachmentName}
-        messages={props.messages}/>
+        messages={props.messages}
+      />
       {fileError && <Error>{props.messages.attachmentError}</Error>}
       <Dialog
         open={isNameModalOpen}
@@ -142,6 +143,6 @@ SelectAttachment.propTypes = {
 
 SelectAttachment.defaultProps = {
   styles: {}
-}
+};
 
 export default SelectAttachment;
