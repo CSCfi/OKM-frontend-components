@@ -199,8 +199,8 @@ export function sortObjectsByProperty(a, b, path) {
   var bRaw = R.path(path, b);
   var aDate = moment(aRaw, "DD.MM.YYYY", true);
   var bDate = moment(bRaw, "DD.MM.YYYY", true);
-  var aCompare = aDate.isValid() ? aDate : aRaw;
-  var bCompare = aDate.isValid() ? bDate : bRaw;
+  var aCompare = aDate.isValid() ? aDate.valueOf() : aRaw;
+  var bCompare = bDate.isValid() ? bDate.valueOf() : bRaw;
 
   if (aCompare < bCompare) {
     return -1;
