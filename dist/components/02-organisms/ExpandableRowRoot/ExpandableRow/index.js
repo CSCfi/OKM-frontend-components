@@ -1,7 +1,7 @@
 import React from "react";
-import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
-import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Slot from "../../../00-atoms/Slot/Slot";
@@ -9,7 +9,7 @@ import Slot from "../../../00-atoms/Slot/Slot";
  * @module Components/01-molecules
  */
 
-var ExpansionPanel = withStyles({
+var Accordion = withStyles({
   root: {
     border: "1px solid rgba(0,0,0,.125)",
     boxShadow: "none",
@@ -23,8 +23,8 @@ var ExpansionPanel = withStyles({
   expanded: {
     margin: "auto"
   }
-})(MuiExpansionPanel);
-var ExpansionPanelSummary = withStyles({
+})(MuiAccordion);
+var AccordionSummary = withStyles({
   root: {
     backgroundColor: "rgba(0,0,0,.03)",
     borderBottom: "1px solid rgba(0,0,0,.125)",
@@ -42,26 +42,26 @@ var ExpansionPanelSummary = withStyles({
   },
   expanded: {}
 })(function (props) {
-  return /*#__PURE__*/React.createElement(MuiExpansionPanelSummary, props);
+  return /*#__PURE__*/React.createElement(MuiAccordionSummary, props);
 });
-ExpansionPanelSummary.muiName = "ExpansionPanelSummary";
-var ExpansionPanelDetails = withStyles(function (theme) {
+AccordionSummary.muiName = "AccordionSummary";
+var AccordionDetails = withStyles(function (theme) {
   return {
     root: {
       padding: theme.spacing(0)
     }
   };
-})(MuiExpansionPanelDetails); // className="flex items-center cursor-pointer bg-grey-light hover:bg-grey p-2"
+})(MuiAccordionDetails); // className="flex items-center cursor-pointer bg-grey-light hover:bg-grey p-2"
 
 /**
  * The row can be expanded and shrinked. The div marked with data-slot="content" attribute is visible when the row is expanded.
  */
 
 var ExpandableRow = function ExpandableRow(props) {
-  return /*#__PURE__*/React.createElement(ExpansionPanel, {
+  return /*#__PURE__*/React.createElement(Accordion, {
     defaultExpanded: props.shouldBeExpanded,
     onChange: props.onToggle
-  }, /*#__PURE__*/React.createElement(ExpansionPanelSummary, {
+  }, /*#__PURE__*/React.createElement(AccordionSummary, {
     expandIcon: /*#__PURE__*/React.createElement(ExpandMoreIcon, null),
     id: "".concat(props.id, "-summary")
   }, /*#__PURE__*/React.createElement("div", {
@@ -70,7 +70,7 @@ var ExpandableRow = function ExpandableRow(props) {
     slot: "title"
   }, props.children)), /*#__PURE__*/React.createElement(Slot, {
     slot: "info"
-  }, props.children)), /*#__PURE__*/React.createElement(ExpansionPanelDetails, null, /*#__PURE__*/React.createElement(Slot, {
+  }, props.children)), /*#__PURE__*/React.createElement(AccordionDetails, null, /*#__PURE__*/React.createElement(Slot, {
     slot: "content"
   }, props.children)));
 };
