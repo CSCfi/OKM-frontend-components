@@ -152,7 +152,6 @@ var CategorizedList = React.memo(function (props) {
         metadata: R.path(["component", "properties", "forChangeObject"], payload)
       }))
     };
-    console.log(changeObj);
     return onChangesUpdate(changeObj);
   }, [onChangesUpdate]);
   /**
