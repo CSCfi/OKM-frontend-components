@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MuiExpansionPanel from "@material-ui/core/ExpansionPanel";
-import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
-import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import { withStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Slot from "../../../00-atoms/Slot/Slot";
@@ -11,7 +11,7 @@ import Slot from "../../../00-atoms/Slot/Slot";
  * @module Components/01-molecules
  */
 
-const ExpansionPanel = withStyles({
+const Accordion = withStyles({
   root: {
     border: "1px solid rgba(0,0,0,.125)",
     boxShadow: "none",
@@ -25,9 +25,9 @@ const ExpansionPanel = withStyles({
   expanded: {
     margin: "auto"
   }
-})(MuiExpansionPanel);
+})(MuiAccordion);
 
-const ExpansionPanelSummary = withStyles({
+const AccordionSummary = withStyles({
   root: {
     backgroundColor: "rgba(0,0,0,.03)",
     borderBottom: "1px solid rgba(0,0,0,.125)",
@@ -44,26 +44,26 @@ const ExpansionPanelSummary = withStyles({
     alignItems: "center"
   },
   expanded: {}
-})(props => <MuiExpansionPanelSummary {...props} />);
+})(props => <MuiAccordionSummary {...props} />);
 
-ExpansionPanelSummary.muiName = "ExpansionPanelSummary";
+AccordionSummary.muiName = "AccordionSummary";
 
-const ExpansionPanelDetails = withStyles(theme => ({
+const AccordionDetails = withStyles(theme => ({
   root: {
     padding: theme.spacing(0)
   }
-}))(MuiExpansionPanelDetails);
+}))(MuiAccordionDetails);
 // className="flex items-center cursor-pointer bg-grey-light hover:bg-grey p-2"
 /**
  * The row can be expanded and shrinked. The div marked with data-slot="content" attribute is visible when the row is expanded.
  */
 const ExpandableRow = props => {
   return (
-    <ExpansionPanel
+    <Accordion
       defaultExpanded={props.shouldBeExpanded}
       onChange={props.onToggle}
     >
-      <ExpansionPanelSummary
+      <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         id={`${props.id}-summary`}
       >
@@ -71,11 +71,11 @@ const ExpandableRow = props => {
           <Slot slot="title">{props.children}</Slot>
         </div>
         <Slot slot="info">{props.children}</Slot>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetails>
+      </AccordionSummary>
+      <AccordionDetails>
         <Slot slot="content">{props.children}</Slot>
-      </ExpansionPanelDetails>
-    </ExpansionPanel>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
