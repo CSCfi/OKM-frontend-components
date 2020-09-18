@@ -152,7 +152,6 @@ var CategorizedList = React.memo(function (props) {
         metadata: R.path(["component", "properties", "forChangeObject"], payload)
       }))
     };
-    console.log(changeObj);
     return onChangesUpdate(changeObj);
   }, [onChangesUpdate]);
   /**
@@ -373,7 +372,7 @@ var CategorizedList = React.memo(function (props) {
           requiredMessage: propsObj.requiredMessage
         }));
       }(category) : null, component.name === "TextBox" ? function () {
-        var isDisabled = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || !parentChangeObj.properties.isChecked);
+        var isDisabled = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || parentChangeObj.properties.isChecked === false);
         var value = R.path(["properties", "value"], changeObj);
 
         if (parentComponent && (parentComponent.name === "CheckboxWithLabel" || parentComponent.name === "RadioButtonWithLabel") && !R.equals(parentPropsObj.isChecked, true) && !R.isNil(value) && !R.isEmpty(value)) {

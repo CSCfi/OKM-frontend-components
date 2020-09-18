@@ -156,7 +156,6 @@ const CategorizedList = React.memo(
             )
           })
         };
-        console.log(changeObj);
         return onChangesUpdate(changeObj);
       },
       [onChangesUpdate]
@@ -492,7 +491,7 @@ const CategorizedList = React.memo(
                               ]) &&
                               ((!parentComponent.properties.isChecked &&
                                 R.isEmpty(parentChangeObj.properties)) ||
-                                !parentChangeObj.properties.isChecked);
+                                parentChangeObj.properties.isChecked === false);
                             const value = R.path(
                               ["properties", "value"],
                               changeObj
