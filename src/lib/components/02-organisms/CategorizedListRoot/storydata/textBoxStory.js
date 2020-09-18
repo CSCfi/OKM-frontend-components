@@ -8,25 +8,25 @@ const labelStyles = {
 export const textBoxStory = {
   changes: [
     {
-      anchor: "textbox.A.A",
+      anchor: "textboxStory.A.A",
       properties: {
         isChecked: true
       }
     },
     {
-      anchor: "textbox.B.A",
+      anchor: "textboxStory.B.A",
       properties: {
         isChecked: true
       }
     },
     {
-      anchor: "textbox.A.B.A",
+      anchor: "textboxStory.A.B.A",
       properties: {
         isChecked: true
       }
     },
     {
-      anchor: "textbox.A.C.A",
+      anchor: "textboxStory.A.C.A",
       properties: { value: "Muutettu" }
     }
   ],
@@ -195,8 +195,7 @@ export const textBoxStory = {
                   anchor: "A",
                   name: "TextBox",
                   properties: {
-                    defaultValue:
-                      "Text 1"
+                    value: "Text 1"
                   }
                 }
               ]
@@ -212,8 +211,7 @@ export const textBoxStory = {
               anchor: "A",
               name: "TextBox",
               properties: {
-                defaultValue:
-                  "Text 2"
+                value: "Text 2"
               }
             }
           ]

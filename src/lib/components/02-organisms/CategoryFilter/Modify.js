@@ -196,7 +196,7 @@ const Modify = React.memo(
               properties: {
                 isChecked: true,
                 metadata: {
-                  koodiarvo: 'FI1'
+                  koodiarvo: "FI1"
                 }
               }
             },
@@ -208,7 +208,8 @@ const Modify = React.memo(
         !isCountryActive &&
         !changeObj &&
         !isEmpty(cos) &&
-        isCountryActiveByDefault) {
+        isCountryActiveByDefault
+      ) {
         setQuickFilterChanges(
           append(
             {
@@ -216,9 +217,9 @@ const Modify = React.memo(
               properties: {
                 isChecked: false,
                 metadata: {
-                  koodiarvo: 'FI1'
+                  koodiarvo: "FI1"
                 }
-              },
+              }
             },
             quickFilterChanges
           )
@@ -248,7 +249,7 @@ const Modify = React.memo(
               properties: {
                 isChecked: true,
                 metadata: {
-                  koodiarvo: 'FI2'
+                  koodiarvo: "FI2"
                 }
               }
             },
@@ -279,11 +280,21 @@ const Modify = React.memo(
         }
       }
       // Remove quickFilterChanges if country activity is changed to default
-      if (quickFilterChanges && quickFilterChanges.length &&
-        ((isCountryActive && isCountryActiveByDefault) || (isCountryDeactive && isCountryDeactiveByDefault))) {
+      if (
+        quickFilterChanges &&
+        quickFilterChanges.length &&
+        ((isCountryActive && isCountryActiveByDefault) ||
+          (isCountryDeactive && isCountryDeactiveByDefault))
+      ) {
         setQuickFilterChanges([]);
       }
-    }, [isCountryActive, isCountryDeactive, quickFilterChanges]);
+    }, [
+      isCountryActive,
+      isCountryActiveByDefault,
+      isCountryDeactive,
+      isCountryDeactiveByDefault,
+      quickFilterChanges
+    ]);
 
     useEffect(() => {
       const anchor = `${baseAnchor}-radios.quick-filters.ei-alueita`;
@@ -295,7 +306,7 @@ const Modify = React.memo(
             properties: {
               isChecked: false,
               metadata: {
-                koodiarvo: 'FI2'
+                koodiarvo: "FI2"
               }
             }
           }

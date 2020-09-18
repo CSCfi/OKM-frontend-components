@@ -18,7 +18,7 @@ export const simpleTextBoxStory = {
           name: "CheckboxWithLabel",
           properties: {
             code: "A.A",
-            isChecked: false,
+            isChecked: true,
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),

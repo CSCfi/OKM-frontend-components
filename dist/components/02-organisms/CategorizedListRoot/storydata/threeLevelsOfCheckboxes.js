@@ -85,7 +85,7 @@ export var threeLevelsOfCheckboxes = {
       name: "CheckboxWithLabel",
       properties: {
         code: "B.A",
-        isChecked: true,
+        isChecked: false,
         isIndeterminate: true,
         labelStyles: labelStyles,
         name: "example-checkbox-2",

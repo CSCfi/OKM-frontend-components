@@ -4,17 +4,7 @@ var labelStyles = {
   removal: isRemoved
 };
 export var radioStory = {
-  changes: [{
-    anchor: "radio.A.A",
-    properties: {
-      isChecked: true
-    }
-  }, {
-    anchor: "radio.A.A.A",
-    properties: {
-      isChecked: true
-    }
-  }],
+  changes: [],
   categories: [{
     anchor: "A",
     code: "0",
@@ -77,7 +67,7 @@ export var radioStory = {
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),
-            isChecked: true
+            isChecked: false
           }
         }]
       }, {
@@ -109,8 +99,7 @@ export var radioStory = {
             }, {
               value: "value3",
               label: "Value 3"
-            }],
-            isChecked: true
+            }]
           }
         }],
         categories: [{
@@ -160,7 +149,7 @@ export var radioStory = {
             labelStyles: Object.assign({}, labelStyles, {
               custom: isInLupa
             }),
-            isChecked: true
+            isChecked: false
           }
         }]
       }]

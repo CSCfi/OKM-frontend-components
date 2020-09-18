@@ -7,7 +7,6 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
-import { equals } from "ramda";
 import styles from "./input.module.css";
 var inputStyles = {
   root: {
@@ -39,7 +38,8 @@ var inputStyles = {
     }
   }
 };
-var Input = React.memo(function (props) {
+
+var Input = function Input(props) {
   var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       isVisited = _useState2[0],
@@ -58,7 +58,6 @@ var Input = React.memo(function (props) {
     });
   };
 
-  console.info(props.value);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center"
   }, /*#__PURE__*/React.createElement(TextField, {
@@ -117,10 +116,8 @@ var Input = React.memo(function (props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, props.value !== "" && props.requiredMessage));
-}, function (cp, np) {
-  var isSameOld = cp.isDisabled === np.isDisabled && cp.isHidden === np.isHidden && cp.isReadOnly === np.isReadOnly && cp.isRequired === np.isRequired && cp.isVisited === np.isVisited && cp.isDence === np.isDense && cp.value === np.value && equals(cp.payload, np.payload);
-  return isSameOld;
-});
+};
+
 Input.defaultProps = {
   ariaLabel: "Text area",
   delay: 300,

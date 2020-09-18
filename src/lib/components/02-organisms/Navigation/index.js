@@ -27,7 +27,7 @@ const Navigation = ({
 
   const items = R.addIndex(R.map)((link, index) => {
     const className = `px-4 font-medium uppercase
-      py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial
+      py-2 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial mx-4
       hover:bg-${theme.hoverColor} hover:text-${theme.color} visited:text-${theme.color} text-${theme.color} text-center flex-wrap whitespace-no-wrap`;
 
     return link.url ? (
@@ -38,7 +38,7 @@ const Navigation = ({
       <NavLink
         key={`link-${index}`}
         exact={link.isExact}
-        activeClassName={`font-bold md:bg-${theme.hoverColor} md:font-normal`}
+        activeClassName={`font-bold md:bg-${theme.hoverColor} md:font-normal ml-xxs`}
         to={link.path}
         className={className}>
         {link.text}
@@ -50,11 +50,10 @@ const Navigation = ({
     <React.Fragment>
       {(!direction || direction === "horizontal") && (
         <AppBar position="static" classes={classes}>
-          <nav>
+          <nav className="border border-gray-300">
             <Toolbar
               variant="dense"
-              className={`flex flex-wrap text-black border 
-        border-gray-300 text-sm overflow-auto hide-scrollbar bg-${theme.backgroundColor}`}
+              className={`flex flex-wrap text-black text-sm overflow-auto hide-scrollbar bg-${theme.backgroundColor}`}
               disableGutters={true}>
               <HorizontalLayout items={items}></HorizontalLayout>
             </Toolbar>

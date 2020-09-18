@@ -4,13 +4,13 @@ import Dropdown from "./index";
 import { withState } from "@dump247/storybook-state";
 var options = [{
   value: "1",
-  label: "один"
+  label: "Yksi"
 }, {
   value: "2",
-  label: "два"
+  label: "Kaksi"
 }, {
   value: "3",
-  label: "три"
+  label: "Kolme"
 }];
 var initialState = {
   value: "2",
@@ -30,24 +30,51 @@ storiesOf("Dropdown", module).add("default, contained", withState(initialState)(
     emptyMessage: "Clear"
   }), /*#__PURE__*/React.createElement("p", null, "Value from callback is: ", store.state.value), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Fills container"), /*#__PURE__*/React.createElement(Dropdown, {
     options: options,
+    value: store.state.value,
     fullWidth: true,
-    emptyMessage: "Clear"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Doesn't fill container"), /*#__PURE__*/React.createElement(Dropdown, {
-    options: options,
-    emptyMessage: "Clear"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "With label"), /*#__PURE__*/React.createElement(Dropdown, {
-    options: options,
-    label: "With label",
-    emptyMessage: "Clear"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Disabled"), /*#__PURE__*/React.createElement(Dropdown, {
-    options: options,
-    value: 3,
-    isDisabled: true,
-    emptyMessage: "Clear"
-  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Required"), /*#__PURE__*/React.createElement(Dropdown, {
-    options: options,
+    emptyMessage: "Clear",
     onChanges: function onChanges(payload, _ref3) {
       var selectedOption = _ref3.selectedOption;
+      return store.set({
+        value: selectedOption.value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Doesn't fill container"), /*#__PURE__*/React.createElement(Dropdown, {
+    options: options,
+    value: store.state.value,
+    emptyMessage: "Clear",
+    onChanges: function onChanges(payload, _ref4) {
+      var selectedOption = _ref4.selectedOption;
+      return store.set({
+        value: selectedOption.value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "With label"), /*#__PURE__*/React.createElement(Dropdown, {
+    options: options,
+    value: store.state.value,
+    label: "With label",
+    emptyMessage: "Clear",
+    onChanges: function onChanges(payload, _ref5) {
+      var selectedOption = _ref5.selectedOption;
+      return store.set({
+        value: selectedOption.value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Disabled"), /*#__PURE__*/React.createElement(Dropdown, {
+    options: options,
+    value: store.state.value,
+    isDisabled: true,
+    emptyMessage: "Clear",
+    onChanges: function onChanges(payload, _ref6) {
+      var selectedOption = _ref6.selectedOption;
+      return store.set({
+        value: selectedOption.value
+      });
+    }
+  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("p", null, "Required"), /*#__PURE__*/React.createElement(Dropdown, {
+    options: options,
+    onChanges: function onChanges(payload, _ref7) {
+      var selectedOption = _ref7.selectedOption;
       return store.set({
         requiredValue: selectedOption.value
       });
@@ -56,7 +83,7 @@ storiesOf("Dropdown", module).add("default, contained", withState(initialState)(
     isRequired: true,
     requiredMessage: "field is required",
     showValidationErrors: true,
-    error: store.state.requiredValue === '',
+    error: store.state.requiredValue === "",
     label: "label",
     emptyMessage: "Clear"
   }));

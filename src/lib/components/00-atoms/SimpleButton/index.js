@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { createStyles } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 const defaultProps = {
   isReadOnly: false,
@@ -64,13 +64,14 @@ const SimpleButton = ({
 };
 
 SimpleButton.propTypes = {
+  ariaLabel: PropTypes.string,
+  color: PropTypes.string,
+  disabled: PropTypes.bool,
   isReadOnly: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   payload: PropTypes.object,
-  variant: PropTypes.string,
-  color: PropTypes.string,
   text: PropTypes.string,
-  ariaLabel: PropTypes.string
+  variant: PropTypes.string,
 };
 
 export default withStyles(styles)(SimpleButton);

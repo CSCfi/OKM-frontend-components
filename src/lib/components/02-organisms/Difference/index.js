@@ -50,7 +50,6 @@ const Difference = ({
         ? emptySelectionPlaceholderValue
         : properties.value;
       const resultIsValid = isValueValid(required, result);
-
       setValue(result);
       if (timeoutHandle) {
         clearTimeout(timeoutHandle);
@@ -93,7 +92,7 @@ const Difference = ({
               type="number"
               onChanges={handleChange}
               payload={payload}
-              value={value}
+              value={String(value)}
               fullWidth={false}
               isRequired={isRequired}
             />

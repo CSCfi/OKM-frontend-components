@@ -165,7 +165,7 @@ var Modify = React.memo(function (_ref) {
         properties: {
           isChecked: true,
           metadata: {
-            koodiarvo: 'FI1'
+            koodiarvo: "FI1"
           }
         }
       }, quickFilterChanges));
@@ -177,7 +177,7 @@ var Modify = React.memo(function (_ref) {
         properties: {
           isChecked: false,
           metadata: {
-            koodiarvo: 'FI1'
+            koodiarvo: "FI1"
           }
         }
       }, quickFilterChanges));
@@ -193,7 +193,7 @@ var Modify = React.memo(function (_ref) {
         properties: {
           isChecked: true,
           metadata: {
-            koodiarvo: 'FI2'
+            koodiarvo: "FI2"
           }
         }
       }, quickFilterChanges));
@@ -214,7 +214,7 @@ var Modify = React.memo(function (_ref) {
     if (quickFilterChanges && quickFilterChanges.length && (isCountryActive && isCountryActiveByDefault || isCountryDeactive && isCountryDeactiveByDefault)) {
       setQuickFilterChanges([]);
     }
-  }, [isCountryActive, isCountryDeactive, quickFilterChanges]);
+  }, [isCountryActive, isCountryActiveByDefault, isCountryDeactive, isCountryDeactiveByDefault, quickFilterChanges]);
   useEffect(function () {
     var anchor = "".concat(baseAnchor, "-radios.quick-filters.ei-alueita");
     var changeObj = find(propEq("anchor", anchor), quickFilterChanges);
@@ -225,7 +225,7 @@ var Modify = React.memo(function (_ref) {
         properties: {
           isChecked: false,
           metadata: {
-            koodiarvo: 'FI2'
+            koodiarvo: "FI2"
           }
         }
       }]);

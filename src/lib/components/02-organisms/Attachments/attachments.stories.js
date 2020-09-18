@@ -8,22 +8,22 @@ storiesOf("Attachments", module)
   .add("Example 1", () => (
     <>
       <Attachments
-        name="example"
         messages={{
           addAttachment: "Lisää liite",
           attachmentDownload: "Lataa koneelle"
         }}
+        name="example"
       />
       <Attachments
-        name="example3"
         isRequired={true}
-        requiredMessage="Liite vaaditaan"
-        showValidationErrors={true}
-        payload={null}
         messages={{
           addAttachment: "Lisää liite",
           attachmentDownload: "Lataa koneelle"
         }}
+        name="example3"
+        payload={null}
+        requiredMessage="Liite vaaditaan"
+        showValidationErrors={true}
       />
     </>
   ));

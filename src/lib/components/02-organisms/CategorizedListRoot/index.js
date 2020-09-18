@@ -102,7 +102,6 @@ const CategorizedListRoot = React.memo(
                * This is the first instance of CategorizedList. The component
                * will create more instances on it's own.
                **/
-
               return (
                 <CategorizedList
                   anchor={anchor}

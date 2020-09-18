@@ -26,7 +26,7 @@ var Navigation = function Navigation(_ref) {
   } : _ref$theme;
   var classes = useStyles(theme);
   var items = R.addIndex(R.map)(function (link, index) {
-    var className = "px-4 font-medium uppercase\n      py-4 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial\n      hover:bg-".concat(theme.hoverColor, " hover:text-").concat(theme.color, " visited:text-").concat(theme.color, " text-").concat(theme.color, " text-center flex-wrap whitespace-no-wrap");
+    var className = "px-4 font-medium uppercase\n      py-2 flex-1 tracking-wider min-w-200 lg:max-w-xxs sm:min-w-initial mx-4\n      hover:bg-".concat(theme.hoverColor, " hover:text-").concat(theme.color, " visited:text-").concat(theme.color, " text-").concat(theme.color, " text-center flex-wrap whitespace-no-wrap");
     return link.url ? /*#__PURE__*/React.createElement("a", {
       href: link.url,
       key: "link-".concat(index),
@@ -34,7 +34,7 @@ var Navigation = function Navigation(_ref) {
     }, link.text) : /*#__PURE__*/React.createElement(NavLink, {
       key: "link-".concat(index),
       exact: link.isExact,
-      activeClassName: "font-bold md:bg-".concat(theme.hoverColor, " md:font-normal"),
+      activeClassName: "font-bold md:bg-".concat(theme.hoverColor, " md:font-normal ml-xxs"),
       to: link.path,
       className: className
     }, link.text);
@@ -42,9 +42,11 @@ var Navigation = function Navigation(_ref) {
   return /*#__PURE__*/React.createElement(React.Fragment, null, (!direction || direction === "horizontal") && /*#__PURE__*/React.createElement(AppBar, {
     position: "static",
     classes: classes
-  }, /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement(Toolbar, {
+  }, /*#__PURE__*/React.createElement("nav", {
+    className: "border border-gray-300"
+  }, /*#__PURE__*/React.createElement(Toolbar, {
     variant: "dense",
-    className: "flex flex-wrap text-black border \n        border-gray-300 text-sm overflow-auto hide-scrollbar bg-".concat(theme.backgroundColor),
+    className: "flex flex-wrap text-black text-sm overflow-auto hide-scrollbar bg-".concat(theme.backgroundColor),
     disableGutters: true
   }, /*#__PURE__*/React.createElement(HorizontalLayout, {
     items: items

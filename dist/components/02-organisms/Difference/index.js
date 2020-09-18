@@ -89,7 +89,7 @@ var Difference = function Difference(_ref) {
     type: "number",
     onChanges: handleChange,
     payload: payload,
-    value: value,
+    value: String(value),
     fullWidth: false,
     isRequired: isRequired
   }), readonly && applyForValue), /*#__PURE__*/React.createElement("div", {

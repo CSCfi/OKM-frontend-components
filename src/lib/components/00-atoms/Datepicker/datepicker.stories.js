@@ -12,8 +12,7 @@ storiesOf("Datepicker", module)
     const onChanges = (payload, { value }) => {
       store.set({value, payload});
     };
-    const today = new Date(Date.now());
-    const yesterday = new Date(Date.now() - 86400000);
+
     const messages = {
       ok: "ok",
       cancel: "cancel",

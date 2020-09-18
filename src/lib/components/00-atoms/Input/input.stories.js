@@ -4,141 +4,103 @@ import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { withState } from "@dump247/storybook-state";
 
+const initialState = {
+  value: "Example text"
+};
+
 storiesOf("Input", module)
   .addDecorator(withInfo)
-  .add("Simple example", () => {
-    const onChanges = (payload, { value }) => {
-      console.info(payload, value);
-    };
-    return (
-      <div>
-        <p>Normal</p>
-        <Input value="1" payload={{ testProp: 1 }} onChanges={onChanges} />
-        <p>Error</p>
-        <Input
-          value="1"
-          payload={{ testProp: 2 }}
-          onChanges={onChanges}
-          error={true}
-        />
-        <p>Required and valid or not yet visited/validated</p>
-        <Input
-          payload={{ testProp: 1 }}
-          value="test"
-          onChanges={onChanges}
-          isRequired
-          isValid={true}
-          label="Required"
-          tooltip={{ text: "This is info text" }}
-        />
-        <p>Invalid</p>
-        <Input
-          payload={{ testProp: 1 }}
-          onChanges={onChanges}
-          isValid={false}
-          label="Invalid"
-          tooltip={{ text: "This is info text" }}
-        />
-        <p>Required and invalid</p>
-        <Input
-          payload={{ testProp: 1 }}
-          onChanges={onChanges}
-          isRequired
-          isValid={false}
-          label="Required"
-        />
-        <p>Width given</p>
-        <Input
-          payload={{ testProp: 2 }}
-          onChanges={onChanges}
-          width={"20rem"}
-        />
-        <Input
-          label="Readonly"
-          payload={{ testProp: 2 }}
-          onChanges={onChanges}
-          isReadOnly
-          value="readonly"
-        />
-        <p>Number</p>
-        <Input
-          payload={{ testProp: 123 }}
-          onChanges={onChanges}
-          type={"number"}
-          value={123}
-        />
-        <Input
-          payload={{ testProp: 123 }}
-          onChanges={onChanges}
-          type={"number"}
-          isRequired
-          label="Required"
-        />
-        <Input
-          label="Readonly"
-          payload={{ testProp: 123 }}
-          type={"number"}
-          onChanges={onChanges}
-          isReadOnly
-          isRequired
-          value={123}
-          tooltip={{ text: "This is info text" }}
-        />
-        <Input
-          label="Readonly empty"
-          payload={{ testProp: 123 }}
-          type={"number"}
-          onChanges={onChanges}
-          isReadOnly
-          isRequired
-          tooltip={{ text: "This is info text" }}
-        />
-      </div>
-    );
-  })
   .add(
-    "Requirement example",
-    withState({ values: ["", "", "", "", ""] })(({ store }) => {
-      const onChanges = (payload, { value }, index) => {
-        console.info(payload, value);
-        store.set({ values: store.state.currentStep + 1 });
+    "Unrequired",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
       };
       return (
-        <div className="p-4">
+        <div>
           <Input
-            payload={{ testProp: store.state.values[0] }}
-            onChanges={(payload, value) => onChanges(payload, { value }, 0)}
-            isRequired
-            isValid={true}
             label="Perustele muutos"
+            onChanges={onChanges}
+            value={store.state.value}
           />
+        </div>
+      );
+    })
+  )
+  .add(
+    "Required and invalid",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <div>
           <Input
-            payload={{ testProp: store.state.values[1] }}
-            onChanges={(payload, value) => onChanges(payload, { value }, 1)}
-            isRequired
-            isValid={true}
+            isRequired={true}
+            isValid={false}
             label="Perustele muutos"
+            onChanges={onChanges}
+            value={store.state.value}
           />
+        </div>
+      );
+    })
+  )
+  .add(
+    "Required and valid with a tooltip",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <div>
           <Input
-            payload={{ testProp: store.state.values[2] }}
-            onChanges={(payload, value) => onChanges(payload, { value }, 2)}
-            isRequired
+            isRequired={true}
             isValid={true}
             label="Perustele muutos"
+            onChanges={onChanges}
+            tooltip={{ text: "This is info text" }}
+            value={store.state.value}
           />
+        </div>
+      );
+    })
+  )
+  .add(
+    "Read only, required and invalid",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <div>
           <Input
-            payload={{ testProp: store.state.values[3] }}
-            onChanges={(payload, value) => onChanges(payload, { value }, 3)}
-            isRequired
-            isValid={true}
+            isRequired={true}
+            isReadOnly={true}
+            isValid={false}
             label="Perustele muutos"
+            onChanges={onChanges}
+            value={store.state.value}
           />
+        </div>
+      );
+    })
+  )
+  .add(
+    "Erroneous",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <div>
           <Input
-            payload={{ testProp: store.state.values[4] }}
-            onChanges={(payload, value) => onChanges(payload, { value }, 4)}
-            isRequired
-            isValid={true}
+            error={true}
+            isRequired={true}
+            isValid={false}
             label="Perustele muutos"
+            onChanges={onChanges}
+            value={store.state.value}
           />
         </div>
       );

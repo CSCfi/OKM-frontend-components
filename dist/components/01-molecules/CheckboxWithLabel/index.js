@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import green from "@material-ui/core/colors/green";
 import FormGroup from "@material-ui/core/FormGroup";

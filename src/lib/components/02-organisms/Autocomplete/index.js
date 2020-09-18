@@ -22,7 +22,7 @@ const Autocomplete = React.memo(
   props => {
     const [options, setOptions] = useState([]);
     const [value, setValue] = useState([]);
-    const [minCharacters, setMinCharacters] = useState(3);
+    const [, setMinCharacters] = useState(3);
     const [isOptionsShown, setIsOptionsShown] = useState(false);
 
     useEffect(() => {
@@ -123,7 +123,7 @@ const Autocomplete = React.memo(
       props.minChars <= 0
         ? setMinCharacters(props.minChars)
         : props.isSearch && setMinCharacters(3);
-    }, [props.minChars]);
+    }, [props.isSearch, props.minChars]);
 
     const searchFilter = (option, searchText) => {
       return option.data.label.toLowerCase().includes(searchText.toLowerCase());

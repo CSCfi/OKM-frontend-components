@@ -3,184 +3,95 @@ import Input from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { withState } from "@dump247/storybook-state";
-storiesOf("Input", module).addDecorator(withInfo).add("Simple example", function () {
-  var onChanges = function onChanges(payload, _ref) {
-    var value = _ref.value;
-    console.info(payload, value);
-  };
+var initialState = {
+  value: "Example text"
+};
+storiesOf("Input", module).addDecorator(withInfo).add("Unrequired", withState(initialState)(function (_ref) {
+  var store = _ref.store;
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Normal"), /*#__PURE__*/React.createElement(Input, {
-    value: "1",
-    payload: {
-      testProp: 1
-    },
-    onChanges: onChanges
-  }), /*#__PURE__*/React.createElement("p", null, "Error"), /*#__PURE__*/React.createElement(Input, {
-    value: "1",
-    payload: {
-      testProp: 2
-    },
-    onChanges: onChanges,
-    error: true
-  }), /*#__PURE__*/React.createElement("p", null, "Required and valid or not yet visited/validated"), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 1
-    },
-    value: "test",
-    onChanges: onChanges,
-    isRequired: true,
-    isValid: true,
-    label: "Required",
-    tooltip: {
-      text: "This is info text"
-    }
-  }), /*#__PURE__*/React.createElement("p", null, "Invalid"), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 1
-    },
-    onChanges: onChanges,
-    isValid: false,
-    label: "Invalid",
-    tooltip: {
-      text: "This is info text"
-    }
-  }), /*#__PURE__*/React.createElement("p", null, "Required and invalid"), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 1
-    },
-    onChanges: onChanges,
-    isRequired: true,
-    isValid: false,
-    label: "Required"
-  }), /*#__PURE__*/React.createElement("p", null, "Width given"), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 2
-    },
-    onChanges: onChanges,
-    width: "20rem"
-  }), /*#__PURE__*/React.createElement(Input, {
-    label: "Readonly",
-    payload: {
-      testProp: 2
-    },
-    onChanges: onChanges,
-    isReadOnly: true,
-    value: "readonly"
-  }), /*#__PURE__*/React.createElement("p", null, "Number"), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 123
-    },
-    onChanges: onChanges,
-    type: "number",
-    value: 123
-  }), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: 123
-    },
-    onChanges: onChanges,
-    type: "number",
-    isRequired: true,
-    label: "Required"
-  }), /*#__PURE__*/React.createElement(Input, {
-    label: "Readonly",
-    payload: {
-      testProp: 123
-    },
-    type: "number",
-    onChanges: onChanges,
-    isReadOnly: true,
-    isRequired: true,
-    value: 123,
-    tooltip: {
-      text: "This is info text"
-    }
-  }), /*#__PURE__*/React.createElement(Input, {
-    label: "Readonly empty",
-    payload: {
-      testProp: 123
-    },
-    type: "number",
-    onChanges: onChanges,
-    isReadOnly: true,
-    isRequired: true,
-    tooltip: {
-      text: "This is info text"
-    }
-  }));
-}).add("Requirement example", withState({
-  values: ["", "", "", "", ""]
-})(function (_ref2) {
-  var store = _ref2.store;
-
-  var _onChanges = function onChanges(payload, _ref3, index) {
-    var value = _ref3.value;
-    console.info(payload, value);
+  var onChanges = function onChanges(payload, _ref2) {
+    var value = _ref2.value;
     store.set({
-      values: store.state.currentStep + 1
+      value: value
     });
   };
 
-  return /*#__PURE__*/React.createElement("div", {
-    className: "p-4"
-  }, /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: store.state.values[0]
-    },
-    onChanges: function onChanges(payload, value) {
-      return _onChanges(payload, {
-        value: value
-      }, 0);
-    },
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Input, {
+    label: "Perustele muutos",
+    onChanges: onChanges,
+    value: store.state.value
+  }));
+})).add("Required and invalid", withState(initialState)(function (_ref3) {
+  var store = _ref3.store;
+
+  var onChanges = function onChanges(payload, _ref4) {
+    var value = _ref4.value;
+    store.set({
+      value: value
+    });
+  };
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Input, {
+    isRequired: true,
+    isValid: false,
+    label: "Perustele muutos",
+    onChanges: onChanges,
+    value: store.state.value
+  }));
+})).add("Required and valid with a tooltip", withState(initialState)(function (_ref5) {
+  var store = _ref5.store;
+
+  var onChanges = function onChanges(payload, _ref6) {
+    var value = _ref6.value;
+    store.set({
+      value: value
+    });
+  };
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Input, {
     isRequired: true,
     isValid: true,
-    label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: store.state.values[1]
+    label: "Perustele muutos",
+    onChanges: onChanges,
+    tooltip: {
+      text: "This is info text"
     },
-    onChanges: function onChanges(payload, value) {
-      return _onChanges(payload, {
-        value: value
-      }, 1);
-    },
+    value: store.state.value
+  }));
+})).add("Read only, required and invalid", withState(initialState)(function (_ref7) {
+  var store = _ref7.store;
+
+  var onChanges = function onChanges(payload, _ref8) {
+    var value = _ref8.value;
+    store.set({
+      value: value
+    });
+  };
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Input, {
     isRequired: true,
-    isValid: true,
-    label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: store.state.values[2]
-    },
-    onChanges: function onChanges(payload, value) {
-      return _onChanges(payload, {
-        value: value
-      }, 2);
-    },
+    isReadOnly: true,
+    isValid: false,
+    label: "Perustele muutos",
+    onChanges: onChanges,
+    value: store.state.value
+  }));
+})).add("Erroneous", withState(initialState)(function (_ref9) {
+  var store = _ref9.store;
+
+  var onChanges = function onChanges(payload, _ref10) {
+    var value = _ref10.value;
+    store.set({
+      value: value
+    });
+  };
+
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Input, {
+    error: true,
     isRequired: true,
-    isValid: true,
-    label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: store.state.values[3]
-    },
-    onChanges: function onChanges(payload, value) {
-      return _onChanges(payload, {
-        value: value
-      }, 3);
-    },
-    isRequired: true,
-    isValid: true,
-    label: "Perustele muutos"
-  }), /*#__PURE__*/React.createElement(Input, {
-    payload: {
-      testProp: store.state.values[4]
-    },
-    onChanges: function onChanges(payload, value) {
-      return _onChanges(payload, {
-        value: value
-      }, 4);
-    },
-    isRequired: true,
-    isValid: true,
-    label: "Perustele muutos"
+    isValid: false,
+    label: "Perustele muutos",
+    onChanges: onChanges,
+    value: store.state.value
   }));
 }));
