@@ -8,7 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "../DialogTitle";
-import {checkFiletypeAndSize, downloadFileFn} from "./utils";
+import { checkFiletypeAndSize, downloadFileFn } from "./utils";
 import { FormHelperText } from "@material-ui/core";
 import Incomplete from "@material-ui/icons/ErrorOutlined";
 import { COLORS } from "./styles";
@@ -190,7 +190,6 @@ const Attachments = React.memo(
       // setFileAdded("");
 
       if (e.target.files.length === 0) return;
-      console.log("File selected");
 
       const type = e.target.files[0].name
         .split(".")
@@ -200,11 +199,11 @@ const Attachments = React.memo(
       // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
       if (checkFiletypeAndSize(type, e.target.files[0].size)) {
         let liite = {};
-        liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
         liite.filename = e.target.files[0].name;
+        liite.tiedostoId = Math.random() + "-" + liite.filename;
         liite.kieli = "fi";
         liite.tyyppi = type;
-        liite.nimi = e.target.files[0].name.split(".")[0].toLowerCase();
+        liite.nimi = liite.filename.substr(0, liite.filename.lastIndexOf("."));
         liite.tiedosto = new Blob([e.target.files[0]]);
         liite.koko = e.target.files[0].size;
         liite.removed = false;

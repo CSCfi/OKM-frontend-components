@@ -133,16 +133,15 @@ var Attachments = React.memo(function (props) {
     setFileError(false); // setFileAdded("");
 
     if (e.target.files.length === 0) return;
-    console.log("File selected");
     var type = e.target.files[0].name.split(".").pop().toLowerCase(); // Rajoitetaan max kooksi 25MB ja vain pdf, word, excel, jpeg ja gif on sallittuja
 
     if (checkFiletypeAndSize(type, e.target.files[0].size)) {
       var liite = {};
-      liite.tiedostoId = Math.random() + "-" + e.target.files[0].name;
       liite.filename = e.target.files[0].name;
+      liite.tiedostoId = Math.random() + "-" + liite.filename;
       liite.kieli = "fi";
       liite.tyyppi = type;
-      liite.nimi = e.target.files[0].name.split(".")[0].toLowerCase();
+      liite.nimi = liite.filename.substr(0, liite.filename.lastIndexOf("."));
       liite.tiedosto = new Blob([e.target.files[0]]);
       liite.koko = e.target.files[0].size;
       liite.removed = false;
