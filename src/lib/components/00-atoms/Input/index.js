@@ -7,7 +7,6 @@ import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
-import { equals } from "ramda";
 
 import styles from "./input.module.css";
 
@@ -42,56 +41,53 @@ const inputStyles = {
   }
 };
 
-const Input = React.memo(
-  props => {
-    const [isVisited, setIsVisited] = useState(false);
-    const [isFocused, setIsFocused] = useState(false);
-    const { classes } = props;
+const Input = props => {
+  const [isVisited, setIsVisited] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const { classes } = props;
 
-    const updateValue = e => {
-      props.onChanges(props.payload, { value: e.target.value });
-    };
-    console.info(props.value);
-    return (
-      <React.Fragment>
-        <div className="flex items-center">
-          <TextField
-            id={props.id}
-            aria-label={props.ariaLabel}
-            value={props.value}
-            label={props.label}
-            disabled={props.isDisabled || props.isReadOnly}
-            inputprops={{
-              readOnly: props.isReadOnly
-            }}
-            placeholder={props.placeholder}
-            rows={props.rows}
-            margin={props.isDense ? "dense" : ""}
-            rowsMax={props.rowsMax}
-            onChange={updateValue}
-            required={props.isRequired && !props.isReadOnly}
-            error={
-              !props.isReadOnly && props.error
-                ? props.error
-                : (props.isRequired && props.value && !props.isValid) ||
-                  (!props.isRequired && !props.isValid)
-            }
-            variant="outlined"
-            style={
-              props.fullWidth
-                ? { border: "none" }
-                : { width: props.width, border: "none" }
-            }
-            fullWidth={props.fullWidth}
-            type={props.type}
-            onBlurCapture={
-              !props.value
-                ? () => setIsVisited(true)
-                : () => setIsVisited(false)
-            }
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            className={`${props.isHidden ? "hidden" : ""} 
+  const updateValue = e => {
+    props.onChanges(props.payload, { value: e.target.value });
+  };
+
+  return (
+    <React.Fragment>
+      <div className="flex items-center">
+        <TextField
+          id={props.id}
+          aria-label={props.ariaLabel}
+          value={props.value}
+          label={props.label}
+          disabled={props.isDisabled || props.isReadOnly}
+          inputprops={{
+            readOnly: props.isReadOnly
+          }}
+          placeholder={props.placeholder}
+          rows={props.rows}
+          margin={props.isDense ? "dense" : ""}
+          rowsMax={props.rowsMax}
+          onChange={updateValue}
+          required={props.isRequired && !props.isReadOnly}
+          error={
+            !props.isReadOnly && props.error
+              ? props.error
+              : (props.isRequired && props.value && !props.isValid) ||
+                (!props.isRequired && !props.isValid)
+          }
+          variant="outlined"
+          style={
+            props.fullWidth
+              ? { border: "none" }
+              : { width: props.width, border: "none" }
+          }
+          fullWidth={props.fullWidth}
+          type={props.type}
+          onBlurCapture={
+            !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
+          }
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          className={`${props.isHidden ? "hidden" : ""} 
           ${
             !props.isReadOnly &&
             props.value === "" &&
@@ -103,48 +99,35 @@ const Input = React.memo(
           } 
           ${props.isReadOnly && classes.readonlyNoValue}
         `}
-          />
-          {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
-            <div className="ml-8">
-              <Tooltip tooltip={props.tooltip.text} trigger="click">
-                <HelpIcon
-                  classes={{
-                    colorPrimary: styles.tooltipBg
-                  }}
-                  color="primary"
-                />
-              </Tooltip>
-            </div>
-          )}
-        </div>
-        {props.showValidationErrors && props.requiredMessage && (
-          <FormHelperText
-            id="component-message-text"
-            style={{
-              marginTop: "0.1em",
-              paddingLeft: "1.2em",
-              marginBottom: "0.5em",
-              color: COLORS.OIVA_ORANGE_TEXT
-            }}>
-            {props.value !== "" && props.requiredMessage}
-          </FormHelperText>
+        />
+        {!props.isReadOnly && !props.disabled && !isEmpty(props.tooltip) && (
+          <div className="ml-8">
+            <Tooltip tooltip={props.tooltip.text} trigger="click">
+              <HelpIcon
+                classes={{
+                  colorPrimary: styles.tooltipBg
+                }}
+                color="primary"
+              />
+            </Tooltip>
+          </div>
         )}
-      </React.Fragment>
-    );
-  },
-  (cp, np) => {
-    const isSameOld =
-      cp.isDisabled === np.isDisabled &&
-      cp.isHidden === np.isHidden &&
-      cp.isReadOnly === np.isReadOnly &&
-      cp.isRequired === np.isRequired &&
-      cp.isVisited === np.isVisited &&
-      cp.isDence === np.isDense &&
-      cp.value === np.value &&
-      equals(cp.payload, np.payload);
-    return isSameOld;
-  }
-);
+      </div>
+      {props.showValidationErrors && props.requiredMessage && (
+        <FormHelperText
+          id="component-message-text"
+          style={{
+            marginTop: "0.1em",
+            paddingLeft: "1.2em",
+            marginBottom: "0.5em",
+            color: COLORS.OIVA_ORANGE_TEXT
+          }}>
+          {props.value !== "" && props.requiredMessage}
+        </FormHelperText>
+      )}
+    </React.Fragment>
+  );
+};
 
 Input.defaultProps = {
   ariaLabel: "Text area",

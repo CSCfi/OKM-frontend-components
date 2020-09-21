@@ -533,8 +533,8 @@ Attachments.propTypes = {
   selectedAttachment: PropTypes.object,
   showListOnly: PropTypes.bool,
   requiredMessage: PropTypes.string,
-  showValidationErrors: PropTypes.boolean,
-  isRequired: PropTypes.boolean
+  showValidationErrors: PropTypes.bool,
+  isRequired: PropTypes.bool
 };
 
 export default Attachments;

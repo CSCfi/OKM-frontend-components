@@ -18,8 +18,6 @@ storiesOf("Datepicker", module).addDecorator(withInfo).add("Simple example", wit
     });
   };
 
-  var today = new Date(Date.now());
-  var yesterday = new Date(Date.now() - 86400000);
   var messages = {
     ok: "ok",
     cancel: "cancel",

@@ -6,20 +6,7 @@ const labelStyles = {
 };
 
 export const radioStory = {
-  changes: [
-    {
-      anchor: "radio.A.A",
-      properties: {
-        isChecked: true
-      }
-    },
-    {
-      anchor: "radio.A.A.A",
-      properties: {
-        isChecked: true
-      }
-    }
-  ],
+  changes: [],
   categories: [
     {
       anchor: "A",
@@ -86,7 +73,7 @@ export const radioStory = {
                     labelStyles: Object.assign({}, labelStyles, {
                       custom: isInLupa
                     }),
-                    isChecked: true
+                    isChecked: false
                   }
                 }
               ]
@@ -120,8 +107,7 @@ export const radioStory = {
                         label: "Value 2"
                       },
                       { value: "value3", label: "Value 3" }
-                    ],
-                    isChecked: true
+                    ]
                   }
                 }
               ],
@@ -181,7 +167,7 @@ export const radioStory = {
                     labelStyles: Object.assign({}, labelStyles, {
                       custom: isInLupa
                     }),
-                    isChecked: true
+                    isChecked: false
                   }
                 }
               ]

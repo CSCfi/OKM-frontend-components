@@ -117,9 +117,8 @@ var getPropertiesObject = function getPropertiesObject() {
  */
 
 
-var CategorizedList = React.memo(function (props) {
+var CategorizedList = function CategorizedList(props) {
   var onChangesUpdate = props.onChangesUpdate,
-      removeChangeObject = props.removeChangeObject,
       showValidationErrors = props.showValidationErrors;
   /**
    * Click of the SimpleButton is handled here.
@@ -268,7 +267,6 @@ var CategorizedList = React.memo(function (props) {
       var changeObj = getChangeObjByAnchor(fullAnchor, props.changes);
       var parentComponent = props.parent && props.parent.category.components ? props.parent.category.components[0] : null;
       var parentChangeObj = parentComponent ? getChangeObjByAnchor("".concat(props.parent.anchor, ".").concat(parentComponent.anchor), props.changes) : {};
-      var parentPropsObj = getPropertiesObject(parentChangeObj, parentComponent);
       /**
        * Override component properties with the change object properties
        * to display the state after changes.
@@ -373,14 +371,6 @@ var CategorizedList = React.memo(function (props) {
         }));
       }(category) : null, component.name === "TextBox" ? function () {
         var isDisabled = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]) && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || parentChangeObj.properties.isChecked === false);
-        var value = R.path(["properties", "value"], changeObj);
-
-        if (parentComponent && (parentComponent.name === "CheckboxWithLabel" || parentComponent.name === "RadioButtonWithLabel") && !R.equals(parentPropsObj.isChecked, true) && !R.isNil(value) && !R.isEmpty(value)) {
-          // If parent checkbox is unchecked the change object of
-          // the current textbox will be removed
-          removeChangeObject("".concat(anchor, ".").concat(component.anchor));
-        }
-
         return /*#__PURE__*/React.createElement(TextBox, {
           id: fullAnchor,
           isDisabled: isDisabled,
@@ -401,7 +391,7 @@ var CategorizedList = React.memo(function (props) {
           placeholder: propsObj.placeholder,
           title: propsObj.title,
           tooltip: propsObj.tooltip,
-          value: value,
+          value: propsObj.value,
           showValidationErrors: showValidationErrors,
           requiredMessage: propsObj.requiredMessage
         });
@@ -490,6 +480,9 @@ var CategorizedList = React.memo(function (props) {
           title: propsObj.title
         }));
       }(category) : null, component.name === "Alert" ? function () {
+        var hasCheckableParent = parentComponent && R.includes(parentComponent.name, ["CheckboxWithLabel", "RadioButtonWithLabel"]);
+        var isHiddenByParentComponent = hasCheckableParent && (!parentComponent.properties.isChecked && R.isEmpty(parentChangeObj.properties) || parentChangeObj.properties.isChecked === false);
+        var isVisible = hasCheckableParent ? !isHiddenByParentComponent : props.isVisible;
         return /*#__PURE__*/React.createElement("div", {
           className: "flex-1 mb-2 ".concat(component.styleClasses)
         }, /*#__PURE__*/React.createElement(AlertMessage, {
@@ -498,7 +491,7 @@ var CategorizedList = React.memo(function (props) {
           type: propsObj.type,
           title: propsObj.title,
           message: propsObj.message,
-          isVisible: propsObj.isVisible,
+          isVisible: isVisible,
           link: propsObj.link,
           linkUrl: propsObj.linkUrl,
           linkText: propsObj.linkText,
@@ -524,7 +517,8 @@ var CategorizedList = React.memo(function (props) {
         }, /*#__PURE__*/React.createElement(Multiselect, {
           ariaLabel: propsObj.ariaLabel,
           callback: handleChanges,
-          id: fullPath,
+          id: fullAnchor,
+          isDisabled: isDisabled,
           isMulti: propsObj.isMulti,
           isRequired: propsObj.isRequired,
           isReadOnly: propsObj.isReadOnly,
@@ -540,7 +534,6 @@ var CategorizedList = React.memo(function (props) {
           },
           placeholder: propsObj.placeholder,
           value: R.flatten([propsObj.value]),
-          isDisabled: isDisabled,
           height: heights.SHORT,
           width: propsObj.width,
           autoSize: propsObj.autoSize,
@@ -687,16 +680,12 @@ var CategorizedList = React.memo(function (props) {
       runRootOperations: props.runRootOperations,
       showCategoryTitles: props.showCategoryTitles,
       onChangesUpdate: props.onChangesUpdate,
-      removeChangeObject: props.removeChangeObject,
       showValidationErrors: showValidationErrors,
       requiredMessage: props.requiredMessage
     }));
   }).filter(Boolean));
-}, function (prevState, nextState) {
-  var areCategoriesSame = JSON.stringify(prevState.categories) === JSON.stringify(nextState.categories);
-  var areChangesSame = R.equals(prevState.changes, nextState.changes);
-  return areCategoriesSame && areChangesSame && JSON.stringify(prevState.onChangesUpdate) === JSON.stringify(nextState.onChangesUpdate);
-});
+};
+
 CategorizedList.defaultProps = {
   level: 0
 };

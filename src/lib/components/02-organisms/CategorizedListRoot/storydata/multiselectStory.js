@@ -37,13 +37,13 @@ export const multiselectStory = {
               anchor: "A",
               name: "Multiselect",
               properties: {
-                defaultValue: "Default value"
-              },
-              options: [
-                { label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" },
-                { label: "Bbbbbb", value: "Bbbbbb", group: "2" },
-                { label: "Ccccccccccc", value: "Ccccccccccc", group: "2" }
-              ]
+                value: [{ label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" }],
+                options: [
+                  { label: "Aaaaaaaa", value: "Aaaaaaaa", group: "1" },
+                  { label: "Bbbbbb", value: "Bbbbbb", group: "2" },
+                  { label: "Ccccccccccc", value: "Ccccccccccc", group: "2" }
+                ]
+              }
             }
           ]
         }

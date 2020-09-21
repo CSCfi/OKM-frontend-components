@@ -89,9 +89,6 @@ storiesOf("CheckboxWithLabel", module)
       Is checked, added and in LUPA
     </CheckboxWithLabel>
   ))
-  .add("is unchecked and indeterminate", () => (
-    <p>This state is not implemented.</p>
-  ))
   .add("is checked and indeterminate", () => (
     <CheckboxWithLabel
       name="example"

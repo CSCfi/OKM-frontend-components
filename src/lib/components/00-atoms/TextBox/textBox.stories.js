@@ -2,49 +2,88 @@ import React from "react";
 import TextBox from "./index";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
+import { withState } from "@dump247/storybook-state";
+
+const initialState = {
+  value: "Example text"
+};
 
 storiesOf("TextBox", module)
   .addDecorator(withInfo)
-  .add("Simple example", () => {
-    const onChanges = (payload, { value }) => {
-      console.info(payload, value);
-    };
-    return (
-      <div>
-        <p>Open developer tool console to see callback values.</p>
-        <TextBox payload={{ testProp: 1 }} onChanges={onChanges} />
-        <br />
+  .add(
+    "Unrequired without a title",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return <TextBox onChanges={onChanges} value={store.state.value} />;
+    })
+  )
+  .add(
+    "Required",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
         <TextBox
-          title="Required"
-          isRequired
-          payload={{ testProp: 1 }}
+          isRequired={true}
           onChanges={onChanges}
+          title="Perustelut"
+          value={store.state.value}
         />
-        <br />
-        <br />
+      );
+    })
+  )
+  .add(
+    "Read only",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
         <TextBox
-          title="read only"
-          isReadOnly
-          value="Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text Read only longer text "
-          isRequired
-          tooltip={{ text: "This is info text" }}
-        />
-        <TextBox
-          title="invalid"
-          payload={{ testProp: 1 }}
+          isReadOnly={true}
           onChanges={onChanges}
+          title="Perustelut"
+          value={store.state.value}
+        />
+      );
+    })
+  )
+  .add(
+    "Invalid with a tooltip",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <TextBox
+          isRequired={false}
           isValid={false}
-          tooltip={{ text: "This is info text" }}
-        />
-        <br />
-        <TextBox
-          title="invalid and required"
-          isRequired
-          payload={{ testProp: 1 }}
           onChanges={onChanges}
+          title="Perustelut"
+          tooltip={{ text: "This is info text" }}
+          value={store.state.value}
+        />
+      );
+    })
+  )
+  .add(
+    "Required and invalid",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <TextBox
+          isRequired
           isValid={false}
+          onChanges={onChanges}
           requiredMessage={"Pakollinen tieto"}
+          title="Perustelut"
+          value={store.state.value}
         />
-      </div>
-    );
-  });
+      );
+    })
+  );

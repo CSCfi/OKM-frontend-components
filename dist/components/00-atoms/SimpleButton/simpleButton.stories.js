@@ -5,7 +5,8 @@ storiesOf("SimpleButton", module).add("Normal", function () {
   return /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col w-56 p-4"
   }, /*#__PURE__*/React.createElement(SimpleButton, {
-    text: "Text is here"
+    text: "Text is here",
+    onClick: function onClick() {}
   }));
 });
 storiesOf("SimpleButton", module).add("Outlined, large", function () {
@@ -14,7 +15,8 @@ storiesOf("SimpleButton", module).add("Outlined, large", function () {
   }, /*#__PURE__*/React.createElement(SimpleButton, {
     text: "Text is here",
     variant: "outlined",
-    size: "large"
+    size: "large",
+    onClick: function onClick() {}
   }));
 });
 storiesOf("SimpleButton", module).add("Text button", function () {
@@ -23,7 +25,7 @@ storiesOf("SimpleButton", module).add("Text button", function () {
   }, /*#__PURE__*/React.createElement(SimpleButton, {
     text: "Text is here",
     color: "default",
-    variant: "default"
+    onClick: function onClick() {}
   }));
 });
 storiesOf("SimpleButton", module).add("Disabled Normal button", function () {
@@ -31,6 +33,7 @@ storiesOf("SimpleButton", module).add("Disabled Normal button", function () {
     className: "flex flex-col w-56 p-4"
   }, /*#__PURE__*/React.createElement(SimpleButton, {
     text: "Text is here",
-    disabled: "true"
+    disabled: true,
+    onClick: function onClick() {}
   }));
 });

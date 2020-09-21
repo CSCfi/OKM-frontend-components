@@ -16,172 +16,201 @@ import { datepickerStory } from "./storydata/datepickerStory";
 import { alertStory } from "./storydata/alertStory";
 import { multiselectStory } from "./storydata/multiselectStory";
 import { oneCheckboxStory } from "./storydata/oneCheckboxStory";
-import Stage from "./Stage";
+import { withState } from "@dump247/storybook-state";
 
 storiesOf("CategorizedListRoot", module)
   .addDecorator(withInfo)
-  .add("One checkbox story", () => {
-    return (
-      <Stage
-        anchor={"one-checkbox"}
+  .add(
+    "One checkbox story",
+    withState(oneCheckboxStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="one-checkbox"
         categories={oneCheckboxStory.categories}
-        changes={oneCheckboxStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Long and plain - Checkboxes only", () => {
-    return (
-      <Stage
-        anchor={"long-and-plain"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={true}
+      />
+    ))
+  )
+  .add(
+    "Long and plain - Checkboxes only",
+    withState(longAndPlainStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="long-and-plain"
         categories={longAndPlainStory.categories}
-        changes={longAndPlainStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Three levels of radio buttons", () => {
-    return (
-      <Stage
-        anchor={"simple-radio"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={true}
+      />
+    ))
+  )
+  .add(
+    "Three levels of radio buttons",
+    withState(simpleRadioStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="simple-radio"
         categories={simpleRadioStory.categories}
-        changes={simpleRadioStory.changes}
-        render={props => <CategorizedListRoot {...props} />}></Stage>
-    );
-  })
-  .add("Checkbox under a checkbox", () => {
-    return (
-      <Stage
-        anchor={"checkbox"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+      />
+    ))
+  )
+  .add(
+    "Checkbox under a checkbox",
+    withState(checkboxStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="checkbox"
         categories={checkboxStory.categories}
-        changes={checkboxStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Three levels of checkboxes", () => {
-    return (
-      <Stage
-        anchor={"simple"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={true}
+      />
+    ))
+  )
+  .add(
+    "Three levels of checkboxes",
+    withState(checkboxStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="simple"
         categories={threeLevelsOfCheckboxes.categories}
-        changes={threeLevelsOfCheckboxes.changes}
-        render={props => (
-          <CategorizedListRoot
-            uncheckParentWithoutActiveChildNodes={true}
-            showCategoryTitles={false}
-            {...props}
-          />
-        )}></Stage>
-    );
-  })
-  .add("Checkboxes, radio buttons and dropdowns", () => {
-    return (
-      <Stage
-        anchor={"complex"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+      />
+    ))
+  )
+  .add(
+    "Checkboxes, radio buttons and dropdowns",
+    withState(complexStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="complex"
         categories={complexStory.categories}
-        changes={complexStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Checkboxes, radio buttons and dropdowns (simpler)", () => {
-    return (
-      <Stage
-        anchor={"radio"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Checkboxes, radio buttons and dropdowns (simpler)",
+    withState(complexStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="radio"
         categories={radioStory.categories}
-        changes={radioStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Simple textbox example", () => {
-    return (
-      <Stage
-        anchor={"simple-textbox"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Simple textbox example",
+    withState(simpleTextBoxStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="simple-textbox"
         categories={simpleTextBoxStory.categories}
-        changes={simpleTextBoxStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={true} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Checkboxes, Dropdowns, textboxes and radio buttons", () => {
-    return (
-      <Stage
-        anchor={"textbox"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={true}
+      />
+    ))
+  )
+  .add(
+    "Checkboxes, Dropdowns, textboxes and radio buttons",
+    withState(textBoxStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="textboxStory"
         categories={textBoxStory.categories}
-        changes={textBoxStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Checkboxes, Dropdowns, inputs and radio buttons", () => {
-    return (
-      <Stage
-        anchor={"input"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Checkboxes, Dropdowns, inputs and radio buttons",
+    withState(inputStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="input"
         categories={inputStory.categories}
-        changes={inputStory.changes}
-        render={props => (
-          <CategorizedListRoot showCategoryTitles={false} {...props} />
-        )}></Stage>
-    );
-  })
-  .add("Datepicker example", () => {
-    return (
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Datepicker example",
+    withState(inputStory)(({ store }) => (
       <CategorizedListRoot
         anchor="datepicker"
         categories={datepickerStory.categories}
-        changes={datepickerStory.changes}
-        onUpdate={() => {}}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
         showCategoryTitles={false}
       />
-    );
-  })
-  .add("Attachments example", () => {
-    return (
-      <Stage
-        anchor={"attachments"}
-        // interval={1000}
+    ))
+  )
+  .add(
+    "Attachments example",
+    withState(attachmentsStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="attachments"
         categories={attachmentsStory.categories}
-        changes={attachmentsStory.changes}
-        render={props => (
-          <CategorizedListRoot
-            showCategoryTitles={false}
-            {...props}
-            placement="test"
-          />
-        )}></Stage>
-    );
-  })
-  .add("Alert example", () => {
-    return (
-      <Stage
-        anchor={"alert"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Alert example",
+    withState(attachmentsStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="alert"
         categories={alertStory.categories}
-        changes={alertStory.changes}
-        render={props => (
-          <div className="mb-64">
-            <CategorizedListRoot showCategoryTitles={false} {...props} />
-          </div>
-        )}></Stage>
-    );
-  })
-  .add("Multiselect example WIP", () => {
-    return (
-      <Stage
-        anchor={"multiselect"}
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  )
+  .add(
+    "Multiselect example",
+    withState(multiselectStory)(({ store }) => (
+      <CategorizedListRoot
+        anchor="multiselect"
         categories={multiselectStory.categories}
-        changes={multiselectStory.changes}
-        render={props => (
-          <div className="mb-64">
-            <CategorizedListRoot showCategoryTitles={false} {...props} />
-          </div>
-        )}></Stage>
-    );
-  });
+        changes={store.state.changes}
+        onUpdate={({ changes }) => {
+          store.set({ changes });
+        }}
+        showCategoryTitles={false}
+      />
+    ))
+  );

@@ -1,5 +1,5 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
@@ -100,57 +100,30 @@ var TextBox = function TextBox(props) {
       isFocused = _useState4[0],
       setIsFocused = _useState4[1];
 
-  var _useState5 = useState(null),
-      _useState6 = _slicedToArray(_useState5, 2),
-      value = _useState6[0],
-      setValue = _useState6[1];
-
-  var _useState7 = useState(null),
-      _useState8 = _slicedToArray(_useState7, 2),
-      handle = _useState8[0],
-      setHandle = _useState8[1];
-
   var classes = props.classes;
 
   var updateValue = function updateValue(e) {
-    !e.target.value && !isFocused ? setIsVisited(true) : setIsVisited(false);
-    setValue(e.target.value);
-
-    if (handle) {
-      clearTimeout(handle);
-    }
-
-    setHandle(function (v) {
-      return setTimeout(function () {
-        props.onChanges(props.payload, {
-          value: v
-        });
-      }, props.delay);
-    }(e.target.value));
+    props.onChanges(props.payload, {
+      value: e.target.value
+    });
   };
 
-  useEffect(function () {
-    if (props.value !== value || !value) {
-      setValue(props.value || ""); // props.value might be undefined
-    }
-  }, [props.value]); // If value is added the component won't work.
-
-  return /*#__PURE__*/React.createElement(React.Fragment, null, value !== null ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, props.value !== null ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row w-full"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col w-full"
   }, props.title && !props.isHidden && /*#__PURE__*/React.createElement(InputLabel, {
     disabled: props.isDisabled || props.isReadOnly,
     htmlFor: "props.id",
-    shrink: isFocused || value || props.placeholder ? true : false,
+    shrink: isFocused || props.value || props.placeholder ? true : false,
     variant: "outlined",
-    error: props.isErroneous ? props.isErroneous : props.isRequired && value && !props.isValid || !props.isRequired && !props.isValid,
+    error: props.isErroneous ? props.isErroneous : props.isRequired && props.value && !props.isValid || !props.isRequired && !props.isValid,
     classes: {
       root: classes.cssLabel,
       shrink: classes.inputLabelShrink,
       disabled: classes.inputLabelReadonly
     },
-    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && (!value && props.showValidationErrors || isVisited) ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && value && classes.inputLabelReadonlyShrink)
+    className: "".concat(isFocused ? classes.cssLabelFocused : props.isRequired && (!props.value && props.showValidationErrors || isVisited) ? classes.cssLabelRequired : classes.cssLabel, " ").concat(props.isReadOnly && props.value && classes.inputLabelReadonlyShrink)
   }, /*#__PURE__*/React.createElement("span", {
     style: {
       padding: "0 0.3em",
@@ -163,14 +136,14 @@ var TextBox = function TextBox(props) {
     placeholder: props.isDisabled || props.isReadOnly ? "" : props.placeholder,
     rows: props.isReadOnly ? 1 : props.rows,
     rowsMax: props.isReadOnly ? Infinity : props.rowsMax,
-    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(!value && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
+    className: "".concat(props.isHidden ? "hidden" : "rounded", " \n                    ").concat(props.required && classes.required, "\n                    ").concat(!props.value && !isFocused && props.isRequired && (isVisited || props.showValidationErrors) ? classes.requiredVisited : classes.root, " \n                    ").concat(isFocused ? props.isRequired ? classes.requiredVisitedFocus : classes.focused : "", " \n                    ").concat(props.isReadOnly && classes.readOnly, " \n                  ").concat(props.isErroneous || !props.isValid && !props.isRequired || !props.isValid && props.value && props.isRequired ? isFocused ? classes.errorFocused : classes.error : "", " \n              w-full p-2 resize-none"),
     onChange: updateValue,
-    value: value,
+    value: props.value,
     inputprops: {
       readOnly: props.isReadOnly
     },
     onBlurCapture: function onBlurCapture() {
-      return !value ? setIsVisited(true) : setIsVisited(false);
+      return !props.value ? setIsVisited(true) : setIsVisited(false);
     },
     onFocus: function onFocus() {
       return setIsFocused(true);
@@ -186,7 +159,7 @@ var TextBox = function TextBox(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, !value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
+  }, !props.value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
   }, /*#__PURE__*/React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
@@ -213,6 +186,7 @@ TextBox.defaultProps = {
   rowsMax: 100,
   title: "",
   tooltip: {},
-  isVisited: false
+  isVisited: false,
+  value: ""
 };
 export default withStyles(textboxStyles)(TextBox);

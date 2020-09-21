@@ -31,7 +31,6 @@ var Autocomplete = React.memo(function (props) {
 
   var _useState5 = useState(3),
       _useState6 = _slicedToArray(_useState5, 2),
-      minCharacters = _useState6[0],
       setMinCharacters = _useState6[1];
 
   var _useState7 = useState(false),
@@ -140,7 +139,7 @@ var Autocomplete = React.memo(function (props) {
   useEffect(function () {
     setMinCharacters(3);
     props.minChars <= 0 ? setMinCharacters(props.minChars) : props.isSearch && setMinCharacters(3);
-  }, [props.minChars]);
+  }, [props.isSearch, props.minChars]);
 
   var searchFilter = function searchFilter(option, searchText) {
     return option.data.label.toLowerCase().includes(searchText.toLowerCase());

@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import { createStyles } from "@material-ui/core";
-import { withStyles } from "@material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 var defaultProps = {
   isReadOnly: false,
   payload: {},

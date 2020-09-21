@@ -1,12 +1,14 @@
 function HexToRgb(hexstr) {
   var a = [];
   hexstr = hexstr.replace(/[^0-9a-f]+/gi, "");
-  if (hexstr.length == 3) {
+  if (hexstr.length === 3) {
     a = hexstr.split("");
-  } else if (hexstr.length == 6) {
+  } else if (hexstr.length === 6) {
     a = hexstr.match(/(\w{2})/g);
   } else {
-    throw "invalid input, hex string must be in the format #FFFFFF or #FFF";
+    throw new Error(
+      "invalid input, hex string must be in the format #FFFFFF or #FFF"
+    );
   }
   return a.map(function(x) {
     return parseInt(x, 16);
@@ -15,7 +17,7 @@ function HexToRgb(hexstr) {
 
 function IntToHex(i) {
   var hex = i.toString(16);
-  if (hex.length == 1) hex = "0" + hex;
+  if (hex.length === 1) hex = "0" + hex;
   return hex;
 }
 

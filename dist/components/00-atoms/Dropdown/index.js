@@ -1,11 +1,10 @@
 import _slicedToArray from "@babel/runtime/helpers/esm/slicedToArray";
 import React, { useState } from "react";
 import Select from "@material-ui/core/Select";
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
 import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
-import { equals } from "ramda";
 import "./dropdown.css";
 import { withStyles } from "@material-ui/core";
 var selectCustomStyles = {
@@ -87,7 +86,8 @@ var selectCustomStyles = {
     marginLeft: "-1.1em"
   }
 };
-var Dropdown = React.memo(function (props) {
+
+var Dropdown = function Dropdown(props) {
   var _useState = useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       isVisited = _useState2[0],
@@ -97,9 +97,9 @@ var Dropdown = React.memo(function (props) {
       _useState4 = _slicedToArray(_useState3, 2),
       setIsFocused = _useState4[1];
 
-  var handleChanges = function handleChanges(selectedOption) {
+  var handleChanges = function handleChanges(e) {
     props.onChanges(props.payload, {
-      selectedOption: selectedOption.target
+      selectedOption: e.target.value
     });
   };
 
@@ -131,7 +131,7 @@ var Dropdown = React.memo(function (props) {
     }
   }, /*#__PURE__*/React.createElement(MenuItem, {
     value: ""
-  }, props.emptyMessage || ''), props.options.map(function (item, i) {
+  }, props.emptyMessage || ""), props.options.map(function (item, i) {
     return /*#__PURE__*/React.createElement(MenuItem, {
       key: i,
       value: item.value
@@ -145,8 +145,9 @@ var Dropdown = React.memo(function (props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, isVisited && !props.value && props.requiredMessage));
-}, function (prevProps, nextProps) {
-  var isSameFunction = prevProps.onChanges === nextProps.onChanges;
-  return isSameFunction && equals(prevProps.isDisabled, nextProps.isDisabled) && equals(prevProps.value, nextProps.value) && equals(prevProps.isRequired, nextProps.isRequired);
-});
+};
+
+Dropdown.defaultProps = {
+  value: ""
+};
 export default withStyles(selectCustomStyles)(Dropdown);

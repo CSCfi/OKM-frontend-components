@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Select from "@material-ui/core/Select";
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
 import PropTypes from "prop-types";
 import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
-import { equals } from "ramda";
 
 import "./dropdown.css";
 
@@ -91,69 +90,64 @@ const selectCustomStyles = {
   }
 };
 
-const Dropdown = React.memo(
-  props => {
-    const [isVisited, setIsVisited] = useState(false);
-    const [, setIsFocused] = useState(false);
+const Dropdown = props => {
+  const [isVisited, setIsVisited] = useState(false);
+  const [, setIsFocused] = useState(false);
 
-    const handleChanges = selectedOption => {
-      props.onChanges(props.payload, { selectedOption: selectedOption.target });
-    };
+  const handleChanges = e => {
+    props.onChanges(props.payload, { selectedOption: e.target.value });
+  };
 
-    return (
-      <React.Fragment>
+  return (
+    <React.Fragment>
       <FormControl
         variant="outlined"
         disabled={props.isDisabled}
         fullWidth={props.fullWidth}
         required={props.isRequired}
         error={props.error}
-        margin="dense"
-      >
-        {props.label && <InputLabel id="select-label">{props.label}</InputLabel>}
+        margin="dense">
+        {props.label && (
+          <InputLabel id="select-label">{props.label}</InputLabel>
+        )}
         <Select
           labelId="select-label"
           aria-label={props.label}
           autosize="true"
           value={props.value}
           onChange={handleChanges}
-
           onBlurCapture={
             !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
           }
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-        >
-          <MenuItem value="">{props.emptyMessage || ''}</MenuItem>
-          {props.options.map((item,i) => <MenuItem key={i} value={item.value}>{item.label}</MenuItem>)}
+          onBlur={() => setIsFocused(false)}>
+          <MenuItem value="">{props.emptyMessage || ""}</MenuItem>
+          {props.options.map((item, i) => (
+            <MenuItem key={i} value={item.value}>
+              {item.label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-        {props.showValidationErrors && props.requiredMessage && (
-          <FormHelperText
-            id="component-message-text"
-            style={{
-              marginTop: "0.1em",
-              paddingLeft: "1.2em",
-              marginBottom: "0.5em",
-              color: COLORS.OIVA_ORANGE_TEXT
-            }}>
-            {isVisited && !props.value && props.requiredMessage}
-          </FormHelperText>
-        )}
-      </React.Fragment>
-    );
-  },
-  (prevProps, nextProps) => {
-    const isSameFunction =
-      prevProps.onChanges === nextProps.onChanges;
-    return (
-      isSameFunction &&
-      equals(prevProps.isDisabled, nextProps.isDisabled) &&
-      equals(prevProps.value, nextProps.value) &&
-      equals(prevProps.isRequired, nextProps.isRequired)
-    );
-  }
-);
+      {props.showValidationErrors && props.requiredMessage && (
+        <FormHelperText
+          id="component-message-text"
+          style={{
+            marginTop: "0.1em",
+            paddingLeft: "1.2em",
+            marginBottom: "0.5em",
+            color: COLORS.OIVA_ORANGE_TEXT
+          }}>
+          {isVisited && !props.value && props.requiredMessage}
+        </FormHelperText>
+      )}
+    </React.Fragment>
+  );
+};
+
+Dropdown.defaultProps = {
+  value: ""
+};
 
 Dropdown.propTypes = {
   isDisabled: PropTypes.bool,
