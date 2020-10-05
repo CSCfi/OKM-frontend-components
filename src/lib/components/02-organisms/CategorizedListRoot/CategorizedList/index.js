@@ -453,25 +453,26 @@ const CategorizedList = props => {
                               isPreviousSiblingCheckedByDefault ||
                               change.properties.isChecked
                             );
+                          const dropDownStyle = component.styleClasses || "px-2 mb-1";
                           return (
-                            <div className="px-2 mb-1">
-                              <Dropdown
-                                id={fullAnchor}
-                                onChanges={handleChanges}
-                                options={propsObj.options}
-                                payload={{
-                                  anchor,
-                                  categories: category.categories,
-                                  component,
-                                  fullPath,
-                                  parent: props.parent,
-                                  rootPath: props.rootPath
-                                }}
-                                value={propsObj.selectedOption}
-                                isDisabled={isDisabled}
-                                showValidationErrors={showValidationErrors}
-                                requiredMessage={propsObj.requiredMessage}
-                              />
+                              <div className={dropDownStyle}>
+                                <Dropdown
+                                  id={fullAnchor}
+                                  onChanges={handleChanges}
+                                  options={propsObj.options}
+                                  payload={{
+                                    anchor,
+                                    categories: category.categories,
+                                    component,
+                                    fullPath,
+                                    parent: props.parent,
+                                    rootPath: props.rootPath
+                                  }}
+                                  value={propsObj.selectedOption}
+                                  isDisabled={isDisabled}
+                                  showValidationErrors={showValidationErrors}
+                                  requiredMessage={propsObj.requiredMessage}
+                                />
                             </div>
                           );
                         })(category)
