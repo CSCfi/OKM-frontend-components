@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import PropTypes from "prop-types";
 import chroma from "chroma-js";
-import { heights, autocompleteShortStyles } from "../../../css/autocomplete";
+import { heights, autocompleteShortStyles, autocompleteWidthStyles } from "../../../css/autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import InputLabel from "@material-ui/core/InputLabel";
 import { equals } from "ramda";
@@ -35,8 +35,9 @@ const Autocomplete = React.memo(
         .concat(values.filter(v => !v.isFixed));
     };
 
-    const optionStyles = {
-      ...(props.height === heights.SHORT ? autocompleteShortStyles : null),
+    const optionStyles = Object.assign(
+      {},
+      {...(props.height === heights.SHORT ? autocompleteShortStyles : null),
 
       control:
         props.height === heights.SHORT
@@ -93,7 +94,8 @@ const Autocomplete = React.memo(
           color: "#666666"
         }
       })
-    };
+    },
+      props.short ? autocompleteWidthStyles : {});
 
     const handleSelectChange = (value, { action, removedValue }) => {
       switch (action) {
@@ -208,7 +210,8 @@ const Autocomplete = React.memo(
       equals(cp.payload, np.payload) &&
       equals(cp.value, np.value) &&
       equals(cp.height, np.height) &&
-      equals(cp.width, np.width)
+      equals(cp.width, np.width) &&
+      equals(cp.short, np.short)
     );
   }
 );
@@ -240,7 +243,8 @@ Autocomplete.propTypes = {
   minChars: PropTypes.number,
   width: PropTypes.string,
   autosize: PropTypes.bool,
-  title: PropTypes.string
+  title: PropTypes.string,
+  short: PropTypes.bool
 };
 
 export default Autocomplete;

@@ -567,6 +567,7 @@ var CategorizedList = function CategorizedList(props) {
           value: R.flatten([propsObj.value]),
           isDisabled: isDisabled,
           height: heights.SHORT,
+          short: component.short,
           title: propsObj.title
         }));
       }(category) : null, component.name === "Difference" && /*#__PURE__*/React.createElement("div", {

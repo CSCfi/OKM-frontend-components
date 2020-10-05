@@ -53,4 +53,21 @@ storiesOf("Autocomplete", module)
         }}
       />
     </div>
+  ))
+  .add("Short width", () => (
+    <div>
+      <br/>
+      <Autocomplete
+        name="example"
+        options={[
+          { label: "Aaaaaaaa", value: "Aaaaaaaa" },
+          { label: "Bbbbbb", value: "Bbbbbb" },
+          { label: "Ccccccccccc", value: "Ccccccccccc" }
+        ]}
+        short={true}
+        callback={(payload, values) => {
+          console.log(values.value[0]);
+        }}
+      />
+    </div>
   ));
