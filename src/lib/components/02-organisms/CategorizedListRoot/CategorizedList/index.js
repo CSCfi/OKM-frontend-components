@@ -777,6 +777,7 @@ const CategorizedList = props => {
                                 value={R.flatten([propsObj.value])}
                                 isDisabled={isDisabled}
                                 height={heights.SHORT}
+                                short={component.short}
                                 title={propsObj.title}
                               />
                             </div>

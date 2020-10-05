@@ -30,3 +30,10 @@ export var autocompleteShortStyles = {
     });
   }
 };
+export var autocompleteWidthStyles = {
+  container: function container(base) {
+    return _objectSpread({}, base, {
+      width: 400
+    });
+  }
+};

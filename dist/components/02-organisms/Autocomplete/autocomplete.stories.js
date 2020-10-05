@@ -56,4 +56,22 @@ storiesOf("Autocomplete", module).addDecorator(withInfo).add("Example 1", functi
       console.log(values.value[0]);
     }
   }));
+}).add("Short width", function () {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(Autocomplete, {
+    name: "example",
+    options: [{
+      label: "Aaaaaaaa",
+      value: "Aaaaaaaa"
+    }, {
+      label: "Bbbbbb",
+      value: "Bbbbbb"
+    }, {
+      label: "Ccccccccccc",
+      value: "Ccccccccccc"
+    }],
+    short: true,
+    callback: function callback(payload, values) {
+      console.log(values.value[0]);
+    }
+  }));
 });
