@@ -175,7 +175,7 @@ const CategoryFilter = ({
           <SimpleButton
             variant="outlined"
             onClick={() => toggleEditView(true)}
-            text={"Muokkaa toiminta-aluetta"}></SimpleButton>
+            text={localizations.editButtonText}></SimpleButton>
         </div>
       </React.Fragment>
     );
