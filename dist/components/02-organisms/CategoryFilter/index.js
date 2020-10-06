@@ -161,7 +161,7 @@ var CategoryFilter = function CategoryFilter(_ref) {
       onClick: function onClick() {
         return toggleEditView(true);
       },
-      text: "Muokkaa toiminta-aluetta"
+      text: localizations.editButtonText
     })));
   }
 };
