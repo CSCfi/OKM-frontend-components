@@ -90,4 +90,23 @@ storiesOf("TextBox", module).addDecorator(withInfo).add("Unrequired without a ti
     title: "Perustelut",
     value: store.state.value
   });
+})).add("Textbox with delete icon", withState(initialState)(function (_ref11) {
+  var store = _ref11.store;
+
+  var onChanges = function onChanges(payload, _ref12) {
+    var value = _ref12.value;
+    store.set({
+      value: value
+    });
+  };
+
+  return /*#__PURE__*/React.createElement(TextBox, {
+    isRequired: true,
+    isValid: false,
+    onChanges: onChanges,
+    requiredMessage: "Pakollinen tieto",
+    title: "Perustelut",
+    value: store.state.value,
+    isRemovable: true
+  });
 }));
