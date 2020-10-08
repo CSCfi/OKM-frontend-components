@@ -454,12 +454,14 @@ const CategorizedList = props => {
                               change.properties.isChecked
                             );
                           const dropDownStyle = component.styleClasses || "px-2 mb-1";
+                          console.log("*********");
                           return (
                               <div className={dropDownStyle}>
                                 <Dropdown
                                   id={fullAnchor}
                                   onChanges={handleChanges}
                                   options={propsObj.options}
+                                  fullWidth={true}
                                   payload={{
                                     anchor,
                                     categories: category.categories,

@@ -103,9 +103,9 @@ const Dropdown = props => {
       <FormControl
         variant="outlined"
         disabled={props.isDisabled}
-        fullWidth={props.fullWidth}
         required={props.isRequired}
         error={props.error}
+        fullWidth={props.fullWidth}
         margin="dense">
         {props.label && (
           <InputLabel id="select-label">{props.label}</InputLabel>
@@ -113,7 +113,7 @@ const Dropdown = props => {
         <Select
           labelId="select-label"
           aria-label={props.label}
-          autosize="true"
+          autosize="false"
           value={props.value}
           onChange={handleChanges}
           onBlurCapture={

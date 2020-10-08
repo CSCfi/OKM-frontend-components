@@ -62,7 +62,7 @@ var layoutStrategies = [{
   key: "groups"
 }];
 var defaultComponentStyles = {
-  justification: componentStyleMapping.justification.start,
+  justification: componentStyleMapping.justification.between,
   verticalAlignment: componentStyleMapping.verticalAlignment.center
 };
 var defaultCategoryStyles = {
@@ -351,12 +351,14 @@ var CategorizedList = function CategorizedList(props) {
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
         var dropDownStyle = component.styleClasses || "px-2 mb-1";
+        console.log("*********");
         return /*#__PURE__*/React.createElement("div", {
           className: dropDownStyle
         }, /*#__PURE__*/React.createElement(Dropdown, {
           id: fullAnchor,
           onChanges: handleChanges,
           options: propsObj.options,
+          fullWidth: true,
           payload: {
             anchor: anchor,
             categories: category.categories,

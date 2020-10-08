@@ -106,16 +106,16 @@ var Dropdown = function Dropdown(props) {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(FormControl, {
     variant: "outlined",
     disabled: props.isDisabled,
-    fullWidth: props.fullWidth,
     required: props.isRequired,
     error: props.error,
+    fullWidth: props.fullWidth,
     margin: "dense"
   }, props.label && /*#__PURE__*/React.createElement(InputLabel, {
     id: "select-label"
   }, props.label), /*#__PURE__*/React.createElement(Select, {
     labelId: "select-label",
     "aria-label": props.label,
-    autosize: "true",
+    autosize: "false",
     value: props.value,
     onChange: handleChanges,
     onBlurCapture: !props.value ? function () {
