@@ -86,4 +86,23 @@ storiesOf("TextBox", module)
         />
       );
     })
+  )
+  .add(
+    "Textbox with delete icon",
+    withState(initialState)(({ store }) => {
+      const onChanges = (payload, { value }) => {
+        store.set({ value });
+      };
+      return (
+        <TextBox
+          isRequired
+          isValid={false}
+          onChanges={onChanges}
+          requiredMessage={"Pakollinen tieto"}
+          title="Perustelut"
+          value={store.state.value}
+          isRemovable={true}
+        />
+      );
+    })
   );

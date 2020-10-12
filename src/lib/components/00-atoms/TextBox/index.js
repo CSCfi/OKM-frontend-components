@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import ClearIcon from "@material-ui/icons/Clear";
 import { withStyles } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
@@ -98,6 +99,13 @@ const TextBox = props => {
 
   const updateValue = e => {
     props.onChanges(props.payload, { value: e.target.value });
+  }
+
+  const deleteTextBox = () => {
+    props.onChanges(props.payload, {
+      value: '',
+      textBoxDelete: true
+    });
   }
 
   return (
@@ -204,6 +212,11 @@ const TextBox = props => {
                   </FormHelperText>
                 )}
             </div>
+            {!props.isReadOnly && props.isRemovable && (
+            <div className="ml-8 mr-1 mt-4">
+              <ClearIcon style={{ position: "relative", right: "20px", top: "20px" }} onClick={deleteTextBox} />
+            </div>
+            )}
             {!props.isReadOnly && !isEmpty(props.tooltip) && (
               <div className="ml-8 mr-1 mt-4">
                 <Tooltip tooltip={props.tooltip.text} trigger="click">
@@ -238,7 +251,8 @@ TextBox.defaultProps = {
   title: "",
   tooltip: {},
   isVisited: false,
-  value: ""
+  value: "",
+  isRemovable: false
 };
 
 TextBox.propTypes = {
@@ -264,7 +278,8 @@ TextBox.propTypes = {
   isVisited: PropTypes.bool,
   label: PropTypes.string,
   requiredMessage: PropTypes.string,
-  showValidationErrors: PropTypes.bool
+  showValidationErrors: PropTypes.bool,
+  isRemovable: PropTypes.bool
 };
 
 export default withStyles(textboxStyles)(TextBox);

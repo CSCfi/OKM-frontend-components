@@ -494,6 +494,7 @@ const CategorizedList = props => {
                               isErroneous={propsObj.isErroneous}
                               isHidden={isDisabled}
                               isReadOnly={propsObj.isReadOnly}
+                              isRemovable={propsObj.isRemovable}
                               isRequired={propsObj.isRequired}
                               isValid={propsObj.isValid}
                               onChanges={handleChanges}

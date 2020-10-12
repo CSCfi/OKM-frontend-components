@@ -4,6 +4,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Tooltip from "../../02-organisms/Tooltip";
 import { isEmpty } from "ramda";
 import HelpIcon from "@material-ui/icons/Help";
+import ClearIcon from "@material-ui/icons/Clear";
 import { withStyles } from "@material-ui/core";
 import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
@@ -108,6 +109,13 @@ var TextBox = function TextBox(props) {
     });
   };
 
+  var deleteTextBox = function deleteTextBox() {
+    props.onChanges(props.payload, {
+      value: '',
+      textBoxDelete: true
+    });
+  };
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, props.value !== null ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-row w-full"
   }, /*#__PURE__*/React.createElement("div", {
@@ -159,7 +167,16 @@ var TextBox = function TextBox(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, !props.value && props.requiredMessage)), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
+  }, !props.value && props.requiredMessage)), !props.isReadOnly && props.isRemovable && /*#__PURE__*/React.createElement("div", {
+    className: "ml-8 mr-1 mt-4"
+  }, /*#__PURE__*/React.createElement(ClearIcon, {
+    style: {
+      position: "relative",
+      right: "20px",
+      top: "20px"
+    },
+    onClick: deleteTextBox
+  })), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
   }, /*#__PURE__*/React.createElement(Tooltip, {
     tooltip: props.tooltip.text,
@@ -187,6 +204,7 @@ TextBox.defaultProps = {
   title: "",
   tooltip: {},
   isVisited: false,
-  value: ""
+  value: "",
+  isRemovable: false
 };
 export default withStyles(textboxStyles)(TextBox);
