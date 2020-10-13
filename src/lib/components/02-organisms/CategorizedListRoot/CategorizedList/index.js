@@ -808,6 +808,8 @@ const CategorizedList = props => {
                           isReadOnly={propsObj.isReadOnly}
                           text={propsObj.text}
                           variant={propsObj.variant}
+                          icon={propsObj.icon}
+                          iconFontSize={propsObj.iconFontSize}
                           onClick={handleButtonClick}
                           payload={{
                             anchor,

@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { createStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { FaPlus } from "react-icons/fa";
 var defaultProps = {
   isReadOnly: false,
   payload: {},
@@ -9,7 +10,9 @@ var defaultProps = {
   variant: "contained",
   color: "primary",
   size: "large",
-  disabled: false
+  disabled: false,
+  icon: null,
+  iconFontSize: null
 };
 var styles = createStyles(function (theme) {
   return {
@@ -43,7 +46,11 @@ var SimpleButton = function SimpleButton(_ref) {
       size = _ref$size === void 0 ? defaultProps.size : _ref$size,
       classes = _ref.classes,
       _ref$disabled = _ref.disabled,
-      disabled = _ref$disabled === void 0 ? defaultProps.disabled : _ref$disabled;
+      disabled = _ref$disabled === void 0 ? defaultProps.disabled : _ref$disabled,
+      _ref$icon = _ref.icon,
+      icon = _ref$icon === void 0 ? defaultProps.icon : _ref$icon,
+      _ref$iconFontSize = _ref.iconFontSize,
+      iconFontSize = _ref$iconFontSize === void 0 ? defaultProps.iconFontSize : _ref$iconFontSize;
 
   var handleClick = function handleClick(event) {
     onClick(payload, {}, event);
@@ -59,7 +66,15 @@ var SimpleButton = function SimpleButton(_ref) {
     disabled: disabled,
     "aria-label": ariaLabel,
     className: classes.root
-  }, text));
+  }, icon === "FaPlus" && /*#__PURE__*/React.createElement("span", {
+    style: {
+      width: 15
+    }
+  }, /*#__PURE__*/React.createElement(FaPlus, {
+    style: {
+      fontSize: iconFontSize ? iconFontSize : 18
+    }
+  })), text));
 };
 
 export default withStyles(styles)(SimpleButton);
