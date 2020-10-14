@@ -9,6 +9,7 @@ import { FormHelperText, InputLabel } from "@material-ui/core";
 import "./dropdown.css";
 
 import { withStyles } from "@material-ui/core";
+import { addIndex, map } from "ramda";
 
 const selectCustomStyles = {
   root: {
@@ -120,13 +121,15 @@ const Dropdown = props => {
             !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
           }
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}>
-          <MenuItem value="">{props.emptyMessage || ""}</MenuItem>
-          {props.options.map((item, i) => (
-            <MenuItem key={i} value={item.value}>
-              {item.label}
-            </MenuItem>
-          ))}
+          onBlur={() => setIsFocused(false)}
+          placeholder={props.placeholder}>
+          {addIndex(map)((item, i) => {
+            return item ? (
+              <MenuItem key={i} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ) : null;
+          }, props.options).filter(Boolean)}
         </Select>
       </FormControl>
       {props.showValidationErrors && props.requiredMessage && (
