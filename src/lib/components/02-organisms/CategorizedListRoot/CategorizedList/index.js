@@ -469,6 +469,7 @@ const CategorizedList = props => {
                                   parent: props.parent,
                                   rootPath: props.rootPath
                                 }}
+                                placeholder={propsObj.placeholder}
                                 value={propsObj.selectedOption}
                                 isDisabled={isDisabled}
                                 showValidationErrors={showValidationErrors}
