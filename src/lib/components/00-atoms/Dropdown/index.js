@@ -114,7 +114,6 @@ const Dropdown = props => {
         <Select
           labelId="select-label"
           aria-label={props.label}
-          autosize="false"
           value={props.value}
           onChange={handleChanges}
           onBlurCapture={
