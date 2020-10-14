@@ -14,7 +14,7 @@ const defaultProps = {
   size: "large",
   disabled: false,
   icon: null,
-  iconFontSize: null,
+  iconFontSize: 18,
 };
 
 const styles = createStyles(theme => ({
@@ -63,7 +63,7 @@ const SimpleButton = ({
           className={classes.root}>
           {icon === "FaPlus" && (
             <span style={{ width: 15 }}>
-              <FaPlus style={{ fontSize: iconFontSize ? iconFontSize : 18 }}/>
+              <FaPlus style={{ fontSize: iconFontSize }}/>
             </span>)}
           {text}
         </Button>

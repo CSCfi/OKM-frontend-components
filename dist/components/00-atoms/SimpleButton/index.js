@@ -12,7 +12,7 @@ var defaultProps = {
   size: "large",
   disabled: false,
   icon: null,
-  iconFontSize: null
+  iconFontSize: 18
 };
 var styles = createStyles(function (theme) {
   return {
@@ -72,7 +72,7 @@ var SimpleButton = function SimpleButton(_ref) {
     }
   }, /*#__PURE__*/React.createElement(FaPlus, {
     style: {
-      fontSize: iconFontSize ? iconFontSize : 18
+      fontSize: iconFontSize
     }
   })), text));
 };
