@@ -454,11 +454,13 @@ const CategorizedList = props => {
                               change.properties.isChecked
                             );
                           return (
-                            <div className="px-2 mb-1">
+                            <div
+                              className={component.styleClasses || "px-2 mb-1"}>
                               <Dropdown
                                 id={fullAnchor}
                                 onChanges={handleChanges}
                                 options={propsObj.options}
+                                fullWidth={true}
                                 payload={{
                                   anchor,
                                   categories: category.categories,
@@ -467,6 +469,7 @@ const CategorizedList = props => {
                                   parent: props.parent,
                                   rootPath: props.rootPath
                                 }}
+                                placeholder={propsObj.placeholder}
                                 value={propsObj.selectedOption}
                                 isDisabled={isDisabled}
                                 showValidationErrors={showValidationErrors}

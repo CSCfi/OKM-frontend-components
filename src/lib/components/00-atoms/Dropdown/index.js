@@ -9,6 +9,7 @@ import { FormHelperText, InputLabel } from "@material-ui/core";
 import "./dropdown.css";
 
 import { withStyles } from "@material-ui/core";
+import { addIndex, map } from "ramda";
 
 const selectCustomStyles = {
   root: {
@@ -103,9 +104,9 @@ const Dropdown = props => {
       <FormControl
         variant="outlined"
         disabled={props.isDisabled}
-        fullWidth={props.fullWidth}
         required={props.isRequired}
         error={props.error}
+        fullWidth={props.fullWidth}
         margin="dense">
         {props.label && (
           <InputLabel id="select-label">{props.label}</InputLabel>
@@ -113,20 +114,21 @@ const Dropdown = props => {
         <Select
           labelId="select-label"
           aria-label={props.label}
-          autosize="true"
           value={props.value}
           onChange={handleChanges}
           onBlurCapture={
             !props.value ? () => setIsVisited(true) : () => setIsVisited(false)
           }
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}>
-          <MenuItem value="">{props.emptyMessage || ""}</MenuItem>
-          {props.options.map((item, i) => (
-            <MenuItem key={i} value={item.value}>
-              {item.label}
-            </MenuItem>
-          ))}
+          onBlur={() => setIsFocused(false)}
+          placeholder={props.placeholder}>
+          {addIndex(map)((item, i) => {
+            return item ? (
+              <MenuItem key={i} value={item.value}>
+                {item.label}
+              </MenuItem>
+            ) : null;
+          }, props.options).filter(Boolean)}
         </Select>
       </FormControl>
       {props.showValidationErrors && props.requiredMessage && (
