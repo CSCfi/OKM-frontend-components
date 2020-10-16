@@ -7,6 +7,7 @@ import { COLORS } from "../../../modules/styles";
 import { FormHelperText, InputLabel } from "@material-ui/core";
 import "./dropdown.css";
 import { withStyles } from "@material-ui/core";
+import { addIndex, map } from "ramda";
 var selectCustomStyles = {
   root: {
     outline: "none !important",
@@ -115,7 +116,6 @@ var Dropdown = function Dropdown(props) {
   }, props.label), /*#__PURE__*/React.createElement(Select, {
     labelId: "select-label",
     "aria-label": props.label,
-    autosize: "false",
     value: props.value,
     onChange: handleChanges,
     onBlurCapture: !props.value ? function () {
@@ -128,15 +128,14 @@ var Dropdown = function Dropdown(props) {
     },
     onBlur: function onBlur() {
       return setIsFocused(false);
-    }
-  }, /*#__PURE__*/React.createElement(MenuItem, {
-    value: ""
-  }, props.emptyMessage || ""), props.options.map(function (item, i) {
-    return /*#__PURE__*/React.createElement(MenuItem, {
+    },
+    placeholder: props.placeholder
+  }, addIndex(map)(function (item, i) {
+    return item ? /*#__PURE__*/React.createElement(MenuItem, {
       key: i,
       value: item.value
-    }, item.label);
-  }))), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
+    }, item.label) : null;
+  }, props.options).filter(Boolean))), props.showValidationErrors && props.requiredMessage && /*#__PURE__*/React.createElement(FormHelperText, {
     id: "component-message-text",
     style: {
       marginTop: "0.1em",

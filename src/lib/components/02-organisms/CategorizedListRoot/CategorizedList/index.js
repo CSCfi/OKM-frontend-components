@@ -18,6 +18,7 @@ import Attachments from "../../Attachments";
 import * as R from "ramda";
 import { map } from "lodash";
 import CategoryFilter from "../../CategoryFilter";
+import FileUpload from "../../FileUpload";
 
 /** @namespace components */
 
@@ -683,6 +684,31 @@ const CategorizedList = props => {
                                   parent: props.parent,
                                   rootPath: props.rootPath
                                 }}
+                              />
+                            </div>
+                          );
+                        })(category)
+                      : null}
+                    {component.name === "FileUpload"
+                      ? (() => {
+                          return (
+                            <div className="flex-2">
+                              <FileUpload
+                                acceptedTypes={props.acceptedTypes}
+                                isReadOnly={propsObj.isReadOnly}
+                                maxSize={propsObj.maxSize}
+                                messages={component.messages}
+                                minSize={propsObj.minSize}
+                                onChanges={handleChanges}
+                                payload={{
+                                  anchor,
+                                  categories: category.categories,
+                                  component,
+                                  fullPath,
+                                  parent: props.parent,
+                                  rootPath: props.rootPath
+                                }}
+                                uploadedFiles={propsObj.uploadedFiles}
                               />
                             </div>
                           );

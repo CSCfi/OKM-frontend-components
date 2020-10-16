@@ -18,6 +18,7 @@ import Attachments from "../../Attachments";
 import * as R from "ramda";
 import { map } from "lodash";
 import CategoryFilter from "../../CategoryFilter";
+import FileUpload from "../../FileUpload";
 /** @namespace components */
 
 /**
@@ -350,10 +351,8 @@ var CategorizedList = function CategorizedList(props) {
         var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
-        var dropDownStyle = component.styleClasses || "px-2 mb-1";
-        console.log("*********");
         return /*#__PURE__*/React.createElement("div", {
-          className: dropDownStyle
+          className: component.styleClasses || "px-2 mb-1"
         }, /*#__PURE__*/React.createElement(Dropdown, {
           id: fullAnchor,
           onChanges: handleChanges,
@@ -367,6 +366,7 @@ var CategorizedList = function CategorizedList(props) {
             parent: props.parent,
             rootPath: props.rootPath
           },
+          placeholder: propsObj.placeholder,
           value: propsObj.selectedOption,
           isDisabled: isDisabled,
           showValidationErrors: showValidationErrors,
@@ -509,6 +509,26 @@ var CategorizedList = function CategorizedList(props) {
             parent: props.parent,
             rootPath: props.rootPath
           }
+        }));
+      }(category) : null, component.name === "FileUpload" ? function () {
+        return /*#__PURE__*/React.createElement("div", {
+          className: "flex-2"
+        }, /*#__PURE__*/React.createElement(FileUpload, {
+          acceptedTypes: props.acceptedTypes,
+          isReadOnly: propsObj.isReadOnly,
+          maxSize: propsObj.maxSize,
+          messages: component.messages,
+          minSize: propsObj.minSize,
+          onChanges: handleChanges,
+          payload: {
+            anchor: anchor,
+            categories: category.categories,
+            component: component,
+            fullPath: fullPath,
+            parent: props.parent,
+            rootPath: props.rootPath
+          },
+          uploadedFiles: propsObj.uploadedFiles
         }));
       }(category) : null, component.name === "Multiselect" ? function (category) {
         var previousSibling = category.components[ii - 1] || {};
