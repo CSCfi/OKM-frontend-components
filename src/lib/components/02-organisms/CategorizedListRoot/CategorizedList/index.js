@@ -15,10 +15,10 @@ import AlertMessage from "../../../00-atoms/Alert";
 import TextBox from "../../../00-atoms/TextBox";
 import Input from "../../../00-atoms/Input";
 import Attachments from "../../Attachments";
+import FileUpload from "../../FileUpload";
 import * as R from "ramda";
 import { map } from "lodash";
 import CategoryFilter from "../../CategoryFilter";
-import FileUpload from "../../FileUpload";
 
 /** @namespace components */
 
@@ -311,16 +311,29 @@ const CategorizedList = props => {
             data-level={props.level}
             id={anchor}>
             {isCategoryTitleVisible && (
-              <div className={categoryTitleClasses}>
-                <h4>
-                  {category.code && (
-                    <span className="mr-4">{category.code}</span>
-                  )}
-                  <span>{category.title}</span>
-                  {!category.isReadOnly && category.isRequired && (
-                    <span className="pr-4">*</span>
-                  )}
-                </h4>
+              <div
+                className={`flex justify-between items-center ${categoryTitleClasses}`}>
+                <div>
+                  <h4>
+                    {category.code && (
+                      <span className="mr-4">{category.code}</span>
+                    )}
+                    <span>{category.title}</span>
+                    {!category.isReadOnly && category.isRequired && (
+                      <span className="pr-4">*</span>
+                    )}
+                  </h4>
+                </div>
+                {category.isRemovable ? (
+                  <div>
+                    <SimpleButton
+                      text={"Poista"}
+                      variant={"outlined"}
+                      onClick={() =>
+                        category.onRemove(category)
+                      }></SimpleButton>
+                  </div>
+                ) : null}
               </div>
             )}
             <div className={R.join(" ", componentContainerClasses)}>
@@ -625,8 +638,13 @@ const CategorizedList = props => {
                       : null}
                     {component.name === "StatusTextRow"
                       ? (() => {
+                          const containerStyleClasses = !R.isNil(
+                            component.containerStyleClasses
+                          )
+                            ? component.containerStyleClasses
+                            : "flex-2";
                           return (
-                            <div className="flex-2">
+                            <div className={containerStyleClasses}>
                               <StatusTextRow
                                 code={propsObj.code}
                                 labelStyles={labelStyles}
