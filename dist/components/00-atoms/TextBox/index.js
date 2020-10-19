@@ -167,9 +167,10 @@ var TextBox = function TextBox(props) {
       marginBottom: "0.5em",
       color: COLORS.OIVA_ORANGE_TEXT
     }
-  }, !props.value && props.requiredMessage)), !props.isReadOnly && props.isRemovable && /*#__PURE__*/React.createElement("div", {
+  }, !props.value && props.requiredMessage)), !props.isReadOnly && props.isRemovable && !props.isHidden && /*#__PURE__*/React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
   }, /*#__PURE__*/React.createElement(ClearIcon, {
+    className: "cursor-pointer",
     style: {
       position: "relative",
       right: "20px",

@@ -212,9 +212,10 @@ const TextBox = props => {
                   </FormHelperText>
                 )}
             </div>
-            {!props.isReadOnly && props.isRemovable && (
+            {!props.isReadOnly && props.isRemovable && !props.isHidden && (
             <div className="ml-8 mr-1 mt-4">
-              <ClearIcon style={{ position: "relative", right: "20px", top: "20px" }} onClick={deleteTextBox} />
+              <ClearIcon className="cursor-pointer"
+                         style={{ position: "relative", right: "20px", top: "20px" }} onClick={deleteTextBox} />
             </div>
             )}
             {!props.isReadOnly && !isEmpty(props.tooltip) && (
