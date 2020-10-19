@@ -350,10 +350,8 @@ var CategorizedList = function CategorizedList(props) {
         var previousSiblingFullAnchor = "".concat(anchor, ".").concat(previousSibling.anchor);
         var change = getChangeObjByAnchor(previousSiblingFullAnchor, props.changes);
         var isDisabled = (previousSibling.name === "CheckboxWithLabel" || previousSibling.name === "RadioButtonWithLabel") && !(isPreviousSiblingCheckedByDefault || change.properties.isChecked);
-        var dropDownStyle = component.styleClasses || "px-2 mb-1";
-        console.log("*********");
         return /*#__PURE__*/React.createElement("div", {
-          className: dropDownStyle
+          className: component.styleClasses || "px-2 mb-1"
         }, /*#__PURE__*/React.createElement(Dropdown, {
           id: fullAnchor,
           onChanges: handleChanges,
@@ -367,6 +365,7 @@ var CategorizedList = function CategorizedList(props) {
             parent: props.parent,
             rootPath: props.rootPath
           },
+          placeholder: propsObj.placeholder,
           value: propsObj.selectedOption,
           isDisabled: isDisabled,
           showValidationErrors: showValidationErrors,
@@ -596,7 +595,8 @@ var CategorizedList = function CategorizedList(props) {
         text: propsObj.text,
         variant: propsObj.variant,
         icon: propsObj.icon,
-        iconFontSize: propsObj.iconFontSize,
+        iconContainerStyles: propsObj.iconContainerStyles,
+        iconStyles: propsObj.iconStyles,
         onClick: handleButtonClick,
         payload: {
           anchor: anchor,

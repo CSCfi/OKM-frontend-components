@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { createStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { FaPlus } from "react-icons/fa";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const defaultProps = {
   isReadOnly: false,
@@ -14,7 +15,8 @@ const defaultProps = {
   size: "large",
   disabled: false,
   icon: null,
-  iconFontSize: 18,
+  iconStyles: {},
+  iconContainerStyles: {}
 };
 
 const styles = createStyles(theme => ({
@@ -42,7 +44,8 @@ const SimpleButton = ({
   classes,
   disabled = defaultProps.disabled,
   icon = defaultProps.icon,
-  iconFontSize = defaultProps.iconFontSize,
+  iconContainerStyles = defaultProps.iconContainerStyles,
+  iconStyles = defaultProps.iconStyles
 }) => {
   const handleClick = event => {
     onClick(payload, {}, event);
@@ -61,10 +64,16 @@ const SimpleButton = ({
           disabled={disabled}
           aria-label={ariaLabel}
           className={classes.root}>
-          {icon === "FaPlus" && (
-            <span style={{ width: 15 }}>
-              <FaPlus style={{ fontSize: iconFontSize }}/>
-            </span>)}
+          {icon && (
+            <span style={ iconContainerStyles }>
+              {icon === "FaPlus" && (
+                <FaPlus style={ iconStyles }/>
+              )}
+              {icon === "ClearIcon" && (
+                <ClearIcon style={ iconStyles }/>
+                )}
+            </span>
+          )}
           {text}
         </Button>
       )}
@@ -82,7 +91,8 @@ SimpleButton.propTypes = {
   text: PropTypes.string,
   variant: PropTypes.string,
   icon: PropTypes.string,
-  iconFontSize: PropTypes.string,
+  iconStyles: PropTypes.object,
+  iconContainerStyles: PropTypes.object
 };
 
 export default withStyles(styles)(SimpleButton);

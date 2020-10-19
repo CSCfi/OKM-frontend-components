@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import { createStyles } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { FaPlus } from "react-icons/fa";
+import ClearIcon from "@material-ui/icons/Clear";
 var defaultProps = {
   isReadOnly: false,
   payload: {},
@@ -12,7 +13,8 @@ var defaultProps = {
   size: "large",
   disabled: false,
   icon: null,
-  iconFontSize: 18
+  iconStyles: {},
+  iconContainerStyles: {}
 };
 var styles = createStyles(function (theme) {
   return {
@@ -49,8 +51,10 @@ var SimpleButton = function SimpleButton(_ref) {
       disabled = _ref$disabled === void 0 ? defaultProps.disabled : _ref$disabled,
       _ref$icon = _ref.icon,
       icon = _ref$icon === void 0 ? defaultProps.icon : _ref$icon,
-      _ref$iconFontSize = _ref.iconFontSize,
-      iconFontSize = _ref$iconFontSize === void 0 ? defaultProps.iconFontSize : _ref$iconFontSize;
+      _ref$iconContainerSty = _ref.iconContainerStyles,
+      iconContainerStyles = _ref$iconContainerSty === void 0 ? defaultProps.iconContainerStyles : _ref$iconContainerSty,
+      _ref$iconStyles = _ref.iconStyles,
+      iconStyles = _ref$iconStyles === void 0 ? defaultProps.iconStyles : _ref$iconStyles;
 
   var handleClick = function handleClick(event) {
     onClick(payload, {}, event);
@@ -66,14 +70,12 @@ var SimpleButton = function SimpleButton(_ref) {
     disabled: disabled,
     "aria-label": ariaLabel,
     className: classes.root
-  }, icon === "FaPlus" && /*#__PURE__*/React.createElement("span", {
-    style: {
-      width: 15
-    }
-  }, /*#__PURE__*/React.createElement(FaPlus, {
-    style: {
-      fontSize: iconFontSize
-    }
+  }, icon && /*#__PURE__*/React.createElement("span", {
+    style: iconContainerStyles
+  }, icon === "FaPlus" && /*#__PURE__*/React.createElement(FaPlus, {
+    style: iconStyles
+  }), icon === "ClearIcon" && /*#__PURE__*/React.createElement(ClearIcon, {
+    style: iconStyles
   })), text));
 };
 

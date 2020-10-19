@@ -11,6 +11,7 @@ import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
 
 import styles from "./textbox.module.css";
+import SimpleButton from "../SimpleButton";
 
 const textboxStyles = {
   root: {
@@ -213,9 +214,15 @@ const TextBox = props => {
                 )}
             </div>
             {!props.isReadOnly && props.isRemovable && !props.isHidden && (
-            <div className="ml-8 mr-1 mt-4">
-              <ClearIcon className="cursor-pointer"
-                         style={{ position: "relative", right: "20px", top: "20px" }} onClick={deleteTextBox} />
+            <div className="ml-8 mr-1 mt-4" style={{ position: "relative", right: "32px", top: "7px"}}>
+              <SimpleButton icon={"ClearIcon"}
+                            color={"default"}
+                            iconStyles={{
+                              fontSize: 25
+                            }}
+                            variant={"text"}
+                            text={""}
+                            onClick={deleteTextBox}/>
             </div>
             )}
             {!props.isReadOnly && !isEmpty(props.tooltip) && (

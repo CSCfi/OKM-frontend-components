@@ -10,6 +10,7 @@ import { InputLabel } from "@material-ui/core";
 import { FormHelperText } from "@material-ui/core";
 import { COLORS } from "../../../modules/styles";
 import styles from "./textbox.module.css";
+import SimpleButton from "../SimpleButton";
 var textboxStyles = {
   root: {
     outline: "none !important",
@@ -168,14 +169,20 @@ var TextBox = function TextBox(props) {
       color: COLORS.OIVA_ORANGE_TEXT
     }
   }, !props.value && props.requiredMessage)), !props.isReadOnly && props.isRemovable && !props.isHidden && /*#__PURE__*/React.createElement("div", {
-    className: "ml-8 mr-1 mt-4"
-  }, /*#__PURE__*/React.createElement(ClearIcon, {
-    className: "cursor-pointer",
+    className: "ml-8 mr-1 mt-4",
     style: {
       position: "relative",
-      right: "20px",
-      top: "20px"
+      right: "32px",
+      top: "7px"
+    }
+  }, /*#__PURE__*/React.createElement(SimpleButton, {
+    icon: "ClearIcon",
+    color: "default",
+    iconStyles: {
+      fontSize: 25
     },
+    variant: "text",
+    text: "",
     onClick: deleteTextBox
   })), !props.isReadOnly && !isEmpty(props.tooltip) && /*#__PURE__*/React.createElement("div", {
     className: "ml-8 mr-1 mt-4"
