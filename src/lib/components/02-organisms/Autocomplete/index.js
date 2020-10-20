@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import PropTypes from "prop-types";
 import chroma from "chroma-js";
-import { heights, autocompleteShortStyles, autocompleteWidthStyles } from "../../../css/autocomplete";
+import {
+  heights,
+  autocompleteShortStyles,
+  autocompleteWidthStyles
+} from "../../../css/autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import InputLabel from "@material-ui/core/InputLabel";
 import { equals } from "ramda";
@@ -37,65 +41,67 @@ const Autocomplete = React.memo(
 
     const optionStyles = Object.assign(
       {},
-      {...(props.height === heights.SHORT ? autocompleteShortStyles : null),
+      {
+        ...(props.height === heights.SHORT ? autocompleteShortStyles : null),
 
-      control:
-        props.height === heights.SHORT
-          ? autocompleteShortStyles.control
-          : styles => ({
-              ...styles,
-              backgroundColor: "white"
-            }),
-      option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-        const color = chroma("#c3dafe");
-        return {
+        control:
+          props.height === heights.SHORT
+            ? autocompleteShortStyles.control
+            : styles => ({
+                ...styles,
+                backgroundColor: "white"
+              }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+          const color = chroma("#c3dafe");
+          return {
+            ...styles,
+            backgroundColor: isDisabled
+              ? null
+              : isSelected
+              ? data.color
+              : isFocused
+              ? color.css()
+              : null,
+            color: isDisabled
+              ? "#ccc"
+              : isSelected
+              ? chroma.contrast(color, "white") > 2
+                ? "white"
+                : "black"
+              : data.color,
+            cursor: isDisabled ? "not-allowed" : "default",
+
+            ":active": {
+              ...styles[":active"],
+              backgroundColor:
+                !isDisabled && (isSelected ? data.color : color.css())
+            }
+          };
+        },
+        indicatorSeparator: styles => ({ display: "none" }),
+        menu: styles => ({ ...styles, zIndex: 999 }),
+        multiValue: styles => {
+          const color = chroma("#c3dafe");
+          return {
+            ...styles,
+            backgroundColor: color.css()
+          };
+        },
+        multiValueLabel: (styles, { data }) => ({
           ...styles,
-          backgroundColor: isDisabled
-            ? null
-            : isSelected
-            ? data.color
-            : isFocused
-            ? color.css()
-            : null,
-          color: isDisabled
-            ? "#ccc"
-            : isSelected
-            ? chroma.contrast(color, "white") > 2
-              ? "white"
-              : "black"
-            : data.color,
-          cursor: isDisabled ? "not-allowed" : "default",
-
-          ":active": {
-            ...styles[":active"],
-            backgroundColor:
-              !isDisabled && (isSelected ? data.color : color.css())
+          color: data.color
+        }),
+        multiValueRemove: (styles, { data }) => ({
+          ...styles,
+          color: data.color,
+          ":hover": {
+            backgroundColor: data.color,
+            color: "#666666"
           }
-        };
+        })
       },
-      indicatorSeparator: styles => ({ display: "none" }),
-      menu: styles => ({ ...styles, zIndex: 999 }),
-      multiValue: styles => {
-        const color = chroma("#c3dafe");
-        return {
-          ...styles,
-          backgroundColor: color.css()
-        };
-      },
-      multiValueLabel: (styles, { data }) => ({
-        ...styles,
-        color: data.color
-      }),
-      multiValueRemove: (styles, { data }) => ({
-        ...styles,
-        color: data.color,
-        ":hover": {
-          backgroundColor: data.color,
-          color: "#666666"
-        }
-      })
-    },
-      props.short ? autocompleteWidthStyles : {});
+      props.short ? autocompleteWidthStyles : {}
+    );
 
     const handleSelectChange = (value, { action, removedValue }) => {
       switch (action) {
@@ -112,7 +118,7 @@ const Autocomplete = React.memo(
           break;
       }
       props.callback(props.payload, {
-        value: Array.isArray(value) ? orderOptions(value) : value
+        value: Array.isArray(value) ? orderOptions(value) : value || []
       });
     };
 

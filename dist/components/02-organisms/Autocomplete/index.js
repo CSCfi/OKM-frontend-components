@@ -129,7 +129,7 @@ var Autocomplete = React.memo(function (props) {
     }
 
     props.callback(props.payload, {
-      value: Array.isArray(value) ? orderOptions(value) : value
+      value: Array.isArray(value) ? orderOptions(value) : value || []
     });
   };
 
