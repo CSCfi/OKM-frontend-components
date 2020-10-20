@@ -595,7 +595,8 @@ var CategorizedList = function CategorizedList(props) {
         text: propsObj.text,
         variant: propsObj.variant,
         icon: propsObj.icon,
-        iconFontSize: propsObj.iconFontSize,
+        iconContainerStyles: propsObj.iconContainerStyles,
+        iconStyles: propsObj.iconStyles,
         onClick: handleButtonClick,
         payload: {
           anchor: anchor,
