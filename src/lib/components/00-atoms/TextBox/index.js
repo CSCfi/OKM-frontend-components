@@ -215,10 +215,11 @@ const TextBox = props => {
             </div>
             {!props.isReadOnly && props.isRemovable && !props.isHidden && (
             <div className="ml-8 mr-1 mt-4" style={{ position: "relative", right: "32px", top: "7px"}}>
-              <SimpleButton icon={"ClearIcon"}
+              <SimpleButton ariaLabel={"Remove text area"}
+                            icon={"ClearIcon"}
                             color={"default"}
                             iconStyles={{
-                              fontSize: 25
+                              fontSize: 20
                             }}
                             variant={"text"}
                             text={""}
